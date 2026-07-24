@@ -40,7 +40,7 @@ export default function BeforeAfterSlider() {
   const example = EXAMPLES[active];
 
   return (
-    <div className="mx-auto w-full lg:w-2/3">
+    <div className="mx-auto w-full lg:w-[92%]">
       <div className="relative">
         <button
           type="button"
@@ -56,7 +56,7 @@ export default function BeforeAfterSlider() {
             <PhotoPlaceholder
               label={example.beforeLabel}
               alt={example.beforeLabel}
-              ratio="1/1"
+              ratio="4/5"
               tone="clay"
               rounded="rounded-none"
             />
@@ -68,7 +68,7 @@ export default function BeforeAfterSlider() {
             <PhotoPlaceholder
               label={example.afterLabel}
               alt={example.afterLabel}
-              ratio="1/1"
+              ratio="4/5"
               tone="sage"
               rounded="rounded-none"
             />
