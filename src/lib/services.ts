@@ -54,22 +54,46 @@ export const resetPackages: ResetPackage[] = [
   },
 ];
 
-export const roomByRoomStartingAt = 235;
-export const roomByRoomRooms = [
-  "Closet (small/non-walk-in)",
-  "Refrigerator",
-  "Bathroom",
-  "Mudroom",
-  "Pantry",
-  "Laundry Room",
-  "Bedroom",
-  "Home Office",
-  "Playroom",
-  "Craft Room",
-  "Attic",
-  "Kitchen",
-  "Garage",
-  "Basement",
+export const roomByRoomStartingAt = 185;
+
+export type RoomByRoomGroup = { rooms: string[]; price: number };
+
+// Refrigerator was removed entirely from the offering per the updated pricing.
+export const roomByRoomGroups: RoomByRoomGroup[] = [
+  { rooms: ["Closet (small, non-walk-in)"], price: 185 },
+  { rooms: ["Bathroom", "Mudroom"], price: 200 },
+  { rooms: ["Pantry", "Laundry Room"], price: 220 },
+  { rooms: ["Bedroom", "Home Office", "Playroom", "Craft Room"], price: 250 },
+  { rooms: ["Kitchen"], price: 300 },
+  { rooms: ["Attic"], price: 300 },
+  { rooms: ["Garage", "Basement"], price: 350 },
+];
+
+export type RoomByRoomBundle = {
+  label: string;
+  example: string;
+  basePrice: number;
+  discountPercent: number;
+  finalPrice: number;
+};
+
+// Booking two spaces from the same size tier in one visit, two organizers
+// working in parallel, earns a 12% bundle discount.
+export const roomByRoomBundles: RoomByRoomBundle[] = [
+  {
+    label: "Two Small Spaces",
+    example: "e.g. two closets",
+    basePrice: 370,
+    discountPercent: 12,
+    finalPrice: 326,
+  },
+  {
+    label: "Two Full Rooms",
+    example: "e.g. two kids' rooms, or a bedroom + guest room",
+    basePrice: 500,
+    discountPercent: 12,
+    finalPrice: 440,
+  },
 ];
 
 export const cleaningInclusions: { tier: string; note?: string; items: string[] }[] = [
@@ -230,7 +254,7 @@ export const contactPanelInfo: Record<string, ContactPanelInfo> = {
   },
   "Room-by-Room Resets": {
     title: "Room-by-Room Resets",
-    startingAt: "Starting at $235",
+    startingAt: "Starting at $185",
     blurb:
       "Know exactly which space needs help? Start there. Closets, pantries, kitchens, garages, and more, final price scoped to your specific space during your consultation.",
     bullets: everyResetIncludes,

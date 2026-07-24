@@ -23,7 +23,7 @@ export const locations: Location[] = [
     metaTitle:
       "Home Organizing & Cleaning Services in Fredericksburg, VA | Elevated Home Resets",
     metaDescription:
-      "Professional home organizing, deep cleaning, and move management in Fredericksburg, VA. Book online, reset packages from $235 and cleanings with instant quotes.",
+      "Professional home organizing, deep cleaning, and move management in Fredericksburg, VA. Book online, resets from $185 and cleanings with instant quotes.",
     h1: "Home Organizing & Cleaning in Fredericksburg, VA",
     intro:
       "Fredericksburg is our home base. From historic downtown rowhouses with barely-there closets to newer builds out toward Spotsylvania, we've reset homes across every corner of the 22401 and beyond, and because we're local, there's never a travel fee here.",
@@ -97,7 +97,7 @@ export const locations: Location[] = [
     metaTitle:
       "Professional Organizing & House Cleaning in Woodbridge, VA | Elevated Home Resets",
     metaDescription:
-      "Home organizing, recurring maid service, and move management in Woodbridge, VA. Instant online cleaning quotes, reset packages from $235.",
+      "Home organizing, recurring maid service, and move management in Woodbridge, VA. Instant online cleaning quotes, resets from $185.",
     h1: "Professional Organizing & House Cleaning in Woodbridge, VA",
     intro:
       "From Lake Ridge to Potomac Mills, Woodbridge families run full schedules, and homes that need systems which survive real life. We build them: judgment-free organizing and dependable cleaning, booked online without phone tag.",

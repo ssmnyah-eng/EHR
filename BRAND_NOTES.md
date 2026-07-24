@@ -37,6 +37,38 @@ stay consistent, and add to it as new decisions come in.
   `src/lib/cleaning.ts` reflect the original spec (cleaning base rates
   there are still marked PLACEHOLDER pending the real pricing engine).
 
+## Pricing updates received (applied)
+
+- **Room-by-Room Resets repriced**, new starting price is $185 (was $235).
+  Refrigerator was removed from the offering entirely. Full new pricing in
+  `roomByRoomGroups` in `src/lib/services.ts`:
+  - Closet (small, non-walk-in): $185
+  - Bathroom, Mudroom: $200
+  - Pantry, Laundry Room: $220
+  - Bedroom, Home Office, Playroom, Craft Room: $250
+  - Kitchen: $300
+  - Attic: $300
+  - Garage, Basement: $350
+  - Decision made here: since the client sent real per-room prices (not
+    just a new "starting at" figure), the Room-by-Room page now shows this
+    as a real price list rather than the old "scope only, no prices"
+    treatment. This is a deliberate departure from the original spec's
+    "one starting price, never a breakdown table" rule, flag if that's not
+    what was wanted.
+- **Room-by-Room bundle discount added**: booking two spaces from the same
+  size tier in one visit (two organizers working in parallel) gets 12%
+  off the combined price. Two small spaces (e.g. two closets): $370 → $326.
+  Two full rooms (e.g. two kids' rooms, or a bedroom + guest room): $500 →
+  $440. Lives in `roomByRoomBundles` in `src/lib/services.ts`, shown on the
+  Room-by-Room page.
+- Reset Packages (Mini/Room/Multi-Room/Storage/Whole Home/Signature,
+  $448–$5,973) are a **separate offering** from Room-by-Room and were not
+  part of this update, their prices are unchanged. Watch for naming
+  confusion: the bundle pricing above uses "Mini Reset" / "Room Reset" as
+  size labels, which collide with the Reset Package tier names, the site
+  copy avoids reusing those exact labels for the bundles to keep the two
+  offerings distinct.
+
 ## Open questions worth asking before launch
 
 - Exact wording for "how it makes them feel" claims, anything specific
