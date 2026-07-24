@@ -1,19 +1,22 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Container from "@/components/Container";
 import PageHero from "@/components/PageHero";
+import PhotoPlaceholder from "@/components/PhotoPlaceholder";
 import WhatsIncluded from "@/components/WhatsIncluded";
 import CTAButton from "@/components/CTAButton";
 import Reveal from "@/components/Reveal";
 import { resetPackages } from "@/lib/services";
 
 export const metadata: Metadata = {
-  title: "Reset Packages, Home Organizing from $448",
+  title: "Reset Packages, Home Organizing from $326",
   description:
-    "Six reset packages from a single closet ($448) to the Signature Home Reset ($5,973). You buy a completed project, not hours. Serving Northern & Central Virginia.",
+    "Reset packages from two small spaces ($326) to the Signature Home Reset ($1,500+). You buy a completed project, not hours. Serving Northern & Central Virginia.",
 };
 
 // Per the site-wide pricing rule: starting price + what's included only, no
-// product budget or total investment breakdown on this page.
+// product budget or total investment breakdown on this page. Cards preview
+// each package with a photo; clicking opens the full converting detail page.
 export default function ResetPackagesPage() {
   return (
     <>
@@ -25,25 +28,55 @@ export default function ResetPackagesPage() {
 
       <section className="pb-10 lg:pb-16">
         <Container className="flex flex-col gap-6 lg:gap-8">
-          {resetPackages.map((pkg, i) => (
-            <Reveal key={pkg.name} delay={(i % 3) * 100}>
+          {resetPackages.map((pkg, i) => {
+            const card = (
               <article
-                className={`shadow-soft flex flex-col gap-6 rounded-[16px] bg-white/60 p-7 lg:flex-row lg:items-start lg:gap-12 lg:p-10 ${
+                className={`shadow-soft card-img-zoom flex flex-col gap-6 overflow-hidden rounded-[16px] bg-white/60 sm:flex-row sm:items-stretch ${
                   i % 2 === 1 ? "lg:ml-12" : "lg:mr-12"
-                }`}
+                } ${pkg.hasDetailPage ? "t-hover hover:-translate-y-1" : ""}`}
               >
-                <div className="lg:w-64 lg:shrink-0">
-                  <h2 className="text-[22px] lg:text-[26px]">{pkg.name}</h2>
-                  <p className="label mt-2 text-clay">
-                    Starting at ${pkg.startingAt.toLocaleString("en-US")}
-                  </p>
+                <div className="sm:w-64 sm:shrink-0">
+                  <PhotoPlaceholder
+                    label={pkg.photo.label}
+                    alt={pkg.photo.alt}
+                    ratio="4/5"
+                    tone={pkg.photo.tone}
+                    rounded="rounded-none"
+                    className="h-full"
+                  />
                 </div>
-                <p className="leading-relaxed text-ink-soft">
-                  {pkg.description}
-                </p>
+                <div className="flex flex-1 flex-col gap-4 p-7 lg:flex-row lg:items-start lg:gap-12 lg:p-10">
+                  <div className="lg:w-56 lg:shrink-0">
+                    <h2 className="text-[22px] lg:text-[26px]">{pkg.name}</h2>
+                    <p className="label mt-2 text-clay">
+                      Starting at ${pkg.startingAt.toLocaleString("en-US")}
+                    </p>
+                  </div>
+                  <div className="flex-1">
+                    <p className="leading-relaxed text-ink-soft">
+                      {pkg.description}
+                    </p>
+                    {pkg.hasDetailPage && (
+                      <span className="label mt-4 inline-block text-clay">
+                        See full details →
+                      </span>
+                    )}
+                  </div>
+                </div>
               </article>
-            </Reveal>
-          ))}
+            );
+            return (
+              <Reveal key={pkg.slug} delay={(i % 3) * 100}>
+                {pkg.hasDetailPage ? (
+                  <Link href={`/services/organizing/reset-packages/${pkg.slug}`}>
+                    {card}
+                  </Link>
+                ) : (
+                  card
+                )}
+              </Reveal>
+            );
+          })}
         </Container>
       </section>
 

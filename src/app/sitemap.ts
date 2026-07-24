@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
 import { locations } from "@/lib/locations";
 import { blogPosts } from "@/lib/blog";
+import { resetPackageDetails } from "@/lib/services";
 
 // Static routes + auto-included location pages and blog posts. Adding a city
 // to lib/locations.ts or a post to lib/blog.ts updates the sitemap with no
@@ -50,6 +51,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(p.date),
       changeFrequency: "monthly" as const,
       priority: 0.5,
+    })),
+    ...resetPackageDetails.map((d) => ({
+      url: `${SITE_URL}/services/organizing/reset-packages/${d.slug}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.75,
     })),
   ];
 }
