@@ -73,7 +73,7 @@ export default function ContactForm() {
   if (submitted) {
     return (
       <div className="shadow-soft rounded-[24px] bg-gradient-to-br from-sage/15 via-white/70 to-mauve/10 p-10 text-center">
-        <h2 className="text-[28px]">Thanks — we&rsquo;ll be in touch.</h2>
+        <h2 className="text-[28px]">Thanks, we&rsquo;ll be in touch.</h2>
         <p className="mx-auto mt-4 max-w-md leading-relaxed text-ink-soft">
           Your note is in our inbox and a real person will reach out shortly
           to talk through your project. In the meantime, our{" "}
@@ -134,7 +134,7 @@ export default function ContactForm() {
 
         {service === "Cleaning" && (
           <div className="rounded-[16px] bg-sage/10 p-6">
-            <p className="font-medium">Good news — cleaning books instantly.</p>
+            <p className="font-medium">Good news, cleaning books instantly.</p>
             <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">
               No need to fill out this form: our cleaning page gives you an
               exact quote and a real calendar right now.
@@ -177,7 +177,7 @@ export default function ContactForm() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 rows={5}
-                placeholder="In your own words — what's going on in your home, and what would 'done' look like?"
+                placeholder="In your own words, what's going on in your home, and what would 'done' look like?"
                 className="w-full rounded-[6px] border border-charcoal/20 bg-white/70 px-4 py-3 outline-none focus:border-sage"
               />
             </label>
@@ -192,7 +192,7 @@ export default function ContactForm() {
         )}
       </form>
 
-      {/* Dynamic info panel — updates live with the selection */}
+      {/* Dynamic info panel, updates live with the selection */}
       <aside className="lg:sticky lg:top-28 lg:self-start">
         <Reveal>
           <div className="shadow-soft rounded-[16px] bg-white/70 p-7">
@@ -232,7 +232,7 @@ export default function ContactForm() {
                 </ul>
                 <p className="mt-4 text-sm text-ink-soft">
                   Pick a service on the left and this panel shows its starting
-                  price and what&rsquo;s included — so you can be sure before
+                  price and what&rsquo;s included, so you can be sure before
                   you send.
                 </p>
               </>

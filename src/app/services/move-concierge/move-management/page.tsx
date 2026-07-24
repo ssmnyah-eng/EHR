@@ -7,7 +7,7 @@ import Reveal from "@/components/Reveal";
 import { moveManagement } from "@/lib/services";
 
 export const metadata: Metadata = {
-  title: "Move Management Package — Pack, Move, Unpack & Organize from $2,158",
+  title: "Move Management Package, Pack, Move, Unpack & Organize from $2,158",
   description:
     "Full-service move management in Virginia: coordination, a 2-person packing crew, a 3-person moving crew, and a fully organized unpack. Starting at $2,158.",
 };
@@ -20,7 +20,7 @@ export default function MoveManagementPage() {
       <PageHero
         eyebrow="Move & Concierge"
         title="Move Management Package"
-        lede="We pack, move, unpack, and organize — one team, start to finish."
+        lede="We pack, move, unpack, and organize. One team, start to finish."
       />
 
       <section className="pb-16 lg:pb-24">
@@ -47,7 +47,7 @@ export default function MoveManagementPage() {
           <PriceBlock
             className="mt-12"
             startingAt={moveManagement.startingAt}
-            note="Scales with home size — final price confirmed at your consultation"
+            note="Scales with home size, final price confirmed at your consultation"
           />
 
           <Reveal delay={100} className="mt-10">

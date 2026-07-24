@@ -2,7 +2,6 @@ import Link from "next/link";
 import Container from "./Container";
 import PhotoPlaceholder from "./PhotoPlaceholder";
 import Reveal from "./Reveal";
-import CTAButton from "./CTAButton";
 
 export type SectionListItem = {
   name: string;
@@ -14,48 +13,43 @@ export type SectionListItem = {
   tag?: string;
 };
 
-// Asymmetric alternating image-left / image-right clickable sections, used by
-// the Services landing and each category landing page.
+// Compact grid of clickable service cards, sized to fit without heavy
+// scrolling. Used by the Services landing, each category landing page, and
+// the homepage's "Four ways we reset a home" section.
 export default function SectionList({ items }: { items: SectionListItem[] }) {
   return (
     <section className="py-10 lg:py-16">
-      <Container className="flex flex-col gap-16 lg:gap-24">
-        {items.map((item, i) => (
-          <Reveal key={item.name}>
-            <div
-              className={`flex flex-col gap-8 lg:items-center lg:gap-16 ${
-                i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-              }`}
-            >
+      <Container>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {items.map((item, i) => (
+            <Reveal key={item.name} delay={(i % 4) * 100}>
               <Link
                 href={item.href}
-                className={`card-img-zoom block overflow-hidden rounded-[24px] ${
-                  i % 2 === 0 ? "lg:w-[55%]" : "lg:w-[45%]"
-                }`}
+                className="card-img-zoom t-hover shadow-soft flex h-full flex-col overflow-hidden rounded-[16px] bg-white/60 hover:-translate-y-1"
               >
                 <PhotoPlaceholder
                   label={item.photo}
                   alt={item.alt}
-                  ratio={i % 2 === 0 ? "3/2" : "4/5"}
+                  ratio="3/2"
                   tone={item.tone}
+                  rounded="rounded-none"
                 />
-              </Link>
-              <div className="flex-1">
-                {item.tag && <p className="label text-mauve">{item.tag}</p>}
-                <h2 className="mt-2 text-[24px] lg:text-[32px]">{item.name}</h2>
-                <p className="mt-3 max-w-md leading-relaxed text-ink-soft">
-                  {item.blurb}
-                </p>
-                <div className="mt-6">
-                  <CTAButton href={item.href} variant="text">
-                    {item.tag === "Coming Soon" ? "Preview" : "Explore"}{" "}
+                <div className="flex flex-1 flex-col p-5">
+                  {item.tag && <p className="label text-mauve">{item.tag}</p>}
+                  <h2 className="mt-1 text-[18px] leading-snug lg:text-[20px]">
                     {item.name}
-                  </CTAButton>
+                  </h2>
+                  <p className="mt-2 flex-1 text-[14px] leading-relaxed text-ink-soft">
+                    {item.blurb}
+                  </p>
+                  <span className="label mt-4 text-clay">
+                    {item.tag === "Coming Soon" ? "Preview" : "Explore"} →
+                  </span>
                 </div>
-              </div>
-            </div>
-          </Reveal>
-        ))}
+              </Link>
+            </Reveal>
+          ))}
+        </div>
       </Container>
     </section>
   );

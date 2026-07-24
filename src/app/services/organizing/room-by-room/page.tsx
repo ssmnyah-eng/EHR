@@ -7,9 +7,9 @@ import Reveal from "@/components/Reveal";
 import { roomByRoomRooms, roomByRoomStartingAt } from "@/lib/services";
 
 export const metadata: Metadata = {
-  title: "Room-by-Room Resets — Single Space Organizing from $235",
+  title: "Room-by-Room Resets, Single Space Organizing from $235",
   description:
-    "Pick the one space driving you crazy — closet, pantry, kitchen, garage, and more. Single-room organizing resets starting at $235 across Virginia.",
+    "Pick the one space driving you crazy, closet, pantry, kitchen, garage, and more. Single-room organizing resets starting at $235 across Virginia.",
 };
 
 export default function RoomByRoomPage() {
@@ -28,7 +28,7 @@ export default function RoomByRoomPage() {
             note="Final price scoped to your specific space during your consultation"
           />
 
-          {/* Room names as scope, not a price menu — no per-room price tags. */}
+          {/* Room names as scope, not a price menu, no per-room price tags. */}
           <Reveal delay={100} className="mt-12">
             <p className="label text-sage-deep">Spaces we reset</p>
             <ul className="mt-6 flex flex-wrap gap-x-10 gap-y-4">

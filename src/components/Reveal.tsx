@@ -3,7 +3,7 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 
 // Scroll-triggered reveal: fades in and shifts up on first entry into the
-// viewport. Pass `delay` (ms) to stagger siblings — 100ms steps per the spec.
+// viewport. Pass `delay` (ms) to stagger siblings, 100ms steps per the spec.
 export default function Reveal({
   children,
   delay = 0,

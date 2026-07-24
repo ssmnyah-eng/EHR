@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 // Address field backed by Google Places Autocomplete.
 // Requires NEXT_PUBLIC_GOOGLE_MAPS_API_KEY. Until that key is configured,
-// the field degrades to a plain input so development/preview still works —
+// the field degrades to a plain input so development/preview still works,
 // but production must ship with the key so customers select a real address
 // (this also drives the automatic Arlington/Richmond travel fee).
 

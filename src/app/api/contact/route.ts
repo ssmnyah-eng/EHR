@@ -4,7 +4,7 @@ import { sendContactNotification } from "@/lib/email";
 export const dynamic = "force-dynamic";
 
 // Contact form + coming-soon launch-notify submissions.
-// Routes to the private business inbox (CONTACT_INBOX) — that address is
+// Routes to the private business inbox (CONTACT_INBOX), that address is
 // backend-only and must never be rendered in the UI.
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null);

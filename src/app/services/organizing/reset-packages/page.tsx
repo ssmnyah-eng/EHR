@@ -7,12 +7,12 @@ import Reveal from "@/components/Reveal";
 import { resetPackages } from "@/lib/services";
 
 export const metadata: Metadata = {
-  title: "Reset Packages — Home Organizing from $448",
+  title: "Reset Packages, Home Organizing from $448",
   description:
     "Six reset packages from a single closet ($448) to the Signature Home Reset ($5,973). You buy a completed project, not hours. Serving Northern & Central Virginia.",
 };
 
-// Per the site-wide pricing rule: starting price + what's included only — no
+// Per the site-wide pricing rule: starting price + what's included only, no
 // product budget or total investment breakdown on this page.
 export default function ResetPackagesPage() {
   return (
@@ -20,7 +20,7 @@ export default function ResetPackagesPage() {
       <PageHero
         eyebrow="Organizing"
         title="Reset Packages"
-        lede="You're not buying hours — you're buying a finished space. Every package is scoped as a completed project: we quote it, we finish it, and the price doesn't creep because a drawer took longer than planned."
+        lede="You're not buying hours. You're buying a finished space. Every package is scoped as a completed project: we quote it, we finish it, and the price doesn't creep because a drawer took longer than planned."
       />
 
       <section className="pb-10 lg:pb-16">

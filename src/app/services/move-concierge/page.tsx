@@ -14,7 +14,7 @@ export default function MoveConciergePage() {
       <PageHero
         eyebrow="Move & Concierge"
         title="One team on both sides of your move"
-        lede="A typical move means juggling a packing crew, a moving company, and — if you're lucky — someone to help you unpack. Elevated is the vendor on both sides: we pack, we move, we unpack, and we organize, with one point of contact instead of three companies."
+        lede="A typical move means juggling a packing crew, a moving company, and if you're lucky, someone to help you unpack. Elevated is the vendor on both sides: we pack, we move, we unpack, and we organize, with one point of contact instead of three companies."
       />
       <SectionList
         items={[
@@ -22,7 +22,7 @@ export default function MoveConciergePage() {
             name: "Move Management Package",
             href: "/services/move-concierge/move-management",
             blurb:
-              "We pack, move, unpack, and organize — one team, start to finish. Starting at $2,158.",
+              "We pack, move, unpack, and organize. One team, start to finish. Starting at $2,158.",
             photo: "Photo: crew loading labeled boxes onto the truck",
             alt: "Full-service move management crew packing a Virginia home",
             tone: "clay",
@@ -40,7 +40,7 @@ export default function MoveConciergePage() {
             name: "Senior Move Management",
             href: "/services/move-concierge/senior-move-management",
             blurb:
-              "The full move package with patience built in — family coordination, safety-aware setup, and a gentler pace for a meaningful transition.",
+              "The full move package with patience built in, family coordination, safety-aware setup, and a gentler pace for a meaningful transition.",
             photo: "Photo: senior's new living room, clear paths, familiar items placed",
             alt: "Safety-aware senior move management setup in a new Virginia home",
             tone: "mauve",

@@ -30,10 +30,10 @@ export default function Footer() {
             <p className="font-display text-xl">{SITE_NAME}</p>
             <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">
               Home organizing, cleaning, and move management across Northern
-              &amp; Central Virginia — premium, judgment-free, and built around
+              &amp; Central Virginia, premium, judgment-free, and built around
               how you actually live.
             </p>
-            {/* Contact by form or phone only — business email is intentionally never displayed. */}
+            {/* Contact by form or phone only, business email is intentionally never displayed. */}
             <a
               href={PHONE_HREF}
               className="t-hover mt-4 inline-flex min-h-[44px] items-center font-medium text-clay hover:text-sage-deep"
@@ -58,7 +58,7 @@ export default function Footer() {
             </ul>
           </nav>
 
-          {/* Service Areas — internal links to every local landing page */}
+          {/* Service Areas, internal links to every local landing page */}
           <nav aria-label="Service areas">
             <p className="label text-charcoal/60">Service Areas</p>
             <ul className="mt-4 flex flex-col gap-2.5">

@@ -1,11 +1,11 @@
-// All prices below are from the locked pricing engine — do not change casually.
+// All prices below are from the locked pricing engine, do not change casually.
 
 export const everyResetIncludes = [
   "Customized system built around how you live",
   "Light cleaning before items go back",
-  "Product sourcing & shopping if needed",
+  "We shop for organizing products, cost included in your price",
   "Labels & finishing touches",
-  "Two organizers on larger resets",
+  "A two-person organizing team on every job",
   "A judgment-free process",
 ];
 
@@ -20,25 +20,25 @@ export const resetPackages: ResetPackage[] = [
     name: "Mini Reset",
     startingAt: 448,
     description:
-      "One small space — a single closet, pantry, or drawer zone. Full declutter and sort, a customized system built for how you actually use the space, product sourcing if needed, labels, and light cleaning before everything goes back.",
+      "One small space, a single closet, pantry, or drawer zone. Full declutter and sort, a customized system built for how you actually use the space, product shopping done for you, labels, and light cleaning before everything goes back.",
   },
   {
     name: "Room Reset",
     startingAt: 896,
     description:
-      "One full room, start to finish. Everything the Mini Reset includes, scaled to a complete room — every surface, every drawer, every corner given a real system.",
+      "One full room, start to finish. Everything the Mini Reset includes, scaled to a complete room, every surface, every drawer, every corner given a real system.",
   },
   {
     name: "Multi-Room Reset",
     startingAt: 1792,
     description:
-      "2–3 connected rooms or zones, planned as one cohesive project rather than separate jobs — systems that work together across the spaces, not in isolation.",
+      "2–3 connected rooms or zones, planned as one cohesive project rather than separate jobs, systems that work together across the spaces, not in isolation.",
   },
   {
     name: "Storage Reset",
     startingAt: 896,
     description:
-      "Garage, basement, or attic. Bulk-item sorting and category-based systems built for storage spaces — different approach than fine organizing, since it's about grouping and access, not drawer-level detail.",
+      "Garage, basement, or attic. Bulk-item sorting and category-based systems built for storage spaces, different approach than fine organizing, since it's about grouping and access, not drawer-level detail.",
   },
   {
     name: "Whole Home Reset",
@@ -50,7 +50,7 @@ export const resetPackages: ResetPackage[] = [
     name: "Signature Home Reset",
     startingAt: 5973,
     description:
-      "Everything in the Whole Home Reset, plus a design-forward finish — the most comprehensive transformation we offer, top to bottom.",
+      "Everything in the Whole Home Reset, plus a design-forward finish, the most comprehensive transformation we offer, top to bottom.",
   },
 ];
 
@@ -100,7 +100,7 @@ export const cleaningInclusions: { tier: string; note?: string; items: string[] 
       "Window sills",
       "Interior light fixtures (detailed)",
       "Deep scrub of grout/tile in bathrooms",
-      "Kitchen cabinet exteriors (detailed — fronts, handles, edges)",
+      "Kitchen cabinet exteriors (detailed, fronts, handles, edges)",
       "Mirror/glass streak-free detail",
     ],
   },
@@ -114,7 +114,7 @@ export const cleaningInclusions: { tier: string; note?: string; items: string[] 
       "Interior windows",
       "Inside dishwasher",
       "Sink drain/plug area",
-      "Walls — spot cleaning of marks, scuffs, handprints, smudges",
+      "Walls, spot cleaning of marks, scuffs, handprints, smudges",
     ],
   },
   {
@@ -136,13 +136,13 @@ export const cleaningInclusions: { tier: string; note?: string; items: string[] 
   {
     tier: "Post-Organization Cleaning",
     items: [
-      "Standard Cleaning scope, but with full access to just-cleared cabinets, closets, and drawers since organizing already emptied them — wiping interiors that are normally blocked, without the full deep-clean detail work of Premium",
+      "Standard Cleaning scope, but with full access to just-cleared cabinets, closets, and drawers since organizing already emptied them, wiping interiors that are normally blocked, without the full deep-clean detail work of Premium",
     ],
   },
 ];
 
 export const furniturePolicy =
-  "We move light, stable furniture to clean around and behind it. We don't move large, heavy, or top-heavy pieces — for your safety and ours.";
+  "We move light, stable furniture to clean around and behind it. We don't move large, heavy, or top-heavy pieces, for your safety and ours.";
 
 export const moveManagement = {
   startingAt: 2158,
@@ -225,21 +225,21 @@ export const contactPanelInfo: Record<string, ContactPanelInfo> = {
     title: "Reset Packages",
     startingAt: "Starting at $448",
     blurb:
-      "Full-scope transformations, from one closet to your whole home. You buy a completed project, not hours — Mini Reset from $448 up to the Signature Home Reset from $5,973.",
+      "Full-scope transformations, from one closet to your whole home. You buy a completed project, not hours, Mini Reset from $448 up to the Signature Home Reset from $5,973.",
     bullets: everyResetIncludes,
   },
   "Room-by-Room Resets": {
     title: "Room-by-Room Resets",
     startingAt: "Starting at $235",
     blurb:
-      "Know exactly which space needs help? Start there. Closets, pantries, kitchens, garages, and more — final price scoped to your specific space during your consultation.",
+      "Know exactly which space needs help? Start there. Closets, pantries, kitchens, garages, and more, final price scoped to your specific space during your consultation.",
     bullets: everyResetIncludes,
   },
   "Move Management Package": {
     title: "Move Management Package",
     startingAt: "Starting at $2,158",
     blurb:
-      "We pack, move, unpack, and organize — one team, start to finish. Scales with home size; final price confirmed at your consultation.",
+      "We pack, move, unpack, and organize. One team, start to finish. Scales with home size; final price confirmed at your consultation.",
     bullets: moveManagement.included.map((i) => i.title),
   },
   "Welcome Home Package": {
@@ -259,7 +259,7 @@ export const contactPanelInfo: Record<string, ContactPanelInfo> = {
     title: "Supportive Living Reset",
     startingAt: "Starting at $470",
     blurb:
-      "Decluttering and organizing based on how you actually move through your space — clear paths, resting points, grip-accessible placement. Cleaning & Sanitizing Add-On from $85.",
+      "Decluttering and organizing based on how you actually move through your space, clear paths, resting points, grip-accessible placement. Cleaning & Sanitizing Add-On from $85.",
     bullets: supportiveLiving.included,
   },
   "Nesting & Nursery Prep": {
@@ -273,11 +273,11 @@ export const contactPanelInfo: Record<string, ContactPanelInfo> = {
     title: "Junk Removal",
     startingAt: "Starting at $135",
     blurb:
-      "Our own truck and labor — not a referral. We haul it away ourselves, from a few boxes to a full truck load.",
+      "Our own truck and labor, not a referral. We haul it away ourselves, from a few boxes to a full truck load.",
   },
   "Maid Services": {
     title: "Maid Services",
     blurb:
-      "Our maid services are currently booked by phone. Send us your details here and we'll call you to set everything up — or reach us directly at 540-356-3306.",
+      "Our maid services are currently booked by phone. Send us your details here and we'll call you to set everything up, or reach us directly at 540-356-3306.",
   },
 };

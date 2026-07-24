@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import Container from "./Container";
 import HeroCycler from "./HeroCycler";
 
-// Full-bleed hero, ~88vh. Background drifts ~12% slower than the page scroll —
+// Full-bleed hero, ~88vh. Background drifts ~12% slower than the page scroll,
 // the one place parallax is used on the whole site, per the depth spec.
 export default function HomeHero() {
   const bgRef = useRef<HTMLDivElement>(null);
@@ -30,7 +30,7 @@ export default function HomeHero() {
 
   return (
     <section className="relative isolate flex min-h-[85vh] items-center overflow-hidden lg:min-h-[88vh]">
-      {/* VIDEO PLACEHOLDER — swap for a looping <video> of real home footage
+      {/* VIDEO PLACEHOLDER, swap for a looping <video> of real home footage
           (warm light, lived-in, 16:9) once the shoot is delivered. */}
       <div
         ref={bgRef}
@@ -39,7 +39,7 @@ export default function HomeHero() {
         aria-label="Looping video of a warm, lived-in Virginia home in evening light"
       >
         <span className="label absolute bottom-[14%] right-[14%] text-stone/40">
-          Hero video placeholder — warm home footage loop
+          Hero video placeholder, warm home footage loop
         </span>
       </div>
       <div className="absolute inset-0 -z-10 bg-charcoal/45" />
@@ -49,16 +49,24 @@ export default function HomeHero() {
         <div className="max-w-xl lg:max-w-[38%]">
           <HeroCycler />
           <p className="mt-6 text-lg leading-relaxed text-stone/85">
-            Organizing, cleaning, and move management for Virginia homes —
+            Organizing, cleaning, and move management for Virginia homes,
             one team, judgment-free, built around how you actually live.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-6">
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <Link
+              href="/contact"
+              className="t-hover pressable inline-flex min-h-[48px] items-center rounded-[6px] bg-clay px-7 py-3 font-medium text-stone hover:bg-sage"
+            >
+              Reset Your Home
+            </Link>
             <Link
               href="/services/cleaning"
-              className="t-hover pressable inline-flex min-h-[48px] items-center rounded-[6px] bg-clay px-7 py-3 font-medium text-stone hover:bg-sage"
+              className="t-hover pressable inline-flex min-h-[48px] items-center rounded-[6px] border border-stone/50 px-7 py-3 font-medium text-stone hover:border-stone hover:bg-stone/10"
             >
               Book a Cleaning
             </Link>
+          </div>
+          <div className="mt-4">
             <Link
               href="/services"
               className="t-hover label inline-flex min-h-[44px] items-center gap-2 text-stone underline decoration-stone/40 underline-offset-8 hover:text-mauve"

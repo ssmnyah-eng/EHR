@@ -59,7 +59,7 @@ export default async function LocationPage({
         <Container className="flex flex-col gap-14 lg:gap-20">
           <Reveal>
             <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-16">
-              <div className="lg:w-[55%]">
+              <div className="max-w-sm lg:w-[38%]">
                 <PhotoPlaceholder
                   label={`Photo: organized ${loc.city} home interior, warm light`}
                   alt={`Professional home organizing results in ${loc.city}, ${loc.region}`}
@@ -85,7 +85,7 @@ export default async function LocationPage({
 
           <Reveal>
             <div className="flex flex-col gap-8 lg:flex-row-reverse lg:items-center lg:gap-16">
-              <div className="lg:w-[45%]">
+              <div className="max-w-sm lg:w-[32%]">
                 <PhotoPlaceholder
                   label={`Photo: cleaning crew detail work in a ${loc.city} kitchen`}
                   alt={`House cleaning service in ${loc.city}, ${loc.region}`}
@@ -111,7 +111,7 @@ export default async function LocationPage({
 
           <Reveal>
             <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-16">
-              <div className="lg:w-[55%]">
+              <div className="max-w-sm lg:w-[38%]">
                 <PhotoPlaceholder
                   label={`Photo: moving day outside a ${loc.city} home`}
                   alt={`Move management and unpacking services in ${loc.city}, ${loc.region}`}

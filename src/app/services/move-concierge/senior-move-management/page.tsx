@@ -18,7 +18,7 @@ export default function SeniorMoveManagementPage() {
       <PageHero
         eyebrow="Move & Concierge"
         title="Senior Move Management"
-        lede="This is our Move Management Package — with support built in for the family decisions along the way. Downsizing a longtime home is more than logistics, and we plan for that from the first call."
+        lede="This is our Move Management Package, with support built in for the family decisions along the way. Downsizing a longtime home is more than logistics, and we plan for that from the first call."
       />
 
       <section className="pb-16 lg:pb-24">
@@ -33,9 +33,9 @@ export default function SeniorMoveManagementPage() {
               >
                 Move Management Package
               </Link>{" "}
-              — coordination, packing, moving, unpacking &amp; organizing
+             , coordination, packing, moving, unpacking &amp; organizing
               (starting at ${moveManagement.startingAt.toLocaleString("en-US")})
-              — plus a slower, more patient process built around this specific
+             , plus a slower, more patient process built around this specific
               transition.
             </p>
             <p className="mt-4 text-lg leading-relaxed text-ink-soft">
@@ -67,7 +67,7 @@ export default function SeniorMoveManagementPage() {
                 ))}
               </ul>
               <p className="mt-5 text-[15px] leading-relaxed text-ink-soft">
-                How it works: we facilitate decisions — we never make them for
+                How it works: we facilitate decisions, we never make them for
                 your family. Structured questions guide everyone to their own
                 answer; we don&rsquo;t hand down rulings about who gets what.
               </p>

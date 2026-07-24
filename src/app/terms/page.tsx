@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "The terms that govern use of Elevated Home Resets services.",
 };
 
-// Standard template language per the launch spec — not custom legal drafting.
+// Standard template language per the launch spec, not custom legal drafting.
 export default function TermsPage() {
   return (
     <section className="py-16 lg:py-24">
@@ -48,7 +48,7 @@ export default function TermsPage() {
           <div>
             <h2 className="text-[22px] text-charcoal">Furniture &amp; Property</h2>
             <p className="mt-3">
-              Our crews move light, stable furniture only — never large,
+              Our crews move light, stable furniture only, never large,
               heavy, or top-heavy pieces. We treat every home with care; any
               concern about damage should be reported within 48 hours of
               service.

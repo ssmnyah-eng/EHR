@@ -7,7 +7,7 @@ import FurniturePolicy from "@/components/FurniturePolicy";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Book a Cleaning — Instant Online Quote",
+  title: "Book a Cleaning, Instant Online Quote",
   description:
     "Get an instant house cleaning quote and book online: Standard, Premium Deep, Elevated Reset, Move-In/Out, and Post-Organization cleaning across Virginia. $100 deposit holds your slot.",
 };
@@ -18,7 +18,7 @@ export default function CleaningPage() {
       <PageHero
         eyebrow="Cleaning"
         title="Your price, upfront. Your date, booked."
-        lede="Answer a few honest questions and get your exact quote instantly — then pick your slot on a real calendar and lock it in with a $100 deposit. No callbacks, no mystery pricing."
+        lede="Answer a few honest questions and get your exact quote instantly, then pick your slot on a real calendar and lock it in with a $100 deposit. No callbacks, no mystery pricing."
       />
 
       <section className="pb-16 lg:pb-24">

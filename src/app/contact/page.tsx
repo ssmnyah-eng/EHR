@@ -5,13 +5,13 @@ import ContactForm from "@/components/ContactForm";
 import { PHONE, PHONE_HREF, SERVICE_AREA_LABEL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact — Book a Discovery Call",
+  title: "Contact, Book a Discovery Call",
   description:
     "Tell us about your project and we'll be in touch. Organizing, move management, specialty services, and maid service requests start here. Serving Northern & Central Virginia.",
 };
 
 // Every "Book Now" / "Book a Discovery Call" / "Schedule a Consultation" CTA
-// (except Cleaning, which books instantly) lands on this page — it's the
+// (except Cleaning, which books instantly) lands on this page, it's the
 // lead-capture step before a real consultation.
 export default function ContactPage() {
   return (
@@ -19,7 +19,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="Tell us what's going on at home"
-        lede="Share a few details and a real person will call you back to talk through your project — no bots, no pressure, no judgment."
+        lede="Share a few details and a real person will call you back to talk through your project, no bots, no pressure, no judgment."
       />
 
       <section className="pb-16 lg:pb-24">

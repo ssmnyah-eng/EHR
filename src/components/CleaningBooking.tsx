@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import AddressInput from "./AddressInput";
+import MonthCalendar from "./MonthCalendar";
 import {
   CleaningType,
   Frequency,
@@ -18,13 +19,12 @@ import {
   TRAVEL_FEE_CITIES,
 } from "@/lib/cleaning";
 
-type Step8State = {
+type FormState = {
   firstName: string;
   lastName: string;
   email: string;
   address: string;
   date: string; // YYYY-MM-DD
-  time: string; // HH:MM
 };
 
 function StepHeading({ n, children }: { n: number; children: React.ReactNode }) {
@@ -49,16 +49,13 @@ export default function CleaningBooking() {
   const [conditionIndex, setConditionIndex] = useState(1);
   const [frequency, setFrequency] = useState<Frequency>("One-Time");
   const [selectedExtras, setSelectedExtras] = useState<Record<string, number>>({});
-  const [form, setForm] = useState<Step8State>({
+  const [form, setForm] = useState<FormState>({
     firstName: "",
     lastName: "",
     email: "",
     address: "",
     date: "",
-    time: "",
   });
-  const [days, setDays] = useState<{ iso: string; label: string; bookable: boolean }[]>([]);
-  const [slots, setSlots] = useState<string[] | null>(null);
   const [anyAvailability, setAnyAvailability] = useState<boolean | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -92,52 +89,14 @@ export default function CleaningBooking() {
     [type, sqftIndex, conditionIndex, frequency, selectedExtras, form.address]
   );
 
-  // Build the next-30-day strip (Sundays + first 2 days always unavailable).
-  // Populated after mount (async) so prerendered HTML never carries stale dates.
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const now = new Date();
-      const list: { iso: string; label: string; bookable: boolean }[] = [];
-      for (let i = 0; i <= 30; i++) {
-        const d = new Date(now);
-        d.setDate(d.getDate() + i);
-        const iso = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-        list.push({
-          iso,
-          label: d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }),
-          bookable: i >= 2 && d.getDay() !== 0,
-        });
-      }
-      setDays(list);
-    }, 0);
-    return () => clearTimeout(timer);
-  }, []);
-
   // Overall availability check for the "we can't service this right now" state.
   useEffect(() => {
     if (quote.customQuote) return;
-    fetch(`/api/bookings?hours=${quote.estimatedHours}`)
+    fetch(`/api/bookings`)
       .then((r) => r.json())
       .then((d) => setAnyAvailability(Boolean(d.anyAvailability)))
       .catch(() => setAnyAvailability(true));
-  }, [quote.estimatedHours, quote.customQuote]);
-
-  // Slots for the selected date (the date-button onClick clears stale slots).
-  useEffect(() => {
-    if (!form.date) return;
-    let stale = false;
-    fetch(`/api/bookings?date=${form.date}&hours=${quote.estimatedHours}`)
-      .then((r) => r.json())
-      .then((d) => {
-        if (!stale) setSlots(d.slots ?? []);
-      })
-      .catch(() => {
-        if (!stale) setSlots([]);
-      });
-    return () => {
-      stale = true;
-    };
-  }, [form.date, quote.estimatedHours]);
+  }, [quote.customQuote]);
 
   // Stripe redirect return states (async read keeps hydration clean).
   useEffect(() => {
@@ -153,12 +112,16 @@ export default function CleaningBooking() {
     (address: string) => setForm((f) => ({ ...f, address })),
     []
   );
+  const setDate = useCallback(
+    (date: string) => setForm((f) => ({ ...f, date })),
+    []
+  );
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
-    if (!form.date || !form.time) {
-      setError("Please pick a date and time for your cleaning.");
+    if (!form.date) {
+      setError("Please pick a date for your cleaning.");
       return;
     }
     setSubmitting(true);
@@ -168,7 +131,7 @@ export default function CleaningBooking() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           kind: "cleaning",
-          start: `${form.date}T${form.time}:00`,
+          date: form.date,
           durationHours: quote.estimatedHours,
           name: `${form.firstName} ${form.lastName}`.trim(),
           email: form.email,
@@ -180,7 +143,7 @@ export default function CleaningBooking() {
       });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error ?? "Something went wrong — please try again.");
+        setError(data.error ?? "Something went wrong, please try again.");
         return;
       }
       if (data.checkoutUrl) {
@@ -189,7 +152,7 @@ export default function CleaningBooking() {
       }
       setConfirmedId(data.bookingId);
     } catch {
-      setError("Something went wrong — please try again.");
+      setError("Something went wrong, please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -201,7 +164,7 @@ export default function CleaningBooking() {
         <p className="label text-sage-deep">Booking confirmed</p>
         <h2 className="mt-3 text-[28px]">You&rsquo;re on the calendar.</h2>
         <p className="mx-auto mt-4 max-w-md leading-relaxed text-ink-soft">
-          Thank you for welcoming us into your home — a confirmation email
+          Thank you for welcoming us into your home, a confirmation email
           with your booking and payment summary is on its way. Until then,
           want to stay stress-free? Check out our{" "}
           <Link href="/blog" className="font-medium text-clay underline underline-offset-4">
@@ -219,7 +182,7 @@ export default function CleaningBooking() {
         {cancelled && (
           <p className="rounded-[16px] border border-clay/40 bg-clay/8 p-5 text-ink-soft">
             Payment wasn&rsquo;t completed, so no booking was made and your
-            slot was released. Pick a time below whenever you&rsquo;re ready.
+            date was released. Pick a date below whenever you&rsquo;re ready.
           </p>
         )}
 
@@ -248,7 +211,7 @@ export default function CleaningBooking() {
         <fieldset>
           <StepHeading n={3}>How would you describe your home right now?</StepHeading>
           <p className="mt-2 text-sm text-ink-soft">
-            Honest answers only — zero judgment, better estimates.
+            Honest answers only, zero judgment, better estimates.
           </p>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             {conditions.map((c, i) => (
@@ -357,10 +320,10 @@ export default function CleaningBooking() {
           <div className="rounded-[16px] border border-clay/40 bg-clay/8 p-8">
             <h2 className="text-[24px]">We&rsquo;re fully booked right now.</h2>
             <p className="mt-3 leading-relaxed text-ink-soft">
-              We can&rsquo;t currently service this request — there&rsquo;s no
-              availability in the next 30 days. Please call us at 540-356-3306
-              or send a note through our contact page and we&rsquo;ll find a
-              way to help.
+              We can&rsquo;t currently service this request, there&rsquo;s no
+              availability right now. Please call us at 540-356-3306 or send
+              a note through our contact page and we&rsquo;ll find a way to
+              help.
             </p>
           </div>
         ) : (
@@ -407,72 +370,12 @@ export default function CleaningBooking() {
               </p>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-6 max-w-sm">
               <p className="text-sm font-medium">Pick a date</p>
-              <p className="mt-1 text-xs text-ink-soft">
-                Closed Sundays · bookings open 2 days out
-              </p>
-              <div className="mt-3 flex gap-2 overflow-x-auto pb-2">
-                {days.map((d) => (
-                  <button
-                    key={d.iso}
-                    type="button"
-                    disabled={!d.bookable}
-                    onClick={() => {
-                      setSlots(null);
-                      setForm((f) => ({ ...f, date: d.iso, time: "" }));
-                    }}
-                    className={`min-h-[48px] min-w-[92px] shrink-0 rounded-[6px] border px-3 py-2 text-sm ${
-                      form.date === d.iso
-                        ? "border-clay bg-clay/10 font-medium"
-                        : d.bookable
-                          ? "t-hover border-charcoal/15 bg-white/60 hover:border-sage"
-                          : "cursor-not-allowed border-charcoal/8 bg-white/30 text-charcoal/30"
-                    }`}
-                  >
-                    {d.label}
-                  </button>
-                ))}
+              <div className="mt-3 rounded-[16px] border border-charcoal/10 bg-white/60 p-4">
+                <MonthCalendar value={form.date} onChange={setDate} />
               </div>
             </div>
-
-            {form.date && (
-              <div className="mt-4">
-                <p className="text-sm font-medium">Pick a time</p>
-                <p className="mt-1 text-xs text-ink-soft">
-                  Your slot reserves {quote.estimatedHours} estimated hours
-                  plus a 30-minute buffer — one crew, never double-booked.
-                </p>
-                {slots === null ? (
-                  <p className="mt-3 text-sm text-ink-soft">Checking availability…</p>
-                ) : slots.length === 0 ? (
-                  <p className="mt-3 rounded-[6px] bg-clay/8 p-3 text-sm text-ink-soft">
-                    That day is fully booked — try another date.
-                  </p>
-                ) : (
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {slots.map((s) => (
-                      <button
-                        key={s}
-                        type="button"
-                        onClick={() => setForm((f) => ({ ...f, time: s }))}
-                        className={`min-h-[48px] rounded-[6px] border px-4 py-2 text-sm ${
-                          form.time === s
-                            ? "border-clay bg-clay/10 font-medium"
-                            : "t-hover border-charcoal/15 bg-white/60 hover:border-sage"
-                        }`}
-                      >
-                        {Number(s.slice(0, 2)) > 12
-                          ? `${Number(s.slice(0, 2)) - 12}:00 PM`
-                          : Number(s.slice(0, 2)) === 12
-                            ? "12:00 PM"
-                            : `${Number(s.slice(0, 2))}:00 AM`}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
 
             {error && (
               <p className="mt-4 rounded-[6px] border border-clay/40 bg-clay/8 p-3 text-sm text-charcoal">
@@ -485,24 +388,24 @@ export default function CleaningBooking() {
               disabled={submitting}
               className="t-hover pressable mt-8 inline-flex min-h-[52px] w-full items-center justify-center rounded-[6px] bg-clay px-8 py-3.5 text-lg font-medium text-stone hover:bg-sage disabled:opacity-60 sm:w-auto"
             >
-              {submitting ? "Holding your slot…" : `Confirm & Pay $${DEPOSIT} Deposit`}
+              {submitting ? "Holding your date…" : `Confirm & Pay $${DEPOSIT} Deposit`}
             </button>
             <p className="mt-3 text-xs text-ink-soft">
-              Your booking is only finalized once payment goes through — if
-              payment fails, no confirmation is sent and the slot isn&rsquo;t
+              Your booking is only finalized once payment goes through, if
+              payment fails, no confirmation is sent and the date isn&rsquo;t
               held. Remaining balance is handled per our standard policy.
             </p>
           </fieldset>
         )}
       </div>
 
-      {/* Live quote summary — Step 7's line-item breakdown, always visible */}
+      {/* Live quote summary, always visible */}
       <aside className="lg:sticky lg:top-28 lg:self-start">
         <div className="shadow-soft rounded-[16px] bg-white/70 p-7">
           <p className="label text-charcoal/60">Your quote</p>
           {quote.customQuote ? (
             <p className="mt-4 leading-relaxed text-ink-soft">
-              3,500+ sqft homes are quoted personally — no online price here,
+              3,500+ sqft homes are quoted personally, no online price here,
               just a fair one after a quick conversation.
             </p>
           ) : (
@@ -548,8 +451,7 @@ export default function CleaningBooking() {
                 <span className="font-display text-[32px]">${quote.total}</span>
               </div>
               <p className="mt-2 text-xs text-ink-soft">
-                ${DEPOSIT} deposit due today · est. {quote.estimatedHours} hrs
-                on site
+                ${DEPOSIT} deposit due today
               </p>
             </>
           )}

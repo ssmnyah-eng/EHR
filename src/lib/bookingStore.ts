@@ -1,21 +1,20 @@
-// Booking store + calendar business rules for the custom calendar system.
+// Booking store + calendar business rules.
 //
 // Storage: in-memory with a JSON file fallback so bookings survive dev-server
 // restarts. PRODUCTION NOTE: on serverless hosting this must be replaced with
 // a real database (the interface below is deliberately small to make that a
-// drop-in swap). One crew/slot at a time — no overlapping bookings, ever.
+// drop-in swap). One job per day, full stop, no overlapping bookings.
 
 import { promises as fs } from "fs";
 import path from "path";
-import { BUFFER_MINUTES } from "./cleaning";
 
 export type Booking = {
   id: string;
   kind: "cleaning" | "consultation";
   status: "pending" | "confirmed";
   createdAt: string;
-  start: string; // ISO datetime (local ET treated as wall time)
-  end: string; // ISO datetime, includes the 30-minute buffer
+  date: string; // YYYY-MM-DD, the one job for that day
+  durationHours: number; // kept for internal crew scheduling, never shown to the customer
   name: string;
   email: string;
   address: string;
@@ -49,10 +48,8 @@ async function persist(): Promise<void> {
 
 // --- Calendar rules -------------------------------------------------------
 
-export const OPEN_HOUR = 8; // first start time 8:00
-export const LAST_END_HOUR = 18; // job + buffer must finish by 18:00
 export const MIN_DAYS_OUT = 2; // today and tomorrow always unavailable
-export const LOOKAHEAD_DAYS = 30; // "reasonable window" for availability
+export const LOOKAHEAD_DAYS = 60; // "reasonable window" for availability
 
 export function isBookableDay(date: Date, now: Date = new Date()): boolean {
   if (date.getDay() === 0) return false; // Closed Sundays
@@ -62,82 +59,59 @@ export function isBookableDay(date: Date, now: Date = new Date()): boolean {
   return date >= floor;
 }
 
-function overlaps(aStart: Date, aEnd: Date, bStart: Date, bEnd: Date): boolean {
-  return aStart < bEnd && bStart < aEnd;
+async function isDayTaken(dateISO: string): Promise<boolean> {
+  const bookings = await load();
+  return bookings.some((b) => b.date === dateISO);
 }
 
-// All open start times for a given date and job duration (hours, pre-buffer).
-export async function slotsForDay(
-  dateISO: string,
-  durationHours: number
-): Promise<string[]> {
+export async function isDayAvailable(dateISO: string): Promise<boolean> {
   const day = new Date(`${dateISO}T00:00:00`);
-  if (!isBookableDay(day)) return [];
+  if (!isBookableDay(day)) return false;
+  return !(await isDayTaken(dateISO));
+}
 
-  const bookings = (await load()).filter((b) => b.start.startsWith(dateISO));
-  const blockMinutes = Math.round(durationHours * 60) + BUFFER_MINUTES;
+// Unavailable dates (YYYY-MM-DD) within a given month, for calendar rendering.
+export async function unavailableDatesForMonth(
+  year: number,
+  month: number // 1-12
+): Promise<string[]> {
+  const daysInMonth = new Date(year, month, 0).getDate();
   const out: string[] = [];
-
-  for (let hour = OPEN_HOUR; hour < LAST_END_HOUR; hour++) {
-    const start = new Date(day);
-    start.setHours(hour, 0, 0, 0);
-    const end = new Date(start.getTime() + blockMinutes * 60000);
-    if (end.getHours() + end.getMinutes() / 60 > LAST_END_HOUR) continue;
-    const taken = bookings.some((b) =>
-      overlaps(start, end, new Date(b.start), new Date(b.end))
-    );
-    if (!taken) {
-      out.push(
-        `${String(hour).padStart(2, "0")}:00`
-      );
-    }
+  for (let d = 1; d <= daysInMonth; d++) {
+    const iso = `${year}-${String(month).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+    if (!(await isDayAvailable(iso))) out.push(iso);
   }
   return out;
 }
 
-export async function hasAnyAvailability(
-  durationHours: number
-): Promise<boolean> {
+export async function hasAnyAvailability(): Promise<boolean> {
   const now = new Date();
   for (let i = MIN_DAYS_OUT; i <= LOOKAHEAD_DAYS; i++) {
     const d = new Date(now);
     d.setDate(d.getDate() + i);
     const iso = d.toISOString().slice(0, 10);
-    if ((await slotsForDay(iso, durationHours)).length > 0) return true;
+    if (await isDayAvailable(iso)) return true;
   }
   return false;
 }
 
 export async function createBooking(
-  input: Omit<Booking, "id" | "createdAt" | "end" | "status"> & {
-    durationHours: number;
-  }
+  input: Omit<Booking, "id" | "createdAt" | "status">
 ): Promise<Booking | { error: string }> {
-  const start = new Date(input.start);
-  const dateISO = input.start.slice(0, 10);
-
-  if (!isBookableDay(new Date(`${dateISO}T00:00:00`))) {
-    return { error: "That day isn't available for booking." };
+  if (!isBookableDay(new Date(`${input.date}T00:00:00`))) {
+    return { error: "That day isn't available for booking, please pick another date." };
   }
-  const open = await slotsForDay(dateISO, input.durationHours);
-  const hhmm = input.start.slice(11, 16);
-  if (!open.includes(hhmm)) {
-    return { error: "That time was just taken — please pick another slot." };
+  if (await isDayTaken(input.date)) {
+    return { error: "That day was just taken, please pick another date." };
   }
-
-  const blockMinutes =
-    Math.round(input.durationHours * 60) + BUFFER_MINUTES;
-  const end = new Date(start.getTime() + blockMinutes * 60000);
 
   const booking: Booking = {
     id: `ehr_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
     kind: input.kind,
     status: "pending",
     createdAt: new Date().toISOString(),
-    start: input.start,
-    end: `${dateISO}T${String(end.getHours()).padStart(2, "0")}:${String(
-      end.getMinutes()
-    ).padStart(2, "0")}:00`,
+    date: input.date,
+    durationHours: input.durationHours,
     name: input.name,
     email: input.email,
     address: input.address,

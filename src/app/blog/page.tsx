@@ -7,7 +7,7 @@ import Reveal from "@/components/Reveal";
 import { blogPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
-  title: "Blog — Organizing, Cleaning & Moving Tips",
+  title: "Blog, Organizing, Cleaning & Moving Tips",
   description:
     "Practical, judgment-free advice on home organizing, cleaning, and moving from the Elevated Home Resets team in Virginia.",
 };
@@ -20,7 +20,7 @@ export default function BlogPage() {
       <PageHero
         eyebrow="Blog"
         title="Notes from inside real homes"
-        lede="Practical, judgment-free advice on organizing, cleaning, and moving — from a team that's seen it all and loved every reset."
+        lede="Practical, judgment-free advice on organizing, cleaning, and moving, from a team that's seen it all and loved every reset."
       />
       <section className="pb-16 lg:pb-24">
         <Container>

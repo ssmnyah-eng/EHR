@@ -47,7 +47,7 @@ export default function ComingSoon({
         <Reveal delay={100}>
           {done ? (
             <p className="mt-10 rounded-[16px] bg-sage/10 p-6 font-medium text-sage-deep">
-              You&rsquo;re on the list — we&rsquo;ll let you know the moment
+              You&rsquo;re on the list, we&rsquo;ll let you know the moment
               this launches.
             </p>
           ) : (

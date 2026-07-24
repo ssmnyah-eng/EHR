@@ -80,7 +80,7 @@ const baseHours: Record<CleaningType, number[]> = {
   "Post-Organization Cleaning": [2.5, 3, 3.5, 4, 4.5],
 };
 
-// Extras — locked pricing from the spec.
+// Extras, locked pricing from the spec.
 export type Extra = {
   id: string;
   label: string;
@@ -125,7 +125,6 @@ export const extras: Extra[] = [
 export const TRAVEL_FEE = 25;
 export const TRAVEL_FEE_CITIES = ["Arlington", "Richmond"];
 export const DEPOSIT = 100;
-export const BUFFER_MINUTES = 30;
 
 export function extraIsAvailable(extra: Extra, type: CleaningType): boolean {
   return extra.availableFor === "all" || extra.availableFor.includes(type);
@@ -167,7 +166,7 @@ export type Quote = {
   extrasTotal: number;
   travelFee: number;
   total: number;
-  estimatedHours: number;
+  estimatedHours: number; // internal crew-scheduling reference only, never shown to the customer
 };
 
 export function computeQuote(input: QuoteInput): Quote {

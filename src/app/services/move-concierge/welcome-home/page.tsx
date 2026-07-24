@@ -7,9 +7,9 @@ import Reveal from "@/components/Reveal";
 import { welcomeHome } from "@/lib/services";
 
 export const metadata: Metadata = {
-  title: "Welcome Home Package — Unpack & Organize from $937",
+  title: "Welcome Home Package, Unpack & Organize from $937",
   description:
-    "Movers dropped the boxes — we make it a home. Full unpacking with customized room-by-room organizing systems, starting at $937 across Virginia.",
+    "Movers dropped the boxes, we make it a home. Full unpacking with customized room-by-room organizing systems, starting at $937 across Virginia.",
 };
 
 export default function WelcomeHomePage() {
@@ -41,7 +41,7 @@ export default function WelcomeHomePage() {
           <PriceBlock
             className="mt-12"
             startingAt={welcomeHome.startingAt}
-            note="Scales with home size — final price confirmed at your consultation"
+            note="Scales with home size, final price confirmed at your consultation"
           />
 
           <Reveal delay={100} className="mt-10">

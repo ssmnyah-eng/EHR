@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "How Elevated Home Resets collects, uses, and protects your information.",
 };
 
-// Standard template language per the launch spec — not custom legal drafting.
+// Standard template language per the launch spec, not custom legal drafting.
 export default function PrivacyPage() {
   return (
     <section className="py-16 lg:py-24">

@@ -2,7 +2,7 @@
 
 import { ReactNode, useRef, useState } from "react";
 
-// Gentle perspective tilt following the cursor — service category images only.
+// Gentle perspective tilt following the cursor, service category images only.
 // Max 3 degrees; disabled automatically on touch devices (no hover) and for
 // prefers-reduced-motion users.
 export default function TiltCard({

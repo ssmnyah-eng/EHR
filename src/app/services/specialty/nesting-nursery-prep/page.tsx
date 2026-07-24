@@ -7,7 +7,7 @@ import Reveal from "@/components/Reveal";
 import { nursery } from "@/lib/services";
 
 export const metadata: Metadata = {
-  title: "Nesting & Nursery Prep — from $470",
+  title: "Nesting & Nursery Prep, from $470",
   description:
     "Nursery preparation with the same care as a full home reset: furniture assembly, natural-product sanitizing, labeled systems. From $470, 3-hour minimum.",
 };
@@ -18,7 +18,7 @@ export default function NurseryPrepPage() {
       <PageHero
         eyebrow="Specialty Services"
         title="Nesting & Nursery Prep"
-        lede="A nursery deserves the same care as the rest of a home reset — and you deserve to spend the last stretch resting, not assembling furniture."
+        lede="A nursery deserves the same care as the rest of a home reset, and you deserve to spend the last stretch resting, not assembling furniture."
       />
 
       <section className="pb-16 lg:pb-24">
@@ -47,7 +47,7 @@ export default function NurseryPrepPage() {
           <Reveal delay={100} className="mt-8">
             <p className="rounded-[16px] border border-mauve/30 bg-mauve/8 p-6 text-[15px] leading-relaxed text-ink-soft">
               <span className="label mr-2 text-mauve">Please note</span>
-              Baby clothing should be laundered before your appointment — our
+              Baby clothing should be laundered before your appointment, our
               team organizes and places everything, but doesn&rsquo;t launder.
             </p>
           </Reveal>

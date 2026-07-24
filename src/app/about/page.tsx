@@ -6,7 +6,7 @@ import CTAButton from "@/components/CTAButton";
 import WhatsIncluded from "@/components/WhatsIncluded";
 
 export const metadata: Metadata = {
-  title: "About — The Story Behind Elevated Home Resets",
+  title: "About, The Story Behind Elevated Home Resets",
   description:
     "Premium, not luxury. Judgment-free, always. The story and philosophy behind Virginia's complete home reset company.",
 };
@@ -17,28 +17,28 @@ export default function AboutPage() {
       <section className="py-16 lg:py-24">
         <Container>
           <div className="flex flex-col gap-12 lg:flex-row lg:items-center lg:gap-20">
-            <Reveal className="lg:w-[45%]">
+            <Reveal className="max-w-xs lg:w-[32%]">
               <div className="glow-sage rounded-[24px]">
                 <PhotoPlaceholder
-                  label="Photo: founder at a client's kitchen table, candid, warm light — not a corporate headshot"
+                  label="Photo: founder at a client's kitchen table, candid, warm light, not a corporate headshot"
                   alt="Founder of Elevated Home Resets working with a client in a warm Virginia home"
                   ratio="4/5"
                   tone="mauve"
                 />
               </div>
             </Reveal>
-            <div className="lg:w-[55%]">
+            <div className="flex-1">
               <Reveal>
                 <p className="label text-clay">Our Story</p>
                 <h1 className="mt-3 text-[36px] leading-[1.1] lg:text-[56px]">
                   Every home deserves a fresh start.
                 </h1>
-                {/* FOUNDER STORY COPY TBD — holding copy below sets the tone
+                {/* FOUNDER STORY COPY TBD, holding copy below sets the tone
                     until the real story is written with the founder. */}
                 <p className="mt-6 text-lg leading-relaxed text-ink-soft">
                   Elevated Home Resets started with a simple observation:
-                  the moments when a home gets away from you — a move, a new
-                  baby, a busy season, a loss — are exactly the moments when
+                  the moments when a home gets away from you, a move, a new
+                  baby, a busy season, a loss, are exactly the moments when
                   you have the least energy to fix it. And the industry built
                   to help often shows up with judgment, hourly meters, and
                   three different companies that don&rsquo;t talk to each
@@ -48,7 +48,7 @@ export default function AboutPage() {
                   So we built the company we wished existed: one team that
                   organizes, cleans, and moves. Two-person crews on every job.
                   Premium work without luxury pretense. And a strict
-                  judgment-free rule — because needing help with your home is
+                  judgment-free rule, because needing help with your home is
                   the most normal thing in the world.
                 </p>
               </Reveal>
@@ -65,7 +65,7 @@ export default function AboutPage() {
               Premium, not luxury.
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-ink-soft">
-              Luxury is about status. Premium is about care — showing up on
+              Luxury is about status. Premium is about care, showing up on
               time, finishing what we quoted, and leaving your home working
               better than we found it. We&rsquo;ll never be the cheapest, and
               we&rsquo;ll never pretend your pantry needs gold-plated bins.

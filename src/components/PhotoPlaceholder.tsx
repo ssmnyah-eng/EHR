@@ -1,4 +1,4 @@
-// PHOTO PLACEHOLDER — real photography is being shot separately.
+// PHOTO PLACEHOLDER, real photography is being shot separately.
 // Each instance renders a soft gradient block with a description of the shot
 // that belongs there (warm color grade, lived-in, per the design direction).
 // Swap for <Image> components once the real photo library arrives.
