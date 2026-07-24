@@ -43,8 +43,11 @@ export default function RoomByRoomPage() {
                   <span className="text-[15px] leading-snug text-ink-soft lg:text-lg">
                     {group.rooms.join(", ")}
                   </span>
-                  <span className="label whitespace-nowrap text-clay">
-                    ${group.price}
+                  <span className="whitespace-nowrap text-right">
+                    <span className="label block text-charcoal/50">
+                      Starting at
+                    </span>
+                    <span className="label text-clay">${group.price}</span>
                   </span>
                 </div>
               ))}
@@ -73,8 +76,11 @@ export default function RoomByRoomPage() {
                       {bundle.discountPercent}% off
                     </span>
                   </p>
-                  <p className="mt-1 font-display text-[24px]">
-                    ${bundle.finalPrice}
+                  <p className="mt-1 flex items-baseline gap-2">
+                    <span className="label text-charcoal/50">Starting at</span>
+                    <span className="font-display text-[24px]">
+                      ${bundle.finalPrice}
+                    </span>
                   </p>
                 </div>
               ))}
