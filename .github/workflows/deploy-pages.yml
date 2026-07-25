@@ -31,7 +31,7 @@ jobs:
       # remove NEXT_PUBLIC_BASE_PATH once a custom domain is attached.
       - run: npm run build:pages
         env:
-          NEXT_PUBLIC_BASE_PATH: ""
+          NEXT_PUBLIC_BASE_PATH: /EHR
           STATIC_EXPORT: "1"
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
