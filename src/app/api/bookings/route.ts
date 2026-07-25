@@ -6,7 +6,7 @@ import {
   releaseBooking,
   unavailableDatesForMonth,
 } from "@/lib/bookingStore";
-import { DEPOSIT } from "@/lib/cleaning";
+import { DEPOSIT, TIME_SLOTS } from "@/lib/cleaning";
 import { sendBookingConfirmation } from "@/lib/email";
 import { SITE_URL } from "@/lib/site";
 
@@ -34,6 +34,7 @@ export async function POST(req: NextRequest) {
   const {
     kind = "cleaning",
     date,
+    time,
     durationHours,
     name,
     email,
@@ -46,10 +47,17 @@ export async function POST(req: NextRequest) {
   if (!date || !name || !email || !address || !service || total == null) {
     return NextResponse.json({ error: "Missing required fields." }, { status: 400 });
   }
+  if (!time || !(TIME_SLOTS as readonly string[]).includes(time)) {
+    return NextResponse.json(
+      { error: "Please pick an arrival time between 8:00 AM and 2:00 PM." },
+      { status: 400 }
+    );
+  }
 
   const result = await createBooking({
     kind,
     date,
+    time,
     durationHours: Number(durationHours) || 0,
     name,
     email,

@@ -126,6 +126,74 @@ export const TRAVEL_FEE = 25;
 export const TRAVEL_FEE_CITIES = ["Arlington", "Richmond"];
 export const DEPOSIT = 100;
 
+// Bookable arrival times, 8am to 2pm. Day stays one-job-per-day; the slot
+// tells the crew when to arrive.
+export const TIME_SLOTS = [
+  "8:00 AM",
+  "9:00 AM",
+  "10:00 AM",
+  "11:00 AM",
+  "12:00 PM",
+  "1:00 PM",
+  "2:00 PM",
+] as const;
+export type TimeSlot = (typeof TIME_SLOTS)[number];
+
+// Long-form converting copy for the cleaning landing page, one section per
+// tier, alternating image/text like the reset-package pages.
+export type CleaningTypeDetail = {
+  tagline: string;
+  body: string;
+  who: string;
+  tone: "clay" | "sage" | "mauve";
+  photo: string;
+};
+
+export const cleaningTypeDetails: Record<CleaningType, CleaningTypeDetail> = {
+  "Standard Cleaning": {
+    tagline: "The reliable reset, every room, every visit",
+    body: "Floors vacuumed and mopped, every surface dusted, kitchen and bathrooms detailed, beds made, trash gone. This is the clean that keeps a lived-in home feeling cared for, week after week.",
+    who: "Households that want a dependable baseline, weekly, biweekly, or a one-time refresh before company comes.",
+    tone: "clay",
+    photo: "Photo: sunlit living room mid-clean, fresh vacuum lines",
+  },
+  "Premium Deep Cleaning": {
+    tagline: "Everything in Standard, plus the spots that get skipped",
+    body: "We move furniture to clean underneath and behind it, scrub grout and tile, detail baseboards, window sills, and light fixtures, and give cabinet fronts real attention, not just a quick wipe.",
+    who: "Homes that haven't had a deep clean in a while, or anyone who wants Standard's reliability with a genuinely thorough pass.",
+    tone: "sage",
+    photo: "Photo: gleaming bathroom grout, detail brush in hand",
+  },
+  "Elevated Reset Cleaning": {
+    tagline: "The full interior detail, inside every cabinet and appliance",
+    body: "Everything in Premium, plus inside the oven, inside the fridge, inside every cabinet and drawer, interior windows, and spot-cleaning on walls. This is as close to a move-in clean as a home gets while still lived in.",
+    who: "Homes prepping for a big event, a new season, or anyone ready for a genuine top-to-bottom reset.",
+    tone: "mauve",
+    photo: "Photo: open oven door, spotless interior",
+  },
+  "Move-In Cleaning": {
+    tagline: "A truly blank slate before your boxes arrive",
+    body: "Every cabinet, drawer, and closet interior wiped down, baseboards, interior windows, light fixtures, and bathrooms fully detailed, so the first thing that touches those shelves is your own belongings, not the last owner's dust.",
+    who: "Buyers and renters who want to unpack into a genuinely clean home, not one that just looks clean from the doorway.",
+    tone: "clay",
+    photo: "Photo: empty bright kitchen, cabinets open and clean",
+  },
+  "Move-Out Cleaning": {
+    tagline: "Leave it better than the walkthrough requires",
+    body: "The same full detail as Move-In, every interior surface, appliance, and window, built to satisfy landlord walkthroughs and leave the next owner's first impression a good one.",
+    who: "Renters protecting a deposit, and sellers who want the final showing to close the deal.",
+    tone: "sage",
+    photo: "Photo: empty room, sun through spotless windows",
+  },
+  "Post-Organization Cleaning": {
+    tagline: "The clean that follows a reset, while everything's still out",
+    body: "Standard Cleaning's scope, but with full access to cabinets, closets, and drawers an organizing visit just emptied, wiping interiors that are normally blocked by everything stored inside them.",
+    who: "Anyone who just finished a Reset Package or Room-by-Room Reset and wants the space genuinely clean before everything goes back in.",
+    tone: "mauve",
+    photo: "Photo: emptied pantry shelves being wiped down",
+  },
+};
+
 export function extraIsAvailable(extra: Extra, type: CleaningType): boolean {
   return extra.availableFor === "all" || extra.availableFor.includes(type);
 }

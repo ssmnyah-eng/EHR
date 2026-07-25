@@ -48,6 +48,7 @@ export async function sendBookingConfirmation(
       <div style="background: #F1F0EB; border-radius: 16px; padding: 24px; margin: 24px 0;">
         <p><strong>Service:</strong> ${booking.service}</p>
         <p><strong>Date:</strong> ${when}</p>
+        <p><strong>Arrival time:</strong> ${booking.time}</p>
         <p><strong>Address:</strong> ${booking.address}</p>
         ${extras}
       </div>

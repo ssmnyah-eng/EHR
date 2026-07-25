@@ -13,14 +13,14 @@ const icons = ["✦", "❋", "✳", "❊", "✷", "❉"];
 
 function Card({ item, i }: { item: string; i: number }) {
   return (
-    <div className="flex h-full flex-col items-center gap-3 rounded-[16px] bg-stone/80 p-5 text-center">
+    <div className="shadow-soft mx-auto flex h-full max-w-md flex-col items-center gap-4 rounded-[20px] bg-stone p-8 text-center lg:p-10">
       <span
         aria-hidden
-        className={`flex h-11 w-11 items-center justify-center rounded-full text-xl ${bgCycle[i % 3]} ${accentCycle[i % 3]}`}
+        className={`flex h-14 w-14 items-center justify-center rounded-full text-2xl ${bgCycle[i % 3]} ${accentCycle[i % 3]}`}
       >
         {icons[i % icons.length]}
       </span>
-      <span className="text-[15px] leading-snug text-ink-soft">{item}</span>
+      <span className="text-lg leading-snug text-ink-soft lg:text-xl">{item}</span>
     </div>
   );
 }
@@ -41,14 +41,14 @@ export default function WhatsIncluded({
           <h2 className="text-center text-[26px] lg:text-[36px]">{heading}</h2>
         </Reveal>
 
-        {/* Mobile/tablet: arrow-paged single card */}
-        <div className="mt-8 lg:hidden">
+        {/* Arrow-paged floating single card, every breakpoint */}
+        <div className="mt-10">
           <Reveal className="relative">
             <button
               type="button"
               onClick={() => go(-1)}
               aria-label="Previous item"
-              className="t-hover pressable absolute left-0 top-1/2 z-10 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-stone text-lg text-charcoal shadow-soft hover:bg-clay hover:text-stone"
+              className="t-hover pressable absolute left-0 top-1/2 z-10 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-stone text-lg text-charcoal shadow-soft hover:bg-clay hover:text-stone lg:h-14 lg:w-14 lg:text-2xl lg:-left-4"
             >
               ‹
             </button>
@@ -57,12 +57,12 @@ export default function WhatsIncluded({
               type="button"
               onClick={() => go(1)}
               aria-label="Next item"
-              className="t-hover pressable absolute right-0 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-stone text-lg text-charcoal shadow-soft hover:bg-clay hover:text-stone"
+              className="t-hover pressable absolute right-0 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-stone text-lg text-charcoal shadow-soft hover:bg-clay hover:text-stone lg:h-14 lg:w-14 lg:text-2xl lg:-right-4"
             >
               ›
             </button>
           </Reveal>
-          <div className="mt-4 flex justify-center gap-2">
+          <div className="mt-6 flex justify-center gap-2">
             {everyResetIncludes.map((item, i) => (
               <button
                 key={item}
@@ -74,15 +74,6 @@ export default function WhatsIncluded({
               />
             ))}
           </div>
-        </div>
-
-        {/* Desktop: full grid, no paging needed */}
-        <div className="mt-8 hidden gap-6 lg:grid lg:grid-cols-6">
-          {everyResetIncludes.map((item, i) => (
-            <Reveal key={item} delay={i * 100} className="h-full">
-              <Card item={item} i={i} />
-            </Reveal>
-          ))}
         </div>
       </Container>
     </section>

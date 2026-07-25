@@ -14,6 +14,7 @@ export type Booking = {
   status: "pending" | "confirmed";
   createdAt: string;
   date: string; // YYYY-MM-DD, the one job for that day
+  time: string; // arrival slot, e.g. "8:00 AM" (8am-2pm window)
   durationHours: number; // kept for internal crew scheduling, never shown to the customer
   name: string;
   email: string;
@@ -111,6 +112,7 @@ export async function createBooking(
     status: "pending",
     createdAt: new Date().toISOString(),
     date: input.date,
+    time: input.time,
     durationHours: input.durationHours,
     name: input.name,
     email: input.email,
