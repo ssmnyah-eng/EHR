@@ -6,6 +6,7 @@ import AddressInput from "./AddressInput";
 import Reveal from "./Reveal";
 import { contactPanelInfo } from "@/lib/services";
 import { everyResetIncludes } from "@/lib/services";
+import { PHONE, PHONE_HREF } from "@/lib/site";
 
 const PRIMARY_SERVICES = [
   "Organizing",
@@ -43,6 +44,7 @@ export default function ContactForm() {
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [staticNotice, setStaticNotice] = useState(false);
 
   const setAddress = useCallback((a: string) => setAddressState(a), []);
 
@@ -55,19 +57,45 @@ export default function ContactForm() {
     return null;
   }, [service, subService]);
 
+  const staticExport = process.env.NEXT_PUBLIC_STATIC_EXPORT === "1";
+
   async function submit(e: React.FormEvent) {
     e.preventDefault();
+    // Static export has no backend to receive this, so don't claim success,
+    // send people to the phone number instead.
+    if (staticExport) {
+      setStaticNotice(true);
+      return;
+    }
     setSubmitting(true);
     try {
-      await fetch("/api/contact", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, phone, address, service, subService, message }),
       });
+      if (!res.ok) throw new Error("Request failed");
       setSubmitted(true);
+    } catch {
+      setStaticNotice(true);
     } finally {
       setSubmitting(false);
     }
+  }
+
+  if (staticNotice) {
+    return (
+      <div className="shadow-soft rounded-[24px] bg-gradient-to-br from-clay/10 via-white/70 to-mauve/10 p-10 text-center">
+        <h2 className="text-[28px]">Call us to reach a real person right now.</h2>
+        <p className="mx-auto mt-4 max-w-md leading-relaxed text-ink-soft">
+          Online form submission is being wired up. In the meantime, call{" "}
+          <a href={PHONE_HREF} className="font-medium text-clay underline underline-offset-4">
+            {PHONE}
+          </a>{" "}
+          and we&rsquo;ll get you taken care of.
+        </p>
+      </div>
+    );
   }
 
   if (submitted) {

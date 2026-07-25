@@ -23,9 +23,15 @@ export default function MonthCalendar({
   const today = new Date();
   const [viewYear, setViewYear] = useState(today.getFullYear());
   const [viewMonth, setViewMonth] = useState(today.getMonth() + 1); // 1-12
-  const [unavailable, setUnavailable] = useState<Set<string> | null>(null);
+  const staticExport = process.env.NEXT_PUBLIC_STATIC_EXPORT === "1";
+  const [unavailable, setUnavailable] = useState<Set<string> | null>(() =>
+    staticExport ? new Set() : null
+  );
 
   useEffect(() => {
+    // Static export has no backend to check against, so every eligible day
+    // shows as open; exact availability is confirmed when the booking posts.
+    if (staticExport) return;
     let stale = false;
     fetch(`/api/bookings?year=${viewYear}&month=${viewMonth}`)
       .then((r) => r.json())
@@ -38,7 +44,7 @@ export default function MonthCalendar({
     return () => {
       stale = true;
     };
-  }, [viewYear, viewMonth]);
+  }, [viewYear, viewMonth, staticExport]);
 
   function goMonth(delta: number) {
     setUnavailable(null);

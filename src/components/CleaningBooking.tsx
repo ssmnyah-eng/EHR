@@ -77,17 +77,9 @@ const pill = (active: boolean) =>
 const inputCls =
   "min-h-[48px] rounded-[6px] border border-charcoal/20 bg-white/70 px-4 py-3 font-normal outline-none focus:border-sage";
 
-export default function CleaningBooking({
-  defaultType,
-}: {
-  defaultType?: string;
-}) {
-  const initialType = cleaningTypes.includes(defaultType as CleaningType)
-    ? (defaultType as CleaningType)
-    : "Standard Cleaning";
-
+export default function CleaningBooking() {
   const [step, setStep] = useState<Step>(1);
-  const [type, setType] = useState<CleaningType>(initialType);
+  const [type, setType] = useState<CleaningType>("Standard Cleaning");
   const [sqftIndex, setSqftIndex] = useState(0);
   const [conditionIndex, setConditionIndex] = useState(1);
   const [frequency, setFrequency] = useState<Frequency>("One-Time");
@@ -100,7 +92,10 @@ export default function CleaningBooking({
     date: "",
     time: "",
   });
-  const [anyAvailability, setAnyAvailability] = useState<boolean | null>(null);
+  const staticExport = process.env.NEXT_PUBLIC_STATIC_EXPORT === "1";
+  const [anyAvailability, setAnyAvailability] = useState<boolean | null>(() =>
+    staticExport ? true : null
+  );
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [confirmedId, setConfirmedId] = useState("");
@@ -135,22 +130,25 @@ export default function CleaningBooking({
 
   // Overall availability check for the "we can't service this right now" state.
   useEffect(() => {
-    if (quote.customQuote) return;
+    if (quote.customQuote || staticExport) return;
     fetch(`/api/bookings`)
       .then((r) => r.json())
       .then((d) => setAnyAvailability(Boolean(d.anyAvailability)))
       .catch(() => setAnyAvailability(true));
-  }, [quote.customQuote]);
+  }, [quote.customQuote, staticExport]);
 
-  // Stripe redirect return states (async read keeps hydration clean).
+  // Stripe redirect return states + ?type= preselect from a "Book This
+  // Cleaning" link (async read keeps hydration clean).
   useEffect(() => {
     const timer = setTimeout(() => {
       const params = new URLSearchParams(window.location.search);
       if (params.get("confirmed")) setConfirmedId(params.get("confirmed")!);
       if (params.get("cancelled")) setCancelled(true);
+      const t = params.get("type");
+      if (cleaningTypes.includes(t as CleaningType)) selectType(t as CleaningType);
     }, 0);
     return () => clearTimeout(timer);
-  }, []);
+  }, [selectType]);
 
   const setAddress = useCallback(
     (address: string) => setForm((f) => ({ ...f, address })),
@@ -189,6 +187,14 @@ export default function CleaningBooking({
 
   async function submit() {
     setError("");
+    // No backend to hold a date or start Stripe Checkout in a static build,
+    // don't pretend to book, send them to the phone instead.
+    if (staticExport) {
+      setError(
+        "Online booking is being wired up. Call 540-356-3306 with your date and time and we'll lock it in."
+      );
+      return;
+    }
     setSubmitting(true);
     try {
       const res = await fetch("/api/bookings", {

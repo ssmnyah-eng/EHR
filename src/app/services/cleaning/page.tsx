@@ -15,13 +15,7 @@ export const metadata: Metadata = {
     "Six ways to get your home clean: Standard, Premium Deep, Elevated Reset, Move-In/Out, and Post-Organization cleaning. Instant online quote, real calendar booking, across Virginia.",
 };
 
-export default async function CleaningPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ type?: string }>;
-}) {
-  const { type } = await searchParams;
-
+export default function CleaningPage() {
   return (
     <>
       <PageHero
@@ -71,7 +65,7 @@ export default async function CleaningPage({
 
       <section id="book" className="scroll-mt-24 py-16 lg:py-24">
         <Container>
-          <CleaningBooking defaultType={type} />
+          <CleaningBooking />
         </Container>
       </section>
 

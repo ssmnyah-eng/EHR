@@ -4,6 +4,8 @@ import { locations } from "@/lib/locations";
 import { blogPosts } from "@/lib/blog";
 import { resetPackageDetails } from "@/lib/services";
 
+export const dynamic = "force-static";
+
 // Static routes + auto-included location pages and blog posts. Adding a city
 // to lib/locations.ts or a post to lib/blog.ts updates the sitemap with no
 // further changes here.
