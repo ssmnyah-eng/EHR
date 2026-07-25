@@ -1,0 +1,58 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [claude/elevated-home-resets-brand-wwe2vy, main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to gh-pages
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+          # Create or switch to gh-pages branch
+          git fetch origin gh-pages 2>/dev/null || true
+          git checkout --orphan gh-pages || git checkout gh-pages
+
+          # Copy HTML, CSS, JS, and other files
+          git checkout ${{ github.head_ref || github.ref_name }} -- \
+            index.html \
+            styles.css \
+            script.js \
+            contact/ \
+            services/ \
+            about/ \
+            privacy/ \
+            terms/ \
+            apps-script.gs \
+            2>/dev/null || true
+
+          # Commit and push
+          git add -A
+          git commit -m "Deploy static HTML site" --allow-empty
+          git push origin gh-pages -f
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Enable GitHub Pages
+        run: |
+          echo "GitHub Pages should be enabled in repository settings:"
+          echo "1. Go to Settings → Pages"
+          echo "2. Set Source to 'Deploy from a branch'"
+          echo "3. Select gh-pages branch and / (root) folder"

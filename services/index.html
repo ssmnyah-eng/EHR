@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services - Elevated Home Resets</title>
+  <meta name="description" content="Organizing, cleaning, move concierge, and specialty services for Virginia homes.">
+  <link rel="canonical" href="https://elevatedhomeresets.com/services">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .page-hero {
+      background: var(--color-white);
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+
+    .page-hero h1 {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px;
+      padding: 64px 0;
+    }
+
+    @media (max-width: 768px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    .service-item {
+      padding: 40px;
+      border: 1px solid rgba(51, 46, 42, 0.1);
+      border-radius: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 220ms ease;
+    }
+
+    .service-item:hover {
+      border-color: var(--color-clay);
+      box-shadow: 0 8px 24px rgba(51, 46, 42, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .service-item h3 {
+      font-size: 24px;
+      margin-bottom: 12px;
+      color: var(--color-charcoal);
+    }
+
+    .service-item p {
+      color: var(--color-ink-soft);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .service-link {
+      color: var(--color-clay);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="/" class="logo">Elevated Home Resets</a>
+      <nav>
+        <a href="/services">Services</a>
+        <a href="/about">About</a>
+        <a href="/locations">Locations</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>Our Services</h1>
+      <p>Four ways we reset a home, from organizing to cleaning to complete moves.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="services-grid">
+        <a href="/services/organizing" class="service-item reveal">
+          <h3>Organizing</h3>
+          <p>Customized organizing systems built around how you actually live. From one closet to your whole home.</p>
+          <span class="service-link">Explore → </span>
+        </a>
+
+        <a href="/services/cleaning" class="service-item reveal" data-reveal-delay="100">
+          <h3>Cleaning</h3>
+          <p>Instant quotes, real calendar booking, and crews that care. Standard, deep, or complete resets.</p>
+          <span class="service-link">Explore → </span>
+        </a>
+
+        <a href="/services/move-concierge" class="service-item reveal" data-reveal-delay="200">
+          <h3>Move & Concierge</h3>
+          <p>Full-service moving and unpacking. We pack, move, unpack, and organize. One team, one point of contact.</p>
+          <span class="service-link">Explore → </span>
+        </a>
+
+        <a href="/services/specialty" class="service-item reveal" data-reveal-delay="300">
+          <h3>Specialty Services</h3>
+          <p>Supportive living resets, nursery prep, and junk removal. Projects that don't fit a standard box.</p>
+          <span class="service-link">Explore → </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-bottom: 64px;">
+        <div>
+          <h4 style="color: var(--color-white); margin-bottom: 16px;">Services</h4>
+          <p><a href="/services/organizing">Organizing</a></p>
+          <p><a href="/services/cleaning">Cleaning</a></p>
+          <p><a href="/services/move-concierge">Move & Concierge</a></p>
+        </div>
+        <div>
+          <h4 style="color: var(--color-white); margin-bottom: 16px;">Company</h4>
+          <p><a href="/about">About</a></p>
+          <p><a href="/locations">Locations</a></p>
+          <p><a href="/contact">Contact</a></p>
+        </div>
+        <div>
+          <h4 style="color: var(--color-white); margin-bottom: 16px;">Legal</h4>
+          <p><a href="/privacy">Privacy</a></p>
+          <p><a href="/terms">Terms</a></p>
+        </div>
+      </div>
+      <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 32px; text-align: center;">
+        <p>&copy; 2024 Elevated Home Resets. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

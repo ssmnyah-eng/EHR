@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elevated Home Resets - Organizing, Cleaning & Moving Services in Virginia</title>
+  <meta name="description" content="Professional home organizing, deep cleaning, and move management for Virginia homes. Instant quotes, real calendar booking.">
+  <meta property="og:title" content="Elevated Home Resets">
+  <meta property="og:description" content="Organizing, cleaning, and move management for Virginia homes.">
+  <link rel="canonical" href="https://elevatedhomeresets.com/">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .hero {
+      position: relative;
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: -12%;
+      z-index: -20;
+      background: linear-gradient(135deg, #332e2a, #575e47, #a85d42);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: -10;
+      background: rgba(51, 46, 42, 0.45);
+    }
+
+    .hero-content {
+      max-width: 480px;
+      color: rgba(241, 240, 235, 0.85);
+    }
+
+    @media (min-width: 1024px) {
+      .hero-content {
+        max-width: 45%;
+      }
+    }
+
+    .cycler {
+      font-size: 36px;
+      line-height: 1.1;
+      color: rgba(241, 240, 235, 1);
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    @media (min-width: 1024px) {
+      .cycler {
+        font-size: 64px;
+      }
+    }
+
+    .cycler-word {
+      display: inline-block;
+      color: var(--color-mauve);
+      transition: opacity 700ms ease;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .hero-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 48px;
+      padding: 12px 28px;
+      font-weight: 500;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 220ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hero-primary {
+      background: var(--color-clay);
+      color: var(--color-stone);
+    }
+
+    .hero-primary:hover {
+      background: var(--color-sage);
+    }
+
+    .hero-secondary {
+      border: 1px solid rgba(241, 240, 235, 0.5);
+      color: rgba(241, 240, 235, 1);
+    }
+
+    .hero-secondary:hover {
+      border-color: rgba(241, 240, 235, 1);
+      background: rgba(241, 240, 235, 0.1);
+    }
+
+    .hero-sub-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(241, 240, 235, 1);
+      text-decoration: underline;
+      text-decoration-color: rgba(241, 240, 235, 0.25);
+      text-underline-offset: 32px;
+      margin-top: 16px;
+      transition: all 220ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hero-sub-link:hover {
+      color: var(--color-mauve);
+    }
+
+    /* Brand intro section */
+    .trust-section {
+      background: var(--color-stone);
+      padding: 64px 0;
+    }
+
+    @media (max-width: 1024px) {
+      .trust-section {
+        padding: 48px 0;
+      }
+    }
+
+    .trust-content {
+      text-align: center;
+      max-width: 768px;
+      margin: 0 auto;
+    }
+
+    .trust-label {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--color-clay);
+    }
+
+    .trust-title {
+      font-size: 24px;
+      line-height: 1.3;
+      margin-top: 20px;
+      font-family: 'Fraunces', Georgia, serif;
+    }
+
+    @media (min-width: 1024px) {
+      .trust-title {
+        font-size: 32px;
+      }
+    }
+
+    .trust-description {
+      margin-top: 20px;
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--color-ink-soft);
+    }
+
+    /* Services grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    @media (min-width: 1024px) {
+      .services-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+      }
+    }
+
+    .service-card {
+      padding: 64px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    @media (min-width: 1024px) {
+      .service-card {
+        padding: 96px;
+        flex-direction: row;
+        gap: 64px;
+        align-items: center;
+      }
+    }
+
+    .service-card.reversed {
+      flex-direction: row-reverse;
+    }
+
+    .service-image {
+      flex: 0 0 42%;
+      background: #e0e0e0;
+      aspect-ratio: 4/5;
+      border-radius: 12px;
+    }
+
+    .service-content {
+      flex: 1;
+    }
+
+    .service-label {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--color-clay);
+    }
+
+    .service-title {
+      font-size: 24px;
+      line-height: 1.3;
+      margin-top: 12px;
+      font-family: 'Fraunces', Georgia, serif;
+    }
+
+    .service-description {
+      margin-top: 16px;
+      line-height: 1.6;
+      color: var(--color-ink-soft);
+    }
+
+    .service-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 32px;
+      margin-top: 24px;
+      background: var(--color-clay);
+      color: var(--color-stone);
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 220ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .service-cta:hover {
+      background: var(--color-clay-deep);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <a href="/" class="logo">Elevated Home Resets</a>
+      <nav>
+        <a href="/services">Services</a>
+        <a href="/about">About</a>
+        <a href="/locations">Locations</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="cycler">
+          Reset your <span class="cycler-word" id="cyclerWord">Home</span>.
+        </h1>
+        <p style="font-size: 18px; line-height: 1.6;">
+          Organizing, cleaning, and move management for Virginia homes, one team, judgment-free, built around how you actually live.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="/contact" class="hero-link hero-primary">Reset Your Home</a>
+          <a href="/services/cleaning" class="hero-link hero-secondary">Book a Cleaning</a>
+        </div>
+
+        <a href="/services" class="hero-sub-link">
+          Explore Services <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Section -->
+  <section class="trust-section">
+    <div class="container trust-content">
+      <div class="reveal">
+        <p class="trust-label">Elevated Home Resets</p>
+        <h2 class="trust-title">A complete home reset company, organizing, cleaning, and moving under one roof, done by two-person crews who never judge what they walk into.</h2>
+        <p class="trust-description">We specialize in personalized home solutions for busy professionals, growing families, and life transitions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section style="padding: 0;">
+    <div class="services-grid">
+      <div class="service-card" style="background: rgba(255, 255, 255, 0.6);">
+        <div class="service-image" style="order: -1;"></div>
+        <div class="service-content">
+          <p class="service-label">Organizing</p>
+          <h3 class="service-title">Customized systems built around how you live.</h3>
+          <p class="service-description">From one closet to your whole home, we create organizing systems that actually work for your lifestyle and stay organized long-term.</p>
+          <p style="margin-top: 12px; color: var(--color-charcoal);"><strong>Best for:</strong> <span style="color: var(--color-ink-soft);">Anyone overwhelmed by clutter who wants systems that stick.</span></p>
+          <a href="/services/organizing" class="service-cta">Explore Organizing</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-image"></div>
+        <div class="service-content">
+          <p class="service-label">Cleaning</p>
+          <h3 class="service-title">Instant quotes, real calendar booking, crews that care.</h3>
+          <p class="service-description">Deep clean, standard refresh, or post-event cleanup. Get an instant online quote, book on a real calendar, and trust a team that treats your home like their own.</p>
+          <p style="margin-top: 12px; color: var(--color-charcoal);"><strong>Best for:</strong> <span style="color: var(--color-ink-soft);">Busy professionals who need reliable, on-demand cleaning.</span></p>
+          <a href="/services/cleaning" class="service-cta">Book a Cleaning</a>
+        </div>
+      </div>
+
+      <div class="service-card" style="background: rgba(255, 255, 255, 0.6);">
+        <div class="service-image" style="order: -1;"></div>
+        <div class="service-content">
+          <p class="service-label">Move & Concierge</p>
+          <h3 class="service-title">We pack, move, unpack, and organize. One team, one point of contact.</h3>
+          <p class="service-description">From packing through unpacking and organizing your new space, we handle the whole move so you don't have to.</p>
+          <p style="margin-top: 12px; color: var(--color-charcoal);"><strong>Best for:</strong> <span style="color: var(--color-ink-soft);">Anyone relocating who wants a seamless, stress-free move.</span></p>
+          <a href="/services/move-concierge" class="service-cta">Explore Move Services</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-image"></div>
+        <div class="service-content">
+          <p class="service-label">Specialty Services</p>
+          <h3 class="service-title">Supportive living resets, nursery prep, and junk removal.</h3>
+          <p class="service-description">The projects that don't fit a standard box. Aging in place adaptations, nursery prep, senior transitions, and bulk junk removal.</p>
+          <p style="margin-top: 12px; color: var(--color-charcoal);"><strong>Best for:</strong> <span style="color: var(--color-ink-soft);">Life transitions that need specialized care and expertise.</span></p>
+          <a href="/services/specialty" class="service-cta">Explore Specialty Services</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-bottom: 64px;">
+        <div>
+          <h4 style="color: var(--color-white); margin-bottom: 16px;">Services</h4>
+          <p><a href="/services/organizing">Organizing</a></p>
+          <p><a href="/services/cleaning">Cleaning</a></p>
+          <p><a href="/services/move-concierge">Move & Concierge</a></p>
+          <p><a href="/services/specialty">Specialty Services</a></p>
+        </div>
+        <div>
+          <h4 style="color: var(--color-white); margin-bottom: 16px;">Company</h4>
+          <p><a href="/about">About</a></p>
+          <p><a href="/locations">Locations</a></p>
+          <p><a href="/contact">Contact</a></p>
+          <p><a href="/blog">Blog</a></p>
+        </div>
+        <div>
+          <h4 style="color: var(--color-white); margin-bottom: 16px;">Legal</h4>
+          <p><a href="/privacy">Privacy Policy</a></p>
+          <p><a href="/terms">Terms of Service</a></p>
+        </div>
+      </div>
+      <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 32px; text-align: center;">
+        <p>&copy; 2024 Elevated Home Resets. All rights reserved.</p>
+        <p style="margin-top: 8px; font-size: 14px;">Serving Virginia homes with care and professionalism.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Hero parallax effect
+    const heroBg = document.getElementById('heroBg');
+    if (heroBg && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      let raf = 0;
+      const onScroll = () => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          heroBg.style.transform = `translateY(${window.scrollY * 0.12}px)`;
+        });
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
+
+    // Hero cycler
+    const WORDS = ['Home', 'Life', 'Family'];
+    const HOLD_MS = 2800;
+    const FADE_MS = 700;
+    let cyclerIndex = 0;
+    const cyclerWord = document.getElementById('cyclerWord');
+
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setInterval(() => {
+        cyclerWord.style.opacity = '0';
+        setTimeout(() => {
+          cyclerIndex = (cyclerIndex + 1) % WORDS.length;
+          cyclerWord.textContent = WORDS[cyclerIndex];
+          cyclerWord.style.opacity = '1';
+        }, FADE_MS);
+      }, HOLD_MS + FADE_MS);
+    }
+  </script>
+</body>
+</html>
