@@ -295,6 +295,36 @@
       align-self: flex-start;
     }
 
+    /* ===== Mid-page CTA strip ===== */
+    .cta-strip {
+      background: var(--color-charcoal);
+      padding: 56px 0;
+      text-align: center;
+    }
+
+    .cta-strip p {
+      color: rgba(241, 240, 235, 0.85);
+      font-size: 18px;
+      margin-bottom: 24px;
+    }
+
+    .cta-strip-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .cta-strip .btn-secondary {
+      color: var(--color-white);
+      border-color: rgba(241, 240, 235, 0.4);
+    }
+
+    .cta-strip .btn-secondary:hover {
+      background: rgba(241, 240, 235, 0.1);
+      color: var(--color-white);
+    }
+
     /* ===== How The Process Works ===== */
     .process-section { background: var(--color-stone); padding: 96px 0; }
 
@@ -782,6 +812,18 @@
     </div>
   </section>
 
+  <!-- Mid-page CTA strip -->
+  <section class="cta-strip">
+    <div class="container">
+      <p>Ready to see what a reset actually feels like?</p>
+      <div class="cta-strip-buttons">
+        <a href="./services/cleaning" class="btn btn-primary">Book Your Cleaning</a>
+        <a href="./services/organizing" class="btn btn-primary">Start Your Reset</a>
+        <a href="./services" class="btn btn-secondary">Explore Services</a>
+      </div>
+    </div>
+  </section>
+
   <!-- Before & After Carousel -->
   <section class="baa-section">
     <div class="container">
@@ -916,6 +958,18 @@
     </div>
   </section>
 
+  <!-- Mid-page CTA strip -->
+  <section class="cta-strip">
+    <div class="container">
+      <p>Your evenings and weekends are waiting on the other side of this.</p>
+      <div class="cta-strip-buttons">
+        <a href="./services/cleaning" class="btn btn-primary">Book Your Cleaning</a>
+        <a href="./services/organizing" class="btn btn-primary">Start Your Reset</a>
+        <a href="./services" class="btn btn-secondary">Explore Services</a>
+      </div>
+    </div>
+  </section>
+
   <!-- See Why Families Trust Elevated Home Resets -->
   <section class="trust-reviews-section">
     <div class="container">
@@ -992,7 +1046,10 @@
       <div class="closing-content reveal">
         <h2>Ready to walk into a home that feels lighter?</h2>
         <p>You don't have to live in the chaos any longer than you already have. Tell us what's going on, and we'll build a plan that gets you your evenings, your weekends, and your peace of mind back.</p>
-        <a href="./contact" class="btn btn-primary">Book Now</a>
+        <div class="cta-strip-buttons" style="margin-top: 40px;">
+          <a href="./services/cleaning" class="btn btn-primary">Book Your Cleaning</a>
+          <a href="./services/organizing" class="btn btn-primary">Start Your Reset</a>
+        </div>
       </div>
     </div>
   </section>
