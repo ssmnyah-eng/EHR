@@ -1075,12 +1075,12 @@
         });
 
         if (response.ok) {
-          messageDiv.className = 'form-message success';
-          messageDiv.textContent = 'Booking request received! We\'ll confirm within 24 hours.';
-          document.getElementById('bookingForm').reset();
-          selectedDate = null;
-          renderCalendar();
-          updatePrice();
+          const params = new URLSearchParams({
+            service: 'cleaning',
+            name: document.getElementById('name').value,
+            total: document.getElementById('priceTotal').textContent
+          });
+          window.location.href = '../../book/?' + params.toString();
         } else {
           throw new Error('Booking failed');
         }

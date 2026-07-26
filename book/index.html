@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserve Your Spot - Elevated Home Resets</title>
+  <meta name="description" content="Lock in your date with a $100 deposit and let's get your reset on the calendar.">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .img-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: repeating-linear-gradient(
+        135deg,
+        rgba(51, 46, 42, 0.06),
+        rgba(51, 46, 42, 0.06) 12px,
+        rgba(51, 46, 42, 0.03) 12px,
+        rgba(51, 46, 42, 0.03) 24px
+      );
+      border: 1px dashed rgba(51, 46, 42, 0.25);
+      color: var(--color-ink-soft);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .section-heading { text-align: center; max-width: 680px; margin: 0 auto 56px; }
+    .section-eyebrow { color: var(--color-clay); }
+    .section-title { margin-top: 16px; }
+
+    /* Converting hero */
+    .reserve-hero {
+      background: linear-gradient(135deg, rgba(92, 122, 82, 0.1) 0%, rgba(107, 114, 89, 0.1) 100%);
+      padding: 96px 0 64px;
+      text-align: center;
+    }
+
+    .reserve-hero h1 { font-size: 40px; margin-bottom: 20px; }
+    .reserve-hero p { font-size: 18px; color: var(--color-ink-soft); max-width: 640px; margin: 0 auto; line-height: 1.7; }
+
+    /* Deposit / payment card */
+    .deposit-section { background: var(--color-white); padding: 64px 0; }
+
+    .deposit-card {
+      max-width: 560px;
+      margin: 0 auto;
+      background: var(--color-stone);
+      border-radius: 20px;
+      padding: 48px 40px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(51, 46, 42, 0.08);
+    }
+
+    .deposit-amount {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: 48px;
+      color: var(--color-charcoal);
+      margin: 8px 0 16px;
+    }
+
+    .deposit-card p.deposit-note {
+      color: var(--color-ink-soft);
+      font-size: 15px;
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+
+    .deposit-card .btn { width: 100%; padding: 16px 32px; font-size: 17px; }
+
+    .deposit-card .fine-print {
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--color-ink-soft);
+    }
+
+    /* Fallback intake section */
+    .not-ready-section { background: var(--color-stone); padding: 64px 0; }
+
+    .not-ready-card {
+      max-width: 560px;
+      margin: 0 auto;
+      background: var(--color-white);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 1px 2px rgba(51, 46, 42, 0.06), 0 8px 24px rgba(51, 46, 42, 0.07);
+    }
+
+    .not-ready-card h2 { font-size: 24px; text-align: center; }
+    .not-ready-card > p { text-align: center; color: var(--color-ink-soft); margin-top: 12px; margin-bottom: 28px; }
+
+    .form-group { margin-bottom: 20px; }
+    label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px; color: var(--color-charcoal); }
+    input, textarea, select {
+      width: 100%;
+      padding: 12px 16px;
+      font-family: inherit;
+      font-size: 16px;
+      border: 1px solid rgba(51, 46, 42, 0.15);
+      border-radius: 6px;
+      background: var(--color-white);
+      color: var(--color-charcoal);
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--color-clay);
+      box-shadow: 0 0 0 3px rgba(92, 122, 82, 0.1);
+    }
+    textarea { resize: vertical; min-height: 100px; }
+
+    .form-message {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      display: none;
+    }
+    .form-message.success { display: block; background: rgba(92, 122, 82, 0.1); color: var(--color-clay-deep); border: 1px solid var(--color-clay); }
+    .form-message.error { display: block; background: rgba(200, 100, 100, 0.1); color: #c64; border: 1px solid #c64; }
+
+    /* Tips / article cards */
+    .tips-section { background: var(--color-white); padding: 96px 0; }
+    .tips-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    @media (max-width: 900px) { .tips-grid { grid-template-columns: 1fr; } }
+    .tip-card { border-radius: 16px; overflow: hidden; box-shadow: 0 1px 2px rgba(51, 46, 42, 0.06), 0 8px 24px rgba(51, 46, 42, 0.07); }
+    .tip-card .img-placeholder { aspect-ratio: 16/10; border-radius: 0; }
+    .tip-card-body { background: var(--color-white); padding: 28px; }
+    .tip-card-body p { color: var(--color-ink-soft); margin-top: 10px; }
+    .tip-card-body .btn { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <a href="../" class="logo">Elevated Home Resets</a>
+      <nav>
+        <a href="../services">Services</a>
+        <a href="../about">About</a>
+        <a href="../contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Converting hero -->
+  <section class="reserve-hero">
+    <div class="container">
+      <h1 id="reserveHeadline">You're one step from getting this off your plate</h1>
+      <p id="reserveSubcopy">A $100 deposit locks in your date and puts your crew on the calendar. Everything else, the mental load, the searching, the overwhelm, becomes our problem instead of yours starting today.</p>
+    </div>
+  </section>
+
+  <!-- Deposit / Payment -->
+  <section class="deposit-section">
+    <div class="container">
+      <div class="deposit-card reveal">
+        <p class="label section-eyebrow">Reserve Your Date</p>
+        <div class="deposit-amount">$100</div>
+        <p class="deposit-note">This deposit holds your spot and goes toward your total. Your card is saved securely with Stripe, so when the job's done, we charge the remaining balance to the same card, no invoice to chase, no second trip to your inbox.</p>
+        <a href="#" id="stripeDepositBtn" class="btn btn-primary" target="_blank" rel="noopener">Pay $100 Deposit</a>
+        <p class="fine-print">Secure checkout powered by Stripe. Full balance is only charged after your service is complete.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Not ready yet -->
+  <section class="not-ready-section">
+    <div class="container">
+      <div class="not-ready-card reveal">
+        <h2>Not ready to put down a deposit yet?</h2>
+        <p>Tell us a bit about what's going on and we'll reach out to you shortly, no pressure, no pushy follow-up.</p>
+        <form id="notReadyForm">
+          <div class="form-group">
+            <label for="nrName">Name</label>
+            <input type="text" id="nrName" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="nrEmail">Email</label>
+            <input type="email" id="nrEmail" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="nrPhone">Phone</label>
+            <input type="tel" id="nrPhone" name="phone">
+          </div>
+          <div class="form-group">
+            <label for="nrMessage">What's on your mind?</label>
+            <textarea id="nrMessage" name="message" placeholder="Questions, timing, anything you want us to know before you commit."></textarea>
+          </div>
+          <button type="submit" class="btn btn-secondary" style="width: 100%;">Have Us Reach Out</button>
+          <div id="nrFormMessage" class="form-message"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tips for a More Organized Home -->
+  <section class="tips-section">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="label section-eyebrow">From The Blog</p>
+        <h2 class="section-title">Tips for a More Organized Home</h2>
+      </div>
+      <div class="tips-grid">
+        <div class="tip-card reveal" data-reveal-delay="0">
+          <div class="img-placeholder">[ Image placeholder ]</div>
+          <div class="tip-card-body">
+            <h4>[ Article title placeholder ]</h4>
+            <p>[ Short excerpt placeholder ]</p>
+            <a href="../blog" class="btn btn-secondary">Read More</a>
+          </div>
+        </div>
+        <div class="tip-card reveal" data-reveal-delay="100">
+          <div class="img-placeholder">[ Image placeholder ]</div>
+          <div class="tip-card-body">
+            <h4>[ Article title placeholder ]</h4>
+            <p>[ Short excerpt placeholder ]</p>
+            <a href="../blog" class="btn btn-secondary">Read More</a>
+          </div>
+        </div>
+        <div class="tip-card reveal" data-reveal-delay="200">
+          <div class="img-placeholder">[ Image placeholder ]</div>
+          <div class="tip-card-body">
+            <h4>[ Article title placeholder ]</h4>
+            <p>[ Short excerpt placeholder ]</p>
+            <a href="../blog" class="btn btn-secondary">Read More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-bottom: 64px;">
+        <div>
+          <h4 style="color: var(--color-white); margin-bottom: 16px;">Services</h4>
+          <p><a href="../services/organizing">Organizing</a></p>
+          <p><a href="../services/cleaning">Cleaning</a></p>
+          <p><a href="../services/move-concierge">Move &amp; Concierge</a></p>
+          <p><a href="../services/specialty">Specialty Services</a></p>
+        </div>
+        <div>
+          <h4 style="color: var(--color-white); margin-bottom: 16px;">Company</h4>
+          <p><a href="../about">About</a></p>
+          <p><a href="../contact">Contact</a></p>
+          <p><a href="../blog">Blog</a></p>
+        </div>
+        <div>
+          <h4 style="color: var(--color-white); margin-bottom: 16px;">Legal</h4>
+          <p><a href="../privacy">Privacy Policy</a></p>
+          <p><a href="../terms">Terms of Service</a></p>
+        </div>
+      </div>
+      <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 32px; text-align: center;">
+        <p>&copy; 2024 Elevated Home Resets. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+    // TODO: replace with the real Stripe Payment Link URL once created
+    // (Dashboard > Payment Links > $100 fixed amount > enable "Save payment
+    // details for future purchases"). Safe to paste that URL directly here,
+    // it's a public link, not a secret.
+    const STRIPE_DEPOSIT_LINK = '';
+
+    const params = new URLSearchParams(window.location.search);
+    const service = params.get('service');
+    const name = params.get('name');
+    const total = params.get('total');
+
+    const SERVICE_LABELS = {
+      cleaning: 'cleaning',
+      organizing: 'organizing reset',
+      'move-concierge': 'move',
+      specialty: 'project'
+    };
+
+    const headline = document.getElementById('reserveHeadline');
+    const subcopy = document.getElementById('reserveSubcopy');
+
+    if (service && SERVICE_LABELS[service]) {
+      const label = SERVICE_LABELS[service];
+      headline.textContent = name
+        ? `${name}, let's lock in your ${label}`
+        : `You're one step from booking your ${label}`;
+      subcopy.textContent = `A $100 deposit holds your date for your ${label} and puts our crew on the calendar. Everything else becomes our problem instead of yours starting today.`;
+    }
+
+    if (total) {
+      const note = document.createElement('p');
+      note.style.marginTop = '16px';
+      note.style.fontSize = '15px';
+      note.style.color = 'var(--color-ink-soft)';
+      note.textContent = `Your estimated total: ${total}. Deposit due now: $100. The rest is charged to the same card after your service is complete.`;
+      document.querySelector('.deposit-card').insertBefore(note, document.getElementById('stripeDepositBtn'));
+    }
+
+    const stripeBtn = document.getElementById('stripeDepositBtn');
+    if (STRIPE_DEPOSIT_LINK) {
+      stripeBtn.href = STRIPE_DEPOSIT_LINK;
+    } else {
+      stripeBtn.href = '../contact';
+      stripeBtn.target = '';
+      stripeBtn.textContent = 'Contact Us to Pay Your Deposit';
+    }
+
+    document.getElementById('notReadyForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const messageDiv = document.getElementById('nrFormMessage');
+      try {
+        const response = await fetch('https://formspree.io/f/xrenrzwv', {
+          method: 'POST',
+          body: new FormData(e.target),
+          headers: { Accept: 'application/json' }
+        });
+        if (response.ok) {
+          messageDiv.className = 'form-message success';
+          messageDiv.textContent = "Got it. We'll be reaching out to you shortly.";
+          e.target.reset();
+        } else {
+          throw new Error('failed');
+        }
+      } catch (error) {
+        messageDiv.className = 'form-message error';
+        messageDiv.textContent = 'Something went wrong. Please call (540) 356-3306.';
+      }
+    });
+  </script>
+</body>
+</html>
