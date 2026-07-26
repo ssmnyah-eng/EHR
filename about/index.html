@@ -7,6 +7,74 @@
   <meta name="description" content="Elevated Home Resets is a team of two-person crews who help Virginia homes get organized, clean, and move-ready.">
   <link rel="canonical" href="https://elevatedhomeresets.com/about">
   <link rel="stylesheet" href="../styles.css">
+  <style>
+    .img-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: repeating-linear-gradient(
+        135deg,
+        rgba(51, 46, 42, 0.06),
+        rgba(51, 46, 42, 0.06) 12px,
+        rgba(51, 46, 42, 0.03) 12px,
+        rgba(51, 46, 42, 0.03) 24px
+      );
+      border: 1px dashed rgba(51, 46, 42, 0.25);
+      color: var(--color-ink-soft);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .about-hero { padding: 96px 0 72px; text-align: center; background: var(--color-white); }
+    .about-hero .label { color: var(--color-clay); }
+    .about-hero h1 { margin-top: 16px; }
+    .about-hero p { font-size: 18px; color: var(--color-ink-soft); max-width: 600px; margin: 20px auto 0; line-height: 1.7; }
+
+    .about-mission-section { background: var(--color-stone); padding: 96px 0; }
+    .about-mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    @media (max-width: 900px) { .about-mission-grid { grid-template-columns: 1fr; gap: 32px; } }
+    .about-mission-grid .img-placeholder { aspect-ratio: 4/5; }
+    .about-mission-copy p { margin-top: 20px; font-size: 18px; line-height: 1.8; color: var(--color-ink-soft); }
+
+    .about-why-section { background: var(--color-white); padding: 96px 0; }
+    .about-why-heading { text-align: center; max-width: 680px; margin: 0 auto 56px; }
+    .about-why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    @media (max-width: 700px) { .about-why-grid { grid-template-columns: 1fr; } }
+    .about-why-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: var(--color-stone);
+      border-radius: 16px;
+      padding: 28px;
+    }
+    .about-why-card .check {
+      flex: 0 0 auto;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--color-clay);
+      color: var(--color-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+    .about-why-card p { font-size: 16px; line-height: 1.6; color: var(--color-charcoal); margin: 0; }
+
+    .about-serving-section {
+      background: linear-gradient(135deg, rgba(92, 122, 82, 0.1) 0%, rgba(107, 114, 89, 0.1) 100%);
+      padding: 96px 0;
+      text-align: center;
+    }
+    .about-serving-section .label { color: var(--color-clay); }
+    .about-serving-section p { font-size: 18px; line-height: 1.8; color: var(--color-ink-soft); max-width: 640px; margin: 20px auto 0; }
+  </style>
 </head>
 <body>
 <header class="site-header">
@@ -49,39 +117,63 @@
     </nav>
   </header>
 
-  <section style="padding: 80px 0 60px; text-align: center; background: var(--color-white);">
+  <section class="about-hero">
     <div class="container">
-      <h1 style="font-size: 40px; margin-bottom: 16px;">About Elevated Home Resets</h1>
-      <p style="font-size: 18px; color: var(--color-ink-soft); max-width: 600px; margin: 0 auto;">Professional organizing, cleaning, and moving services for Virginia homes.</p>
+      <p class="label">About Us</p>
+      <h1>About Elevated Home Resets</h1>
+      <p>Professional organizing, cleaning, and moving services for Virginia homes.</p>
     </div>
   </section>
 
-  <section>
-    <div class="container max-w-3xl">
-      <div class="reveal">
-        <h2>Our Mission</h2>
-        <p style="margin-top: 20px; font-size: 18px; line-height: 1.8; color: var(--color-ink-soft);">
-          We believe that running a household shouldn't dominate your mental load. We're a premium household operations company built for busy professionals and high-achieving families who realize that outsourcing home management isn't a luxury—it's an investment in quality of life, mental health, and time.
-        </p>
+  <section class="about-mission-section">
+    <div class="container">
+      <div class="about-mission-grid">
+        <div class="img-placeholder reveal">[ Image placeholder ]</div>
+        <div class="about-mission-copy reveal" data-reveal-delay="100">
+          <p class="label text-clay">Who We Are</p>
+          <h2 style="margin-top: 12px;">Our Mission</h2>
+          <p>We believe that running a household shouldn't dominate your mental load. We're a premium household operations company built for busy professionals and high-achieving families who realize that outsourcing home management isn't a luxury—it's an investment in quality of life, mental health, and time.</p>
+        </div>
       </div>
+    </div>
+  </section>
 
-      <div class="reveal" data-reveal-delay="100" style="margin-top: 60px;">
-        <h2>Why Clients Choose Us</h2>
-        <ul style="margin-top: 20px; font-size: 18px; line-height: 1.8; list-style: none; padding: 0;">
-          <li style="margin-bottom: 16px;">✓ We build systems, not just organize—things stay functional long-term</li>
-          <li style="margin-bottom: 16px;">✓ Two-person crews who understand your family's unique needs</li>
-          <li style="margin-bottom: 16px;">✓ Nonjudgmental, professional, expert thinking</li>
-          <li style="margin-bottom: 16px;">✓ One company for organizing, cleaning, moving, and specialty services</li>
-          <li style="margin-bottom: 16px;">✓ Clients repeatedly say: "It was worth every penny"</li>
-        </ul>
+  <section class="about-why-section">
+    <div class="container">
+      <div class="about-why-heading reveal">
+        <p class="label text-clay">Why Elevated</p>
+        <h2 style="margin-top: 16px;">Why Clients Choose Us</h2>
       </div>
+      <div class="about-why-grid">
+        <div class="about-why-card reveal" data-reveal-delay="0">
+          <span class="check">&#10003;</span>
+          <p>We build systems, not just organize—things stay functional long-term</p>
+        </div>
+        <div class="about-why-card reveal" data-reveal-delay="50">
+          <span class="check">&#10003;</span>
+          <p>Two-person crews who understand your family's unique needs</p>
+        </div>
+        <div class="about-why-card reveal" data-reveal-delay="100">
+          <span class="check">&#10003;</span>
+          <p>Nonjudgmental, professional, expert thinking</p>
+        </div>
+        <div class="about-why-card reveal" data-reveal-delay="150">
+          <span class="check">&#10003;</span>
+          <p>One company for organizing, cleaning, moving, and specialty services</p>
+        </div>
+        <div class="about-why-card reveal" data-reveal-delay="200" style="grid-column: 1 / -1;">
+          <span class="check">&#10003;</span>
+          <p>Clients repeatedly say: "It was worth every penny"</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <div class="reveal" data-reveal-delay="200" style="margin-top: 60px;">
-        <h2>Serving Virginia</h2>
-        <p style="margin-top: 20px; font-size: 18px; line-height: 1.8; color: var(--color-ink-soft);">
-          We serve the greater Virginia area including Northern Virginia, Charlottesville, Richmond, and surrounding communities. Every home gets the same care and professionalism.
-        </p>
-      </div>
+  <section class="about-serving-section">
+    <div class="container">
+      <p class="label">Where We Work</p>
+      <h2 style="margin-top: 16px;">Serving Virginia</h2>
+      <p>We serve the greater Virginia area including Northern Virginia, Charlottesville, Richmond, and surrounding communities. Every home gets the same care and professionalism.</p>
     </div>
   </section>
 
@@ -90,20 +182,21 @@
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-bottom: 64px;">
         <div>
           <h4 style="color: var(--color-white); margin-bottom: 16px;">Services</h4>
-          <p><a href="/services/organizing">Organizing</a></p>
-          <p><a href="/services/cleaning">Cleaning</a></p>
-          <p><a href="/services/move-concierge">Move & Concierge</a></p>
+          <p><a href="../services/organizing">Organizing</a></p>
+          <p><a href="../services/cleaning">Cleaning</a></p>
+          <p><a href="../services/move-concierge">Move &amp; Concierge</a></p>
+          <p><a href="../services/specialty">Specialty Services</a></p>
         </div>
         <div>
           <h4 style="color: var(--color-white); margin-bottom: 16px;">Company</h4>
-          <p><a href="/about">About</a></p>
-          <p><a href="/locations">Locations</a></p>
-          <p><a href="/contact">Contact</a></p>
+          <p><a href="../about">About</a></p>
+          <p><a href="../contact">Contact</a></p>
+          <p><a href="../blog">Blog</a></p>
         </div>
         <div>
           <h4 style="color: var(--color-white); margin-bottom: 16px;">Legal</h4>
-          <p><a href="/privacy">Privacy</a></p>
-          <p><a href="/terms">Terms</a></p>
+          <p><a href="../privacy">Privacy</a></p>
+          <p><a href="../terms">Terms</a></p>
         </div>
       </div>
       <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 32px; text-align: center;">

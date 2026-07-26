@@ -580,6 +580,59 @@
       min-height: 220px;
     }
 
+    /* Review rows: picture beside the full review text */
+    .review-list {
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .review-row {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .review-row.reversed .review-row-image { order: 2; }
+    .review-row.reversed .review-row-content { order: 1; }
+
+    @media (max-width: 800px) {
+      .review-row { grid-template-columns: 1fr; gap: 24px; }
+      .review-row.reversed .review-row-image,
+      .review-row.reversed .review-row-content { order: unset; }
+    }
+
+    .review-row-image .img-placeholder { aspect-ratio: 4/3; }
+
+    .review-row-content .review-stars {
+      color: var(--color-orange);
+      letter-spacing: 3px;
+      margin-bottom: 16px;
+    }
+
+    .review-row-content .review-text {
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--color-ink-soft);
+      font-style: italic;
+    }
+
+    .review-row-content .review-name {
+      margin-top: 20px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      color: var(--color-charcoal);
+    }
+
+    .review-row-content .review-meta {
+      font-size: 13px;
+      color: var(--color-ink-soft);
+      margin-top: 2px;
+    }
+
     /* ===== Gallery (horizontal scroll) ===== */
     .gallery-section { background: var(--color-stone); padding: 96px 0; }
 
@@ -948,19 +1001,28 @@
         <h2 class="section-title">See Why Families Trust Elevated Home Resets</h2>
       </div>
 
-      <div class="review-grid review-grid-2">
-        <div class="review-card review-card-long reveal" data-reveal-delay="0">
-          <div class="img-placeholder review-photo">Photo</div>
-          <div class="review-stars" aria-hidden="true">★★★★★</div>
-          <p class="review-text">[ Long-form review placeholder — full customer story goes here. ]</p>
-          <p class="review-name">[ Customer name placeholder ]</p>
+      <div class="review-list">
+        <div class="review-row reveal" data-reveal-delay="0">
+          <div class="review-row-image">
+            <div class="img-placeholder">[ Image placeholder — Kim's kitchen &amp; closets ]</div>
+          </div>
+          <div class="review-row-content">
+            <div class="review-stars" aria-hidden="true">★★★★★</div>
+            <p class="review-text">"I cannot recommend Elevated Home Resets enough! Nyah did an absolutely amazing job organizing my kitchen and two large closets. Everything started off overwhelmingly cluttered, and I honestly didn't know where to begin. But she came in with a clear plan and completely transformed the space.<br><br>Nyah thoughtfully found a place for everything, making my home feel spacious, peaceful, and easy to maintain. Her attention to detail was amazing and she handled all of my personal items with great care and respect.<br><br>On top of that, she was extremely professional, kind, and easy to work with. If you're feeling overwhelmed by clutter or just need help getting organized, I highly recommend you check out Elevated Home Resets!"</p>
+            <p class="review-name">Kim Nelson</p>
+            <p class="review-meta">15 weeks ago</p>
+          </div>
         </div>
 
-        <div class="review-card review-card-long reveal" data-reveal-delay="100">
-          <div class="img-placeholder review-photo">Photo</div>
-          <div class="review-stars" aria-hidden="true">★★★★★</div>
-          <p class="review-text">[ Long-form review placeholder — full customer story goes here. ]</p>
-          <p class="review-name">[ Customer name placeholder ]</p>
+        <div class="review-row reversed reveal" data-reveal-delay="100">
+          <div class="review-row-image">
+            <div class="img-placeholder">[ Image placeholder ]</div>
+          </div>
+          <div class="review-row-content">
+            <div class="review-stars" aria-hidden="true">★★★★★</div>
+            <p class="review-text">[ Long-form review placeholder — full customer story goes here. ]</p>
+            <p class="review-name">[ Customer name placeholder ]</p>
+          </div>
         </div>
       </div>
     </div>
