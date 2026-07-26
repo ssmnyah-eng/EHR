@@ -2,8 +2,8 @@
 
 :root {
   --color-stone: #f1f0eb;
-  --color-clay: #a85d42;
-  --color-clay-deep: #8f4c34;
+  --color-clay: #5c7a52;
+  --color-clay-deep: #4a6341;
   --color-sage: #6b7259;
   --color-sage-deep: #575e47;
   --color-mauve: #b08c82;
@@ -157,7 +157,7 @@ section {
               0 24px 64px rgba(51, 46, 42, 0.06);
 }
 
-.glow-clay { box-shadow: 0 0 80px 8px rgba(168, 93, 66, 0.18); }
+.glow-clay { box-shadow: 0 0 80px 8px rgba(92, 122, 82, 0.18); }
 .glow-sage { box-shadow: 0 0 80px 8px rgba(107, 114, 89, 0.2); }
 
 /* Border radius */
@@ -259,7 +259,7 @@ input, textarea, select {
 input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: var(--color-clay);
-  box-shadow: 0 0 0 3px rgba(168, 93, 66, 0.1);
+  box-shadow: 0 0 0 3px rgba(92, 122, 82, 0.1);
 }
 
 textarea {
