@@ -7,6 +7,10 @@
   --color-sage: #6b7259;
   --color-sage-deep: #575e47;
   --color-mauve: #b08c82;
+  --color-ocean: #3d6b7d;
+  --color-ocean-deep: #2e5361;
+  --color-orange: #c2703d;
+  --color-orange-deep: #a35c2f;
   --color-charcoal: #332e2a;
   --color-ink-soft: #5b544d;
   --color-white: #ffffff;
@@ -97,11 +101,15 @@ section {
 .bg-clay { background: var(--color-clay); }
 .bg-sage { background: var(--color-sage); }
 .bg-mauve { background: var(--color-mauve); }
+.bg-ocean { background: var(--color-ocean); }
+.bg-orange { background: var(--color-orange); }
 .bg-charcoal { background: var(--color-charcoal); }
 
 .text-clay { color: var(--color-clay); }
 .text-sage { color: var(--color-sage); }
 .text-mauve { color: var(--color-mauve); }
+.text-ocean { color: var(--color-ocean); }
+.text-orange { color: var(--color-orange); }
 .text-charcoal { color: var(--color-charcoal); }
 .text-ink-soft { color: var(--color-ink-soft); }
 .text-white { color: var(--color-white); }
