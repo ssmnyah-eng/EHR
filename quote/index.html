@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Your Cleaning - Elevated Home Resets</title>
+  <meta name="description" content="Pick your cleaning service, select a date, and get your instant quote.">
+  <link rel="canonical" href="https://elevatedhomeresets.com/quote">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .page-hero { background: var(--color-white); padding: 80px 0 48px; text-align: center; }
+    .page-hero h1 { font-size: 36px; margin-bottom: 12px; }
+    .page-hero p { font-size: 17px; color: var(--color-ink-soft); max-width: 640px; margin: 0 auto; }
+
+    .booking-section { background: var(--color-stone); padding: 16px 0 96px; }
+    .booking-container { max-width: 640px; margin: 0 auto; }
+
+    .booking-stack { display: flex; flex-direction: column; gap: 40px; }
+    .booking-left, .booking-right { display: flex; flex-direction: column; }
+
+    .booking-panel {
+      background: var(--color-white);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 1px 2px rgba(51, 46, 42, 0.06), 0 8px 24px rgba(51, 46, 42, 0.07);
+    }
+
+    .extras-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 560px) { .extras-grid { grid-template-columns: 1fr; } }
+
+    .extra-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1px solid rgba(51, 46, 42, 0.15);
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .extra-checkbox input { width: auto; margin: 0; }
+
+    .extra-qty {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1px solid rgba(51, 46, 42, 0.15);
+      border-radius: 8px;
+      font-size: 14px;
+      grid-column: 1 / -1;
+    }
+    .extra-qty input[type="number"] { width: 70px; padding: 6px 8px; }
+
+    .price-summary { background: var(--color-stone); border-radius: 12px; padding: 24px; margin-top: 8px; }
+    .price-summary-row { display: flex; justify-content: space-between; font-size: 14px; color: var(--color-ink-soft); padding: 4px 0; }
+    .price-summary-row.total {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(51, 46, 42, 0.15);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--color-charcoal);
+      font-family: 'Manrope', sans-serif;
+    }
+    .price-summary-note { margin-top: 12px; font-size: 12px; color: var(--color-ink-soft); }
+
+    .form-group { margin-bottom: 24px; }
+    label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px; color: var(--color-charcoal); }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      font-family: inherit;
+      font-size: 16px;
+      border: 1px solid rgba(51, 46, 42, 0.15);
+      border-radius: 6px;
+      background: var(--color-white);
+      color: var(--color-charcoal);
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--color-ocean);
+      box-shadow: 0 0 0 3px rgba(61, 107, 125, 0.12);
+    }
+
+    .calendar-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+    .calendar-btn {
+      height: 44px; width: 44px; display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(51, 46, 42, 0.15); background: rgba(255, 255, 255, 0.6); border-radius: 24px;
+      cursor: pointer; font-size: 18px; transition: all 220ms ease;
+    }
+    .calendar-btn:hover:not(:disabled) { border-color: var(--color-ocean); }
+    .calendar-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .calendar-month { font-family: 'Manrope', sans-serif; font-size: 18px; }
+    .calendar-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 8px; text-align: center; }
+    .weekday { font-size: 12px; font-weight: 500; color: var(--color-ink-soft); padding: 8px 0; }
+    .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+    .calendar-day {
+      aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(51, 46, 42, 0.15); background: rgba(255, 255, 255, 0.6); border-radius: 6px;
+      cursor: pointer; font-size: 14px; transition: all 220ms ease;
+    }
+    .calendar-day:hover:not(:disabled) { border-color: var(--color-ocean); color: var(--color-charcoal); }
+    .calendar-day:disabled { color: rgba(51, 46, 42, 0.25); cursor: not-allowed; }
+    .calendar-day.selected { background: var(--color-ocean); color: var(--color-stone); font-weight: 500; }
+    .calendar-note { font-size: 12px; color: var(--color-ink-soft); margin-top: 12px; }
+
+    .booking-submit {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 40px;
+      background: var(--color-ocean); color: var(--color-white); border: none; border-radius: 6px;
+      font-weight: 600; cursor: pointer; transition: all 220ms ease; width: 100%;
+    }
+    .booking-submit:hover { background: var(--color-ocean-deep); }
+
+    .form-message { margin-top: 16px; padding: 12px 16px; border-radius: 6px; font-size: 14px; display: none; }
+    .form-message.success { background: rgba(61, 107, 125, 0.1); color: var(--color-ocean-deep); border: 1px solid var(--color-ocean); display: block; }
+    .form-message.error { background: rgba(200, 100, 100, 0.1); color: #c64; border: 1px solid #c64; display: block; }
+  </style>
+</head>
+<body>
+<header class="site-header">
+    <div class="container">
+      <a href="../" class="logo">Elevated Home Resets</a>
+
+      <nav class="primary-nav">
+        <a href="../">Home</a>
+        <div class="nav-dropdown">
+          <button type="button" class="nav-dropdown-toggle">Services <span class="nav-dropdown-arrow" aria-hidden="true">&#9662;</span></button>
+          <div class="nav-dropdown-menu">
+            <a href="../services/organizing">Organizing</a>
+            <a href="../services/cleaning">Cleaning</a>
+            <a href="../services/move-concierge">Move Concierge</a>
+            <a href="../services/specialty">Specialty Services</a>
+          </div>
+        </div>
+        <a href="../blog">Blog</a>
+        <a href="../shop">Shop</a>
+        <a href="../contact">Contact</a>
+        <a href="../contact" class="btn btn-primary nav-book-btn">Book Now</a>
+      </nav>
+
+      <button id="mobile-menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav id="mobile-nav" class="hidden">
+      <a href="../">Home</a>
+      <p class="mobile-services-label">Services</p>
+      <a href="../services/organizing">Organizing</a>
+      <a href="../services/cleaning">Cleaning</a>
+      <a href="../services/move-concierge">Move Concierge</a>
+      <a href="../services/specialty">Specialty Services</a>
+      <a href="../blog">Blog</a>
+      <a href="../shop">Shop</a>
+      <a href="../contact">Contact</a>
+      <a href="../contact" class="btn btn-primary">Book Now</a>
+    </nav>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>Ready to reclaim your time?</h1>
+      <p>Pick your service, select a date, and we'll handle the rest. Our crews have been trained in one principle: your home is your space to recharge, not your second job.</p>
+    </div>
+  </section>
+
+  <section class="booking-section">
+    <div class="container booking-container">
+      <div class="booking-stack">
+        <!-- Booking Form -->
+        <div class="booking-right">
+          <div class="booking-panel">
+            <form id="bookingForm">
+              <div class="form-group">
+                <label for="cleaningType">Service Type *</label>
+                <select id="cleaningType" name="cleaningType" required>
+                  <option value="">Select a service</option>
+                  <option value="Standard">Standard Clean</option>
+                  <option value="Premium Deep">Premium Deep Clean</option>
+                  <option value="Elevated Reset">Elevated Reset</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="sqftTier">Square Footage *</label>
+                <select id="sqftTier" name="sqftTier" required>
+                  <option value="0">Under 1,500 sqft</option>
+                  <option value="1">1,500–2,000 sqft</option>
+                  <option value="2">2,000–2,500 sqft</option>
+                  <option value="3">2,500–3,000 sqft</option>
+                  <option value="4">3,000–3,500 sqft</option>
+                  <option value="custom">3,500+ sqft (custom quote)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="frequency">How often? *</label>
+                <select id="frequency" name="frequency" required>
+                  <option value="One-Time">One-Time</option>
+                  <option value="Monthly">Monthly</option>
+                  <option value="Biweekly">Biweekly</option>
+                  <option value="Weekly">Weekly</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="condition">How would you describe your home right now? *</label>
+                <select id="condition" name="condition" required>
+                  <option value="0">Light &amp; Tidy — cleaned regularly, just needs a refresh</option>
+                  <option value="1">Lived-In — normal day-to-day mess, nothing major</option>
+                  <option value="2">Could Use Some Extra Care — it's been a busy stretch, expect more buildup than usual</option>
+                  <option value="3">Hasn't Had a Deep Clean in a While — it's been months, we'll come ready to focus</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Add extras</label>
+                <div class="extras-grid">
+                  <label class="extra-checkbox"><input type="checkbox" data-extra="oven"> Inside Oven</label>
+                  <label class="extra-checkbox"><input type="checkbox" data-extra="fridge"> Inside Refrigerator</label>
+                  <label class="extra-checkbox"><input type="checkbox" data-extra="cabinets"> Inside Cabinets</label>
+                  <label class="extra-checkbox"><input type="checkbox" data-extra="dishwasher"> Inside Dishwasher</label>
+                  <label class="extra-checkbox"><input type="checkbox" data-extra="baseboards"> Baseboards</label>
+                  <label class="extra-checkbox"><input type="checkbox" data-extra="pethair"> Pet Hair / Shedding</label>
+                  <label class="extra-checkbox"><input type="checkbox" data-extra="blinds"> Blinds</label>
+                  <div class="extra-qty">
+                    <input type="checkbox" data-extra="windows" id="windowsCheck">
+                    <label for="windowsCheck" style="margin: 0;">Interior Windows, qty:</label>
+                    <input type="number" id="windowsQty" min="1" value="1">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" required>
+              </div>
+
+              <div class="form-group">
+                <label for="address">Address *</label>
+                <input type="text" id="address" name="address" placeholder="Street, city, zip" required>
+              </div>
+
+              <div class="form-group">
+                <label for="notes">Special Notes</label>
+                <textarea id="notes" name="notes" placeholder="Any special requests or access info?"></textarea>
+              </div>
+
+              <div class="form-group price-summary" id="priceSummary">
+                <div class="price-summary-row" id="priceDiscountRow" style="display: none;"><span>Frequency discount</span><span id="priceDiscount">$0</span></div>
+                <div class="price-summary-row total"><span>Total Price</span><span id="priceTotal">$0</span></div>
+                <p class="price-summary-note">Estimate only, final price confirmed after booking. Homes in Arlington or Richmond add a $25 travel fee. A $100 deposit is due to confirm your date.</p>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Calendar -->
+        <div class="booking-left">
+          <div class="booking-panel">
+            <label style="display: block; margin-bottom: 16px; font-weight: 600;">Select Date</label>
+            <div class="calendar-header">
+              <button type="button" class="calendar-btn" id="prevMonth" aria-label="Previous month">‹</button>
+              <p class="calendar-month" id="monthLabel">January 2024</p>
+              <button type="button" class="calendar-btn" id="nextMonth" aria-label="Next month">›</button>
+            </div>
+
+            <div class="calendar-weekdays">
+              <div class="weekday">Sun</div>
+              <div class="weekday">Mon</div>
+              <div class="weekday">Tue</div>
+              <div class="weekday">Wed</div>
+              <div class="weekday">Thu</div>
+              <div class="weekday">Fri</div>
+              <div class="weekday">Sat</div>
+            </div>
+
+            <div class="calendar-grid" id="calendarGrid"></div>
+            <input type="text" id="selectedDate" name="selectedDate" readonly style="display: none;">
+
+            <button type="submit" form="bookingForm" class="booking-submit" style="margin-top: 24px;">Complete Your Booking</button>
+            <div id="formMessage" class="form-message"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-bottom: 64px;">
+        <div>
+          <h4 style="color: var(--color-white); margin-bottom: 16px;">Services</h4>
+          <p><a href="../services/organizing">Organizing</a></p>
+          <p><a href="../services/cleaning">Cleaning</a></p>
+          <p><a href="../services/move-concierge">Move &amp; Concierge</a></p>
+          <p><a href="../services/specialty">Specialty Services</a></p>
+        </div>
+        <div>
+          <h4 style="color: var(--color-white); margin-bottom: 16px;">Company</h4>
+          <p><a href="../about">About</a></p>
+          <p><a href="../contact">Contact</a></p>
+          <p><a href="../blog">Blog</a></p>
+        </div>
+        <div>
+          <h4 style="color: var(--color-white); margin-bottom: 16px;">Legal</h4>
+          <p><a href="../privacy">Privacy</a></p>
+          <p><a href="../terms">Terms</a></p>
+        </div>
+      </div>
+      <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 32px; text-align: center;">
+        <p>&copy; 2024 Elevated Home Resets. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+    const MIN_DAYS_OUT = 2;
+
+    let currentDate = new Date();
+    let selectedDate = null;
+
+    function initCalendar() {
+      renderCalendar();
+
+      document.getElementById('prevMonth').addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        renderCalendar();
+      });
+
+      document.getElementById('nextMonth').addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        renderCalendar();
+      });
+    }
+
+    function renderCalendar() {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
+
+      document.getElementById('monthLabel').textContent = currentDate.toLocaleDateString('en-US', {
+        month: 'long',
+        year: 'numeric'
+      });
+
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      const grid = document.getElementById('calendarGrid');
+      grid.innerHTML = '';
+
+      for (let i = 0; i < firstDay; i++) {
+        grid.appendChild(document.createElement('div'));
+      }
+
+      // Days. Closed Sundays, bookings open 2 days out, one job per day
+      // (enforced here, not shown to the customer as a rule).
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'calendar-day';
+        button.textContent = day;
+
+        const date = new Date(year, month, day);
+        const isSunday = date.getDay() === 0;
+        const tooSoon = date < new Date(today.getTime() + MIN_DAYS_OUT * 24 * 60 * 60 * 1000);
+        const isSelected = selectedDate && date.toDateString() === selectedDate.toDateString();
+
+        if (isSunday || tooSoon) {
+          button.disabled = true;
+        } else {
+          button.addEventListener('click', () => {
+            selectedDate = new Date(date);
+            document.getElementById('selectedDate').value = selectedDate.toLocaleDateString('en-US', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            });
+            renderCalendar();
+          });
+        }
+
+        if (isSelected) {
+          button.classList.add('selected');
+        }
+
+        grid.appendChild(button);
+      }
+
+      const isPast = year < today.getFullYear() || (year === today.getFullYear() && month <= today.getMonth());
+      document.getElementById('prevMonth').disabled = isPast;
+    }
+
+    // ===== Pricing engine =====
+    // Base price matrix, condition multipliers, and frequency discounts are
+    // carried over from the original pricing spec, where they were marked
+    // PLACEHOLDER (not yet finalized). Extras, travel fee, and deposit below
+    // were marked locked. Double-check the placeholder numbers before this
+    // goes live for real bookings. None of these breakdown numbers are shown
+    // to the customer, only the final total and the frequency discount.
+    const BASE_PRICES = {
+      Standard: [150, 180, 210, 240, 275],
+      'Premium Deep': [255, 300, 345, 390, 440],
+      'Elevated Reset': [355, 415, 475, 535, 600]
+    };
+    const CONDITION_MULTIPLIERS = [1.0, 1.1, 1.2, 1.35];
+    const FREQUENCY_DISCOUNTS = { 'One-Time': 0, Monthly: 0.05, Biweekly: 0.1, Weekly: 0.15 };
+    const EXTRA_PRICES = {
+      oven: 35,
+      fridge: 30,
+      cabinets: 35,
+      dishwasher: 25,
+      blinds: 25,
+      windows: 6 // per window
+    };
+    const EXTRA_BY_TIER = {
+      baseboards: [40, 50, 60, 70, 80],
+      pethair: [30, 40, 50, 60, 70]
+    };
+
+    function formatMoney(n) {
+      return '$' + n.toFixed(0);
+    }
+
+    function updatePrice() {
+      const type = document.getElementById('cleaningType').value;
+      const tierValue = document.getElementById('sqftTier').value;
+      const frequency = document.getElementById('frequency').value;
+      const conditionIndex = parseInt(document.getElementById('condition').value, 10);
+      const discountRow = document.getElementById('priceDiscountRow');
+
+      if (!type || tierValue === 'custom') {
+        discountRow.style.display = 'none';
+        document.getElementById('priceTotal').textContent = tierValue === 'custom' ? "We'll follow up with pricing" : '$0';
+        return;
+      }
+
+      const tier = parseInt(tierValue, 10);
+      const base = BASE_PRICES[type][tier];
+      const conditionMultiplier = CONDITION_MULTIPLIERS[conditionIndex];
+      const conditionAdd = Math.round(base * (conditionMultiplier - 1));
+
+      let extrasTotal = 0;
+      document.querySelectorAll('[data-extra]').forEach((el) => {
+        if (!el.checked) return;
+        const key = el.dataset.extra;
+        if (key === 'windows') {
+          const qty = parseInt(document.getElementById('windowsQty').value, 10) || 1;
+          extrasTotal += EXTRA_PRICES.windows * qty;
+        } else if (EXTRA_BY_TIER[key]) {
+          extrasTotal += EXTRA_BY_TIER[key][tier];
+        } else if (EXTRA_PRICES[key] != null) {
+          extrasTotal += EXTRA_PRICES[key];
+        }
+      });
+
+      const subtotal = base + conditionAdd + extrasTotal;
+      const discountRate = FREQUENCY_DISCOUNTS[frequency] || 0;
+      const discountAmount = Math.round(subtotal * discountRate);
+      const total = subtotal - discountAmount;
+
+      if (discountAmount > 0) {
+        discountRow.style.display = 'flex';
+        document.getElementById('priceDiscount').textContent = '-' + formatMoney(discountAmount);
+      } else {
+        discountRow.style.display = 'none';
+      }
+      document.getElementById('priceTotal').textContent = formatMoney(total);
+    }
+
+    ['cleaningType', 'sqftTier', 'frequency', 'condition', 'windowsQty'].forEach((id) => {
+      document.getElementById(id).addEventListener('change', updatePrice);
+      document.getElementById(id).addEventListener('input', updatePrice);
+    });
+    document.querySelectorAll('[data-extra]').forEach((el) => el.addEventListener('change', updatePrice));
+
+    // Pre-fill service type from query param, e.g. /quote/?type=Standard
+    const params = new URLSearchParams(window.location.search);
+    const presetType = params.get('type');
+    if (presetType) {
+      document.getElementById('cleaningType').value = presetType;
+    }
+
+    // Form submission
+    document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (!selectedDate) {
+        alert('Please select a date');
+        return;
+      }
+
+      const messageDiv = document.getElementById('formMessage');
+
+      try {
+        const formData = new FormData(e.target);
+        formData.set('estimatedTotal', document.getElementById('priceTotal').textContent);
+        formData.set('selectedDate', selectedDate.toISOString().split('T')[0]);
+
+        const response = await fetch('https://formspree.io/f/xrenrzwv', {
+          method: 'POST',
+          body: formData,
+          headers: { Accept: 'application/json' }
+        });
+
+        if (response.ok) {
+          const cleaningType = document.getElementById('cleaningType').value;
+          const frequency = document.getElementById('frequency').value;
+          const redirectParams = new URLSearchParams({
+            service: 'cleaning',
+            name: document.getElementById('name').value,
+            total: document.getElementById('priceTotal').textContent,
+            detail: `${cleaningType} Clean — ${frequency}`
+          });
+          window.location.href = '../book/?' + redirectParams.toString();
+        } else {
+          throw new Error('Booking failed');
+        }
+      } catch (error) {
+        messageDiv.className = 'form-message error';
+        messageDiv.textContent = 'Error booking. Please try again or call (540) 356-3306.';
+      }
+    });
+
+    initCalendar();
+    updatePrice();
+  </script>
+</body>
+</html>

@@ -46,12 +46,55 @@
     /* Deposit / payment card */
     .deposit-section { background: var(--color-white); padding: 64px 0; }
 
-    .deposit-card {
-      max-width: 560px;
+    .payment-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 32px;
+      max-width: 920px;
       margin: 0 auto;
+      align-items: start;
+    }
+
+    @media (max-width: 800px) {
+      .payment-layout { grid-template-columns: 1fr; }
+    }
+
+    .cart-card {
       background: var(--color-stone);
       border-radius: 20px;
-      padding: 48px 40px;
+      padding: 32px;
+      box-shadow: 0 1px 2px rgba(51, 46, 42, 0.06);
+    }
+
+    .cart-card h3 { font-size: 18px; margin-bottom: 20px; }
+
+    .cart-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(51, 46, 42, 0.1);
+      font-size: 14px;
+    }
+
+    .cart-row:last-child { border-bottom: none; }
+    .cart-row span:first-child { color: var(--color-ink-soft); }
+    .cart-row span:last-child { color: var(--color-charcoal); font-weight: 600; text-align: right; }
+
+    .cart-why {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(51, 46, 42, 0.1);
+    }
+
+    .cart-why p { font-size: 13px; color: var(--color-ink-soft); line-height: 1.6; }
+    .cart-why p + p { margin-top: 8px; }
+
+    .deposit-card {
+      background: var(--color-white);
+      border: 1px solid rgba(51, 46, 42, 0.1);
+      border-radius: 20px;
+      padding: 40px 32px;
       text-align: center;
       box-shadow: 0 8px 24px rgba(51, 46, 42, 0.08);
     }
@@ -179,6 +222,7 @@
   <!-- Converting hero -->
   <section class="reserve-hero">
     <div class="container">
+      <p class="label section-eyebrow">Booking &amp; Payment</p>
       <h1 id="reserveHeadline">You're one step from getting this off your plate</h1>
       <p id="reserveSubcopy">A $100 deposit locks in your date and puts your crew on the calendar. Everything else, the mental load, the searching, the overwhelm, becomes our problem instead of yours starting today.</p>
     </div>
@@ -187,12 +231,25 @@
   <!-- Deposit / Payment -->
   <section class="deposit-section">
     <div class="container">
-      <div class="deposit-card reveal">
-        <p class="label section-eyebrow">Reserve Your Date</p>
-        <div class="deposit-amount">$100</div>
-        <p class="deposit-note">This deposit holds your spot and goes toward your total. Your card is saved securely with Stripe, so when the job's done, we charge the remaining balance to the same card, no invoice to chase, no second trip to your inbox.</p>
-        <a href="#" id="stripeDepositBtn" class="btn btn-primary" target="_blank" rel="noopener">Pay $100 Deposit</a>
-        <p class="fine-print">Secure checkout powered by Stripe. Full balance is only charged after your service is complete.</p>
+      <div class="payment-layout">
+        <div class="cart-card reveal" id="cartCard">
+          <h3>Your Booking</h3>
+          <div id="cartRows">
+            <div class="cart-row"><span>Service</span><span id="cartService">—</span></div>
+          </div>
+          <div class="cart-why">
+            <p><strong>Why a $100 deposit?</strong></p>
+            <p>It holds your date on our calendar and confirms your crew is booked, so we don't turn away another customer for your slot. It's not an extra fee, it comes straight off your final total.</p>
+          </div>
+        </div>
+
+        <div class="deposit-card reveal" data-reveal-delay="100">
+          <p class="label section-eyebrow">Confirm Your Booking</p>
+          <div class="deposit-amount">$100</div>
+          <p class="deposit-note">This deposit holds your spot and goes toward your total. Your card is saved securely with Stripe, so when the job's done, we charge the remaining balance to the same card, no invoice to chase, no second trip to your inbox.</p>
+          <a href="#" id="stripeDepositBtn" class="btn btn-primary" target="_blank" rel="noopener">Pay $100 Deposit</a>
+          <p class="fine-print">Secure checkout powered by Stripe. Full balance is only charged after your service is complete.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -231,8 +288,8 @@
   <section class="tips-section">
     <div class="container">
       <div class="section-heading reveal">
-        <p class="label section-eyebrow">From The Blog</p>
-        <h2 class="section-title">Tips for a More Organized Home</h2>
+        <p class="label section-eyebrow">Resources</p>
+        <h2 class="section-title">Tips and Resources to Keep Your Home Organized and Clean</h2>
       </div>
       <div class="tips-grid">
         <div class="tip-card reveal" data-reveal-delay="0">
@@ -304,6 +361,7 @@
     const service = params.get('service');
     const name = params.get('name');
     const total = params.get('total');
+    const detail = params.get('detail');
 
     const SERVICE_LABELS = {
       cleaning: 'cleaning',
@@ -323,14 +381,36 @@
       subcopy.textContent = `A $100 deposit holds your date for your ${label} and puts our crew on the calendar. Everything else becomes our problem instead of yours starting today.`;
     }
 
-    if (total) {
-      const note = document.createElement('p');
-      note.style.marginTop = '16px';
-      note.style.fontSize = '15px';
-      note.style.color = 'var(--color-ink-soft)';
-      note.textContent = `Your estimated total: ${total}. Deposit due now: $100. The rest is charged to the same card after your service is complete.`;
-      document.querySelector('.deposit-card').insertBefore(note, document.getElementById('stripeDepositBtn'));
+    // Populate the side cart with whatever came through from /reserve/ or /quote/
+    const cartRows = document.getElementById('cartRows');
+    const cartService = document.getElementById('cartService');
+
+    if (service && SERVICE_LABELS[service]) {
+      const serviceNames = {
+        cleaning: 'Cleaning',
+        organizing: 'Organizing Reset',
+        'move-concierge': 'Move Concierge',
+        specialty: 'Specialty Service'
+      };
+      cartService.textContent = serviceNames[service] || service;
     }
+
+    function addCartRow(label, value) {
+      const row = document.createElement('div');
+      row.className = 'cart-row';
+      const labelSpan = document.createElement('span');
+      labelSpan.textContent = label;
+      const valueSpan = document.createElement('span');
+      valueSpan.textContent = value;
+      row.appendChild(labelSpan);
+      row.appendChild(valueSpan);
+      cartRows.appendChild(row);
+    }
+
+    if (name) addCartRow('Name', name);
+    if (detail) addCartRow('Selected', detail);
+    if (total) addCartRow('Estimated Total', total);
+    addCartRow('Deposit Due Now', '$100');
 
     const stripeBtn = document.getElementById('stripeDepositBtn');
     if (STRIPE_DEPOSIT_LINK) {

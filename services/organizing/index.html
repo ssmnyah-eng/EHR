@@ -119,7 +119,7 @@
     .package-card {
       background: var(--color-white);
       border-radius: 16px;
-      padding: 40px 32px;
+      overflow: hidden;
       box-shadow: 0 8px 24px rgba(51, 46, 42, 0.08), 0 2px 6px rgba(51, 46, 42, 0.05);
       transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 260ms cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
@@ -129,6 +129,19 @@
     .package-card:hover {
       transform: translateY(-10px);
       box-shadow: 0 24px 48px rgba(51, 46, 42, 0.14), 0 8px 16px rgba(51, 46, 42, 0.08);
+    }
+
+    .package-card .img-placeholder {
+      aspect-ratio: 16/10;
+      border-radius: 0;
+      border-width: 0 0 1px 0;
+    }
+
+    .package-card-body {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
     }
 
     .package-card .price {
@@ -233,6 +246,42 @@
 
     .conditional-group { display: none; }
     .conditional-group.is-visible { display: block; }
+
+    .room-tint-section { background: rgba(61, 107, 125, 0.08); }
+
+    .room-price-grid {
+      list-style: none;
+      padding: 0;
+      margin: 32px 0 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 48px;
+      border-top: 1px solid rgba(51, 46, 42, 0.12);
+    }
+
+    @media (max-width: 640px) {
+      .room-price-grid { grid-template-columns: 1fr; }
+    }
+
+    .room-price-grid li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(51, 46, 42, 0.12);
+    }
+
+    .room-price-grid li:nth-child(odd) {
+      border-right: 1px solid rgba(51, 46, 42, 0.12);
+      padding-right: 24px;
+    }
+
+    @media (max-width: 640px) {
+      .room-price-grid li:nth-child(odd) { border-right: none; padding-right: 0; }
+    }
+
+    .room-price-grid span { color: var(--color-charcoal); }
+    .room-price-grid strong { color: var(--color-ocean); font-family: 'Manrope', sans-serif; }
   </style>
 
 </head>
@@ -283,8 +332,8 @@
       <div class="container">
         <div class="hero-content reveal">
           <h1>Systems that work the way you do</h1>
-          <p class="subtitle">Tidy is temporary. Systems last. We build organizing around how your household actually lives, judgment-free, from one closet to your whole home.</p>
-          <a href="#booking" class="btn btn-primary">Start Your Reset</a>
+          <p class="subtitle">A quick fix doesn't last. Systems do. We build organizing around how your household actually lives, judgment-free, from one closet to your whole home.</p>
+          <a href="../../reserve/" class="btn btn-primary">Start Your Reset</a>
         </div>
       </div>
     </section>
@@ -293,51 +342,79 @@
     <section class="service-section reveal">
       <div class="container">
         <h2>Reset Packages</h2>
-        <p>Choose the package that fits your space and your timeline. Every card below is clickable, click through to lock in the one that fits.</p>
+        <p>Every reset includes a two-person team, a system built around how you live, the shopping for organizing products (cost included), and a judgment-free process. Every card below is clickable, click through to lock in the one that fits.</p>
         <div class="packages-grid">
-          <a href="#booking" class="package-card reveal" data-package="half-day" onclick="preselectPackage('half-day')">
-            <h3>Half-Day Reset</h3>
-            <p class="price">Starting at $400</p>
-            <ul>
-              <li>4 hours of professional organizing</li>
-              <li>One room or space</li>
-              <li>System design & implementation</li>
-              <li>Organization supplies included</li>
-            </ul>
-            <span class="btn btn-secondary">Start This Reset</span>
+          <a href="../../reserve/?package=mini-reset" class="package-card reveal">
+            <div class="img-placeholder">[ Image placeholder — Mini Reset ]</div>
+            <div class="package-card-body">
+              <h3>Mini Reset</h3>
+              <p class="price">Starting at $326</p>
+              <ul>
+                <li>Two small spaces, one visit, two organizers working in parallel</li>
+                <li>A closet and a pantry, two kids' closets, whatever's driving you crazy</li>
+              </ul>
+              <span class="btn btn-secondary">Start This Reset</span>
+            </div>
           </a>
-          <a href="#booking" class="package-card reveal" data-package="full-day" onclick="preselectPackage('full-day')">
-            <h3>Full-Day Reset</h3>
-            <p class="price">Starting at $750</p>
-            <ul>
-              <li>8 hours of professional organizing</li>
-              <li>Multiple rooms or larger space</li>
-              <li>Custom system design</li>
-              <li>Organization supplies included</li>
-            </ul>
-            <span class="btn btn-secondary">Start This Reset</span>
+          <a href="../../reserve/?package=room-reset" class="package-card reveal">
+            <div class="img-placeholder">[ Image placeholder — Room Reset ]</div>
+            <div class="package-card-body">
+              <h3>Room Reset</h3>
+              <p class="price">Starting at $440</p>
+              <ul>
+                <li>Two full rooms, one visit</li>
+                <li>Two kids' bedrooms, a guest room and a home office, handled together</li>
+              </ul>
+              <span class="btn btn-secondary">Start This Reset</span>
+            </div>
           </a>
-          <a href="#booking" class="package-card reveal" data-package="multi-day" onclick="preselectPackage('multi-day')">
-            <h3>Multi-Day Project</h3>
-            <p class="price">Custom pricing</p>
-            <ul>
-              <li>2+ days of organizing</li>
-              <li>Whole-home transformation</li>
-              <li>Professional system design</li>
-              <li>Follow-up support included</li>
-            </ul>
-            <span class="btn btn-secondary">Start This Reset</span>
+          <a href="../../reserve/?package=multi-room-reset" class="package-card reveal">
+            <div class="img-placeholder">[ Image placeholder — Multi-Room Reset ]</div>
+            <div class="package-card-body">
+              <h3>Multi-Room Reset</h3>
+              <p class="price">Starting at $850</p>
+              <ul>
+                <li>Three connected rooms or zones, one cohesive project</li>
+                <li>Kitchen, pantry, and mudroom as one flow, not three separate jobs</li>
+              </ul>
+              <span class="btn btn-secondary">Start This Reset</span>
+            </div>
           </a>
-          <a href="#booking" class="package-card reveal" data-package="room-by-room" onclick="preselectPackage('room-by-room')">
-            <h3>Room-by-Room Reset</h3>
-            <p class="price">Starting at $250</p>
-            <ul>
-              <li>Know exactly which space needs help? Start there.</li>
-              <li>One room, fully reset</li>
-              <li>Same system design, smaller scope</li>
-              <li>Organization supplies included</li>
-            </ul>
-            <span class="btn btn-secondary">Start This Reset</span>
+          <a href="../../reserve/?package=storage-reset" class="package-card reveal">
+            <div class="img-placeholder">[ Image placeholder — Storage Reset ]</div>
+            <div class="package-card-body">
+              <h3>Storage Reset</h3>
+              <p class="price">Starting at $896</p>
+              <ul>
+                <li>Garage, basement, or attic</li>
+                <li>Bulk-item sorting and category-based systems built for storage, not drawer-level detail</li>
+              </ul>
+              <span class="btn btn-secondary">Start This Reset</span>
+            </div>
+          </a>
+          <a href="../../reserve/?package=whole-home-reset" class="package-card reveal">
+            <div class="img-placeholder">[ Image placeholder — Whole Home Reset ]</div>
+            <div class="package-card-body">
+              <h3>Whole Home Reset</h3>
+              <p class="price">Starting at $1,100</p>
+              <ul>
+                <li>Every room in your home, one master plan</li>
+                <li>Typically completed over multiple days with two or more organizers</li>
+              </ul>
+              <span class="btn btn-secondary">Start This Reset</span>
+            </div>
+          </a>
+          <a href="../../reserve/?package=signature-home-reset" class="package-card reveal">
+            <div class="img-placeholder">[ Image placeholder — Signature Home Reset ]</div>
+            <div class="package-card-body">
+              <h3>Signature Home Reset</h3>
+              <p class="price">Starting at $1,500</p>
+              <ul>
+                <li>Everything in the Whole Home Reset</li>
+                <li>Plus a design-forward finish: matching systems, styled spaces</li>
+              </ul>
+              <span class="btn btn-secondary">Start This Reset</span>
+            </div>
           </a>
         </div>
       </div>
@@ -346,303 +423,75 @@
     <!-- Systems That Work -->
     <section class="service-section reveal">
       <div class="container">
-        <h2>Organizing isn't tidying. It's a system.</h2>
-        <p>Tidying moves things around. We build a system, a decision the space makes for you, so putting things away is easier than leaving them out. Here's where we start most often.</p>
+        <h2>A system, not a one-time fix</h2>
+        <p>Shoving everything into a closet for an afternoon feels good for about a week. We build a system, a decision the space makes for you, so putting things away is easier than leaving them out. Here's where we start most often.</p>
         <div class="systems-grid">
-          <div class="systems-card reveal">
+          <a href="../../reserve/?room=pantry" class="systems-card reveal">
             <div class="img-placeholder">[ Image placeholder — Kitchen & Pantry ]</div>
             <div class="systems-card-body">
               <h3>Kitchen & Pantry</h3>
               <p>Open the door and actually see what you own. No more buying a third jar of cumin because the first two were buried. Meal prep gets easier when every ingredient has a home.</p>
+              <p class="systems-price">Starting at $220</p>
             </div>
-          </div>
-          <div class="systems-card reveal" data-reveal-delay="100">
+          </a>
+          <a href="../../reserve/?room=closet" class="systems-card reveal" data-reveal-delay="100">
             <div class="img-placeholder">[ Image placeholder — Closet Organization ]</div>
             <div class="systems-card-body">
               <h3>Closet Organization</h3>
               <p>Getting dressed stops being a decision that drains you before 8am. A closet built around your actual wardrobe, not a magazine's, so mornings feel lighter.</p>
+              <p class="systems-price">Starting at $185</p>
             </div>
-          </div>
-          <div class="systems-card reveal" data-reveal-delay="150">
+          </a>
+          <a href="../../reserve/?room=home-office" class="systems-card reveal" data-reveal-delay="150">
             <div class="img-placeholder">[ Image placeholder — Home Office ]</div>
             <div class="systems-card-body">
               <h3>Home Office</h3>
               <p>Every paper, cable, and half-finished project has a place, so focus isn't competing with clutter in your peripheral vision. Built for how you actually work.</p>
+              <p class="systems-price">Starting at $250</p>
             </div>
-          </div>
-          <div class="systems-card reveal" data-reveal-delay="200">
+          </a>
+          <a href="../../reserve/?package=whole-home-reset" class="systems-card reveal" data-reveal-delay="200">
             <div class="img-placeholder">[ Image placeholder — Whole-Home Organization ]</div>
             <div class="systems-card-body">
               <h3>Whole-Home Organization</h3>
               <p>Every room working the same way, so nothing quietly reverts to chaos the moment life gets busy again. One consistent system, top to bottom.</p>
+              <p class="systems-price">Starting at $1,100</p>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </section>
 
     <!-- Room by Room -->
-    <section class="service-section reveal">
+    <section class="service-section room-tint-section reveal">
       <div class="container">
-        <h2>Every room has its own kind of overwhelm</h2>
-        <p>Know exactly which space is driving you crazy? Start there. Room-by-room resets are their own package above, and here's what we consider for each one.</p>
-        <div class="room-list reveal">
-          <div class="room-item">
-            <h3>Bedrooms</h3>
-            <p>A room that actually helps you rest instead of reminding you of everything undone the moment you walk in.</p>
-          </div>
-          <div class="room-item">
-            <h3>Bathrooms</h3>
-            <p>Efficient mornings. Everything you reach for is visible, nothing wasted digging through what you forgot you had.</p>
-          </div>
-          <div class="room-item">
-            <h3>Living Spaces</h3>
-            <p>A common area you can actually relax in, and that you're not embarrassed to have people see.</p>
-          </div>
-          <div class="room-item">
-            <h3>Storage & Basements</h3>
-            <p>The room you've been avoiding, finally with a system, so finding things doesn't mean excavating first.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Memberships -->
-    <section class="service-section reveal">
-      <div class="container">
-        <h2>Ongoing Support</h2>
-        <p>Your organizing doesn't end when we leave. Get ongoing support to maintain your systems.</p>
-        <div class="membership-grid">
-          <div class="membership-card reveal">
-            <h3>Monthly Check-In</h3>
-            <p class="price">$199/month</p>
-            <ul>
-              <li>One 2-hour session per month</li>
-              <li>System maintenance & adjustments</li>
-              <li>Email support between visits</li>
-            </ul>
-          </div>
-          <div class="membership-card reveal">
-            <h3>Seasonal Reset</h3>
-            <p class="price">$299/month</p>
-            <ul>
-              <li>Quarterly organizing sessions</li>
-              <li>Seasonal system updates</li>
-              <li>Priority booking</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- What's Included -->
-    <section class="service-section reveal">
-      <div class="container">
-        <h2>What's Included in Every Organizing Project</h2>
-        <ul class="inclusion-list reveal">
-          <li><strong>Judgment-Free Assessment:</strong> We listen to how you actually live before designing a single thing. You don't need to clean up before we arrive.</li>
-          <li><strong>Custom System Design:</strong> Built around your household, never a generic template.</li>
-          <li><strong>Professional Implementation:</strong> We do the work. You get the results.</li>
-          <li><strong>Quality Supplies:</strong> Organization materials included, or we source your preferences.</li>
-          <li><strong>Labeling & Documentation:</strong> Clear, consistent systems everyone in your home understands.</li>
-          <li><strong>Sustainability:</strong> Systems designed to still be working three months from now, not three weeks.</li>
+        <h2>Room-by-Room</h2>
+        <p>Know exactly which space is driving you crazy? Start there. This is a separate offering from Reset Packages above, priced per room.</p>
+        <ul class="room-price-grid reveal">
+          <li><span>Closet (small, non-walk-in)</span><strong>$185</strong></li>
+          <li><span>Bathroom, Mudroom</span><strong>$200</strong></li>
+          <li><span>Pantry, Laundry Room</span><strong>$220</strong></li>
+          <li><span>Bedroom, Home Office, Playroom, Craft Room</span><strong>$250</strong></li>
+          <li><span>Kitchen</span><strong>$300</strong></li>
+          <li><span>Attic</span><strong>$300</strong></li>
+          <li><span>Garage, Basement</span><strong>$350</strong></li>
         </ul>
+        <p style="margin-top: 24px; color: var(--color-ink-soft); font-size: 15px;">Book two spaces from the same size tier in one visit (two organizers working in parallel) and get 12% off the combined price: two small spaces (e.g. two closets) is $370 &rarr; $326, two full rooms (e.g. two kids' rooms, or a bedroom + guest room) is $500 &rarr; $440.</p>
+        <a href="../../reserve/" class="btn btn-primary" style="margin-top: 32px;">Start Your Reset</a>
       </div>
     </section>
 
-    <!-- Booking Section -->
-    <section id="booking" class="service-section reveal">
-      <div class="container">
-        <h2>Ready to start your reset?</h2>
-        <p>Tell us what's going on and we'll build a plan around it. This form also covers Move Concierge and Specialty Services, pick whichever fits.</p>
-        <div class="booking-form">
-          <form onsubmit="handleBooking(event)" id="bookingForm">
-            <div class="form-group">
-              <label>What do you need help with?</label>
-              <div class="service-type-toggle" id="serviceTypeToggle">
-                <input type="radio" id="typeOrganizing" name="serviceType" value="organizing" checked>
-                <label for="typeOrganizing">Organizing</label>
-                <input type="radio" id="typeMove" name="serviceType" value="move-concierge">
-                <label for="typeMove">Move Concierge</label>
-                <input type="radio" id="typeSpecialty" name="serviceType" value="specialty">
-                <label for="typeSpecialty">Specialty Services</label>
-              </div>
-            </div>
-
-            <!-- Organizing fields -->
-            <div class="conditional-group is-visible" id="groupOrganizing">
-              <div class="form-group">
-                <label for="organizingPackage">Which package?</label>
-                <select id="organizingPackage" name="organizingPackage">
-                  <option value="half-day">Half-Day Reset ($400+)</option>
-                  <option value="full-day">Full-Day Reset ($750+)</option>
-                  <option value="multi-day">Multi-Day Project (Custom)</option>
-                  <option value="room-by-room">Room-by-Room Reset ($250+)</option>
-                </select>
-              </div>
-              <div class="form-group conditional-group" id="groupRoomSelect">
-                <label for="roomSelect">Which room?</label>
-                <select id="roomSelect" name="roomSelect">
-                  <option value="bedroom">Bedroom</option>
-                  <option value="bathroom">Bathroom</option>
-                  <option value="kitchen-pantry">Kitchen & Pantry</option>
-                  <option value="living-space">Living Space</option>
-                  <option value="home-office">Home Office</option>
-                  <option value="closet">Closet</option>
-                  <option value="storage-basement">Storage / Basement</option>
-                  <option value="whole-home">Whole Home</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Move Concierge fields -->
-            <div class="conditional-group" id="groupMove">
-              <div class="form-group">
-                <label for="movePackage">Which package?</label>
-                <select id="movePackage" name="movePackage">
-                  <option value="planning">Move Planning & Coordination</option>
-                  <option value="full-service">Full-Service Move Reset</option>
-                  <option value="premium">Premium Move Management</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Specialty fields -->
-            <div class="conditional-group" id="groupSpecialty">
-              <div class="form-group">
-                <label for="specialtyService">Which service?</label>
-                <select id="specialtyService" name="specialtyService">
-                  <option value="supportive-living">Supportive Living Reset</option>
-                  <option value="nesting-nursery">Nesting & Nursery Prep</option>
-                  <option value="junk-removal">Junk Removal</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="name">Your Name</label>
-              <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-              <label for="phone">Phone</label>
-              <input type="tel" id="phone" name="phone" required>
-            </div>
-            <div class="form-group">
-              <label for="address">Address</label>
-              <input type="text" id="address" name="address" required>
-            </div>
-            <div class="form-group">
-              <label for="date">Preferred Date</label>
-              <input type="date" id="date" name="date" required>
-            </div>
-            <div class="form-group">
-              <label for="clutterLevel">How would you describe your space right now?</label>
-              <select id="clutterLevel" name="clutterLevel">
-                <option value="mostly-fine">It's mostly under control, just needs some polish</option>
-                <option value="cant-find-things">It's functional, but I can never find what I actually need</option>
-                <option value="close-the-door">I close doors so guests don't see certain rooms</option>
-                <option value="dont-know-where-to-start">I don't even know where to start anymore</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="message">Tell us about your space</label>
-              <textarea id="message" name="message" rows="4" placeholder="What's going on, and what would a working space look like for you?"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Request Booking</button>
-          </form>
-          <div id="form-message" style="display: none; margin-top: 20px; padding: 15px; border-radius: 6px;"></div>
-        </div>
-      </div>
-    </section>
   </main>
 
 
     <!-- ===== STANDARD PAGE LAYOUT ===== -->
 
-    <!-- Section 1: Hero Banner -->
-    <section class="standard-hero-banner">
-      <div class="standard-hero-bg img-placeholder">[ Large hero image placeholder ]</div>
-      <div class="standard-hero-overlay"></div>
-      <div class="container">
-        <div class="standard-hero-content reveal">
-          <h2>[ Headline placeholder ]</h2>
-          <p>[ Supporting paragraph placeholder ]</p>
-          <a href="#booking" class="btn btn-primary">Start Your Reset</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 2: Content Block -->
-    <section class="content-block-section">
-      <div class="container">
-        <div class="content-row">
-          <div class="content-row-copy reveal">
-            <h3>[ Headline placeholder ]</h3>
-            <p>[ Paragraph placeholder ]</p>
-          </div>
-          <div class="content-row-image reveal" data-reveal-delay="100">
-            <div class="img-placeholder">[ Image placeholder ]</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 3: Content Block (reversed) -->
-    <section class="content-block-section alt-bg">
-      <div class="container">
-        <div class="content-row reversed">
-          <div class="content-row-image reveal">
-            <div class="img-placeholder">[ Image placeholder ]</div>
-          </div>
-          <div class="content-row-copy reveal" data-reveal-delay="100">
-            <h3>[ Headline placeholder ]</h3>
-            <p>[ Paragraph placeholder ]</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 4: Content Block -->
-    <section class="content-block-section">
-      <div class="container">
-        <div class="content-row">
-          <div class="content-row-copy reveal">
-            <h3>[ Headline placeholder ]</h3>
-            <p>[ Paragraph placeholder ]</p>
-          </div>
-          <div class="content-row-image reveal" data-reveal-delay="100">
-            <div class="img-placeholder">[ Image placeholder ]</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 5: Content Block (reversed) -->
-    <section class="content-block-section alt-bg">
-      <div class="container">
-        <div class="content-row reversed">
-          <div class="content-row-image reveal">
-            <div class="img-placeholder">[ Image placeholder ]</div>
-          </div>
-          <div class="content-row-copy reveal" data-reveal-delay="100">
-            <h3>[ Headline placeholder ]</h3>
-            <p>[ Paragraph placeholder ]</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 6: See Why Families Trust Elevated Home Resets -->
+    <!-- Section 6: Reviews -->
     <section class="trust-reviews-section">
       <div class="container">
         <div class="section-heading reveal">
           <p class="label section-eyebrow">Testimonials</p>
-          <h2 class="section-title">See Why Families Trust Elevated Home Resets</h2>
+          <h2 class="section-title">See What Our Customers Have To Say</h2>
         </div>
         <div class="review-grid">
           <div class="review-card reveal" data-reveal-delay="0">
@@ -667,31 +516,11 @@
       </div>
     </section>
 
-    <!-- Section 7: Real Homes. Real Transformations. -->
-    <section class="gallery-section">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="label section-eyebrow">Project Gallery</p>
-          <h2 class="section-title">Real Homes. Real Transformations.</h2>
-        </div>
-      </div>
-      <div class="container">
-        <div class="gallery-scroll reveal" data-reveal-delay="100">
-          <div class="img-placeholder">[ Image placeholder ]</div>
-          <div class="img-placeholder">[ Image placeholder ]</div>
-          <div class="img-placeholder">[ Image placeholder ]</div>
-          <div class="img-placeholder">[ Image placeholder ]</div>
-          <div class="img-placeholder">[ Image placeholder ]</div>
-          <div class="img-placeholder">[ Image placeholder ]</div>
-        </div>
-      </div>
-    </section>
-
     <!-- Section 8: Tips for a More Organized Home -->
     <section class="tips-section">
       <div class="container">
         <div class="section-heading reveal">
-          <p class="label section-eyebrow">From The Blog</p>
+          <p class="label section-eyebrow">Tips &amp; Resources</p>
           <h2 class="section-title">Tips for a More Organized Home</h2>
         </div>
         <div class="tips-grid">
@@ -729,9 +558,9 @@
       <div class="closing-overlay"></div>
       <div class="container">
         <div class="closing-content reveal">
-          <h2>[ Headline placeholder ]</h2>
-          <p>[ Paragraph placeholder ]</p>
-          <a href="#booking" class="btn btn-primary">Start Your Reset</a>
+          <h2>Ready for a home that runs itself?</h2>
+          <p>Pick a package or a room above, or start your reset now and we'll help you find the right fit.</p>
+          <a href="../../reserve/" class="btn btn-primary">Start Your Reset</a>
         </div>
       </div>
     </section>
@@ -747,72 +576,5 @@
   </footer>
 
   <script src="../../script.js"></script>
-  <script>
-    // Service type toggle: show/hide the right conditional field group
-    const serviceGroups = {
-      organizing: document.getElementById('groupOrganizing'),
-      'move-concierge': document.getElementById('groupMove'),
-      specialty: document.getElementById('groupSpecialty')
-    };
-
-    function setServiceType(type) {
-      Object.keys(serviceGroups).forEach((key) => {
-        serviceGroups[key].classList.toggle('is-visible', key === type);
-      });
-      const radio = document.querySelector(`input[name="serviceType"][value="${type}"]`);
-      if (radio) radio.checked = true;
-      if (type === 'organizing') updateRoomSelectVisibility();
-    }
-
-    document.querySelectorAll('input[name="serviceType"]').forEach((input) => {
-      input.addEventListener('change', (e) => setServiceType(e.target.value));
-    });
-
-    // Room-by-Room package reveals the room selector
-    const organizingPackageSelect = document.getElementById('organizingPackage');
-    const groupRoomSelect = document.getElementById('groupRoomSelect');
-
-    function updateRoomSelectVisibility() {
-      groupRoomSelect.classList.toggle('is-visible', organizingPackageSelect.value === 'room-by-room');
-    }
-
-    organizingPackageSelect.addEventListener('change', updateRoomSelectVisibility);
-    updateRoomSelectVisibility();
-
-    // Clicking a package card jumps to the form pre-set to that package
-    function preselectPackage(pkg) {
-      setServiceType('organizing');
-      organizingPackageSelect.value = pkg;
-      updateRoomSelectVisibility();
-    }
-
-    // Submit to Formspree, then send them to the shared deposit page
-    function handleBooking(event) {
-      event.preventDefault();
-      const messageDiv = document.getElementById('form-message');
-      const selectedType = document.querySelector('input[name="serviceType"]:checked').value;
-      const customerName = document.getElementById('name').value;
-
-      fetch('https://formspree.io/f/xrenrzwv', {
-        method: 'POST',
-        body: new FormData(event.target),
-        headers: { Accept: 'application/json' }
-      })
-      .then((response) => {
-        if (response.ok) {
-          const params = new URLSearchParams({ service: selectedType, name: customerName });
-          window.location.href = '../../book/?' + params.toString();
-        } else {
-          throw new Error('Booking failed');
-        }
-      })
-      .catch((error) => {
-        messageDiv.textContent = 'Error: ' + error.message + '. Please try again or call (540) 356-3306.';
-        messageDiv.style.backgroundColor = '#f8d7da';
-        messageDiv.style.color = '#721c24';
-        messageDiv.style.display = 'block';
-      });
-    }
-  </script>
 </body>
 </html>

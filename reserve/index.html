@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Your Reset - Elevated Home Resets</title>
+  <meta name="description" content="Tell us about your organizing, move concierge, or specialty project and we'll get you on the calendar.">
+  <link rel="canonical" href="https://elevatedhomeresets.com/reserve">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .page-hero { background: var(--color-white); padding: 80px 0 48px; text-align: center; }
+    .page-hero .label { color: var(--color-clay); }
+    .page-hero h1 { margin-top: 16px; margin-bottom: 16px; }
+    .page-hero p { font-size: 18px; color: var(--color-ink-soft); max-width: 640px; margin: 0 auto; }
+
+    .reserve-section { background: var(--color-stone); padding: 16px 0 96px; }
+
+    .booking-form { max-width: 640px; margin: 0 auto; background: var(--color-white); border-radius: 16px; padding: 40px; box-shadow: 0 1px 2px rgba(51, 46, 42, 0.06), 0 8px 24px rgba(51, 46, 42, 0.07); }
+
+    .service-type-toggle {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 640px) {
+      .service-type-toggle { grid-template-columns: 1fr; }
+    }
+
+    .service-type-toggle label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px 12px;
+      border: 2px solid rgba(51, 46, 42, 0.15);
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--color-charcoal);
+      transition: all 200ms ease;
+      margin-bottom: 0;
+    }
+
+    .service-type-toggle input { position: absolute; opacity: 0; pointer-events: none; }
+
+    .service-type-toggle input:checked + label {
+      border-color: var(--color-ocean);
+      background: rgba(61, 107, 125, 0.08);
+      color: var(--color-ocean-deep);
+    }
+
+    .conditional-group { display: none; }
+    .conditional-group.is-visible { display: block; }
+
+    .form-group { margin-bottom: 20px; }
+    label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px; color: var(--color-charcoal); }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      font-family: inherit;
+      font-size: 16px;
+      border: 1px solid rgba(51, 46, 42, 0.15);
+      border-radius: 6px;
+      background: var(--color-white);
+      color: var(--color-charcoal);
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--color-ocean);
+      box-shadow: 0 0 0 3px rgba(61, 107, 125, 0.12);
+    }
+    textarea { resize: vertical; min-height: 100px; }
+
+    .form-message { margin-top: 16px; padding: 12px 16px; border-radius: 6px; font-size: 14px; display: none; }
+    .form-message.success { display: block; background: rgba(61, 107, 125, 0.1); color: var(--color-ocean-deep); border: 1px solid var(--color-ocean); }
+    .form-message.error { display: block; background: rgba(200, 100, 100, 0.1); color: #c64; border: 1px solid #c64; }
+  </style>
+</head>
+<body>
+<header class="site-header">
+    <div class="container">
+      <a href="../" class="logo">Elevated Home Resets</a>
+
+      <nav class="primary-nav">
+        <a href="../">Home</a>
+        <div class="nav-dropdown">
+          <button type="button" class="nav-dropdown-toggle">Services <span class="nav-dropdown-arrow" aria-hidden="true">&#9662;</span></button>
+          <div class="nav-dropdown-menu">
+            <a href="../services/organizing">Organizing</a>
+            <a href="../services/cleaning">Cleaning</a>
+            <a href="../services/move-concierge">Move Concierge</a>
+            <a href="../services/specialty">Specialty Services</a>
+          </div>
+        </div>
+        <a href="../blog">Blog</a>
+        <a href="../shop">Shop</a>
+        <a href="../contact">Contact</a>
+        <a href="../contact" class="btn btn-primary nav-book-btn">Book Now</a>
+      </nav>
+
+      <button id="mobile-menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav id="mobile-nav" class="hidden">
+      <a href="../">Home</a>
+      <p class="mobile-services-label">Services</p>
+      <a href="../services/organizing">Organizing</a>
+      <a href="../services/cleaning">Cleaning</a>
+      <a href="../services/move-concierge">Move Concierge</a>
+      <a href="../services/specialty">Specialty Services</a>
+      <a href="../blog">Blog</a>
+      <a href="../shop">Shop</a>
+      <a href="../contact">Contact</a>
+      <a href="../contact" class="btn btn-primary">Book Now</a>
+    </nav>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="label">Book Your Reset</p>
+      <h1>Tell us about your project</h1>
+      <p>A few quick questions and we'll get you on the calendar. Once you're done, you'll confirm your booking with a $100 deposit.</p>
+    </div>
+  </section>
+
+  <section class="reserve-section">
+    <div class="container">
+      <div class="booking-form">
+        <form id="reserveForm">
+          <div class="form-group">
+            <label>What do you need?</label>
+            <div class="service-type-toggle">
+              <input type="radio" name="serviceType" value="organizing" id="typeOrganizing">
+              <label for="typeOrganizing">Organizing</label>
+              <input type="radio" name="serviceType" value="move-concierge" id="typeMove">
+              <label for="typeMove">Move Concierge</label>
+              <input type="radio" name="serviceType" value="specialty" id="typeSpecialty">
+              <label for="typeSpecialty">Specialty Services</label>
+            </div>
+          </div>
+
+          <!-- Organizing fields -->
+          <div class="conditional-group" id="groupOrganizing">
+            <div class="form-group">
+              <label for="organizingPackage">Which package?</label>
+              <select id="organizingPackage" name="organizingPackage">
+                <option value="">Select a package</option>
+                <option value="mini-reset">Mini Reset — $326</option>
+                <option value="room-reset">Room Reset — $440</option>
+                <option value="multi-room-reset">Multi-Room Reset — $850</option>
+                <option value="storage-reset">Storage Reset — $896</option>
+                <option value="whole-home-reset">Whole Home Reset — $1,100</option>
+                <option value="signature-home-reset">Signature Home Reset — $1,500</option>
+                <option value="room-by-room">Room-by-Room (priced per room)</option>
+              </select>
+            </div>
+            <div class="form-group conditional-group" id="groupRoomSelect">
+              <label for="roomSelect">Which room?</label>
+              <select id="roomSelect" name="roomSelect">
+                <option value="">Select a room</option>
+                <option value="closet">Closet (small, non-walk-in) — $185</option>
+                <option value="bathroom-mudroom">Bathroom, Mudroom — $200</option>
+                <option value="pantry-laundry">Pantry, Laundry Room — $220</option>
+                <option value="bedroom-office-playroom">Bedroom, Home Office, Playroom, Craft Room — $250</option>
+                <option value="kitchen">Kitchen — $300</option>
+                <option value="attic">Attic — $300</option>
+                <option value="garage-basement">Garage, Basement — $350</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Move Concierge fields -->
+          <div class="conditional-group" id="groupMove">
+            <div class="form-group">
+              <label for="movePackage">Which package?</label>
+              <select id="movePackage" name="movePackage">
+                <option value="">Select a package</option>
+                <option value="planning">Move Planning &amp; Coordination — Starting at $800</option>
+                <option value="full-service">Full-Service Move Reset — Starting at $1,500</option>
+                <option value="premium">Premium Move Management — Custom pricing</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="moveDate">Preferred move date</label>
+              <input type="date" id="moveDate" name="moveDate">
+            </div>
+          </div>
+
+          <!-- Specialty fields -->
+          <div class="conditional-group" id="groupSpecialty">
+            <div class="form-group">
+              <label for="specialtyService">Which service?</label>
+              <select id="specialtyService" name="specialtyService">
+                <option value="">Select a service</option>
+                <option value="estate">Estate Services</option>
+                <option value="senior-transition">Senior Transitions</option>
+                <option value="post-construction">Post-Construction Cleanup</option>
+                <option value="downsizing">Downsizing &amp; Relocation</option>
+                <option value="airbnb">Airbnb/Vacation Setup</option>
+                <option value="virtual">Virtual Organization</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="specialtyDate">Preferred date</label>
+              <input type="date" id="specialtyDate" name="specialtyDate">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" name="phone" required>
+          </div>
+          <div class="form-group">
+            <label for="address">Address *</label>
+            <input type="text" id="address" name="address" placeholder="Street, city, zip" required>
+          </div>
+          <div class="form-group">
+            <label for="notes">Anything else we should know?</label>
+            <textarea id="notes" name="notes" placeholder="Tell us more about the space or project."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Complete Your Booking</button>
+          <div id="form-message" class="form-message"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-bottom: 64px;">
+        <div>
+          <h4 style="color: var(--color-white); margin-bottom: 16px;">Services</h4>
+          <p><a href="../services/organizing">Organizing</a></p>
+          <p><a href="../services/cleaning">Cleaning</a></p>
+          <p><a href="../services/move-concierge">Move &amp; Concierge</a></p>
+          <p><a href="../services/specialty">Specialty Services</a></p>
+        </div>
+        <div>
+          <h4 style="color: var(--color-white); margin-bottom: 16px;">Company</h4>
+          <p><a href="../about">About</a></p>
+          <p><a href="../contact">Contact</a></p>
+          <p><a href="../blog">Blog</a></p>
+        </div>
+        <div>
+          <h4 style="color: var(--color-white); margin-bottom: 16px;">Legal</h4>
+          <p><a href="../privacy">Privacy</a></p>
+          <p><a href="../terms">Terms</a></p>
+        </div>
+      </div>
+      <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 32px; text-align: center;">
+        <p>&copy; 2024 Elevated Home Resets. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+    const serviceGroups = {
+      organizing: document.getElementById('groupOrganizing'),
+      'move-concierge': document.getElementById('groupMove'),
+      specialty: document.getElementById('groupSpecialty')
+    };
+
+    function setServiceType(type) {
+      Object.keys(serviceGroups).forEach((key) => {
+        serviceGroups[key].classList.toggle('is-visible', key === type);
+      });
+      const radio = document.querySelector(`input[name="serviceType"][value="${type}"]`);
+      if (radio) radio.checked = true;
+      if (type === 'organizing') updateRoomSelectVisibility();
+    }
+
+    document.querySelectorAll('input[name="serviceType"]').forEach((input) => {
+      input.addEventListener('change', (e) => setServiceType(e.target.value));
+    });
+
+    const organizingPackageSelect = document.getElementById('organizingPackage');
+    const groupRoomSelect = document.getElementById('groupRoomSelect');
+
+    function updateRoomSelectVisibility() {
+      groupRoomSelect.classList.toggle('is-visible', organizingPackageSelect.value === 'room-by-room');
+    }
+
+    organizingPackageSelect.addEventListener('change', updateRoomSelectVisibility);
+
+    // Pre-fill from query params, e.g. /reserve/?package=mini-reset or /reserve/?room=closet
+    const params = new URLSearchParams(window.location.search);
+    const pkg = params.get('package');
+    const room = params.get('room');
+
+    if (room) {
+      setServiceType('organizing');
+      organizingPackageSelect.value = 'room-by-room';
+      const roomMap = {
+        pantry: 'pantry-laundry',
+        closet: 'closet',
+        'home-office': 'bedroom-office-playroom'
+      };
+      document.getElementById('roomSelect').value = roomMap[room] || room;
+    } else if (pkg) {
+      setServiceType('organizing');
+      organizingPackageSelect.value = pkg;
+    }
+
+    updateRoomSelectVisibility();
+
+    // Submit to Formspree, then send them to the shared payment page
+    document.getElementById('reserveForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const messageDiv = document.getElementById('form-message');
+      const selectedTypeInput = document.querySelector('input[name="serviceType"]:checked');
+
+      if (!selectedTypeInput) {
+        messageDiv.className = 'form-message error';
+        messageDiv.textContent = 'Please choose what you need above.';
+        return;
+      }
+
+      const selectedType = selectedTypeInput.value;
+      const customerName = document.getElementById('name').value;
+
+      const detailLabels = {
+        organizing: organizingPackageSelect.options[organizingPackageSelect.selectedIndex]?.text,
+        'move-concierge': document.getElementById('movePackage').options[document.getElementById('movePackage').selectedIndex]?.text,
+        specialty: document.getElementById('specialtyService').options[document.getElementById('specialtyService').selectedIndex]?.text
+      };
+      let detail = detailLabels[selectedType] || '';
+      if (selectedType === 'organizing' && organizingPackageSelect.value === 'room-by-room') {
+        const roomSelect = document.getElementById('roomSelect');
+        const roomLabel = roomSelect.options[roomSelect.selectedIndex]?.text;
+        if (roomLabel) detail = roomLabel;
+      }
+
+      fetch('https://formspree.io/f/xrenrzwv', {
+        method: 'POST',
+        body: new FormData(event.target),
+        headers: { Accept: 'application/json' }
+      })
+      .then((response) => {
+        if (response.ok) {
+          const redirectParams = new URLSearchParams({ service: selectedType, name: customerName, detail: detail || '' });
+          window.location.href = '../book/?' + redirectParams.toString();
+        } else {
+          throw new Error('Booking failed');
+        }
+      })
+      .catch((error) => {
+        messageDiv.className = 'form-message error';
+        messageDiv.textContent = 'Error: ' + error.message + '. Please try again or call (540) 356-3306.';
+      });
+    });
+  </script>
+</body>
+</html>
