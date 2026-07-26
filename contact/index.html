@@ -145,16 +145,44 @@
 </head>
 <body>
   <!-- Header -->
-  <header>
+<header class="site-header">
     <div class="container">
-      <a href="/" class="logo">Elevated Home Resets</a>
-      <nav>
-        <a href="/services">Services</a>
-        <a href="/about">About</a>
-        <a href="/locations">Locations</a>
-        <a href="/contact">Contact</a>
+      <a href="../" class="logo">Elevated Home Resets</a>
+
+      <nav class="primary-nav">
+        <a href="../">Home</a>
+        <div class="nav-dropdown">
+          <button type="button" class="nav-dropdown-toggle">Services <span class="nav-dropdown-arrow" aria-hidden="true">&#9662;</span></button>
+          <div class="nav-dropdown-menu">
+            <a href="../services/organizing">Organizing</a>
+            <a href="../services/cleaning">Cleaning</a>
+            <a href="../services/move-concierge">Move Concierge</a>
+            <a href="../services/specialty">Specialty Services</a>
+          </div>
+        </div>
+        <a href="../blog">Blog</a>
+        <a href="../shop">Shop</a>
+        <a href="../contact">Contact</a>
+        <a href="../contact" class="btn btn-primary nav-book-btn">Book Now</a>
       </nav>
+
+      <button id="mobile-menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+
+    <nav id="mobile-nav" class="hidden">
+      <a href="../">Home</a>
+      <p class="mobile-services-label">Services</p>
+      <a href="../services/organizing">Organizing</a>
+      <a href="../services/cleaning">Cleaning</a>
+      <a href="../services/move-concierge">Move Concierge</a>
+      <a href="../services/specialty">Specialty Services</a>
+      <a href="../blog">Blog</a>
+      <a href="../shop">Shop</a>
+      <a href="../contact">Contact</a>
+      <a href="../contact" class="btn btn-primary">Book Now</a>
+    </nav>
   </header>
 
   <!-- Page Hero -->

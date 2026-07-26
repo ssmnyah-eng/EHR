@@ -237,22 +237,43 @@
 
 </head>
 <body>
-  <header class="header">
-    <nav class="nav-bar">
-      <div class="logo">
-        <a href="../../">Elevated Home Resets</a>
-      </div>
-      <button class="mobile-menu-btn" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
+<header class="site-header">
+    <div class="container">
+      <a href="../../" class="logo">Elevated Home Resets</a>
+
+      <nav class="primary-nav">
+        <a href="../../">Home</a>
+        <div class="nav-dropdown">
+          <button type="button" class="nav-dropdown-toggle">Services <span class="nav-dropdown-arrow" aria-hidden="true">&#9662;</span></button>
+          <div class="nav-dropdown-menu">
+            <a href="../../services/organizing">Organizing</a>
+            <a href="../../services/cleaning">Cleaning</a>
+            <a href="../../services/move-concierge">Move Concierge</a>
+            <a href="../../services/specialty">Specialty Services</a>
+          </div>
+        </div>
+        <a href="../../blog">Blog</a>
+        <a href="../../shop">Shop</a>
+        <a href="../../contact">Contact</a>
+        <a href="../../contact" class="btn btn-primary nav-book-btn">Book Now</a>
+      </nav>
+
+      <button id="mobile-menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
       </button>
-      <ul class="nav-menu">
-        <li><a href="../../">Home</a></li>
-        <li><a href="../">Services</a></li>
-        <li><a href="../../about/">About</a></li>
-        <li><a href="../../contact/">Contact</a></li>
-      </ul>
+    </div>
+
+    <nav id="mobile-nav" class="hidden">
+      <a href="../../">Home</a>
+      <p class="mobile-services-label">Services</p>
+      <a href="../../services/organizing">Organizing</a>
+      <a href="../../services/cleaning">Cleaning</a>
+      <a href="../../services/move-concierge">Move Concierge</a>
+      <a href="../../services/specialty">Specialty Services</a>
+      <a href="../../blog">Blog</a>
+      <a href="../../shop">Shop</a>
+      <a href="../../contact">Contact</a>
+      <a href="../../contact" class="btn btn-primary">Book Now</a>
     </nav>
   </header>
 

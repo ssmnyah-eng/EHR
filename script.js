@@ -46,6 +46,25 @@ function initMobileMenu() {
   }
 }
 
+// Services dropdown in the primary nav
+function initNavDropdown() {
+  const dropdown = document.querySelector('.nav-dropdown');
+  if (!dropdown) return;
+
+  const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    dropdown.classList.toggle('is-open');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target)) {
+      dropdown.classList.remove('is-open');
+    }
+  });
+}
+
 // Format currency
 function formatCurrency(amount) {
   return new Intl.NumberFormat('en-US', {
@@ -80,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initRevealAnimations();
   addRevealDelays();
   initMobileMenu();
+  initNavDropdown();
 });
 
 // Smooth scrolling for anchor links
