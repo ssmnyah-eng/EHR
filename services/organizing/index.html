@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organizing Services - Elevated Home Resets</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <style>
+    .img-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: repeating-linear-gradient(
+        135deg,
+        rgba(51, 46, 42, 0.06),
+        rgba(51, 46, 42, 0.06) 12px,
+        rgba(51, 46, 42, 0.03) 12px,
+        rgba(51, 46, 42, 0.03) 24px
+      );
+      border: 1px dashed rgba(51, 46, 42, 0.25);
+      color: var(--color-ink-soft);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .section-heading { text-align: center; max-width: 680px; margin: 0 auto 56px; }
+    .section-eyebrow { color: var(--color-clay); }
+    .section-title { margin-top: 16px; }
+
+    /* Standard hero banner */
+    .standard-hero-banner {
+      position: relative;
+      padding: 128px 0;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .standard-hero-bg { position: absolute; inset: 0; z-index: -10; border-radius: 0; border-width: 0; }
+    .standard-hero-overlay { position: absolute; inset: 0; z-index: -5; background: rgba(51, 46, 42, 0.45); }
+    .standard-hero-content { max-width: 620px; margin: 0 auto; color: var(--color-white); }
+    .standard-hero-content p { margin-top: 20px; color: rgba(241, 240, 235, 0.9); font-size: 18px; line-height: 1.7; }
+    .standard-hero-content .btn { margin-top: 40px; }
+
+    /* Alternating content rows */
+    .content-block-section { background: var(--color-white); padding: 56px 0; }
+    .content-block-section.alt-bg { background: var(--color-stone); }
+
+    .content-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .content-row.reversed .content-row-image { order: 2; }
+    .content-row.reversed .content-row-copy { order: 1; }
+
+    @media (max-width: 900px) {
+      .content-row { grid-template-columns: 1fr; gap: 24px; }
+      .content-row.reversed .content-row-image,
+      .content-row.reversed .content-row-copy { order: unset; }
+    }
+
+    .content-row-image .img-placeholder { aspect-ratio: 4/3; }
+    .content-row-copy p { color: var(--color-ink-soft); margin-top: 16px; line-height: 1.75; }
+
+    /* Reviews */
+    .trust-reviews-section { background: var(--color-white); padding: 96px 0; }
+    .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    @media (max-width: 900px) { .review-grid { grid-template-columns: 1fr; } }
+    .review-card { background: var(--color-stone); border-radius: 16px; padding: 40px 32px; text-align: center; }
+    .review-photo { width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 16px; font-size: 10px; }
+    .review-stars { color: var(--color-clay); letter-spacing: 3px; margin-bottom: 16px; }
+    .review-text { color: var(--color-ink-soft); line-height: 1.7; font-style: italic; }
+    .review-name { margin-top: 20px; font-family: 'Manrope', sans-serif; font-weight: 700; }
+
+    /* Gallery */
+    .gallery-section { background: var(--color-stone); padding: 96px 0; }
+    .gallery-scroll { display: flex; gap: 24px; overflow-x: auto; padding: 8px 4px 24px; scroll-snap-type: x mandatory; }
+    .gallery-scroll .img-placeholder { flex: 0 0 320px; aspect-ratio: 4/3; scroll-snap-align: start; }
+
+    /* Tips / article cards */
+    .tips-section { background: var(--color-white); padding: 96px 0; }
+    .tips-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    @media (max-width: 900px) { .tips-grid { grid-template-columns: 1fr; } }
+    .tip-card { border-radius: 16px; overflow: hidden; box-shadow: 0 1px 2px rgba(51, 46, 42, 0.06), 0 8px 24px rgba(51, 46, 42, 0.07); }
+    .tip-card .img-placeholder { aspect-ratio: 16/10; border-radius: 0; }
+    .tip-card-body { background: var(--color-white); padding: 28px; }
+    .tip-card-body p { color: var(--color-ink-soft); margin-top: 10px; }
+    .tip-card-body .btn { margin-top: 20px; }
+
+    /* Closing banner */
+    .closing-section { position: relative; padding: 128px 0; overflow: hidden; text-align: center; }
+    .closing-bg { position: absolute; inset: 0; z-index: -10; border-radius: 0; border-width: 0; }
+    .closing-overlay { position: absolute; inset: 0; z-index: -5; background: rgba(51, 46, 42, 0.55); }
+    .closing-content { max-width: 620px; margin: 0 auto; color: var(--color-white); }
+    .closing-content p { margin-top: 20px; color: rgba(241, 240, 235, 0.9); font-size: 18px; line-height: 1.7; }
+    .closing-content .btn { margin-top: 40px; }
+  </style>
+
+</head>
+<body>
+  <header class="header">
+    <nav class="nav-bar">
+      <div class="logo">
+        <a href="../../">Elevated Home Resets</a>
+      </div>
+      <button class="mobile-menu-btn" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-menu">
+        <li><a href="../../">Home</a></li>
+        <li><a href="../">Services</a></li>
+        <li><a href="../../about/">About</a></li>
+        <li><a href="../../contact/">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Service Hero -->
+    <section class="hero" style="background: linear-gradient(135deg, rgba(124, 58, 156, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);">
+      <div class="container">
+        <div class="hero-content reveal">
+          <h1>Professional Organizing</h1>
+          <p class="subtitle">Transform your spaces into functional, beautiful systems that work for you.</p>
+          <a href="#booking" class="btn btn-primary">Start Your Reset</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Systems That Work -->
+    <section class="service-section reveal">
+      <div class="container">
+        <h2>Systems That Work</h2>
+        <p>We don't just organize—we create sustainable systems tailored to how you actually live. Whether it's your kitchen, closet, home office, or entire home, our expert organizers design solutions that reduce mental load and make daily life effortless.</p>
+        <div class="service-grid">
+          <div class="service-card reveal">
+            <h3>Kitchen & Pantry</h3>
+            <p>Streamlined spaces that make meal prep and cooking intuitive. Fewer decisions, more peace of mind.</p>
+          </div>
+          <div class="service-card reveal">
+            <h3>Closet Organization</h3>
+            <p>A wardrobe system that reflects who you are. Getting dressed becomes effortless, every single day.</p>
+          </div>
+          <div class="service-card reveal">
+            <h3>Home Office</h3>
+            <p>Productivity-focused spaces designed for focus and creativity. Everything has its place.</p>
+          </div>
+          <div class="service-card reveal">
+            <h3>Whole-Home Organization</h3>
+            <p>Comprehensive systems across every room. Consistency, clarity, and lasting change.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reset Packages -->
+    <section class="service-section reveal">
+      <div class="container">
+        <h2>Reset Packages</h2>
+        <p>Choose the package that fits your needs and timeline.</p>
+        <div class="packages-grid">
+          <div class="package-card reveal">
+            <h3>Half-Day Reset</h3>
+            <p class="price">Starting at $400</p>
+            <ul>
+              <li>4 hours of professional organizing</li>
+              <li>One room or space</li>
+              <li>System design & implementation</li>
+              <li>Organization supplies included</li>
+            </ul>
+            <a href="#booking" class="btn btn-secondary">Book Now</a>
+          </div>
+          <div class="package-card reveal">
+            <h3>Full-Day Reset</h3>
+            <p class="price">Starting at $750</p>
+            <ul>
+              <li>8 hours of professional organizing</li>
+              <li>Multiple rooms or larger space</li>
+              <li>Custom system design</li>
+              <li>Organization supplies included</li>
+            </ul>
+            <a href="#booking" class="btn btn-secondary">Book Now</a>
+          </div>
+          <div class="package-card reveal">
+            <h3>Multi-Day Project</h3>
+            <p class="price">Custom pricing</p>
+            <ul>
+              <li>2+ days of organizing</li>
+              <li>Whole-home transformation</li>
+              <li>Professional system design</li>
+              <li>Follow-up support included</li>
+            </ul>
+            <a href="#booking" class="btn btn-secondary">Book Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Room by Room -->
+    <section class="service-section reveal">
+      <div class="container">
+        <h2>Room-by-Room Solutions</h2>
+        <p>Every room has unique challenges. We design organizing systems for each space.</p>
+        <div class="room-list reveal">
+          <div class="room-item">
+            <h3>Bedrooms</h3>
+            <p>Peaceful, organized sanctuaries that promote rest and reduce decision fatigue.</p>
+          </div>
+          <div class="room-item">
+            <h3>Bathrooms</h3>
+            <p>Efficient morning routines. Everything visible, nothing wasted.</p>
+          </div>
+          <div class="room-item">
+            <h3>Living Spaces</h3>
+            <p>Organized common areas that accommodate your lifestyle without looking sterile.</p>
+          </div>
+          <div class="room-item">
+            <h3>Storage & Basements</h3>
+            <p>Strategic storage systems that maximize space and make finding things effortless.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Memberships -->
+    <section class="service-section reveal">
+      <div class="container">
+        <h2>Ongoing Support</h2>
+        <p>Your organizing doesn't end when we leave. Get ongoing support to maintain your systems.</p>
+        <div class="membership-grid">
+          <div class="membership-card reveal">
+            <h3>Monthly Check-In</h3>
+            <p class="price">$199/month</p>
+            <ul>
+              <li>One 2-hour session per month</li>
+              <li>System maintenance & adjustments</li>
+              <li>Email support between visits</li>
+            </ul>
+          </div>
+          <div class="membership-card reveal">
+            <h3>Seasonal Reset</h3>
+            <p class="price">$299/month</p>
+            <ul>
+              <li>Quarterly organizing sessions</li>
+              <li>Seasonal system updates</li>
+              <li>Priority booking</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What's Included -->
+    <section class="service-section reveal">
+      <div class="container">
+        <h2>What's Included in Every Organizing Project</h2>
+        <ul class="inclusion-list reveal">
+          <li><strong>Expert Assessment:</strong> We listen to your lifestyle, goals, and pain points before designing solutions.</li>
+          <li><strong>Custom System Design:</strong> Organizing systems tailored to how you actually use your space.</li>
+          <li><strong>Professional Implementation:</strong> We do the work. You get the results.</li>
+          <li><strong>Quality Supplies:</strong> Organization materials included (or we source your preferences).</li>
+          <li><strong>Labeling & Documentation:</strong> Clear, consistent systems everyone in your home understands.</li>
+          <li><strong>Sustainability:</strong> Systems designed to stay organized—not revert in weeks.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="service-section reveal">
+      <div class="container">
+        <h2>Schedule Your Organizing Session</h2>
+        <div class="booking-form">
+          <form onsubmit="handleBooking(event)">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+              <label for="service">Which Package?</label>
+              <select id="service" name="service" required>
+                <option value="">Select a package</option>
+                <option value="half-day">Half-Day Reset ($400+)</option>
+                <option value="full-day">Full-Day Reset ($750+)</option>
+                <option value="multi-day">Multi-Day Project (Custom)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="date">Preferred Date</label>
+              <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Tell us about your space (optional)</label>
+              <textarea id="message" name="message" rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Request Booking</button>
+          </form>
+          <div id="form-message" style="display: none; margin-top: 20px; padding: 15px; border-radius: 6px;"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+    <!-- ===== STANDARD PAGE LAYOUT ===== -->
+
+    <!-- Section 1: Hero Banner -->
+    <section class="standard-hero-banner">
+      <div class="standard-hero-bg img-placeholder">[ Large hero image placeholder ]</div>
+      <div class="standard-hero-overlay"></div>
+      <div class="container">
+        <div class="standard-hero-content reveal">
+          <h2>[ Headline placeholder ]</h2>
+          <p>[ Supporting paragraph placeholder ]</p>
+          <a href="#booking" class="btn btn-primary">Start Your Reset</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Content Block -->
+    <section class="content-block-section">
+      <div class="container">
+        <div class="content-row">
+          <div class="content-row-copy reveal">
+            <h3>[ Headline placeholder ]</h3>
+            <p>[ Paragraph placeholder ]</p>
+          </div>
+          <div class="content-row-image reveal" data-reveal-delay="100">
+            <div class="img-placeholder">[ Image placeholder ]</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Content Block (reversed) -->
+    <section class="content-block-section alt-bg">
+      <div class="container">
+        <div class="content-row reversed">
+          <div class="content-row-image reveal">
+            <div class="img-placeholder">[ Image placeholder ]</div>
+          </div>
+          <div class="content-row-copy reveal" data-reveal-delay="100">
+            <h3>[ Headline placeholder ]</h3>
+            <p>[ Paragraph placeholder ]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Content Block -->
+    <section class="content-block-section">
+      <div class="container">
+        <div class="content-row">
+          <div class="content-row-copy reveal">
+            <h3>[ Headline placeholder ]</h3>
+            <p>[ Paragraph placeholder ]</p>
+          </div>
+          <div class="content-row-image reveal" data-reveal-delay="100">
+            <div class="img-placeholder">[ Image placeholder ]</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Content Block (reversed) -->
+    <section class="content-block-section alt-bg">
+      <div class="container">
+        <div class="content-row reversed">
+          <div class="content-row-image reveal">
+            <div class="img-placeholder">[ Image placeholder ]</div>
+          </div>
+          <div class="content-row-copy reveal" data-reveal-delay="100">
+            <h3>[ Headline placeholder ]</h3>
+            <p>[ Paragraph placeholder ]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: See Why Families Trust Elevated Home Resets -->
+    <section class="trust-reviews-section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="label section-eyebrow">Testimonials</p>
+          <h2 class="section-title">See Why Families Trust Elevated Home Resets</h2>
+        </div>
+        <div class="review-grid">
+          <div class="review-card reveal" data-reveal-delay="0">
+            <div class="img-placeholder review-photo">Photo</div>
+            <div class="review-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-text">[ Review text placeholder ]</p>
+            <p class="review-name">[ Customer name placeholder ]</p>
+          </div>
+          <div class="review-card reveal" data-reveal-delay="100">
+            <div class="img-placeholder review-photo">Photo</div>
+            <div class="review-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-text">[ Review text placeholder ]</p>
+            <p class="review-name">[ Customer name placeholder ]</p>
+          </div>
+          <div class="review-card reveal" data-reveal-delay="200">
+            <div class="img-placeholder review-photo">Photo</div>
+            <div class="review-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-text">[ Review text placeholder ]</p>
+            <p class="review-name">[ Customer name placeholder ]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 7: Real Homes. Real Transformations. -->
+    <section class="gallery-section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="label section-eyebrow">Project Gallery</p>
+          <h2 class="section-title">Real Homes. Real Transformations.</h2>
+        </div>
+      </div>
+      <div class="container">
+        <div class="gallery-scroll reveal" data-reveal-delay="100">
+          <div class="img-placeholder">[ Image placeholder ]</div>
+          <div class="img-placeholder">[ Image placeholder ]</div>
+          <div class="img-placeholder">[ Image placeholder ]</div>
+          <div class="img-placeholder">[ Image placeholder ]</div>
+          <div class="img-placeholder">[ Image placeholder ]</div>
+          <div class="img-placeholder">[ Image placeholder ]</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 8: Tips for a More Organized Home -->
+    <section class="tips-section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="label section-eyebrow">From The Blog</p>
+          <h2 class="section-title">Tips for a More Organized Home</h2>
+        </div>
+        <div class="tips-grid">
+          <div class="tip-card reveal" data-reveal-delay="0">
+            <div class="img-placeholder">[ Image placeholder ]</div>
+            <div class="tip-card-body">
+              <h4>[ Article title placeholder ]</h4>
+              <p>[ Short description placeholder ]</p>
+              <a href="../../blog" class="btn btn-secondary">Read More</a>
+            </div>
+          </div>
+          <div class="tip-card reveal" data-reveal-delay="100">
+            <div class="img-placeholder">[ Image placeholder ]</div>
+            <div class="tip-card-body">
+              <h4>[ Article title placeholder ]</h4>
+              <p>[ Short description placeholder ]</p>
+              <a href="../../blog" class="btn btn-secondary">Read More</a>
+            </div>
+          </div>
+          <div class="tip-card reveal" data-reveal-delay="200">
+            <div class="img-placeholder">[ Image placeholder ]</div>
+            <div class="tip-card-body">
+              <h4>[ Article title placeholder ]</h4>
+              <p>[ Short description placeholder ]</p>
+              <a href="../../blog" class="btn btn-secondary">Read More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 9: Final CTA -->
+    <section class="closing-section">
+      <div class="closing-bg img-placeholder">[ Large image placeholder ]</div>
+      <div class="closing-overlay"></div>
+      <div class="container">
+        <div class="closing-content reveal">
+          <h2>[ Headline placeholder ]</h2>
+          <p>[ Paragraph placeholder ]</p>
+          <a href="#booking" class="btn btn-primary">Start Your Reset</a>
+        </div>
+      </div>
+    </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 Elevated Home Resets. All rights reserved.</p>
+      <ul class="footer-links">
+        <li><a href="../../privacy/">Privacy Policy</a></li>
+        <li><a href="../../terms/">Terms of Service</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+  <script>
+    function handleBooking(event) {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const data = Object.fromEntries(formData);
+      const messageDiv = document.getElementById('form-message');
+
+      fetch('https://script.google.com/macros/d/YOUR_DEPLOYMENT_ID/usercallback?action=bookings/confirm', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(response => response.json())
+      .then(result => {
+        if (result.success) {
+          messageDiv.textContent = 'Booking request received! We\'ll confirm within 24 hours.';
+          messageDiv.style.backgroundColor = '#d4edda';
+          messageDiv.style.color = '#155724';
+          messageDiv.style.display = 'block';
+          event.target.reset();
+        } else {
+          throw new Error(result.error || 'Booking failed');
+        }
+      })
+      .catch(error => {
+        messageDiv.textContent = 'Error: ' + error.message;
+        messageDiv.style.backgroundColor = '#f8d7da';
+        messageDiv.style.color = '#721c24';
+        messageDiv.style.display = 'block';
+      });
+    }
+  </script>
+</body>
+</html>

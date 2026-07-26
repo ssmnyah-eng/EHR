@@ -10,90 +10,173 @@
   <link rel="canonical" href="https://elevatedhomeresets.com/">
   <link rel="stylesheet" href="styles.css">
   <style>
+    /* ===== Placeholder image utility ===== */
+    .img-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: repeating-linear-gradient(
+        135deg,
+        rgba(51, 46, 42, 0.06),
+        rgba(51, 46, 42, 0.06) 12px,
+        rgba(51, 46, 42, 0.03) 12px,
+        rgba(51, 46, 42, 0.03) 24px
+      );
+      border: 1px dashed rgba(51, 46, 42, 0.25);
+      color: var(--color-ink-soft);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    /* ===== Header / Nav ===== */
+    .site-header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .primary-nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .primary-nav a:not(.btn) {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--color-charcoal);
+    }
+
+    .primary-nav a:not(.btn):hover { color: var(--color-clay); }
+
+    .nav-book-btn {
+      padding: 10px 24px;
+      min-height: 44px;
+    }
+
+    #mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    #mobile-menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--color-charcoal);
+      margin: 5px 0;
+    }
+
+    #mobile-nav {
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      .primary-nav { display: none; }
+      #mobile-menu-toggle { display: block; }
+      #mobile-nav.hidden { display: none; }
+      #mobile-nav:not(.hidden) {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--color-white);
+        border-bottom: 1px solid rgba(51, 46, 42, 0.1);
+        padding: 16px 24px 24px;
+      }
+      #mobile-nav a:not(.btn) {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--color-charcoal);
+        padding: 10px 0;
+      }
+      #mobile-nav .btn { margin-top: 8px; align-self: flex-start; }
+    }
+
+    .site-header { position: relative; }
+
+    /* ===== Hero ===== */
     .hero {
       position: relative;
-      min-height: 88vh;
+      min-height: 92vh;
       display: flex;
       align-items: center;
       overflow: hidden;
     }
 
-    .hero-bg {
+    .hero-bg-placeholder {
       position: absolute;
-      inset: -12%;
-      z-index: -20;
-      background: linear-gradient(135deg, #332e2a, #575e47, #a85d42);
+      inset: 0;
+      z-index: -10;
     }
 
     .hero-overlay {
       position: absolute;
       inset: 0;
-      z-index: -10;
-      background: rgba(51, 46, 42, 0.45);
+      z-index: -5;
+      background: rgba(51, 46, 42, 0.4);
     }
 
     .hero-content {
-      max-width: 480px;
-      color: rgba(241, 240, 235, 0.9);
+      max-width: 560px;
+      color: rgba(241, 240, 235, 0.95);
     }
 
-    @media (min-width: 1024px) {
-      .hero-content {
-        max-width: 48%;
-      }
+    .hero-eyebrow {
+      color: rgba(241, 240, 235, 0.8);
     }
 
-    .cycler {
-      font-size: 36px;
+    .hero-headline {
+      font-size: 40px;
       line-height: 1.1;
-      color: rgba(241, 240, 235, 1);
-      font-family: 'Manrope', sans-serif;
-      font-weight: 700;
+      color: var(--color-white);
+      margin-top: 16px;
       margin-bottom: 24px;
     }
 
     @media (min-width: 1024px) {
-      .cycler {
-        font-size: 64px;
-      }
+      .hero-headline { font-size: 68px; }
     }
 
-    .cycler-word {
+    .hero-word {
       display: inline-block;
       color: var(--color-mauve);
       transition: opacity 700ms ease;
+    }
+
+    .hero-support {
+      font-size: 18px;
+      line-height: 1.7;
+      color: rgba(241, 240, 235, 0.88);
+      max-width: 480px;
     }
 
     .hero-buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 16px;
-      margin-top: 32px;
-    }
-
-    .hero-link {
-      display: inline-flex;
-      align-items: center;
-      min-height: 48px;
-      padding: 12px 28px;
-      font-weight: 500;
-      border-radius: 6px;
-      text-decoration: none;
-      transition: all 220ms cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .hero-primary {
-      background: var(--color-clay);
-      color: var(--color-stone);
-    }
-
-    .hero-primary:hover {
-      background: var(--color-sage);
+      margin-top: 40px;
     }
 
     .hero-secondary {
       border: 1px solid rgba(241, 240, 235, 0.5);
-      color: rgba(241, 240, 235, 1);
+      color: var(--color-white);
+      background: transparent;
     }
 
     .hero-secondary:hover {
@@ -101,377 +184,558 @@
       background: rgba(241, 240, 235, 0.1);
     }
 
-    .hero-sub-link {
-      display: inline-flex;
+    .scroll-indicator {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
       align-items: center;
       gap: 8px;
-      min-height: 44px;
-      font-size: 13px;
+      color: rgba(241, 240, 235, 0.7);
+      animation: scrollBounce 2.2s ease-in-out infinite;
+    }
+
+    .scroll-indicator span {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(241, 240, 235, 1);
-      text-decoration: underline;
-      text-decoration-color: rgba(241, 240, 235, 0.25);
-      text-underline-offset: 32px;
-      margin-top: 16px;
-      transition: all 220ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .hero-sub-link:hover {
-      color: var(--color-mauve);
+    .scroll-indicator svg { width: 18px; height: 18px; }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
     }
 
-    /* Brand intro section */
-    .trust-section {
-      background: var(--color-stone);
-      padding: 64px 0;
-    }
-
-    @media (max-width: 1024px) {
-      .trust-section {
-        padding: 48px 0;
-      }
-    }
-
-    .trust-content {
+    /* ===== Section shell ===== */
+    .section-heading {
       text-align: center;
-      max-width: 768px;
-      margin: 0 auto;
+      max-width: 680px;
+      margin: 0 auto 56px;
     }
 
-    .trust-label {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+    .section-eyebrow {
       color: var(--color-clay);
     }
 
-    .trust-title {
-      font-size: 24px;
-      line-height: 1.3;
-      margin-top: 20px;
-      font-family: 'Manrope', sans-serif;
-      font-weight: 700;
+    .section-title {
+      margin-top: 16px;
     }
 
-    @media (min-width: 1024px) {
-      .trust-title {
-        font-size: 32px;
-      }
-    }
+    /* ===== Discover: 4 service cards ===== */
+    .discover-section { background: var(--color-white); padding: 96px 0; }
 
-    .trust-description {
-      margin-top: 20px;
-      font-size: 18px;
-      line-height: 1.6;
-      color: var(--color-ink-soft);
-    }
-
-    /* Cost of Waiting Section */
-    .cost-section {
-      background: linear-gradient(135deg, rgba(168, 93, 66, 0.08) 0%, rgba(107, 114, 89, 0.08) 100%);
-      padding: 64px 0;
-    }
-
-    .cost-header {
-      text-align: center;
-      max-width: 768px;
-      margin: 0 auto 48px;
-    }
-
-    .cost-header h2 {
-      font-size: 32px;
-      margin-bottom: 16px;
-      font-family: 'Manrope', sans-serif;
-      font-weight: 700;
-    }
-
-    .cost-cards {
+    .discover-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
-      max-width: 800px;
-      margin: 0 auto 48px;
+      gap: 40px;
     }
 
-    @media (max-width: 640px) {
-      .cost-cards {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
+    @media (max-width: 900px) {
+      .discover-grid { grid-template-columns: 1fr; }
     }
 
-    .cost-card {
-      padding: 32px;
-      background: rgba(255, 255, 255, 0.8);
-      border-radius: 12px;
-      border: 1px solid rgba(51, 46, 42, 0.1);
-    }
-
-    .cost-card p:first-child {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--color-charcoal);
-      margin: 0;
-    }
-
-    .cost-card p:last-child {
-      font-size: 14px;
-      color: var(--color-ink-soft);
-      margin-top: 8px;
-      margin-bottom: 0;
-    }
-
-    .cost-footer {
-      text-align: center;
-    }
-
-    .cost-footer h3 {
-      font-size: 28px;
-      color: var(--color-charcoal);
-      margin-bottom: 24px;
-      font-family: 'Manrope', sans-serif;
-      font-weight: 700;
-    }
-
-    /* Services grid */
-    .services-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0;
-    }
-
-    @media (min-width: 1024px) {
-      .services-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 0;
-      }
-    }
-
-    .service-card {
-      padding: 64px 24px;
+    .discover-card {
       display: flex;
       flex-direction: column;
-      gap: 32px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 1px 2px rgba(51, 46, 42, 0.06), 0 8px 24px rgba(51, 46, 42, 0.07);
     }
 
-    @media (min-width: 1024px) {
-      .service-card {
-        padding: 96px;
-        flex-direction: row;
-        gap: 64px;
-        align-items: center;
-      }
+    .discover-card .img-placeholder {
+      aspect-ratio: 4/3;
+      border-radius: 0;
+      border-width: 0 0 1px 0;
     }
 
-    .service-card.reversed {
-      flex-direction: row-reverse;
+    .discover-card-body {
+      background: var(--color-white);
+      padding: 32px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
-    .service-image {
-      flex: 0 0 42%;
-      background: #e0e0e0;
-      aspect-ratio: 4/5;
-      border-radius: 12px;
-    }
-
-    .service-content {
+    .discover-card-body p {
+      color: var(--color-ink-soft);
+      margin-top: 12px;
       flex: 1;
     }
 
-    .service-label {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--color-clay);
+    .discover-card-body .btn {
+      margin-top: 24px;
+      align-self: flex-start;
     }
 
-    .service-title {
-      font-size: 24px;
-      line-height: 1.3;
-      margin-top: 12px;
+    /* ===== More Than Organization (2-col) ===== */
+    .more-section { background: var(--color-stone); padding: 96px 0; }
+
+    .more-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .more-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    .more-grid .img-placeholder { aspect-ratio: 4/5; }
+
+    .more-copy p { color: var(--color-ink-soft); margin-top: 20px; line-height: 1.75; }
+
+    /* ===== Every Reset Has a Purpose (alternating) ===== */
+    .purpose-section { background: var(--color-white); padding: 96px 0 40px; }
+
+    .purpose-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      padding: 56px 0;
+    }
+
+    .purpose-row.reversed .purpose-image { order: 2; }
+    .purpose-row.reversed .purpose-copy { order: 1; }
+
+    @media (max-width: 900px) {
+      .purpose-row,
+      .purpose-row.reversed .purpose-image,
+      .purpose-row.reversed .purpose-copy {
+        grid-template-columns: 1fr;
+        order: unset;
+      }
+      .purpose-row { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+    .purpose-image .img-placeholder { aspect-ratio: 4/3; }
+    .purpose-copy p { color: var(--color-ink-soft); margin-top: 16px; line-height: 1.75; }
+
+    /* ===== Imagine the Difference ===== */
+    .imagine-section {
+      background: linear-gradient(135deg, rgba(168, 93, 66, 0.08) 0%, rgba(107, 114, 89, 0.08) 100%);
+      padding: 96px 0;
+    }
+
+    .imagine-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 900px;
+      margin: 48px auto 0;
+    }
+
+    @media (max-width: 640px) {
+      .imagine-compare { grid-template-columns: 1fr; }
+    }
+
+    .imagine-compare .img-placeholder { aspect-ratio: 4/5; }
+
+    /* ===== Testimonials ===== */
+    .trust-reviews-section { background: var(--color-white); padding: 96px 0; }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    @media (max-width: 900px) {
+      .review-grid { grid-template-columns: 1fr; }
+    }
+
+    .review-card {
+      background: var(--color-stone);
+      border-radius: 16px;
+      padding: 40px 32px;
+      text-align: center;
+    }
+
+    .review-photo {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      font-size: 10px;
+    }
+
+    .review-stars {
+      color: var(--color-clay);
+      letter-spacing: 3px;
+      margin-bottom: 16px;
+    }
+
+    .review-text {
+      color: var(--color-ink-soft);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    .review-name {
+      margin-top: 20px;
       font-family: 'Manrope', sans-serif;
       font-weight: 700;
     }
 
-    .service-description {
-      margin-top: 16px;
-      line-height: 1.6;
-      color: var(--color-ink-soft);
+    /* ===== Gallery (horizontal scroll) ===== */
+    .gallery-section { background: var(--color-stone); padding: 96px 0; }
+
+    .gallery-scroll {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      padding: 8px 4px 24px;
+      scroll-snap-type: x mandatory;
     }
 
-    .service-outcome {
-      margin-top: 12px;
-      color: var(--color-charcoal);
-      font-size: 14px;
+    .gallery-scroll .img-placeholder {
+      flex: 0 0 320px;
+      aspect-ratio: 4/3;
+      scroll-snap-align: start;
     }
 
-    .service-outcome strong {
-      color: var(--color-charcoal);
+    /* ===== Tips / Articles ===== */
+    .tips-section { background: var(--color-white); padding: 96px 0; }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
     }
 
-    .service-outcome span {
-      color: var(--color-ink-soft);
+    @media (max-width: 900px) {
+      .tips-grid { grid-template-columns: 1fr; }
     }
 
-    .service-cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 12px 32px;
-      margin-top: 24px;
-      background: var(--color-clay);
-      color: var(--color-stone);
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 220ms cubic-bezier(0.4, 0, 0.2, 1);
+    .tip-card {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 1px 2px rgba(51, 46, 42, 0.06), 0 8px 24px rgba(51, 46, 42, 0.07);
     }
 
-    .service-cta:hover {
-      background: var(--color-clay-deep);
+    .tip-card .img-placeholder { aspect-ratio: 16/10; border-radius: 0; }
+
+    .tip-card-body { background: var(--color-white); padding: 28px; }
+
+    .tip-card-body p { color: var(--color-ink-soft); margin-top: 10px; }
+    .tip-card-body .btn { margin-top: 20px; }
+
+    /* ===== Closing banner ===== */
+    .closing-section {
+      position: relative;
+      padding: 128px 0;
+      overflow: hidden;
+      text-align: center;
     }
+
+    .closing-bg { position: absolute; inset: 0; z-index: -10; }
+    .closing-overlay { position: absolute; inset: 0; z-index: -5; background: rgba(51, 46, 42, 0.55); }
+
+    .closing-content { max-width: 620px; margin: 0 auto; color: var(--color-white); }
+    .closing-content p { margin-top: 20px; color: rgba(241, 240, 235, 0.9); font-size: 18px; line-height: 1.7; }
+    .closing-content .btn { margin-top: 40px; }
   </style>
 </head>
 <body>
   <!-- Header -->
-  <header>
+  <header class="site-header">
     <div class="container">
-      <a href="/" class="logo">Elevated Home Resets</a>
-      <nav>
-        <a href="/services">Services</a>
-        <a href="/about">About</a>
-        <a href="/locations">Locations</a>
-        <a href="/contact">Contact</a>
+      <a href="./" class="logo">Elevated Home Resets</a>
+
+      <nav class="primary-nav">
+        <a href="./">Home</a>
+        <a href="./services/organizing">Organizing</a>
+        <a href="./services/cleaning">Cleaning</a>
+        <a href="./services/move-concierge">Move Concierge</a>
+        <a href="./services/specialty">Specialty Services</a>
+        <a href="./blog">Blog</a>
+        <a href="./contact">Contact</a>
+        <a href="./contact" class="btn btn-primary nav-book-btn">Book Now</a>
       </nav>
+
+      <button id="mobile-menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+
+    <nav id="mobile-nav" class="hidden">
+      <a href="./">Home</a>
+      <a href="./services/organizing">Organizing</a>
+      <a href="./services/cleaning">Cleaning</a>
+      <a href="./services/move-concierge">Move Concierge</a>
+      <a href="./services/specialty">Specialty Services</a>
+      <a href="./blog">Blog</a>
+      <a href="./contact">Contact</a>
+      <a href="./contact" class="btn btn-primary">Book Now</a>
+    </nav>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section class="hero">
-    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-bg-placeholder img-placeholder" style="border-radius:0; border-width:0;">
+      [ Full-width hero image placeholder — do not choose an image ]
+    </div>
     <div class="hero-overlay"></div>
 
     <div class="container">
       <div class="hero-content">
-        <h1 class="cycler">
-          Reset your <span class="cycler-word" id="cyclerWord">Home</span>.
-        </h1>
-        <p style="font-size: 18px; line-height: 1.6;">
-          Premium organizing, cleaning, and moving for busy professionals and high-achieving families. We don't just organize—we build systems that reduce your mental load and give you your weekends back.
-        </p>
+        <p class="label hero-eyebrow">Elevated Home Resets</p>
+        <h1 class="hero-headline">Reset Your <span class="hero-word" id="heroWord">Home</span></h1>
+        <p class="hero-support">[ Supporting copy placeholder — one to two sentences introducing the brand promise. ]</p>
 
         <div class="hero-buttons">
-          <a href="/contact" class="hero-link hero-primary">Get Started</a>
-          <a href="/services/cleaning" class="hero-link hero-secondary">Book a Cleaning</a>
+          <a href="./contact" class="btn btn-primary">Book Now</a>
+          <a href="./services" class="btn hero-secondary">Explore Services</a>
         </div>
-
-        <a href="/services" class="hero-sub-link">
-          Explore All Services <span aria-hidden="true">→</span>
-        </a>
       </div>
+    </div>
+
+    <div class="scroll-indicator" aria-hidden="true">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 4v16m0 0l-6-6m6 6l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
   </section>
 
-  <!-- Brand Section -->
-  <section class="trust-section">
-    <div class="container trust-content">
-      <div class="reveal">
-        <p class="trust-label">Elevated Home Resets</p>
-        <h2 class="trust-title">A premium household operations company for homes that need expert thinking, not just labor.</h2>
-        <p class="trust-description">Two-person crews who understand that managing a home isn't about perfection—it's about creating systems that work for how your family actually lives, so you can focus on what matters.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Cost of Waiting Section -->
-  <section class="cost-section">
+  <!-- Discover Your Perfect Reset -->
+  <section class="discover-section">
     <div class="container">
-      <div class="cost-header reveal">
-        <h2>How much time has clutter already taken from you?</h2>
-        <p style="font-size: 18px; color: var(--color-ink-soft); line-height: 1.6; margin-top: 16px;">Every day you wait is another day of mental exhaustion, weekends spent catching up, and the feeling that your home doesn't support you anymore.</p>
+      <div class="section-heading reveal">
+        <p class="label section-eyebrow">Our Services</p>
+        <h2 class="section-title">Discover Your Perfect Reset</h2>
       </div>
 
-      <div class="cost-cards">
-        <div class="cost-card reveal" data-reveal-delay="100">
-          <p>Looking for lost items</p>
-          <p>Minutes every day. Hours every week. Mental energy wasted.</p>
+      <div class="discover-grid">
+        <div class="discover-card reveal" data-reveal-delay="0">
+          <div class="img-placeholder">[ Image placeholder — Organizing ]</div>
+          <div class="discover-card-body">
+            <h3>Organizing</h3>
+            <p>[ Short description placeholder ]</p>
+            <a href="./services/organizing" class="btn btn-secondary">Learn More</a>
+          </div>
         </div>
 
-        <div class="cost-card reveal" data-reveal-delay="150">
-          <p>Buying things you already own</p>
-          <p>Money wasted. Clutter multiplied. Frustration amplified.</p>
+        <div class="discover-card reveal" data-reveal-delay="100">
+          <div class="img-placeholder">[ Image placeholder — Cleaning ]</div>
+          <div class="discover-card-body">
+            <h3>Cleaning</h3>
+            <p>[ Short description placeholder ]</p>
+            <a href="./services/cleaning" class="btn btn-secondary">Learn More</a>
+          </div>
         </div>
 
-        <div class="cost-card reveal" data-reveal-delay="200">
-          <p>Spending weekends catching up</p>
-          <p>Time with family. Time for yourself. Your peace. Gone.</p>
+        <div class="discover-card reveal" data-reveal-delay="150">
+          <div class="img-placeholder">[ Image placeholder — Move Concierge ]</div>
+          <div class="discover-card-body">
+            <h3>Move Concierge</h3>
+            <p>[ Short description placeholder ]</p>
+            <a href="./services/move-concierge" class="btn btn-secondary">Learn More</a>
+          </div>
         </div>
 
-        <div class="cost-card reveal" data-reveal-delay="250">
-          <p>Feeling stressed in your own home</p>
-          <p>The one place meant to help you recharge now drains you instead.</p>
+        <div class="discover-card reveal" data-reveal-delay="200">
+          <div class="img-placeholder">[ Image placeholder — Specialty Services ]</div>
+          <div class="discover-card-body">
+            <h3>Specialty Services</h3>
+            <p>[ Short description placeholder ]</p>
+            <a href="./services/specialty" class="btn btn-secondary">Learn More</a>
+          </div>
         </div>
-      </div>
-
-      <div class="cost-footer reveal" data-reveal-delay="300">
-        <h3>Let's give you your home back.</h3>
-        <a href="/services" style="display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 40px; background: var(--color-clay); color: var(--color-white); border: none; border-radius: 6px; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 220ms cubic-bezier(0.4, 0, 0.2, 1);">Explore Our Services</a>
       </div>
     </div>
   </section>
 
-  <!-- Services Grid -->
-  <section style="padding: 0;">
-    <div class="services-grid">
-      <div class="service-card" style="background: rgba(255, 255, 255, 0.6);">
-        <div class="service-image" style="order: -1;"></div>
-        <div class="service-content">
-          <p class="service-label">Organizing</p>
-          <h3 class="service-title">Systems that think for you.</h3>
-          <p class="service-description">We don't create pretty shelves. We build functional systems that reduce your mental load. Your kids find things independently. You maintain it without thinking. The result? Easier mornings, less friction, mental energy available for what matters.</p>
-          <p class="service-outcome"><strong>Outcome:</strong> <span>Your home finally works the way it should. Mental load down. Stress down. Control back.</span></p>
-          <a href="/services/organizing" class="service-cta">Explore Organizing</a>
+  <!-- More Than Organization -->
+  <section class="more-section">
+    <div class="container">
+      <div class="more-grid">
+        <div class="img-placeholder reveal">[ Image placeholder ]</div>
+        <div class="more-copy reveal" data-reveal-delay="100">
+          <p class="label section-eyebrow">More Than Organization</p>
+          <h2 style="margin-top: 16px;">[ Headline placeholder ]</h2>
+          <p>[ Paragraph placeholder — supporting copy goes here. ]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Every Reset Has a Purpose -->
+  <section class="purpose-section">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="label section-eyebrow">Our Approach</p>
+        <h2 class="section-title">Every Reset Has a Purpose</h2>
+      </div>
+
+      <div class="purpose-row">
+        <div class="purpose-image reveal">
+          <div class="img-placeholder">[ Image placeholder ]</div>
+        </div>
+        <div class="purpose-copy reveal" data-reveal-delay="100">
+          <h3>[ Headline placeholder ]</h3>
+          <p>[ Paragraph placeholder ]</p>
         </div>
       </div>
 
-      <div class="service-card">
-        <div class="service-image"></div>
-        <div class="service-content">
-          <p class="service-label">Cleaning</p>
-          <h3 class="service-title">One less thing you have to think about.</h3>
-          <p class="service-description">Instant quote. Real calendar. Crews who care. We handle deep cleans, resets, and weekly maintenance so you can spend weekends with family instead of catching up on chores. Most clients say it was worth every penny for the mental energy alone.</p>
-          <p class="service-outcome"><strong>Outcome:</strong> <span>Weekends back. Mental load reduced. A home that supports you, not drains you.</span></p>
-          <a href="/services/cleaning" class="service-cta">Book a Cleaning</a>
+      <div class="purpose-row reversed">
+        <div class="purpose-image reveal">
+          <div class="img-placeholder">[ Image placeholder ]</div>
+        </div>
+        <div class="purpose-copy reveal" data-reveal-delay="100">
+          <h3>[ Headline placeholder ]</h3>
+          <p>[ Paragraph placeholder ]</p>
         </div>
       </div>
 
-      <div class="service-card" style="background: rgba(255, 255, 255, 0.6);">
-        <div class="service-image" style="order: -1;"></div>
-        <div class="service-content">
-          <p class="service-label">Move & Concierge</p>
-          <h3 class="service-title">A move without the chaos.</h3>
-          <p class="service-description">We pack, move, unpack, and organize. One team. One point of contact. Your new home is functional and organized from day one instead of spending months living out of boxes and dealing with chaos.</p>
-          <p class="service-outcome"><strong>Outcome:</strong> <span>New home, new systems. No months of chaos. Easier from day one.</span></p>
-          <a href="/services/move-concierge" class="service-cta">Explore Move Services</a>
+      <div class="purpose-row">
+        <div class="purpose-image reveal">
+          <div class="img-placeholder">[ Image placeholder ]</div>
+        </div>
+        <div class="purpose-copy reveal" data-reveal-delay="100">
+          <h3>[ Headline placeholder ]</h3>
+          <p>[ Paragraph placeholder ]</p>
         </div>
       </div>
 
-      <div class="service-card">
-        <div class="service-image"></div>
-        <div class="service-content">
-          <p class="service-label">Specialty Services</p>
-          <h3 class="service-title">For transitions that need expert thinking.</h3>
-          <p class="service-description">Aging in place adaptations. Nursery prep. Senior moves. Junk removal. These projects need someone whose brain works differently—not just labor, but specialized thinking.</p>
-          <p class="service-outcome"><strong>Outcome:</strong> <span>Peace of mind. Expert solutions. Projects done right.</span></p>
-          <a href="/services/specialty" class="service-cta">Explore Specialty Services</a>
+      <div class="purpose-row reversed">
+        <div class="purpose-image reveal">
+          <div class="img-placeholder">[ Image placeholder ]</div>
         </div>
+        <div class="purpose-copy reveal" data-reveal-delay="100">
+          <h3>[ Headline placeholder ]</h3>
+          <p>[ Paragraph placeholder ]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Imagine the Difference -->
+  <section class="imagine-section">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="label section-eyebrow">Transformations</p>
+        <h2 class="section-title">Imagine the Difference</h2>
+        <p style="margin-top: 16px; color: var(--color-ink-soft); font-size: 18px;">[ Supporting text placeholder ]</p>
+      </div>
+
+      <div class="imagine-compare reveal" data-reveal-delay="100">
+        <div class="img-placeholder">[ Before — image placeholder ]</div>
+        <div class="img-placeholder">[ After — image placeholder ]</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- See Why Families Trust Elevated Home Resets -->
+  <section class="trust-reviews-section">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="label section-eyebrow">Testimonials</p>
+        <h2 class="section-title">See Why Families Trust Elevated Home Resets</h2>
+      </div>
+
+      <div class="review-grid">
+        <div class="review-card reveal" data-reveal-delay="0">
+          <div class="img-placeholder review-photo">Photo</div>
+          <div class="review-stars" aria-hidden="true">★★★★★</div>
+          <p class="review-text">[ Review text placeholder ]</p>
+          <p class="review-name">[ Customer name placeholder ]</p>
+        </div>
+
+        <div class="review-card reveal" data-reveal-delay="100">
+          <div class="img-placeholder review-photo">Photo</div>
+          <div class="review-stars" aria-hidden="true">★★★★★</div>
+          <p class="review-text">[ Review text placeholder ]</p>
+          <p class="review-name">[ Customer name placeholder ]</p>
+        </div>
+
+        <div class="review-card reveal" data-reveal-delay="200">
+          <div class="img-placeholder review-photo">Photo</div>
+          <div class="review-stars" aria-hidden="true">★★★★★</div>
+          <p class="review-text">[ Review text placeholder ]</p>
+          <p class="review-name">[ Customer name placeholder ]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Real Homes. Real Transformations. (horizontal gallery) -->
+  <section class="gallery-section">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="label section-eyebrow">Project Gallery</p>
+        <h2 class="section-title">Real Homes. Real Transformations.</h2>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="gallery-scroll reveal" data-reveal-delay="100">
+        <div class="img-placeholder">[ Image placeholder ]</div>
+        <div class="img-placeholder">[ Image placeholder ]</div>
+        <div class="img-placeholder">[ Image placeholder ]</div>
+        <div class="img-placeholder">[ Image placeholder ]</div>
+        <div class="img-placeholder">[ Image placeholder ]</div>
+        <div class="img-placeholder">[ Image placeholder ]</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tips for a More Organized Home -->
+  <section class="tips-section">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="label section-eyebrow">From The Blog</p>
+        <h2 class="section-title">Tips for a More Organized Home</h2>
+      </div>
+
+      <div class="tips-grid">
+        <div class="tip-card reveal" data-reveal-delay="0">
+          <div class="img-placeholder">[ Image placeholder ]</div>
+          <div class="tip-card-body">
+            <h4>[ Article title placeholder ]</h4>
+            <p>[ Short excerpt placeholder ]</p>
+            <a href="./blog" class="btn btn-secondary">Read More</a>
+          </div>
+        </div>
+
+        <div class="tip-card reveal" data-reveal-delay="100">
+          <div class="img-placeholder">[ Image placeholder ]</div>
+          <div class="tip-card-body">
+            <h4>[ Article title placeholder ]</h4>
+            <p>[ Short excerpt placeholder ]</p>
+            <a href="./blog" class="btn btn-secondary">Read More</a>
+          </div>
+        </div>
+
+        <div class="tip-card reveal" data-reveal-delay="200">
+          <div class="img-placeholder">[ Image placeholder ]</div>
+          <div class="tip-card-body">
+            <h4>[ Article title placeholder ]</h4>
+            <p>[ Short excerpt placeholder ]</p>
+            <a href="./blog" class="btn btn-secondary">Read More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ready for Your Reset? (closing banner) -->
+  <section class="closing-section">
+    <div class="closing-bg img-placeholder" style="border-radius:0; border-width:0;">
+      [ Large lifestyle image placeholder ]
+    </div>
+    <div class="closing-overlay"></div>
+
+    <div class="container">
+      <div class="closing-content reveal">
+        <h2>[ Headline placeholder ]</h2>
+        <p>[ Supporting paragraph placeholder ]</p>
+        <a href="./contact" class="btn btn-primary">Book Now</a>
       </div>
     </div>
   </section>
@@ -482,22 +746,22 @@
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-bottom: 64px;">
         <div>
           <h4 style="color: var(--color-white); margin-bottom: 16px;">Services</h4>
-          <p><a href="/services/organizing">Organizing</a></p>
-          <p><a href="/services/cleaning">Cleaning</a></p>
-          <p><a href="/services/move-concierge">Move & Concierge</a></p>
-          <p><a href="/services/specialty">Specialty Services</a></p>
+          <p><a href="./services/organizing">Organizing</a></p>
+          <p><a href="./services/cleaning">Cleaning</a></p>
+          <p><a href="./services/move-concierge">Move & Concierge</a></p>
+          <p><a href="./services/specialty">Specialty Services</a></p>
         </div>
         <div>
           <h4 style="color: var(--color-white); margin-bottom: 16px;">Company</h4>
-          <p><a href="/about">About</a></p>
-          <p><a href="/locations">Locations</a></p>
-          <p><a href="/contact">Contact</a></p>
-          <p><a href="/blog">Blog</a></p>
+          <p><a href="./about">About</a></p>
+          <p><a href="./locations">Locations</a></p>
+          <p><a href="./contact">Contact</a></p>
+          <p><a href="./blog">Blog</a></p>
         </div>
         <div>
           <h4 style="color: var(--color-white); margin-bottom: 16px;">Legal</h4>
-          <p><a href="/privacy">Privacy Policy</a></p>
-          <p><a href="/terms">Terms of Service</a></p>
+          <p><a href="./privacy">Privacy Policy</a></p>
+          <p><a href="./terms">Terms of Service</a></p>
         </div>
       </div>
       <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 32px; text-align: center;">
@@ -509,33 +773,20 @@
 
   <script src="script.js"></script>
   <script>
-    // Hero parallax effect
-    const heroBg = document.getElementById('heroBg');
-    if (heroBg && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      let raf = 0;
-      const onScroll = () => {
-        cancelAnimationFrame(raf);
-        raf = requestAnimationFrame(() => {
-          heroBg.style.transform = `translateY(${window.scrollY * 0.12}px)`;
-        });
-      };
-      window.addEventListener('scroll', onScroll, { passive: true });
-    }
-
-    // Hero cycler
-    const WORDS = ['home', 'routine', 'peace', 'space', 'life', 'move', 'mind', 'systems', 'storage', 'sanctuary'];
+    // Hero word cycler: "Reset Your ___"
+    const HERO_WORDS = ['Home', 'Space', 'Routine', 'Peace', 'Life', 'Sanctuary'];
     const HOLD_MS = 2800;
     const FADE_MS = 700;
-    let cyclerIndex = 0;
-    const cyclerWord = document.getElementById('cyclerWord');
+    let heroWordIndex = 0;
+    const heroWord = document.getElementById('heroWord');
 
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (heroWord && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setInterval(() => {
-        cyclerWord.style.opacity = '0';
+        heroWord.style.opacity = '0';
         setTimeout(() => {
-          cyclerIndex = (cyclerIndex + 1) % WORDS.length;
-          cyclerWord.textContent = WORDS[cyclerIndex];
-          cyclerWord.style.opacity = '1';
+          heroWordIndex = (heroWordIndex + 1) % HERO_WORDS.length;
+          heroWord.textContent = HERO_WORDS[heroWordIndex];
+          heroWord.style.opacity = '1';
         }, FADE_MS);
       }, HOLD_MS + FADE_MS);
     }

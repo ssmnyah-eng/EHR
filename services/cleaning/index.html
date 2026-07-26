@@ -286,6 +286,101 @@
       border: 1px solid #c64;
       display: block;
     }
+      .img-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: repeating-linear-gradient(
+        135deg,
+        rgba(51, 46, 42, 0.06),
+        rgba(51, 46, 42, 0.06) 12px,
+        rgba(51, 46, 42, 0.03) 12px,
+        rgba(51, 46, 42, 0.03) 24px
+      );
+      border: 1px dashed rgba(51, 46, 42, 0.25);
+      color: var(--color-ink-soft);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .section-heading { text-align: center; max-width: 680px; margin: 0 auto 56px; }
+    .section-eyebrow { color: var(--color-clay); }
+    .section-title { margin-top: 16px; }
+
+    /* Standard hero banner */
+    .standard-hero-banner {
+      position: relative;
+      padding: 128px 0;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .standard-hero-bg { position: absolute; inset: 0; z-index: -10; border-radius: 0; border-width: 0; }
+    .standard-hero-overlay { position: absolute; inset: 0; z-index: -5; background: rgba(51, 46, 42, 0.45); }
+    .standard-hero-content { max-width: 620px; margin: 0 auto; color: var(--color-white); }
+    .standard-hero-content p { margin-top: 20px; color: rgba(241, 240, 235, 0.9); font-size: 18px; line-height: 1.7; }
+    .standard-hero-content .btn { margin-top: 40px; }
+
+    /* Alternating content rows */
+    .content-block-section { background: var(--color-white); padding: 56px 0; }
+    .content-block-section.alt-bg { background: var(--color-stone); }
+
+    .content-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .content-row.reversed .content-row-image { order: 2; }
+    .content-row.reversed .content-row-copy { order: 1; }
+
+    @media (max-width: 900px) {
+      .content-row { grid-template-columns: 1fr; gap: 24px; }
+      .content-row.reversed .content-row-image,
+      .content-row.reversed .content-row-copy { order: unset; }
+    }
+
+    .content-row-image .img-placeholder { aspect-ratio: 4/3; }
+    .content-row-copy p { color: var(--color-ink-soft); margin-top: 16px; line-height: 1.75; }
+
+    /* Reviews */
+    .trust-reviews-section { background: var(--color-white); padding: 96px 0; }
+    .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    @media (max-width: 900px) { .review-grid { grid-template-columns: 1fr; } }
+    .review-card { background: var(--color-stone); border-radius: 16px; padding: 40px 32px; text-align: center; }
+    .review-photo { width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 16px; font-size: 10px; }
+    .review-stars { color: var(--color-clay); letter-spacing: 3px; margin-bottom: 16px; }
+    .review-text { color: var(--color-ink-soft); line-height: 1.7; font-style: italic; }
+    .review-name { margin-top: 20px; font-family: 'Manrope', sans-serif; font-weight: 700; }
+
+    /* Gallery */
+    .gallery-section { background: var(--color-stone); padding: 96px 0; }
+    .gallery-scroll { display: flex; gap: 24px; overflow-x: auto; padding: 8px 4px 24px; scroll-snap-type: x mandatory; }
+    .gallery-scroll .img-placeholder { flex: 0 0 320px; aspect-ratio: 4/3; scroll-snap-align: start; }
+
+    /* Tips / article cards */
+    .tips-section { background: var(--color-white); padding: 96px 0; }
+    .tips-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    @media (max-width: 900px) { .tips-grid { grid-template-columns: 1fr; } }
+    .tip-card { border-radius: 16px; overflow: hidden; box-shadow: 0 1px 2px rgba(51, 46, 42, 0.06), 0 8px 24px rgba(51, 46, 42, 0.07); }
+    .tip-card .img-placeholder { aspect-ratio: 16/10; border-radius: 0; }
+    .tip-card-body { background: var(--color-white); padding: 28px; }
+    .tip-card-body p { color: var(--color-ink-soft); margin-top: 10px; }
+    .tip-card-body .btn { margin-top: 20px; }
+
+    /* Closing banner */
+    .closing-section { position: relative; padding: 128px 0; overflow: hidden; text-align: center; }
+    .closing-bg { position: absolute; inset: 0; z-index: -10; border-radius: 0; border-width: 0; }
+    .closing-overlay { position: absolute; inset: 0; z-index: -5; background: rgba(51, 46, 42, 0.55); }
+    .closing-content { max-width: 620px; margin: 0 auto; color: var(--color-white); }
+    .closing-content p { margin-top: 20px; color: rgba(241, 240, 235, 0.9); font-size: 18px; line-height: 1.7; }
+    .closing-content .btn { margin-top: 40px; }
   </style>
 </head>
 <body>
@@ -457,6 +552,181 @@
       </div>
     </div>
   </section>
+
+    <!-- ===== STANDARD PAGE LAYOUT ===== -->
+
+    <!-- Section 1: Hero Banner -->
+    <section class="standard-hero-banner">
+      <div class="standard-hero-bg img-placeholder">[ Large hero image placeholder ]</div>
+      <div class="standard-hero-overlay"></div>
+      <div class="container">
+        <div class="standard-hero-content reveal">
+          <h2>[ Headline placeholder ]</h2>
+          <p>[ Supporting paragraph placeholder ]</p>
+          <a href="#book" class="btn btn-primary">Book Now</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Content Block -->
+    <section class="content-block-section">
+      <div class="container">
+        <div class="content-row">
+          <div class="content-row-copy reveal">
+            <h3>[ Headline placeholder ]</h3>
+            <p>[ Paragraph placeholder ]</p>
+          </div>
+          <div class="content-row-image reveal" data-reveal-delay="100">
+            <div class="img-placeholder">[ Image placeholder ]</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Content Block (reversed) -->
+    <section class="content-block-section alt-bg">
+      <div class="container">
+        <div class="content-row reversed">
+          <div class="content-row-image reveal">
+            <div class="img-placeholder">[ Image placeholder ]</div>
+          </div>
+          <div class="content-row-copy reveal" data-reveal-delay="100">
+            <h3>[ Headline placeholder ]</h3>
+            <p>[ Paragraph placeholder ]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Content Block -->
+    <section class="content-block-section">
+      <div class="container">
+        <div class="content-row">
+          <div class="content-row-copy reveal">
+            <h3>[ Headline placeholder ]</h3>
+            <p>[ Paragraph placeholder ]</p>
+          </div>
+          <div class="content-row-image reveal" data-reveal-delay="100">
+            <div class="img-placeholder">[ Image placeholder ]</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Content Block (reversed) -->
+    <section class="content-block-section alt-bg">
+      <div class="container">
+        <div class="content-row reversed">
+          <div class="content-row-image reveal">
+            <div class="img-placeholder">[ Image placeholder ]</div>
+          </div>
+          <div class="content-row-copy reveal" data-reveal-delay="100">
+            <h3>[ Headline placeholder ]</h3>
+            <p>[ Paragraph placeholder ]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: See Why Families Trust Elevated Home Resets -->
+    <section class="trust-reviews-section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="label section-eyebrow">Testimonials</p>
+          <h2 class="section-title">See Why Families Trust Elevated Home Resets</h2>
+        </div>
+        <div class="review-grid">
+          <div class="review-card reveal" data-reveal-delay="0">
+            <div class="img-placeholder review-photo">Photo</div>
+            <div class="review-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-text">[ Review text placeholder ]</p>
+            <p class="review-name">[ Customer name placeholder ]</p>
+          </div>
+          <div class="review-card reveal" data-reveal-delay="100">
+            <div class="img-placeholder review-photo">Photo</div>
+            <div class="review-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-text">[ Review text placeholder ]</p>
+            <p class="review-name">[ Customer name placeholder ]</p>
+          </div>
+          <div class="review-card reveal" data-reveal-delay="200">
+            <div class="img-placeholder review-photo">Photo</div>
+            <div class="review-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-text">[ Review text placeholder ]</p>
+            <p class="review-name">[ Customer name placeholder ]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 7: Real Homes. Real Transformations. -->
+    <section class="gallery-section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="label section-eyebrow">Project Gallery</p>
+          <h2 class="section-title">Real Homes. Real Transformations.</h2>
+        </div>
+      </div>
+      <div class="container">
+        <div class="gallery-scroll reveal" data-reveal-delay="100">
+          <div class="img-placeholder">[ Image placeholder ]</div>
+          <div class="img-placeholder">[ Image placeholder ]</div>
+          <div class="img-placeholder">[ Image placeholder ]</div>
+          <div class="img-placeholder">[ Image placeholder ]</div>
+          <div class="img-placeholder">[ Image placeholder ]</div>
+          <div class="img-placeholder">[ Image placeholder ]</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 8: Tips for a More Organized Home -->
+    <section class="tips-section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="label section-eyebrow">From The Blog</p>
+          <h2 class="section-title">Tips for a More Organized Home</h2>
+        </div>
+        <div class="tips-grid">
+          <div class="tip-card reveal" data-reveal-delay="0">
+            <div class="img-placeholder">[ Image placeholder ]</div>
+            <div class="tip-card-body">
+              <h4>[ Article title placeholder ]</h4>
+              <p>[ Short description placeholder ]</p>
+              <a href="../../blog" class="btn btn-secondary">Read More</a>
+            </div>
+          </div>
+          <div class="tip-card reveal" data-reveal-delay="100">
+            <div class="img-placeholder">[ Image placeholder ]</div>
+            <div class="tip-card-body">
+              <h4>[ Article title placeholder ]</h4>
+              <p>[ Short description placeholder ]</p>
+              <a href="../../blog" class="btn btn-secondary">Read More</a>
+            </div>
+          </div>
+          <div class="tip-card reveal" data-reveal-delay="200">
+            <div class="img-placeholder">[ Image placeholder ]</div>
+            <div class="tip-card-body">
+              <h4>[ Article title placeholder ]</h4>
+              <p>[ Short description placeholder ]</p>
+              <a href="../../blog" class="btn btn-secondary">Read More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 9: Final CTA -->
+    <section class="closing-section">
+      <div class="closing-bg img-placeholder">[ Large image placeholder ]</div>
+      <div class="closing-overlay"></div>
+      <div class="container">
+        <div class="closing-content reveal">
+          <h2>[ Headline placeholder ]</h2>
+          <p>[ Paragraph placeholder ]</p>
+          <a href="#book" class="btn btn-primary">Book Now</a>
+        </div>
+      </div>
+    </section>
+
 
   <!-- Footer -->
   <footer>
