@@ -295,6 +295,65 @@
       align-self: flex-start;
     }
 
+    /* ===== How The Process Works ===== */
+    .process-section { background: var(--color-stone); padding: 96px 0; }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+      counter-reset: process;
+    }
+
+    @media (max-width: 1100px) {
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .process-grid { grid-template-columns: 1fr; }
+    }
+
+    .process-step {
+      background: var(--color-white);
+      border-radius: 16px;
+      padding: 32px 28px;
+      box-shadow: 0 1px 2px rgba(51, 46, 42, 0.06), 0 8px 24px rgba(51, 46, 42, 0.07);
+    }
+
+    .process-step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--color-clay);
+      color: var(--color-white);
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .process-step h3 {
+      font-size: 19px;
+    }
+
+    .process-step p {
+      margin-top: 12px;
+      color: var(--color-ink-soft);
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    .process-step.final {
+      background: linear-gradient(135deg, rgba(168, 93, 66, 0.1) 0%, rgba(107, 114, 89, 0.1) 100%);
+    }
+
+    .process-step.final .process-step-number {
+      background: var(--color-sage);
+    }
+
     /* ===== More Than Organization (2-col) ===== */
     .more-section { background: var(--color-stone); padding: 96px 0; }
 
@@ -572,6 +631,48 @@
             <p>[ Short description placeholder ]</p>
             <a href="./services/specialty" class="btn btn-secondary">Learn More</a>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How The Process Works -->
+  <section class="process-section">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="label section-eyebrow">How It Works</p>
+        <h2 class="section-title">From overwhelmed to done, in five steps</h2>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-step reveal" data-reveal-delay="0">
+          <div class="process-step-number">1</div>
+          <h3>Tell us what's weighing on you</h3>
+          <p>Skip the phone tag. Share what's going on in your home, what's driving you crazy, and what "done" would actually feel like. It takes a few minutes, and it's the last time you'll have to explain this to anyone.</p>
+        </div>
+
+        <div class="process-step reveal" data-reveal-delay="100">
+          <div class="process-step-number">2</div>
+          <h3>A real person reaches out</h3>
+          <p>Not a bot, not a script. We reach out personally, ask the right questions, and get a real read on your space and what your family actually needs, so nothing about your plan feels generic.</p>
+        </div>
+
+        <div class="process-step reveal" data-reveal-delay="150">
+          <div class="process-step-number">3</div>
+          <h3>We build your plan and price it honestly</h3>
+          <p>You get a clear plan built around your home, not a one-size-fits-all package, with pricing that's upfront and easy to say yes to. No mystery invoices, no pressure. Just a plan that makes sense.</p>
+        </div>
+
+        <div class="process-step reveal" data-reveal-delay="200">
+          <div class="process-step-number">4</div>
+          <h3>You lock it in, we get you on the calendar</h3>
+          <p>Once your plan feels right, you approve it and pay upfront so it's handled. We get you scheduled at a time that works for your life, and from there, it's off your plate.</p>
+        </div>
+
+        <div class="process-step final reveal" data-reveal-delay="250">
+          <div class="process-step-number">5</div>
+          <h3>We show up and you feel it immediately</h3>
+          <p>Our two-person crew arrives ready to work with the home you actually have, no pre-cleaning, no explaining, no judgment. You walk back into a space that finally works, and clients tell us it feels like a million pounds lighter.</p>
         </div>
       </div>
     </div>
