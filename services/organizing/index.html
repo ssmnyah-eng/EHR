@@ -394,21 +394,19 @@
       const data = Object.fromEntries(formData);
       const messageDiv = document.getElementById('form-message');
 
-      fetch('https://script.google.com/macros/d/YOUR_DEPLOYMENT_ID/usercallback?action=bookings/confirm', {
+      fetch('https://formspree.io/f/xrenrzwv', {
         method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' }
+        body: new FormData(event.target)
       })
-      .then(response => response.json())
-      .then(result => {
-        if (result.success) {
+      .then(response => {
+        if (response.ok) {
           messageDiv.textContent = 'Booking request received! We\'ll confirm within 24 hours.';
           messageDiv.style.backgroundColor = '#d4edda';
           messageDiv.style.color = '#155724';
           messageDiv.style.display = 'block';
           event.target.reset();
         } else {
-          throw new Error(result.error || 'Booking failed');
+          throw new Error('Booking failed');
         }
       })
       .catch(error => {
