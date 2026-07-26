@@ -163,7 +163,7 @@
       font-size: 18px;
       line-height: 1.7;
       color: rgba(241, 240, 235, 0.88);
-      max-width: 480px;
+      max-width: 540px;
     }
 
     .hero-buttons {
@@ -182,6 +182,28 @@
     .hero-secondary:hover {
       border-color: rgba(241, 240, 235, 1);
       background: rgba(241, 240, 235, 0.1);
+    }
+
+    .hero-sub-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--color-white);
+      text-decoration: underline;
+      text-decoration-color: rgba(241, 240, 235, 0.3);
+      text-underline-offset: 6px;
+      margin-top: 20px;
+      transition: all 220ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hero-sub-link:hover {
+      color: var(--color-mauve);
     }
 
     .scroll-indicator {
@@ -488,12 +510,16 @@
       <div class="hero-content">
         <p class="label hero-eyebrow">Elevated Home Resets</p>
         <h1 class="hero-headline">Reset Your <span class="hero-word" id="heroWord">Home</span></h1>
-        <p class="hero-support">[ Supporting copy placeholder — one to two sentences introducing the brand promise. ]</p>
+        <p class="hero-support">If you're exhausted from hunting for lost items, spending weekends catching up instead of resting, and walking into a home that drains you instead of recharging you, that's not a you problem. It's a systems problem. Our two-person crews build organizing and cleaning systems that actually hold, so you get your evenings and weekends back. Clients tell us it's the first thing in years that made them feel a million pounds lighter.</p>
 
         <div class="hero-buttons">
-          <a href="./contact" class="btn btn-primary">Book Now</a>
-          <a href="./services" class="btn hero-secondary">Explore Services</a>
+          <a href="./services/cleaning" class="btn btn-primary">Book Cleaning Services</a>
+          <a href="./services/organizing" class="btn btn-primary">Start Your Reset</a>
         </div>
+
+        <a href="./services" class="hero-sub-link">
+          Explore Services <span aria-hidden="true">→</span>
+        </a>
       </div>
     </div>
 
