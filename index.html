@@ -374,12 +374,16 @@
 
     .baa-slide {
       display: none;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
     }
 
     .baa-slide.is-active {
+      display: block;
+    }
+
+    .baa-pair {
       display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
     }
 
     .baa-image { position: relative; }
@@ -425,7 +429,7 @@
     }
 
     @media (max-width: 640px) {
-      .baa-slide { grid-template-columns: 1fr; }
+      .baa-pair { grid-template-columns: 1fr; }
       .baa-carousel { gap: 12px; }
       .baa-arrow { width: 40px; height: 40px; font-size: 18px; }
     }
@@ -539,6 +543,30 @@
       margin-top: 20px;
       font-family: 'Manrope', sans-serif;
       font-weight: 700;
+    }
+
+    /* Homepage-only: two long-form reviews get a wider, roomier layout */
+    .review-grid.review-grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 900px) {
+      .review-grid.review-grid-2 { grid-template-columns: 1fr; }
+    }
+
+    .review-card-long {
+      text-align: left;
+      padding: 40px;
+    }
+
+    .review-card-long .review-photo {
+      margin: 0 0 16px;
+    }
+
+    .review-card-long .review-text {
+      min-height: 220px;
     }
 
     /* ===== Gallery (horizontal scroll) ===== */
@@ -677,7 +705,7 @@
           <div class="img-placeholder">[ Image placeholder — Organizing ]</div>
           <div class="discover-card-body">
             <h3>Organizing</h3>
-            <p>[ Short description placeholder ]</p>
+            <p>Systems that think for you, built around how your household actually lives. Less hunting for things, less mental load, more evenings back.</p>
             <a href="./services/organizing" class="btn btn-secondary">Learn More</a>
           </div>
         </div>
@@ -686,7 +714,7 @@
           <div class="img-placeholder">[ Image placeholder — Cleaning ]</div>
           <div class="discover-card-body">
             <h3>Cleaning</h3>
-            <p>[ Short description placeholder ]</p>
+            <p>Instant quote, real calendar, crews who care. One less thing on your list, and a home that feels like it's on your side again.</p>
             <a href="./services/cleaning" class="btn btn-secondary">Learn More</a>
           </div>
         </div>
@@ -695,7 +723,7 @@
           <div class="img-placeholder">[ Image placeholder — Move Concierge ]</div>
           <div class="discover-card-body">
             <h3>Move Concierge</h3>
-            <p>[ Short description placeholder ]</p>
+            <p>We pack, move, unpack, and organize. One team, one point of contact, and a new home that's functional from day one instead of months of boxes.</p>
             <a href="./services/move-concierge" class="btn btn-secondary">Learn More</a>
           </div>
         </div>
@@ -704,7 +732,7 @@
           <div class="img-placeholder">[ Image placeholder — Specialty Services ]</div>
           <div class="discover-card-body">
             <h3>Specialty Services</h3>
-            <p>[ Short description placeholder ]</p>
+            <p>Aging-in-place resets, nursery prep, senior moves, junk removal. The transitions that need expert thinking, not just extra hands.</p>
             <a href="./services/specialty" class="btn btn-secondary">Learn More</a>
           </div>
         </div>
@@ -759,7 +787,7 @@
     <div class="container">
       <div class="section-heading reveal">
         <p class="label section-eyebrow">Before &amp; After</p>
-        <h2 class="section-title">See the Transformation</h2>
+        <h2 class="section-title">The Reset in Action</h2>
       </div>
 
       <div class="baa-carousel reveal" data-reveal-delay="100">
@@ -831,8 +859,8 @@
         <div class="img-placeholder reveal">[ Image placeholder ]</div>
         <div class="more-copy reveal" data-reveal-delay="100">
           <p class="label section-eyebrow">More Than Organization</p>
-          <h2 style="margin-top: 16px;">[ Headline placeholder ]</h2>
-          <p>[ Paragraph placeholder — supporting copy goes here. ]</p>
+          <h2 style="margin-top: 16px;">This isn't tidying. It's getting your life back.</h2>
+          <p>Anyone can shove things in a closet for an afternoon. We build systems that actually hold, so the same chaos doesn't creep back in three weeks later. Every project is built around how your household actually lives, never a generic template, and our two-person crews never judge what they walk into. The result isn't just a nicer-looking room. It's finding what you need in seconds instead of minutes, having people over without the pre-visit scramble, and getting your mental energy back for the things that actually matter.</p>
         </div>
       </div>
     </div>
@@ -851,8 +879,8 @@
           <div class="img-placeholder">[ Image placeholder ]</div>
         </div>
         <div class="purpose-copy reveal" data-reveal-delay="100">
-          <h3>[ Headline placeholder ]</h3>
-          <p>[ Paragraph placeholder ]</p>
+          <h3>You're not messy. You're maxed out.</h3>
+          <p>Most people who call us aren't messy, they're overloaded. A new baby, a move, a promotion, a season of just surviving, and suddenly the closets stopped keeping up months ago. If you've ever closed a door so a guest wouldn't see what's behind it, that feeling is exactly what a reset is for. Not because you did something wrong, but because life got busier than the systems in your home could handle.</p>
         </div>
       </div>
 
@@ -861,8 +889,8 @@
           <div class="img-placeholder">[ Image placeholder ]</div>
         </div>
         <div class="purpose-copy reveal" data-reveal-delay="100">
-          <h3>[ Headline placeholder ]</h3>
-          <p>[ Paragraph placeholder ]</p>
+          <h3>A system, not just a tidy afternoon</h3>
+          <p>Tidying moves things around. We build a system: a decision the space makes for you, so putting things away is easier than leaving them out. That's the difference between a clean house today and a home that still works three months from now, long after the initial burst of motivation fades.</p>
         </div>
       </div>
 
@@ -871,8 +899,8 @@
           <div class="img-placeholder">[ Image placeholder ]</div>
         </div>
         <div class="purpose-copy reveal" data-reveal-delay="100">
-          <h3>[ Headline placeholder ]</h3>
-          <p>[ Paragraph placeholder ]</p>
+          <h3>Two-person crews, never rushed</h3>
+          <p>Every job gets two people, never one person doing the work of two on a deadline. We arrive ready to work with the space you actually have. You don't need to clean before we get there, sort before we arrive, or explain how it got this way. That's our whole job, not yours.</p>
         </div>
       </div>
 
@@ -881,25 +909,9 @@
           <div class="img-placeholder">[ Image placeholder ]</div>
         </div>
         <div class="purpose-copy reveal" data-reveal-delay="100">
-          <h3>[ Headline placeholder ]</h3>
-          <p>[ Paragraph placeholder ]</p>
+          <h3>Walk in and feel your shoulders drop</h3>
+          <p>What clients describe afterward isn't just a nicer-looking room. It's finding the school forms in ten seconds instead of ten minutes. It's having people over without the scramble. A functional home gives you back the mental space clutter quietly takes, and that's the whole point: not a home that looks perfect for a photo, but one that keeps working long after we leave.</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Imagine the Difference -->
-  <section class="imagine-section">
-    <div class="container">
-      <div class="section-heading reveal">
-        <p class="label section-eyebrow">Transformations</p>
-        <h2 class="section-title">Imagine the Difference</h2>
-        <p style="margin-top: 16px; color: var(--color-ink-soft); font-size: 18px;">[ Supporting text placeholder ]</p>
-      </div>
-
-      <div class="imagine-compare reveal" data-reveal-delay="100">
-        <div class="img-placeholder">[ Before — image placeholder ]</div>
-        <div class="img-placeholder">[ After — image placeholder ]</div>
       </div>
     </div>
   </section>
@@ -908,52 +920,24 @@
   <section class="trust-reviews-section">
     <div class="container">
       <div class="section-heading reveal">
-        <p class="label section-eyebrow">Testimonials</p>
+        <p class="label section-eyebrow">Here's What Customers Have To Say</p>
         <h2 class="section-title">See Why Families Trust Elevated Home Resets</h2>
       </div>
 
-      <div class="review-grid">
-        <div class="review-card reveal" data-reveal-delay="0">
+      <div class="review-grid review-grid-2">
+        <div class="review-card review-card-long reveal" data-reveal-delay="0">
           <div class="img-placeholder review-photo">Photo</div>
           <div class="review-stars" aria-hidden="true">★★★★★</div>
-          <p class="review-text">[ Review text placeholder ]</p>
+          <p class="review-text">[ Long-form review placeholder — full customer story goes here. ]</p>
           <p class="review-name">[ Customer name placeholder ]</p>
         </div>
 
-        <div class="review-card reveal" data-reveal-delay="100">
+        <div class="review-card review-card-long reveal" data-reveal-delay="100">
           <div class="img-placeholder review-photo">Photo</div>
           <div class="review-stars" aria-hidden="true">★★★★★</div>
-          <p class="review-text">[ Review text placeholder ]</p>
+          <p class="review-text">[ Long-form review placeholder — full customer story goes here. ]</p>
           <p class="review-name">[ Customer name placeholder ]</p>
         </div>
-
-        <div class="review-card reveal" data-reveal-delay="200">
-          <div class="img-placeholder review-photo">Photo</div>
-          <div class="review-stars" aria-hidden="true">★★★★★</div>
-          <p class="review-text">[ Review text placeholder ]</p>
-          <p class="review-name">[ Customer name placeholder ]</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Real Homes. Real Transformations. (horizontal gallery) -->
-  <section class="gallery-section">
-    <div class="container">
-      <div class="section-heading reveal">
-        <p class="label section-eyebrow">Project Gallery</p>
-        <h2 class="section-title">Real Homes. Real Transformations.</h2>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="gallery-scroll reveal" data-reveal-delay="100">
-        <div class="img-placeholder">[ Image placeholder ]</div>
-        <div class="img-placeholder">[ Image placeholder ]</div>
-        <div class="img-placeholder">[ Image placeholder ]</div>
-        <div class="img-placeholder">[ Image placeholder ]</div>
-        <div class="img-placeholder">[ Image placeholder ]</div>
-        <div class="img-placeholder">[ Image placeholder ]</div>
       </div>
     </div>
   </section>
@@ -1006,8 +990,8 @@
 
     <div class="container">
       <div class="closing-content reveal">
-        <h2>[ Headline placeholder ]</h2>
-        <p>[ Supporting paragraph placeholder ]</p>
+        <h2>Ready to walk into a home that feels lighter?</h2>
+        <p>You don't have to live in the chaos any longer than you already have. Tell us what's going on, and we'll build a plan that gets you your evenings, your weekends, and your peace of mind back.</p>
         <a href="./contact" class="btn btn-primary">Book Now</a>
       </div>
     </div>
