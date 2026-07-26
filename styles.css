@@ -233,22 +233,22 @@ button, .btn, a.btn {
 }
 
 .btn-primary {
-  background: var(--color-clay);
+  background: var(--color-ocean);
   color: var(--color-white);
 }
 
 .btn-primary:hover {
-  background: var(--color-clay-deep);
+  background: var(--color-ocean-deep);
 }
 
 .btn-secondary {
   background: transparent;
-  color: var(--color-clay);
-  border: 1px solid var(--color-clay);
+  color: var(--color-ocean);
+  border: 1px solid var(--color-ocean);
 }
 
 .btn-secondary:hover {
-  background: var(--color-clay);
+  background: var(--color-ocean);
   color: var(--color-white);
 }
 
