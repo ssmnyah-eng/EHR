@@ -101,6 +101,138 @@
     .closing-content { max-width: 620px; margin: 0 auto; color: var(--color-white); }
     .closing-content p { margin-top: 20px; color: rgba(241, 240, 235, 0.9); font-size: 18px; line-height: 1.7; }
     .closing-content .btn { margin-top: 40px; }
+
+    /* ===== Organizing page: top-of-page rebuild ===== */
+
+    /* Floating package cards */
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .packages-grid { grid-template-columns: 1fr; }
+    }
+
+    .package-card {
+      background: var(--color-white);
+      border-radius: 16px;
+      padding: 40px 32px;
+      box-shadow: 0 8px 24px rgba(51, 46, 42, 0.08), 0 2px 6px rgba(51, 46, 42, 0.05);
+      transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 260ms cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .package-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 24px 48px rgba(51, 46, 42, 0.14), 0 8px 16px rgba(51, 46, 42, 0.08);
+    }
+
+    .package-card .price {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--color-clay);
+      margin: 8px 0 20px;
+    }
+
+    .package-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+      flex: 1;
+    }
+
+    .package-card li {
+      padding: 6px 0 6px 24px;
+      position: relative;
+      color: var(--color-ink-soft);
+      font-size: 15px;
+    }
+
+    .package-card li::before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      color: var(--color-clay);
+      font-weight: 700;
+    }
+
+    /* Systems That Work - services with side-by-side images */
+    .systems-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .systems-grid { grid-template-columns: 1fr; }
+    }
+
+    .systems-card {
+      background: var(--color-white);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(51, 46, 42, 0.08), 0 2px 6px rgba(51, 46, 42, 0.05);
+      transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .systems-card:hover { transform: translateY(-6px); }
+
+    .systems-card .img-placeholder {
+      aspect-ratio: 16/10;
+      border-radius: 0;
+      border-width: 0 0 1px 0;
+    }
+
+    .systems-card-body { padding: 28px; }
+    .systems-card-body p { color: var(--color-ink-soft); margin-top: 10px; line-height: 1.65; }
+
+    /* Booking form: service selector + conditional groups */
+    .booking-form { max-width: 640px; margin: 40px auto 0; }
+
+    .service-type-toggle {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 640px) {
+      .service-type-toggle { grid-template-columns: 1fr; }
+    }
+
+    .service-type-toggle label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px 12px;
+      border: 2px solid rgba(51, 46, 42, 0.15);
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--color-charcoal);
+      transition: all 200ms ease;
+      margin-bottom: 0;
+    }
+
+    .service-type-toggle input { position: absolute; opacity: 0; pointer-events: none; }
+
+    .service-type-toggle input:checked + label,
+    .service-type-toggle label.is-active {
+      border-color: var(--color-clay);
+      background: rgba(92, 122, 82, 0.08);
+      color: var(--color-clay-deep);
+    }
+
+    .conditional-group { display: none; }
+    .conditional-group.is-visible { display: block; }
   </style>
 
 </head>
@@ -126,49 +258,23 @@
 
   <main>
     <!-- Service Hero -->
-    <section class="hero" style="background: linear-gradient(135deg, rgba(124, 58, 156, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);">
+    <section class="hero" style="background: linear-gradient(135deg, rgba(92, 122, 82, 0.1) 0%, rgba(107, 114, 89, 0.1) 100%);">
       <div class="container">
         <div class="hero-content reveal">
-          <h1>Professional Organizing</h1>
-          <p class="subtitle">Transform your spaces into functional, beautiful systems that work for you.</p>
+          <h1>Systems that work the way you do</h1>
+          <p class="subtitle">Tidy is temporary. Systems last. We build organizing around how your household actually lives, judgment-free, from one closet to your whole home.</p>
           <a href="#booking" class="btn btn-primary">Start Your Reset</a>
         </div>
       </div>
     </section>
 
-    <!-- Systems That Work -->
-    <section class="service-section reveal">
-      <div class="container">
-        <h2>Systems That Work</h2>
-        <p>We don't just organize—we create sustainable systems tailored to how you actually live. Whether it's your kitchen, closet, home office, or entire home, our expert organizers design solutions that reduce mental load and make daily life effortless.</p>
-        <div class="service-grid">
-          <div class="service-card reveal">
-            <h3>Kitchen & Pantry</h3>
-            <p>Streamlined spaces that make meal prep and cooking intuitive. Fewer decisions, more peace of mind.</p>
-          </div>
-          <div class="service-card reveal">
-            <h3>Closet Organization</h3>
-            <p>A wardrobe system that reflects who you are. Getting dressed becomes effortless, every single day.</p>
-          </div>
-          <div class="service-card reveal">
-            <h3>Home Office</h3>
-            <p>Productivity-focused spaces designed for focus and creativity. Everything has its place.</p>
-          </div>
-          <div class="service-card reveal">
-            <h3>Whole-Home Organization</h3>
-            <p>Comprehensive systems across every room. Consistency, clarity, and lasting change.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Reset Packages -->
+    <!-- Reset Packages (floating cards) -->
     <section class="service-section reveal">
       <div class="container">
         <h2>Reset Packages</h2>
-        <p>Choose the package that fits your needs and timeline.</p>
+        <p>Choose the package that fits your space and your timeline. Every card below is clickable, click through to lock in the one that fits.</p>
         <div class="packages-grid">
-          <div class="package-card reveal">
+          <a href="#booking" class="package-card reveal" data-package="half-day" onclick="preselectPackage('half-day')">
             <h3>Half-Day Reset</h3>
             <p class="price">Starting at $400</p>
             <ul>
@@ -177,9 +283,9 @@
               <li>System design & implementation</li>
               <li>Organization supplies included</li>
             </ul>
-            <a href="#booking" class="btn btn-secondary">Book Now</a>
-          </div>
-          <div class="package-card reveal">
+            <span class="btn btn-secondary">Start This Reset</span>
+          </a>
+          <a href="#booking" class="package-card reveal" data-package="full-day" onclick="preselectPackage('full-day')">
             <h3>Full-Day Reset</h3>
             <p class="price">Starting at $750</p>
             <ul>
@@ -188,9 +294,9 @@
               <li>Custom system design</li>
               <li>Organization supplies included</li>
             </ul>
-            <a href="#booking" class="btn btn-secondary">Book Now</a>
-          </div>
-          <div class="package-card reveal">
+            <span class="btn btn-secondary">Start This Reset</span>
+          </a>
+          <a href="#booking" class="package-card reveal" data-package="multi-day" onclick="preselectPackage('multi-day')">
             <h3>Multi-Day Project</h3>
             <p class="price">Custom pricing</p>
             <ul>
@@ -199,7 +305,56 @@
               <li>Professional system design</li>
               <li>Follow-up support included</li>
             </ul>
-            <a href="#booking" class="btn btn-secondary">Book Now</a>
+            <span class="btn btn-secondary">Start This Reset</span>
+          </a>
+          <a href="#booking" class="package-card reveal" data-package="room-by-room" onclick="preselectPackage('room-by-room')">
+            <h3>Room-by-Room Reset</h3>
+            <p class="price">Starting at $250</p>
+            <ul>
+              <li>Know exactly which space needs help? Start there.</li>
+              <li>One room, fully reset</li>
+              <li>Same system design, smaller scope</li>
+              <li>Organization supplies included</li>
+            </ul>
+            <span class="btn btn-secondary">Start This Reset</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Systems That Work -->
+    <section class="service-section reveal">
+      <div class="container">
+        <h2>Organizing isn't tidying. It's a system.</h2>
+        <p>Tidying moves things around. We build a system, a decision the space makes for you, so putting things away is easier than leaving them out. Here's where we start most often.</p>
+        <div class="systems-grid">
+          <div class="systems-card reveal">
+            <div class="img-placeholder">[ Image placeholder — Kitchen & Pantry ]</div>
+            <div class="systems-card-body">
+              <h3>Kitchen & Pantry</h3>
+              <p>Open the door and actually see what you own. No more buying a third jar of cumin because the first two were buried. Meal prep gets easier when every ingredient has a home.</p>
+            </div>
+          </div>
+          <div class="systems-card reveal" data-reveal-delay="100">
+            <div class="img-placeholder">[ Image placeholder — Closet Organization ]</div>
+            <div class="systems-card-body">
+              <h3>Closet Organization</h3>
+              <p>Getting dressed stops being a decision that drains you before 8am. A closet built around your actual wardrobe, not a magazine's, so mornings feel lighter.</p>
+            </div>
+          </div>
+          <div class="systems-card reveal" data-reveal-delay="150">
+            <div class="img-placeholder">[ Image placeholder — Home Office ]</div>
+            <div class="systems-card-body">
+              <h3>Home Office</h3>
+              <p>Every paper, cable, and half-finished project has a place, so focus isn't competing with clutter in your peripheral vision. Built for how you actually work.</p>
+            </div>
+          </div>
+          <div class="systems-card reveal" data-reveal-delay="200">
+            <div class="img-placeholder">[ Image placeholder — Whole-Home Organization ]</div>
+            <div class="systems-card-body">
+              <h3>Whole-Home Organization</h3>
+              <p>Every room working the same way, so nothing quietly reverts to chaos the moment life gets busy again. One consistent system, top to bottom.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -208,24 +363,24 @@
     <!-- Room by Room -->
     <section class="service-section reveal">
       <div class="container">
-        <h2>Room-by-Room Solutions</h2>
-        <p>Every room has unique challenges. We design organizing systems for each space.</p>
+        <h2>Every room has its own kind of overwhelm</h2>
+        <p>Know exactly which space is driving you crazy? Start there. Room-by-room resets are their own package above, and here's what we consider for each one.</p>
         <div class="room-list reveal">
           <div class="room-item">
             <h3>Bedrooms</h3>
-            <p>Peaceful, organized sanctuaries that promote rest and reduce decision fatigue.</p>
+            <p>A room that actually helps you rest instead of reminding you of everything undone the moment you walk in.</p>
           </div>
           <div class="room-item">
             <h3>Bathrooms</h3>
-            <p>Efficient morning routines. Everything visible, nothing wasted.</p>
+            <p>Efficient mornings. Everything you reach for is visible, nothing wasted digging through what you forgot you had.</p>
           </div>
           <div class="room-item">
             <h3>Living Spaces</h3>
-            <p>Organized common areas that accommodate your lifestyle without looking sterile.</p>
+            <p>A common area you can actually relax in, and that you're not embarrassed to have people see.</p>
           </div>
           <div class="room-item">
             <h3>Storage & Basements</h3>
-            <p>Strategic storage systems that maximize space and make finding things effortless.</p>
+            <p>The room you've been avoiding, finally with a system, so finding things doesn't mean excavating first.</p>
           </div>
         </div>
       </div>
@@ -264,12 +419,12 @@
       <div class="container">
         <h2>What's Included in Every Organizing Project</h2>
         <ul class="inclusion-list reveal">
-          <li><strong>Expert Assessment:</strong> We listen to your lifestyle, goals, and pain points before designing solutions.</li>
-          <li><strong>Custom System Design:</strong> Organizing systems tailored to how you actually use your space.</li>
+          <li><strong>Judgment-Free Assessment:</strong> We listen to how you actually live before designing a single thing. You don't need to clean up before we arrive.</li>
+          <li><strong>Custom System Design:</strong> Built around your household, never a generic template.</li>
           <li><strong>Professional Implementation:</strong> We do the work. You get the results.</li>
-          <li><strong>Quality Supplies:</strong> Organization materials included (or we source your preferences).</li>
+          <li><strong>Quality Supplies:</strong> Organization materials included, or we source your preferences.</li>
           <li><strong>Labeling & Documentation:</strong> Clear, consistent systems everyone in your home understands.</li>
-          <li><strong>Sustainability:</strong> Systems designed to stay organized—not revert in weeks.</li>
+          <li><strong>Sustainability:</strong> Systems designed to still be working three months from now, not three weeks.</li>
         </ul>
       </div>
     </section>
@@ -277,9 +432,73 @@
     <!-- Booking Section -->
     <section id="booking" class="service-section reveal">
       <div class="container">
-        <h2>Schedule Your Organizing Session</h2>
+        <h2>Ready to start your reset?</h2>
+        <p>Tell us what's going on and we'll build a plan around it. This form also covers Move Concierge and Specialty Services, pick whichever fits.</p>
         <div class="booking-form">
-          <form onsubmit="handleBooking(event)">
+          <form onsubmit="handleBooking(event)" id="bookingForm">
+            <div class="form-group">
+              <label>What do you need help with?</label>
+              <div class="service-type-toggle" id="serviceTypeToggle">
+                <input type="radio" id="typeOrganizing" name="serviceType" value="organizing" checked>
+                <label for="typeOrganizing">Organizing</label>
+                <input type="radio" id="typeMove" name="serviceType" value="move-concierge">
+                <label for="typeMove">Move Concierge</label>
+                <input type="radio" id="typeSpecialty" name="serviceType" value="specialty">
+                <label for="typeSpecialty">Specialty Services</label>
+              </div>
+            </div>
+
+            <!-- Organizing fields -->
+            <div class="conditional-group is-visible" id="groupOrganizing">
+              <div class="form-group">
+                <label for="organizingPackage">Which package?</label>
+                <select id="organizingPackage" name="organizingPackage">
+                  <option value="half-day">Half-Day Reset ($400+)</option>
+                  <option value="full-day">Full-Day Reset ($750+)</option>
+                  <option value="multi-day">Multi-Day Project (Custom)</option>
+                  <option value="room-by-room">Room-by-Room Reset ($250+)</option>
+                </select>
+              </div>
+              <div class="form-group conditional-group" id="groupRoomSelect">
+                <label for="roomSelect">Which room?</label>
+                <select id="roomSelect" name="roomSelect">
+                  <option value="bedroom">Bedroom</option>
+                  <option value="bathroom">Bathroom</option>
+                  <option value="kitchen-pantry">Kitchen & Pantry</option>
+                  <option value="living-space">Living Space</option>
+                  <option value="home-office">Home Office</option>
+                  <option value="closet">Closet</option>
+                  <option value="storage-basement">Storage / Basement</option>
+                  <option value="whole-home">Whole Home</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Move Concierge fields -->
+            <div class="conditional-group" id="groupMove">
+              <div class="form-group">
+                <label for="movePackage">Which package?</label>
+                <select id="movePackage" name="movePackage">
+                  <option value="planning">Move Planning & Coordination</option>
+                  <option value="full-service">Full-Service Move Reset</option>
+                  <option value="premium">Premium Move Management</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Specialty fields -->
+            <div class="conditional-group" id="groupSpecialty">
+              <div class="form-group">
+                <label for="specialtyService">Which service?</label>
+                <select id="specialtyService" name="specialtyService">
+                  <option value="supportive-living">Supportive Living Reset</option>
+                  <option value="nesting-nursery">Nesting & Nursery Prep</option>
+                  <option value="junk-removal">Junk Removal</option>
+                </select>
+              </div>
+            </div>
+
             <div class="form-group">
               <label for="name">Your Name</label>
               <input type="text" id="name" name="name" required>
@@ -293,21 +512,25 @@
               <input type="tel" id="phone" name="phone" required>
             </div>
             <div class="form-group">
-              <label for="service">Which Package?</label>
-              <select id="service" name="service" required>
-                <option value="">Select a package</option>
-                <option value="half-day">Half-Day Reset ($400+)</option>
-                <option value="full-day">Full-Day Reset ($750+)</option>
-                <option value="multi-day">Multi-Day Project (Custom)</option>
-              </select>
+              <label for="address">Address</label>
+              <input type="text" id="address" name="address" required>
             </div>
             <div class="form-group">
               <label for="date">Preferred Date</label>
               <input type="date" id="date" name="date" required>
             </div>
             <div class="form-group">
-              <label for="message">Tell us about your space (optional)</label>
-              <textarea id="message" name="message" rows="4"></textarea>
+              <label for="clutterLevel">How would you describe your space right now?</label>
+              <select id="clutterLevel" name="clutterLevel">
+                <option value="mostly-fine">It's mostly under control, just needs some polish</option>
+                <option value="cant-find-things">It's functional, but I can never find what I actually need</option>
+                <option value="close-the-door">I close doors so guests don't see certain rooms</option>
+                <option value="dont-know-where-to-start">I don't even know where to start anymore</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Tell us about your space</label>
+              <textarea id="message" name="message" rows="4" placeholder="What's going on, and what would a working space look like for you?"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Request Booking</button>
           </form>
@@ -504,31 +727,68 @@
 
   <script src="../../script.js"></script>
   <script>
+    // Service type toggle: show/hide the right conditional field group
+    const serviceGroups = {
+      organizing: document.getElementById('groupOrganizing'),
+      'move-concierge': document.getElementById('groupMove'),
+      specialty: document.getElementById('groupSpecialty')
+    };
+
+    function setServiceType(type) {
+      Object.keys(serviceGroups).forEach((key) => {
+        serviceGroups[key].classList.toggle('is-visible', key === type);
+      });
+      const radio = document.querySelector(`input[name="serviceType"][value="${type}"]`);
+      if (radio) radio.checked = true;
+      if (type === 'organizing') updateRoomSelectVisibility();
+    }
+
+    document.querySelectorAll('input[name="serviceType"]').forEach((input) => {
+      input.addEventListener('change', (e) => setServiceType(e.target.value));
+    });
+
+    // Room-by-Room package reveals the room selector
+    const organizingPackageSelect = document.getElementById('organizingPackage');
+    const groupRoomSelect = document.getElementById('groupRoomSelect');
+
+    function updateRoomSelectVisibility() {
+      groupRoomSelect.classList.toggle('is-visible', organizingPackageSelect.value === 'room-by-room');
+    }
+
+    organizingPackageSelect.addEventListener('change', updateRoomSelectVisibility);
+    updateRoomSelectVisibility();
+
+    // Clicking a package card jumps to the form pre-set to that package
+    function preselectPackage(pkg) {
+      setServiceType('organizing');
+      organizingPackageSelect.value = pkg;
+      updateRoomSelectVisibility();
+    }
+
+    // Submit to Formspree
     function handleBooking(event) {
       event.preventDefault();
-      const formData = new FormData(event.target);
-      const data = Object.fromEntries(formData);
       const messageDiv = document.getElementById('form-message');
 
-      fetch('https://script.google.com/macros/d/YOUR_DEPLOYMENT_ID/usercallback?action=bookings/confirm', {
+      fetch('https://formspree.io/f/xrenrzwv', {
         method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' }
+        body: new FormData(event.target),
+        headers: { Accept: 'application/json' }
       })
-      .then(response => response.json())
-      .then(result => {
-        if (result.success) {
+      .then((response) => {
+        if (response.ok) {
           messageDiv.textContent = 'Booking request received! We\'ll confirm within 24 hours.';
           messageDiv.style.backgroundColor = '#d4edda';
           messageDiv.style.color = '#155724';
           messageDiv.style.display = 'block';
           event.target.reset();
+          setServiceType('organizing');
         } else {
-          throw new Error(result.error || 'Booking failed');
+          throw new Error('Booking failed');
         }
       })
-      .catch(error => {
-        messageDiv.textContent = 'Error: ' + error.message;
+      .catch((error) => {
+        messageDiv.textContent = 'Error: ' + error.message + '. Please try again or call (540) 356-3306.';
         messageDiv.style.backgroundColor = '#f8d7da';
         messageDiv.style.color = '#721c24';
         messageDiv.style.display = 'block';
