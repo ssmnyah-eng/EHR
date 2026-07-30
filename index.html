@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elevated Home Resets - Premium Home Management for Busy Professionals</title>
-  <meta name="description" content="Premium organizing, cleaning, and moving services for high-achieving families in Virginia. Reduce mental load. Get time back. Premium household operations.">
-  <meta property="og:title" content="Elevated Home Resets - Premium Home Management">
-  <meta property="og:description" content="Professional home operations for busy professionals, working moms, and family transitions.">
+  <title>Elevated Home Resets - Organizing &amp; Cleaning in Northern Virginia | Systems That Last</title>
+  <meta name="description" content="Home organizing and cleaning systems built to last, not just look good for a week. Serving Fredericksburg, Stafford, Fairfax, Loudoun, and Northern Virginia. Judgment-free, transparent pricing.">
+  <meta property="og:title" content="Elevated Home Resets - Systems That Last">
+  <meta property="og:description" content="Organizing, cleaning, and move support built around how you actually live, serving Fredericksburg to Northern Virginia.">
   <link rel="canonical" href="https://elevatedhomeresets.com/">
   <link rel="stylesheet" href="styles.css">
   <style>
@@ -233,6 +233,108 @@
       0%, 100% { transform: translateX(-50%) translateY(0); }
       50% { transform: translateX(-50%) translateY(8px); }
     }
+
+    /* ===== Trust bar ===== */
+    .trust-bar {
+      background: var(--color-charcoal);
+      padding: 20px 0;
+    }
+
+    .trust-bar-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 16px 40px;
+    }
+
+    .trust-bar-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(241, 240, 235, 0.85);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    .trust-bar-item .stars { color: var(--color-orange); letter-spacing: 2px; }
+
+    /* ===== Pain section ===== */
+    .pain-section { background: var(--color-white); padding: 96px 0; }
+
+    .pain-content { max-width: 720px; margin: 0 auto; text-align: center; }
+    .pain-content h2 { margin-bottom: 24px; }
+    .pain-content p { color: var(--color-ink-soft); font-size: 18px; line-height: 1.8; margin-top: 16px; }
+    .pain-content p.pain-lede { color: var(--color-charcoal); font-size: 20px; font-weight: 500; }
+
+    /* ===== Why choose us bullets ===== */
+    .why-list {
+      list-style: none;
+      padding: 0;
+      margin: 32px 0 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 32px;
+    }
+
+    @media (max-width: 700px) {
+      .why-list { grid-template-columns: 1fr; }
+    }
+
+    .why-list li {
+      padding-left: 26px;
+      position: relative;
+      color: var(--color-ink-soft);
+      font-size: 15.5px;
+      line-height: 1.6;
+    }
+
+    .why-list li::before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      top: 1px;
+      color: var(--color-ocean);
+      font-weight: 700;
+    }
+
+    /* ===== FAQ / Objections ===== */
+    .faq-section { background: var(--color-stone); padding: 96px 0; }
+
+    .faq-list { max-width: 760px; margin: 0 auto; }
+
+    .faq-item {
+      background: var(--color-white);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 2px rgba(51, 46, 42, 0.06);
+    }
+
+    .faq-item h3 { font-size: 18px; }
+    .faq-item p { color: var(--color-ink-soft); margin-top: 10px; line-height: 1.7; }
+
+    /* ===== Risk reversal ===== */
+    .risk-section { background: var(--color-white); padding: 96px 0; }
+
+    .risk-grid {
+      max-width: 880px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      .risk-grid { grid-template-columns: 1fr; }
+    }
+
+    .risk-item h3 { font-size: 18px; margin-bottom: 10px; }
+    .risk-item p { color: var(--color-ink-soft); font-size: 14.5px; line-height: 1.65; }
 
     /* ===== Section shell ===== */
     .section-heading {
@@ -743,9 +845,9 @@
 
     <div class="container">
       <div class="hero-content">
-        <p class="label hero-eyebrow">Elevated Home Resets</p>
+        <p class="label hero-eyebrow">Organizing &amp; Cleaning in Northern Virginia</p>
         <h1 class="hero-headline">Reset Your <span class="hero-word" id="heroWord">Home</span></h1>
-        <p class="hero-support">If you're exhausted from hunting for lost items, spending weekends catching up instead of resting, and walking into a home that drains you instead of recharging you, that's not a you problem. It's a systems problem. Our two-person crews build organizing and cleaning systems that actually hold, so you get your evenings and weekends back. Clients tell us it's the first thing in years that made them feel a million pounds lighter.</p>
+        <p class="hero-support">If you're exhausted from hunting for lost items, spending weekends catching up instead of resting, and walking into a home that drains you instead of recharging you, that's not a you problem. It's a systems problem. We build organizing and cleaning systems designed to still be working three months from now, not three weeks, so you get your evenings and weekends back for good. Clients tell us it's the first thing in years that made them feel a million pounds lighter.</p>
 
         <div class="hero-buttons">
           <a href="./services/cleaning" class="btn btn-primary">Book Cleaning Services</a>
@@ -761,6 +863,97 @@
     <div class="scroll-indicator" aria-hidden="true">
       <span>Scroll</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 4v16m0 0l-6-6m6 6l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </section>
+
+  <!-- Trust bar -->
+  <section class="trust-bar">
+    <div class="container">
+      <div class="trust-bar-row">
+        <span class="trust-bar-item"><span class="stars" aria-hidden="true">★★★★★</span> Real client reviews</span>
+        <span class="trust-bar-item">Serving Fredericksburg to Northern Virginia</span>
+        <span class="trust-bar-item">$100 deposit, transparent starting prices</span>
+        <span class="trust-bar-item">Judgment-free, every time</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pain section -->
+  <section class="pain-section">
+    <div class="container">
+      <div class="pain-content reveal">
+        <p class="label section-eyebrow">Sound Familiar?</p>
+        <h2 style="margin-top: 16px;">You're Not Lazy. You're Overwhelmed.</h2>
+        <p class="pain-lede">It's not that you don't care.</p>
+        <p>It's that "organize the pantry this weekend" has been on the list for six months. It's shoving everything in the closet before someone comes over. It's buying a second bottle of something because you couldn't find the first one.</p>
+        <p>None of that is a character flaw. It's what happens when a house full of decisions outpaces the hours you have to make them. You don't need more motivation, you need a system that does the deciding for you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How The Process Works -->
+  <section class="process-section">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="label section-eyebrow">How It Works</p>
+        <h2 class="section-title">From overwhelmed to done, in five steps</h2>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-step reveal" data-reveal-delay="0">
+          <div class="process-step-number">1</div>
+          <h3>Tell us what's weighing on you</h3>
+          <p>Skip the phone tag. Share what's going on in your home, what's driving you crazy, and what "done" would actually feel like. It takes a few minutes, and it's the last time you'll have to explain this to anyone.</p>
+        </div>
+
+        <div class="process-step reveal" data-reveal-delay="100">
+          <div class="process-step-number">2</div>
+          <h3>A real person reaches out</h3>
+          <p>Not a bot, not a script. We reach out personally, ask the right questions, and get a real read on your space and what your family actually needs, so nothing about your plan feels generic.</p>
+        </div>
+
+        <div class="process-step reveal" data-reveal-delay="150">
+          <div class="process-step-number">3</div>
+          <h3>We build your plan and price it honestly</h3>
+          <p>You get a clear plan built around your home, not a one-size-fits-all package, with pricing that's upfront and easy to say yes to. No mystery invoices, no pressure. Just a plan that makes sense.</p>
+        </div>
+
+        <div class="process-step reveal" data-reveal-delay="200">
+          <div class="process-step-number">4</div>
+          <h3>You lock it in, we get you on the calendar</h3>
+          <p>Once your plan feels right, you approve it and pay upfront so it's handled. We get you scheduled at a time that works for your life, and from there, it's off your plate.</p>
+        </div>
+
+        <div class="process-step final reveal" data-reveal-delay="250">
+          <div class="process-step-number">5</div>
+          <h3>You feel it immediately</h3>
+          <p>We arrive ready to work with the home you actually have, no pre-cleaning, no explaining, no judgment. You walk back into a space built to keep working long after we leave, and clients tell us it feels like a million pounds lighter.</p>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 48px;">
+        <a href="./services/cleaning" class="btn btn-primary">Book Your Cleaning</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="more-section">
+    <div class="container">
+      <div class="more-grid">
+        <div class="img-placeholder reveal">[ Image placeholder ]</div>
+        <div class="more-copy reveal" data-reveal-delay="100">
+          <p class="label section-eyebrow">Why Choose Us</p>
+          <h2 style="margin-top: 16px;">We Don't Tidy. We Build Systems That Stick.</h2>
+          <p>Anyone can shove things in a closet for an afternoon. We build systems that actually hold, so the same chaos doesn't creep back in three weeks later. Every project is built around how your household actually lives, never a generic template, and we never judge what we walk into.</p>
+          <ul class="why-list">
+            <li>A system designed to still be working three months from now, not three weeks</li>
+            <li>Built around how your household actually lives, never a generic template</li>
+            <li>A judgment-free process, every time</li>
+            <li>Real starting prices up front, not "call for a quote"</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -808,52 +1001,6 @@
             <a href="./services/specialty" class="btn btn-secondary">Learn More</a>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- How The Process Works -->
-  <section class="process-section">
-    <div class="container">
-      <div class="section-heading reveal">
-        <p class="label section-eyebrow">How It Works</p>
-        <h2 class="section-title">From overwhelmed to done, in five steps</h2>
-      </div>
-
-      <div class="process-grid">
-        <div class="process-step reveal" data-reveal-delay="0">
-          <div class="process-step-number">1</div>
-          <h3>Tell us what's weighing on you</h3>
-          <p>Skip the phone tag. Share what's going on in your home, what's driving you crazy, and what "done" would actually feel like. It takes a few minutes, and it's the last time you'll have to explain this to anyone.</p>
-        </div>
-
-        <div class="process-step reveal" data-reveal-delay="100">
-          <div class="process-step-number">2</div>
-          <h3>A real person reaches out</h3>
-          <p>Not a bot, not a script. We reach out personally, ask the right questions, and get a real read on your space and what your family actually needs, so nothing about your plan feels generic.</p>
-        </div>
-
-        <div class="process-step reveal" data-reveal-delay="150">
-          <div class="process-step-number">3</div>
-          <h3>We build your plan and price it honestly</h3>
-          <p>You get a clear plan built around your home, not a one-size-fits-all package, with pricing that's upfront and easy to say yes to. No mystery invoices, no pressure. Just a plan that makes sense.</p>
-        </div>
-
-        <div class="process-step reveal" data-reveal-delay="200">
-          <div class="process-step-number">4</div>
-          <h3>You lock it in, we get you on the calendar</h3>
-          <p>Once your plan feels right, you approve it and pay upfront so it's handled. We get you scheduled at a time that works for your life, and from there, it's off your plate.</p>
-        </div>
-
-        <div class="process-step final reveal" data-reveal-delay="250">
-          <div class="process-step-number">5</div>
-          <h3>We show up and you feel it immediately</h3>
-          <p>Our two-person crew arrives ready to work with the home you actually have, no pre-cleaning, no explaining, no judgment. You walk back into a space that finally works, and clients tell us it feels like a million pounds lighter.</p>
-        </div>
-      </div>
-
-      <div style="text-align: center; margin-top: 48px;">
-        <a href="./services/cleaning" class="btn btn-primary">Book Your Cleaning</a>
       </div>
     </div>
   </section>
@@ -928,20 +1075,6 @@
     </div>
   </section>
 
-  <!-- More Than Organization -->
-  <section class="more-section">
-    <div class="container">
-      <div class="more-grid">
-        <div class="img-placeholder reveal">[ Image placeholder ]</div>
-        <div class="more-copy reveal" data-reveal-delay="100">
-          <p class="label section-eyebrow">More Than Organization</p>
-          <h2 style="margin-top: 16px;">This isn't about looking presentable. It's about getting your mental load back.</h2>
-          <p>Anyone can shove things in a closet for an afternoon. We build systems that actually hold, so the same chaos doesn't creep back in three weeks later. Every project is built around how your household actually lives, never a generic template, and our two-person crews never judge what they walk into. The result isn't just a nicer-looking room. It's finding what you need in seconds instead of minutes, having people over without the pre-visit scramble, and getting your mental energy back for the things that actually matter.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Every Reset Has a Purpose -->
   <section class="purpose-section">
     <div class="container">
@@ -975,8 +1108,8 @@
           <div class="img-placeholder">[ Image placeholder ]</div>
         </div>
         <div class="purpose-copy reveal" data-reveal-delay="100">
-          <h3>Two-person crews, never rushed</h3>
-          <p>Every job gets two people, never one person doing the work of two on a deadline. We arrive ready to work with the space you actually have. You don't need to clean before we get there, sort before we arrive, or explain how it got this way. That's our whole job, not yours.</p>
+          <h3>A plan built around your real home</h3>
+          <p>Not a generic checklist applied to every house on the street. We look at how you actually live, then build a system around that, so you're not the one adapting to fit someone else's idea of organized. You don't need to clean before we get there, sort before we arrive, or explain how it got this way. That's our whole job, not yours.</p>
         </div>
       </div>
 
@@ -1024,6 +1157,54 @@
             <p class="review-name">Lashon Patterson</p>
             <p class="review-meta">15 weeks ago</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ / Objections -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="label section-eyebrow">Before You Book</p>
+        <h2 class="section-title">Questions people ask before their first reset</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal" data-reveal-delay="0">
+          <h3>Do I need to clean or declutter before you arrive?</h3>
+          <p>No. That's exactly what we're here for. Come as you are, no pre-cleaning, no explaining, no judgment.</p>
+        </div>
+        <div class="faq-item reveal" data-reveal-delay="100">
+          <h3>Will this actually stay organized, or fall apart in a month?</h3>
+          <p>That's the whole point of a system over a one-time tidy. It's built to hold up under how you actually live, not just for the after-photo, so it's still working three months from now, not three weeks.</p>
+        </div>
+        <div class="faq-item reveal" data-reveal-delay="200">
+          <h3>How much does this cost?</h3>
+          <p>Real starting prices are listed on every service page, no "call for a quote" games. You'll know what you're working with before you commit to anything.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Risk Reversal -->
+  <section class="risk-section">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="label section-eyebrow">Booking &amp; Payment</p>
+        <h2 class="section-title">A simple, honest way to lock in your date</h2>
+      </div>
+      <div class="risk-grid">
+        <div class="risk-item reveal" data-reveal-delay="0">
+          <h3>$100 deposit</h3>
+          <p>Goes straight toward your total. It's not an extra fee, it's the only thing due before the work happens.</p>
+        </div>
+        <div class="risk-item reveal" data-reveal-delay="100">
+          <h3>Transparent pricing</h3>
+          <p>Real starting prices up front, so you're never guessing what something costs before you book.</p>
+        </div>
+        <div class="risk-item reveal" data-reveal-delay="200">
+          <h3>No judgment, ever</h3>
+          <p>We're not here to comment on how it got this way. Just to fix it, at your pace, on your terms.</p>
         </div>
       </div>
     </div>
