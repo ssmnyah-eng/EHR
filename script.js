@@ -46,22 +46,29 @@ function initMobileMenu() {
   }
 }
 
-// Services dropdown in the primary nav
+// Services dropdown in the primary nav (including nested Home Organization flyout)
 function initNavDropdown() {
-  const dropdown = document.querySelector('.nav-dropdown');
-  if (!dropdown) return;
+  const dropdowns = document.querySelectorAll('.nav-dropdown');
+  if (!dropdowns.length) return;
 
-  const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+  dropdowns.forEach((dropdown) => {
+    const toggle = dropdown.querySelector(':scope > .nav-dropdown-toggle');
+    if (!toggle) return;
 
-  toggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    dropdown.classList.toggle('is-open');
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const wasOpen = dropdown.classList.contains('is-open');
+      dropdowns.forEach((d) => { if (d !== dropdown) d.classList.remove('is-open'); });
+      dropdown.classList.toggle('is-open', !wasOpen);
+    });
   });
 
   document.addEventListener('click', (e) => {
-    if (!dropdown.contains(e.target)) {
-      dropdown.classList.remove('is-open');
-    }
+    dropdowns.forEach((dropdown) => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('is-open');
+      }
+    });
   });
 }
 
