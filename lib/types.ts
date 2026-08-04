@@ -111,3 +111,35 @@ export interface ResourceItem {
   heroMedia?: MediaSlotData | null;
   href: string;
 }
+
+/** Pricing/labor callout shown in a service hero (e.g. "Starting at $140"). */
+export interface HeroPriceData {
+  label: string;
+  note: string;
+}
+
+/** Bordered "at a glance" box on a service detail page. */
+export interface ServiceSnapshotData {
+  priceLabel: string;
+  laborNote: string;
+  staffingNote?: string;
+  description: string;
+  cta: CTAData;
+}
+
+/**
+ * One section in a service detail page's body. "statement" is a plain
+ * eyebrow/heading/body(/CTA) editorial block; "comparison" is a heading
+ * followed by a small grid of cross-sell cards (e.g. "Which clean do you
+ * need?").
+ */
+export type ServiceDetailSection =
+  | { type: "statement"; slot: ContentSlot }
+  | { type: "comparison"; eyebrow?: string; heading?: string; cards: TeaserCardData[] };
+
+/** One room/category checklist on a "What's Included" page. */
+export interface ChecklistSection {
+  heading: string;
+  intro?: string;
+  items: string[];
+}

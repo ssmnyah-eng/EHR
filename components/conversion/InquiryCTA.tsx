@@ -16,7 +16,7 @@ interface InquiryCTAProps {
  *  editorial site, not a bolted-on sales widget. */
 export function InquiryCTA({ slot, showForm = true }: InquiryCTAProps) {
   return (
-    <div className={styles.wrapper}>
+    <div className={[styles.wrapper, !showForm && styles.noForm].filter(Boolean).join(" ")}>
       <Reveal variant="fade-up">
         <div className={styles.intro}>
           <Display as="h2" size="md">
@@ -25,10 +25,19 @@ export function InquiryCTA({ slot, showForm = true }: InquiryCTAProps) {
           <Text size="lg" className={styles.body}>
             <SlotText label="SUPPORTING COPY" value={slot.body} />
           </Text>
-          {slot.secondaryCTA ? (
-            <Button href={slot.secondaryCTA.href} variant="secondary" size="lg" className={styles.secondaryCta}>
-              {slot.secondaryCTA.label}
-            </Button>
+          {slot.primaryCTA || slot.secondaryCTA ? (
+            <div className={styles.ctaRow}>
+              {slot.primaryCTA ? (
+                <Button href={slot.primaryCTA.href} size="lg">
+                  {slot.primaryCTA.label}
+                </Button>
+              ) : null}
+              {slot.secondaryCTA ? (
+                <Button href={slot.secondaryCTA.href} variant="secondary" size="lg">
+                  {slot.secondaryCTA.label}
+                </Button>
+              ) : null}
+            </div>
           ) : null}
         </div>
       </Reveal>

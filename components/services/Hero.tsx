@@ -1,4 +1,4 @@
-import type { ContentSlot } from "@/lib/types";
+import type { ContentSlot, HeroPriceData } from "@/lib/types";
 import { Display } from "@/components/typography/Display";
 import { Text } from "@/components/typography/Text";
 import { Button } from "@/components/content/Button";
@@ -8,11 +8,13 @@ import styles from "./Hero.module.css";
 
 interface HeroProps {
   slot: ContentSlot;
+  price?: HeroPriceData;
 }
 
-/** Homepage hero (brief section 11) — oversized H1, supporting copy and
- *  CTA offset right, large media beneath/intersecting the lower hero. */
-export function Hero({ slot }: HeroProps) {
+/** Homepage/service hero (brief section 11) — oversized H1, supporting copy,
+ *  optional pricing callout, and CTA offset right, large media beneath/
+ *  intersecting the lower hero. */
+export function Hero({ slot, price }: HeroProps) {
   return (
     <div className={styles.hero}>
       <div className={styles.top}>
@@ -23,6 +25,16 @@ export function Hero({ slot }: HeroProps) {
           <Text size="lg">
             <SlotText label="SUPPORT COPY" value={slot.body} />
           </Text>
+          {price ? (
+            <div className={styles.price}>
+              <Text as="span" size="sm" tone="primary" className={styles.priceLabel}>
+                {price.label}
+              </Text>
+              <Text as="span" size="sm" className={styles.priceNote}>
+                {price.note}
+              </Text>
+            </div>
+          ) : null}
           {slot.primaryCTA || slot.secondaryCTA ? (
             <div className={styles.ctaRow}>
               {slot.primaryCTA ? (

@@ -30,6 +30,26 @@
   max-width: 30ch;
 }
 
+.price {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  padding: var(--space-sm) var(--space-md);
+  border: var(--border-hairline);
+  border-radius: var(--radius-sm);
+  max-width: 32ch;
+}
+
+.priceLabel {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.priceNote {
+  color: var(--color-muted);
+}
+
 .ctaRow {
   display: flex;
   flex-wrap: wrap;

@@ -20,6 +20,18 @@
   max-width: 34ch;
 }
 
-.secondaryCta {
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
   margin-top: var(--space-lg);
+}
+
+.noForm {
+  grid-template-columns: 1fr;
+}
+
+.noForm .intro {
+  max-width: 40rem;
 }
