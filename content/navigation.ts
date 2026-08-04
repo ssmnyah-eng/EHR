@@ -26,7 +26,7 @@ export const HOME_ORGANIZATION: ServiceNode = {
       title: "Organization Packages",
       slug: "organization-packages",
       category: "home-organization",
-      status: "active",
+      status: "coming-soon",
       href: "/home-organization/organization-packages",
     },
     { title: "Whole Room", slug: "whole-room", category: "home-organization", status: "active", href: "/home-organization" },

@@ -201,11 +201,3 @@ export const HOME_ORG_FINAL_CTA: ContentSlot = {
   primaryCTA: { label: "Start Your Organization Estimate", href: ESTIMATE_CTA.href },
   secondaryCTA: { label: "View Organization Packages", href: "/home-organization/organization-packages" },
 };
-
-export const ORGANIZATION_PACKAGES_HERO: ContentSlot = {
-  primaryCTA: ESTIMATE_CTA,
-};
-
-export const ORGANIZATION_PACKAGES_INQUIRY: ContentSlot = {
-  heading: ESTIMATE_CTA.label,
-};

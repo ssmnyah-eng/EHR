@@ -16,12 +16,15 @@ const inter = Inter({
   display: "swap",
 });
 
+/**
+ * No title template here — every page's own metadata.title already
+ * includes the "| Elevated Home Resets" suffix itself, so a template
+ * would double it (e.g. "... | Elevated Home Resets | Elevated Home
+ * Resets"). Only the root default needs to stand alone.
+ */
 export const metadata: Metadata = {
   metadataBase: new URL("https://elevatedhomeresets.com"),
-  title: {
-    default: "Elevated Home Resets",
-    template: "%s | Elevated Home Resets",
-  },
+  title: "Elevated Home Resets",
   description: "Elevated Home Resets — cleaning and home organization.",
 };
 
