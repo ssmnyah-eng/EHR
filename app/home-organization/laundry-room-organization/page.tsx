@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
-import { OrganizationServiceTemplate } from "@/components/services/OrganizationServiceTemplate";
-import { findOrganizationRoomBySlug } from "@/content/home-organization-rooms";
-
-const room = findOrganizationRoomBySlug("laundry-room-organization")!;
+import { OrganizationRoomTemplate } from "@/components/services/OrganizationRoomTemplate";
+import { LAUNDRY_SEO, LAUNDRY_HERO, LAUNDRY_HERO_PRICE, LAUNDRY_SECTIONS, LAUNDRY_FINAL_CTA } from "@/content/home-organization-laundry";
 
 export const metadata: Metadata = {
-  title: `${room.navLabel} | Elevated Home Resets`,
-  description: room.heroSlot.body,
+  title: LAUNDRY_SEO.title,
+  description: LAUNDRY_SEO.description,
 };
 
 export default function LaundryRoomOrganizationPage() {
-  return <OrganizationServiceTemplate heroSlot={room.heroSlot} heroPrice={room.heroPrice} />;
+  return (
+    <OrganizationRoomTemplate
+      currentSlug="laundry-room-organization"
+      heroSlot={LAUNDRY_HERO}
+      heroPrice={LAUNDRY_HERO_PRICE}
+      sections={LAUNDRY_SECTIONS}
+      finalCTA={LAUNDRY_FINAL_CTA}
+    />
+  );
 }

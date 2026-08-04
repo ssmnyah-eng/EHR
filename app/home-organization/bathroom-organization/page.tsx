@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
-import { OrganizationServiceTemplate } from "@/components/services/OrganizationServiceTemplate";
-import { findOrganizationRoomBySlug } from "@/content/home-organization-rooms";
-
-const room = findOrganizationRoomBySlug("bathroom-organization")!;
+import { OrganizationRoomTemplate } from "@/components/services/OrganizationRoomTemplate";
+import { BATHROOM_SEO, BATHROOM_HERO, BATHROOM_HERO_PRICE, BATHROOM_SECTIONS, BATHROOM_FINAL_CTA } from "@/content/home-organization-bathroom";
 
 export const metadata: Metadata = {
-  title: `${room.navLabel} | Elevated Home Resets`,
-  description: room.heroSlot.body,
+  title: BATHROOM_SEO.title,
+  description: BATHROOM_SEO.description,
 };
 
 export default function BathroomOrganizationPage() {
-  return <OrganizationServiceTemplate heroSlot={room.heroSlot} heroPrice={room.heroPrice} />;
+  return (
+    <OrganizationRoomTemplate
+      currentSlug="bathroom-organization"
+      heroSlot={BATHROOM_HERO}
+      heroPrice={BATHROOM_HERO_PRICE}
+      sections={BATHROOM_SECTIONS}
+      finalCTA={BATHROOM_FINAL_CTA}
+    />
+  );
 }

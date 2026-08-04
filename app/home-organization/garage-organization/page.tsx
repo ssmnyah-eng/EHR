@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
-import { OrganizationServiceTemplate } from "@/components/services/OrganizationServiceTemplate";
-import { findOrganizationRoomBySlug } from "@/content/home-organization-rooms";
-
-const room = findOrganizationRoomBySlug("garage-organization")!;
+import { OrganizationRoomTemplate } from "@/components/services/OrganizationRoomTemplate";
+import { GARAGE_SEO, GARAGE_HERO, GARAGE_HERO_PRICE, GARAGE_SECTIONS, GARAGE_FINAL_CTA } from "@/content/home-organization-garage";
 
 export const metadata: Metadata = {
-  title: `${room.navLabel} | Elevated Home Resets`,
-  description: room.heroSlot.body,
+  title: GARAGE_SEO.title,
+  description: GARAGE_SEO.description,
 };
 
 export default function GarageOrganizationPage() {
-  return <OrganizationServiceTemplate heroSlot={room.heroSlot} heroPrice={room.heroPrice} />;
+  return (
+    <OrganizationRoomTemplate
+      currentSlug="garage-organization"
+      heroSlot={GARAGE_HERO}
+      heroPrice={GARAGE_HERO_PRICE}
+      sections={GARAGE_SECTIONS}
+      finalCTA={GARAGE_FINAL_CTA}
+    />
+  );
 }

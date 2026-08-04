@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 export default function ClosetOrganizationPage() {
   return (
     <OrganizationRoomTemplate
+      currentSlug="closet-organization"
       heroSlot={CLOSET_HERO}
       heroPrice={CLOSET_HERO_PRICE}
       sections={CLOSET_SECTIONS}

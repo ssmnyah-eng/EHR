@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 export default function KitchenOrganizationPage() {
   return (
     <OrganizationRoomTemplate
+      currentSlug="kitchen-organization"
       heroSlot={KITCHEN_HERO}
       heroPrice={KITCHEN_HERO_PRICE}
       sections={KITCHEN_SECTIONS}

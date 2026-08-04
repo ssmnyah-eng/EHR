@@ -170,12 +170,13 @@ export interface TierSelectorCardData {
   secondaryCTA?: CTAData;
 }
 
-/** Data for one dedicated Home Organization room/service page. */
+/** Directory entry for one dedicated Home Organization room/service page —
+ *  used to cross-link every room page to the others (see
+ *  RelatedOrganizationLinks). Each room's actual copy lives in its own
+ *  content/home-organization-{room}.ts file. */
 export interface OrganizationRoomData {
   slug: string;
   navLabel: string;
-  heroSlot: ContentSlot;
-  heroPrice: HeroPriceData;
 }
 
 /** Compact "which one do I need" comparison card (e.g. the 3-tier quick
