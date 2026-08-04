@@ -1,4 +1,4 @@
-import type { ContentSlot, HeroPriceData, ServiceDetailSection, ServiceSnapshotData, ChecklistSection, CTAData } from "@/lib/types";
+import type { ContentSlot, HeroPriceData, ServiceDetailSection, ServiceSnapshotData, ChecklistSection, CTAData, InclusionsIntroSegment } from "@/lib/types";
 import { ESTIMATE_CTA } from "@/content/navigation";
 
 /** Final approved copy for the Elevated Reset Clean detail + "What's
@@ -62,8 +62,13 @@ export const ELEVATED_RESET_CLEAN_FINAL_CTA: ContentSlot = {
 };
 
 export const ELEVATED_RESET_CLEAN_INCLUDED_HEADING = "What's Included in an Elevated Reset Clean";
-export const ELEVATED_RESET_CLEAN_INCLUDED_INTRO =
-  "Everything included in Standard Clean and Deep Premium Clean, followed by an intentional reset using your home's existing organization.";
+export const ELEVATED_RESET_CLEAN_INCLUDED_INTRO: InclusionsIntroSegment[] = [
+  { text: "Everything included in " },
+  { text: "Standard Clean", href: "/cleaning/standard-clean/whats-included" },
+  { text: " + " },
+  { text: "Deep Premium Clean", href: "/cleaning/deep-premium-clean/whats-included" },
+  { text: ", plus:" },
+];
 
 export const ELEVATED_RESET_CLEAN_INCLUDED_SECTIONS: ChecklistSection[] = [
   {

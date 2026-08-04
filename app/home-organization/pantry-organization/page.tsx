@@ -1,14 +1,27 @@
 import type { Metadata } from "next";
-import { OrganizationServiceTemplate } from "@/components/services/OrganizationServiceTemplate";
-import { findOrganizationRoomBySlug } from "@/content/home-organization-rooms";
-
-const room = findOrganizationRoomBySlug("pantry-organization")!;
+import { OrganizationRoomTemplate } from "@/components/services/OrganizationRoomTemplate";
+import {
+  PANTRY_SEO,
+  PANTRY_HERO,
+  PANTRY_HERO_PRICE,
+  PANTRY_SECTIONS,
+  PANTRY_PROCESS_STEPS,
+  PANTRY_FINAL_CTA,
+} from "@/content/home-organization-pantry";
 
 export const metadata: Metadata = {
-  title: `${room.navLabel} | Elevated Home Resets`,
-  description: room.heroSlot.body,
+  title: PANTRY_SEO.title,
+  description: PANTRY_SEO.description,
 };
 
 export default function PantryOrganizationPage() {
-  return <OrganizationServiceTemplate heroSlot={room.heroSlot} heroPrice={room.heroPrice} />;
+  return (
+    <OrganizationRoomTemplate
+      heroSlot={PANTRY_HERO}
+      heroPrice={PANTRY_HERO_PRICE}
+      sections={PANTRY_SECTIONS}
+      process={{ steps: PANTRY_PROCESS_STEPS }}
+      finalCTA={PANTRY_FINAL_CTA}
+    />
+  );
 }

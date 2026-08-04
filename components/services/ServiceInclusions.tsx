@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { CTAData, ChecklistSection } from "@/lib/types";
+import type { CTAData, ChecklistSection, InclusionsIntroSegment } from "@/lib/types";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { Heading } from "@/components/typography/Heading";
@@ -10,7 +10,7 @@ import styles from "./ServiceInclusions.module.css";
 
 interface ServiceInclusionsProps {
   heading: string;
-  intro: string;
+  intro: string | InclusionsIntroSegment[];
   sections: ChecklistSection[];
   goodToKnow?: string;
   goodToKnowHeading?: string;
@@ -41,7 +41,19 @@ export function ServiceInclusions({
           <Heading as="h1" size="xl" className={styles.heading}>
             {heading}
           </Heading>
-          <Text size="lg">{intro}</Text>
+          <Text size="lg">
+            {typeof intro === "string"
+              ? intro
+              : intro.map((segment, index) =>
+                  segment.href ? (
+                    <Link key={index} href={segment.href} className={styles.introLink}>
+                      {segment.text}
+                    </Link>
+                  ) : (
+                    <span key={index}>{segment.text}</span>
+                  )
+                )}
+          </Text>
         </Container>
       </Section>
 

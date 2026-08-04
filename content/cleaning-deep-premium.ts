@@ -1,4 +1,4 @@
-import type { ContentSlot, HeroPriceData, ServiceDetailSection, ServiceSnapshotData, ChecklistSection, CTAData } from "@/lib/types";
+import type { ContentSlot, HeroPriceData, ServiceDetailSection, ServiceSnapshotData, ChecklistSection, CTAData, InclusionsIntroSegment } from "@/lib/types";
 import { ESTIMATE_CTA } from "@/content/navigation";
 
 /** Final approved copy for the Deep Premium Clean detail + "What's
@@ -69,8 +69,11 @@ export const DEEP_PREMIUM_CLEAN_FINAL_CTA: ContentSlot = {
 };
 
 export const DEEP_PREMIUM_CLEAN_INCLUDED_HEADING = "What's Included in a Deep Premium Clean";
-export const DEEP_PREMIUM_CLEAN_INCLUDED_INTRO =
-  "Everything included in our Standard Clean, plus detailed attention to areas and buildup that don't require service during every maintenance visit.";
+export const DEEP_PREMIUM_CLEAN_INCLUDED_INTRO: InclusionsIntroSegment[] = [
+  { text: "Everything included in " },
+  { text: "Standard Clean", href: "/cleaning/standard-clean/whats-included" },
+  { text: ", plus:" },
+];
 
 export const DEEP_PREMIUM_CLEAN_INCLUDED_SECTIONS: ChecklistSection[] = [
   {

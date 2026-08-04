@@ -131,11 +131,21 @@ export interface ServiceSnapshotData {
  * One section in a service detail page's body. "statement" is a plain
  * eyebrow/heading/body(/CTA) editorial block; "comparison" is a heading
  * followed by a small grid of cross-sell cards (e.g. "Which clean do you
- * need?").
+ * need?"); "pricing" is a starting-price list (e.g. pantry type ->
+ * starting-price guidance).
  */
 export type ServiceDetailSection =
   | { type: "statement"; slot: ContentSlot }
-  | { type: "comparison"; eyebrow?: string; heading?: string; cards: TeaserCardData[] };
+  | { type: "comparison"; eyebrow?: string; heading?: string; cards: TeaserCardData[] }
+  | { type: "pricing"; eyebrow?: string; items: PricingOptionItem[]; disclaimer?: string; cta: CTAData };
+
+/** One piece of a "What's Included" intro sentence — plain text, or text
+ *  that links to another tier's own What's Included page (e.g. "Standard
+ *  Clean" linking to /cleaning/standard-clean/whats-included). */
+export interface InclusionsIntroSegment {
+  text: string;
+  href?: string;
+}
 
 /** One room/category checklist on a "What's Included" page. */
 export interface ChecklistSection {
@@ -175,4 +185,11 @@ export interface ComparisonSummaryCardData {
   priceLabel: string;
   summary: string;
   think: string;
+}
+
+/** One row in a "Project Options" starting-price list (e.g. pantry type ->
+ *  starting-price guidance). */
+export interface PricingOptionItem {
+  label: string;
+  priceLabel: string;
 }
