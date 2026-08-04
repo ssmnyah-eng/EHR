@@ -23,10 +23,19 @@ export function Hero({ slot }: HeroProps) {
           <Text size="lg">
             <SlotText label="SUPPORT COPY" value={slot.body} />
           </Text>
-          {slot.primaryCTA ? (
-            <Button href={slot.primaryCTA.href} size="lg" className={styles.cta}>
-              {slot.primaryCTA.label}
-            </Button>
+          {slot.primaryCTA || slot.secondaryCTA ? (
+            <div className={styles.ctaRow}>
+              {slot.primaryCTA ? (
+                <Button href={slot.primaryCTA.href} size="lg">
+                  {slot.primaryCTA.label}
+                </Button>
+              ) : null}
+              {slot.secondaryCTA ? (
+                <Button href={slot.secondaryCTA.href} variant="secondary" size="lg">
+                  {slot.secondaryCTA.label}
+                </Button>
+              ) : null}
+            </div>
           ) : null}
         </div>
       </div>

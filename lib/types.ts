@@ -97,6 +97,12 @@ export interface FAQDataset {
   items: FAQItem[];
 }
 
+export interface TeaserCardData {
+  heading: string;
+  body?: string;
+  cta: CTAData;
+}
+
 export interface ResourceItem {
   title: string;
   slug: string;

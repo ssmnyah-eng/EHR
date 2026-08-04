@@ -1,135 +1,146 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
+import { Grid } from "@/components/layout/Grid";
 import { Hero } from "@/components/services/Hero";
-import { ServiceFeature } from "@/components/services/ServiceFeature";
-import { ServiceExplorer } from "@/components/services/ServiceExplorer";
-import { ComingSoonPreview } from "@/components/services/ComingSoonPreview";
-import { FullBleedMedia } from "@/components/media/FullBleedMedia";
 import { EditorialStatement } from "@/components/content/EditorialStatement";
-import { TransformationGrid } from "@/components/transformations/TransformationGrid";
+import { TeaserCard } from "@/components/content/TeaserCard";
+import { ComingSoonPreview } from "@/components/services/ComingSoonPreview";
 import { Process } from "@/components/content/Process";
-import { FounderStory } from "@/components/content/FounderStory";
-import { ProofStrip } from "@/components/content/ProofStrip";
-import { FAQAccordion } from "@/components/content/FAQAccordion";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
-import { CLEANING_SERVICES, HOME_ORGANIZATION, LIFESTYLE_RESETS } from "@/content/navigation";
+import { LIFESTYLE_RESETS } from "@/content/navigation";
 import {
   HERO_SLOT,
-  CLEANING_FEATURE_SLOT,
-  HOME_ORGANIZATION_FEATURE_SLOT,
-  BRAND_PHILOSOPHY_SLOT,
-  FOUNDER_PREVIEW_SLOT,
-  HOMEPAGE_INQUIRY_SLOT,
+  INTRO_SLOT,
+  SERVICE_PATHWAYS_INTRO,
+  SERVICE_PATHWAY_CARDS,
+  CLEANING_SERVICES_INTRO,
+  CLEANING_TIER_CARDS,
+  BRAND_DIFFERENTIATION_SLOT,
+  OUTCOME_SLOT,
+  HOW_IT_WORKS_EYEBROW,
+  HOW_IT_WORKS_HEADING,
+  HOW_IT_WORKS_STEPS,
+  HOW_IT_WORKS_CTA,
+  TRANSFORMATIONS_TEASER,
+  ABOUT_TEASER,
+  LIFESTYLE_RESETS_INTRO,
+  FAQ_TEASER,
+  FINAL_CTA_SLOT,
 } from "@/content/home";
-import { TESTIMONIALS } from "@/content/testimonials";
-import { TRANSFORMATIONS } from "@/content/transformations";
-import { getAllFAQItems } from "@/content/faq";
 
 export const metadata: Metadata = {
   title: "Elevated Home Resets",
-  description: "Cleaning and home organization services.",
+  description:
+    "Thoughtful cleaning and home organization designed to bring your home back to a cleaner, calmer, more manageable place.",
 };
 
 export default function HomePage() {
-  const activeCleaningServices = CLEANING_SERVICES.children ?? [];
-  const organizationPathways = HOME_ORGANIZATION.children ?? [];
-
   return (
     <>
-      {/* 01 — Hero / Elevated Home Resets introduction */}
+      {/* Hero */}
       <Section spacing="lg" surface="background">
         <Container>
           <Hero slot={HERO_SLOT} />
         </Container>
       </Section>
 
-      {/* 02 — Cleaning Services */}
+      {/* Intro / value proposition */}
       <Section spacing="lg" surface="surface">
-        <Container>
-          <ServiceFeature slot={CLEANING_FEATURE_SLOT} mediaLabel="Cleaning services media" />
-        </Container>
-      </Section>
-
-      {/* 03 — Cleaning service explorer */}
-      <Section spacing="md" surface="surface">
         <Container width="content">
-          <ServiceExplorer label="Cleaning Services" items={activeCleaningServices} />
+          <EditorialStatement slot={INTRO_SLOT} />
         </Container>
       </Section>
 
-      {/* 04 — Cleaning outcome / transformation media */}
-      <Section spacing="sm" surface="background">
-        <FullBleedMedia fallbackLabel="Cleaning outcome media" />
+      {/* Service pathways */}
+      <Section spacing="lg" surface="background" id="services">
+        <Container width="content">
+          <EditorialStatement slot={SERVICE_PATHWAYS_INTRO} />
+        </Container>
+        <Container width="content">
+          <Grid columns={2} gap="lg">
+            {SERVICE_PATHWAY_CARDS.map((card, index) => (
+              <TeaserCard key={card.heading} card={card} delay={index * 60} />
+            ))}
+          </Grid>
+        </Container>
       </Section>
 
-      {/* 05 — Home Organization */}
+      {/* Cleaning services */}
       <Section spacing="lg" surface="surface">
-        <Container>
-          <ServiceFeature slot={HOME_ORGANIZATION_FEATURE_SLOT} mediaLabel="Home organization media" />
-        </Container>
-      </Section>
-
-      {/* 06 — Organization pathways */}
-      <Section spacing="md" surface="surface">
         <Container width="content">
-          <ServiceExplorer label="Home Organization" items={organizationPathways} />
+          <EditorialStatement slot={CLEANING_SERVICES_INTRO} />
+        </Container>
+        <Container width="content">
+          <Grid columns={3} gap="lg">
+            {CLEANING_TIER_CARDS.map((card, index) => (
+              <TeaserCard key={card.heading} card={card} delay={index * 60} />
+            ))}
+          </Grid>
         </Container>
       </Section>
 
-      {/* 07 + 08 — Lifestyle Resets & Services + Coming Soon preview */}
+      {/* Brand differentiation */}
       <Section spacing="lg" surface="muted">
+        <Container width="content">
+          <EditorialStatement slot={BRAND_DIFFERENTIATION_SLOT} />
+        </Container>
+      </Section>
+
+      {/* Outcome / transformation */}
+      <Section spacing="lg" surface="background">
+        <Container width="content">
+          <EditorialStatement slot={OUTCOME_SLOT} />
+        </Container>
+      </Section>
+
+      {/* How it works */}
+      <Section spacing="lg" surface="surface">
+        <Container>
+          <Process
+            eyebrow={HOW_IT_WORKS_EYEBROW}
+            heading={HOW_IT_WORKS_HEADING}
+            steps={HOW_IT_WORKS_STEPS}
+            cta={HOW_IT_WORKS_CTA}
+          />
+        </Container>
+      </Section>
+
+      {/* Transformations */}
+      <Section spacing="lg" surface="background">
+        <Container width="content">
+          <EditorialStatement slot={TRANSFORMATIONS_TEASER} />
+        </Container>
+      </Section>
+
+      {/* About */}
+      <Section spacing="lg" surface="surface">
+        <Container width="content">
+          <EditorialStatement slot={ABOUT_TEASER} />
+        </Container>
+      </Section>
+
+      {/* Lifestyle resets & services */}
+      <Section spacing="lg" surface="muted">
+        <Container width="content">
+          <EditorialStatement slot={LIFESTYLE_RESETS_INTRO} />
+        </Container>
         <Container>
           <ComingSoonPreview group={LIFESTYLE_RESETS} />
         </Container>
       </Section>
 
-      {/* 09 — Brand philosophy / why Elevated */}
+      {/* FAQ */}
       <Section spacing="lg" surface="background">
         <Container width="content">
-          <EditorialStatement slot={BRAND_PHILOSOPHY_SLOT} />
+          <EditorialStatement slot={FAQ_TEASER} />
         </Container>
       </Section>
 
-      {/* 10 — Transformations / work */}
-      <Section spacing="lg" surface="surface">
-        <Container>
-          <TransformationGrid projects={TRANSFORMATIONS} />
-        </Container>
-      </Section>
-
-      {/* 11 — Process */}
-      <Section spacing="md" surface="surface">
-        <Container>
-          <Process steps={[{}, {}, {}, {}]} />
-        </Container>
-      </Section>
-
-      {/* 12 — Founder / about preview */}
+      {/* Final CTA */}
       <Section spacing="lg" surface="muted">
         <Container>
-          <FounderStory slot={FOUNDER_PREVIEW_SLOT} />
-        </Container>
-      </Section>
-
-      {/* 13 — Proof */}
-      <Section spacing="md" surface="background">
-        <Container>
-          <ProofStrip eyebrow="What Clients Say" testimonials={TESTIMONIALS} />
-        </Container>
-      </Section>
-
-      {/* 14 — FAQ */}
-      <Section spacing="md" surface="surface">
-        <Container width="content">
-          <FAQAccordion items={getAllFAQItems()} />
-        </Container>
-      </Section>
-
-      {/* 15 — Get Your Free Estimate conversion section */}
-      <Section spacing="lg" surface="muted">
-        <Container>
-          <InquiryCTA slot={HOMEPAGE_INQUIRY_SLOT} />
+          <InquiryCTA slot={FINAL_CTA_SLOT} />
         </Container>
       </Section>
     </>

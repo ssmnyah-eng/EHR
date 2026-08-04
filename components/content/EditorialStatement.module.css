@@ -13,3 +13,8 @@
   max-width: 36ch;
   margin-inline: auto;
 }
+
+.cta {
+  display: inline-block;
+  margin-top: var(--space-lg);
+}

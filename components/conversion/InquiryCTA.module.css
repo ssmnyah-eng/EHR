@@ -19,3 +19,7 @@
   margin-top: var(--space-md);
   max-width: 34ch;
 }
+
+.secondaryCta {
+  margin-top: var(--space-lg);
+}

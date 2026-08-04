@@ -1,6 +1,8 @@
+import type { CTAData } from "@/lib/types";
 import { Eyebrow } from "@/components/typography/Eyebrow";
 import { Heading } from "@/components/typography/Heading";
 import { Text } from "@/components/typography/Text";
+import { Button } from "@/components/content/Button";
 import { SlotText } from "@/components/content/SlotText";
 import { Reveal } from "@/components/motion/Reveal";
 import styles from "./Process.module.css";
@@ -12,16 +14,23 @@ export interface ProcessStep {
 
 interface ProcessProps {
   eyebrow?: string;
+  heading?: string;
   steps: ProcessStep[];
+  cta?: CTAData;
 }
 
 /** Simple, non-over-designed process component (brief section 21). */
-export function Process({ eyebrow, steps }: ProcessProps) {
+export function Process({ eyebrow, heading, steps, cta }: ProcessProps) {
   return (
     <div>
       <Eyebrow className={styles.label}>
         <SlotText label="HOW IT WORKS" value={eyebrow} />
       </Eyebrow>
+      {heading ? (
+        <Heading as="h2" size="lg" className={styles.heading}>
+          {heading}
+        </Heading>
+      ) : null}
       <ol className={styles.steps}>
         {steps.map((step, index) => (
           <Reveal key={index} variant="fade-up" delay={index * 80}>
@@ -37,6 +46,11 @@ export function Process({ eyebrow, steps }: ProcessProps) {
           </Reveal>
         ))}
       </ol>
+      {cta ? (
+        <Button href={cta.href} size="lg" className={styles.cta}>
+          {cta.label}
+        </Button>
+      ) : null}
     </div>
   );
 }

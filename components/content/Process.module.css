@@ -1,5 +1,14 @@
 .label {
+  margin-bottom: var(--space-md);
+}
+
+.heading {
+  max-width: 28ch;
   margin-bottom: var(--space-lg);
+}
+
+.cta {
+  margin-top: var(--space-xl);
 }
 
 .steps {

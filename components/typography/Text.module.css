@@ -1,6 +1,7 @@
 .text {
   font-family: var(--font-body);
   line-height: var(--leading-relaxed);
+  white-space: pre-line;
 }
 
 .lg { font-size: var(--body-lg); }

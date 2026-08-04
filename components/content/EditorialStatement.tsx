@@ -2,6 +2,7 @@ import type { ContentSlot } from "@/lib/types";
 import { Eyebrow } from "@/components/typography/Eyebrow";
 import { Display } from "@/components/typography/Display";
 import { Text } from "@/components/typography/Text";
+import { Button } from "@/components/content/Button";
 import { SlotText } from "@/components/content/SlotText";
 import { Reveal } from "@/components/motion/Reveal";
 import styles from "./EditorialStatement.module.css";
@@ -25,6 +26,11 @@ export function EditorialStatement({ slot }: EditorialStatementProps) {
         <Text size="lg" className={styles.supporting}>
           <SlotText label="SUPPORTING COPY" value={slot.body} />
         </Text>
+        {slot.primaryCTA ? (
+          <Button href={slot.primaryCTA.href} variant="text" className={styles.cta}>
+            {slot.primaryCTA.label} &rarr;
+          </Button>
+        ) : null}
       </div>
     </Reveal>
   );

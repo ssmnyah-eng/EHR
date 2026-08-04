@@ -1,6 +1,7 @@
 import type { ContentSlot } from "@/lib/types";
 import { Display } from "@/components/typography/Display";
 import { Text } from "@/components/typography/Text";
+import { Button } from "@/components/content/Button";
 import { SlotText } from "@/components/content/SlotText";
 import { InquiryForm } from "@/components/conversion/InquiryForm";
 import { Reveal } from "@/components/motion/Reveal";
@@ -24,6 +25,11 @@ export function InquiryCTA({ slot, showForm = true }: InquiryCTAProps) {
           <Text size="lg" className={styles.body}>
             <SlotText label="SUPPORTING COPY" value={slot.body} />
           </Text>
+          {slot.secondaryCTA ? (
+            <Button href={slot.secondaryCTA.href} variant="secondary" size="lg" className={styles.secondaryCta}>
+              {slot.secondaryCTA.label}
+            </Button>
+          ) : null}
         </div>
       </Reveal>
 
