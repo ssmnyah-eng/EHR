@@ -140,7 +140,7 @@ export default function HomePage() {
       {/* Final CTA */}
       <Section spacing="lg" surface="muted">
         <Container>
-          <InquiryCTA slot={FINAL_CTA_SLOT} />
+          <InquiryCTA slot={FINAL_CTA_SLOT} showForm={false} />
         </Container>
       </Section>
     </>

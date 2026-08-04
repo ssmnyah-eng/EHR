@@ -1,11 +1,11 @@
 import type { ContentSlot, HeroPriceData, ServiceDetailSection, CTAData } from "@/lib/types";
-import { ESTIMATE_CTA } from "@/content/navigation";
+import { ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
 
 /** Final approved copy for the dedicated Closet Organization page,
  *  provided directly by the client. No process/steps content was given
  *  for this room, so this page has no process section. */
 
-const CLOSET_CTA: CTAData = { label: "Start Your Closet Estimate", href: ESTIMATE_CTA.href };
+const CLOSET_CTA: CTAData = { label: "Start Your Closet Quote", href: `${ORGANIZATION_QUOTE_CTA.href}?space=closet-organization` };
 
 export const CLOSET_SEO = {
   title: "Closet Organization Services | Elevated Home Resets",
@@ -50,7 +50,7 @@ export const CLOSET_SECTIONS: ServiceDetailSection[] = [
       { label: "Dressing Room / Oversized Closet", priceLabel: "Starting-price guidance: $600" },
     ],
     disclaimer: "Final project price is determined by quote.",
-    cta: { label: "Request Your Closet Estimate", href: ESTIMATE_CTA.href },
+    cta: { label: "Request Your Closet Quote", href: `${ORGANIZATION_QUOTE_CTA.href}?space=closet-organization` },
   },
   {
     type: "statement",

@@ -1,11 +1,11 @@
 import type { ContentSlot, HeroPriceData, ServiceDetailSection, CTAData } from "@/lib/types";
 import type { ProcessStep } from "@/components/content/Process";
-import { ESTIMATE_CTA } from "@/content/navigation";
+import { ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
 
 /** Final approved copy for the dedicated Pantry Organization page,
  *  provided directly by the client. */
 
-const PANTRY_CTA: CTAData = { label: "Start Your Pantry Estimate", href: ESTIMATE_CTA.href };
+const PANTRY_CTA: CTAData = { label: "Start Your Pantry Quote", href: `${ORGANIZATION_QUOTE_CTA.href}?space=pantry-organization` };
 
 export const PANTRY_SEO = {
   title: "Pantry Organization Services | Elevated Home Resets",
@@ -53,7 +53,7 @@ export const PANTRY_SECTIONS: ServiceDetailSection[] = [
     ],
     disclaimer:
       "Organization projects are quote-required. These prices are starting guidance based on pantry type and size rather than guaranteed checkout prices.",
-    cta: { label: "Request Your Pantry Estimate", href: ESTIMATE_CTA.href },
+    cta: { label: "Request Your Pantry Quote", href: `${ORGANIZATION_QUOTE_CTA.href}?space=pantry-organization` },
   },
   {
     type: "statement",

@@ -1,5 +1,5 @@
 import type { ContentSlot, TierSelectorCardData, ComparisonSummaryCardData, CTAData } from "@/lib/types";
-import { ESTIMATE_CTA } from "@/content/navigation";
+import { BOOK_CLEANING_CTA } from "@/content/navigation";
 
 /**
  * Final approved copy for the Cleaning Services hub page (/cleaning),
@@ -16,7 +16,7 @@ export const CLEANING_HUB_HERO: ContentSlot = {
   heading: "Not every home needs the same kind of clean.",
   body: "Whether you're keeping up with your home, catching up on the details, or ready for a more complete reset, Elevated Home Resets gives you a clear level of care to start from.",
   primaryCTA: { label: "Find Your Clean", href: "#selector" },
-  secondaryCTA: ESTIMATE_CTA,
+  secondaryCTA: BOOK_CLEANING_CTA,
 };
 
 export const CLEANING_HUB_INTRO: ContentSlot = {
@@ -76,7 +76,7 @@ export const CLEANING_COMPARISON_CARDS: ComparisonSummaryCardData[] = [
   },
 ];
 
-export const CLEANING_COMPARISON_CTA: CTAData = ESTIMATE_CTA;
+export const CLEANING_COMPARISON_CTA: CTAData = BOOK_CLEANING_CTA;
 
 export const CLEANING_DIFFERENTIATION: ContentSlot = {
   eyebrow: "The Elevated Approach",
@@ -102,7 +102,7 @@ export const CLEANING_ADD_ONS: ContentSlot = {
   eyebrow: "Make It Fit Your Home",
   heading: "Need a little more taken care of?",
   body: "Some tasks require additional time and sit outside the normal scope of your selected cleaning service.\n\nDepending on your service, additional options may include interior oven or refrigerator cleaning, cabinet or drawer interiors, interior window glass, linen changes, laundry, dishes, excessive pet-hair detailing, and more.\n\nAvailable add-ons and pricing can be selected as part of the booking process when applicable.",
-  primaryCTA: { label: "View Cleaning Add-Ons", href: ESTIMATE_CTA.href },
+  primaryCTA: { label: "View Cleaning Add-Ons", href: BOOK_CLEANING_CTA.href },
 };
 
 export const CLEANING_RECURRING: ContentSlot = {
@@ -117,19 +117,19 @@ export const CLEANING_RECURRING_OPTIONS: { heading: string; body: string }[] = [
   { heading: "Every 4 Weeks", body: "Regular maintenance every four weeks." },
 ];
 
-export const CLEANING_RECURRING_CTA: CTAData = { label: "Explore Recurring Cleaning", href: ESTIMATE_CTA.href };
+export const CLEANING_RECURRING_CTA: CTAData = { label: "Explore Recurring Cleaning", href: BOOK_CLEANING_CTA.href };
 
 export const CLEANING_SERVICE_AREA: ContentSlot = {
   eyebrow: "Areas We Serve",
   heading: "Elevated cleaning, close to home.",
   body: "Elevated Home Resets provides cleaning services across our Northern Virginia service area, including Alexandria, Arlington, Ashburn, Fairfax, Falls Church, Herndon, Leesburg, Manassas, Manassas Park, Reston, Tysons, Vienna, and Woodbridge, with additional service in Fredericksburg.",
-  primaryCTA: ESTIMATE_CTA,
+  primaryCTA: BOOK_CLEANING_CTA,
 };
 
 export const CLEANING_FINAL_CTA: ContentSlot = {
   eyebrow: "Start Where You Are",
   heading: "Not sure which clean your home needs?",
   body: "You don't have to diagnose your home before asking for help.\n\nTell us about your space, what you'd like taken care of, and what you're hoping to get back from your home. We'll help you start with the cleaning level that makes sense.",
-  primaryCTA: ESTIMATE_CTA,
+  primaryCTA: BOOK_CLEANING_CTA,
   secondaryCTA: { label: "Compare Cleaning Services", href: "#compare" },
 };

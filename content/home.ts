@@ -1,6 +1,6 @@
 import type { ContentSlot, TeaserCardData, CTAData } from "@/lib/types";
 import type { ProcessStep } from "@/components/content/Process";
-import { ESTIMATE_CTA } from "@/content/navigation";
+import { ESTIMATE_CTA, BOOK_CLEANING_CTA, ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
 
 /**
  * Final approved homepage copy, provided directly by the client. Every
@@ -82,7 +82,7 @@ export const HOW_IT_WORKS_HEADING = "Your reset starts with telling us what you 
 export const HOW_IT_WORKS_STEPS: ProcessStep[] = [
   {
     heading: "Tell us about your home.",
-    description: "Start with an estimate and share what's going on, what you need help with, and the type of service you're considering.",
+    description: "Share what's going on, what you need help with, and the type of service you're considering.",
   },
   {
     heading: "Find the right service.",
@@ -127,5 +127,6 @@ export const FINAL_CTA_SLOT: ContentSlot = {
   eyebrow: "Start Your Reset",
   heading: "Your home doesn't need to be ready for us.",
   body: "That's the point.\n\nTell us what's going on at home and what you'd like help with. We'll help you take the next step toward a space that feels cleaner, calmer, and easier to manage.",
-  secondaryCTA: { label: "Explore Services", href: "#services" },
+  primaryCTA: BOOK_CLEANING_CTA,
+  secondaryCTA: ORGANIZATION_QUOTE_CTA,
 };

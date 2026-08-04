@@ -1,6 +1,6 @@
 import type { ContentSlot, TierSelectorCardData, TeaserCardData, CTAData } from "@/lib/types";
 import type { ProcessStep } from "@/components/content/Process";
-import { ESTIMATE_CTA } from "@/content/navigation";
+import { ESTIMATE_CTA, ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
 
 /**
  * Final approved copy for the Home Organization hub page
@@ -16,7 +16,7 @@ export const HOME_ORG_HUB_HERO: ContentSlot = {
   eyebrow: "Home Organization",
   heading: "Make your home easier to live in.",
   body: "Thoughtful home organization for the spaces that have become cluttered, frustrating, or harder to maintain—so everyday life can move a little more smoothly.",
-  primaryCTA: { label: "Start Your Organization Estimate", href: ESTIMATE_CTA.href },
+  primaryCTA: { label: "Start Your Organization Quote", href: ORGANIZATION_QUOTE_CTA.href },
   secondaryCTA: { label: "Explore Organization Services", href: "#organization-services" },
 };
 
@@ -93,7 +93,7 @@ export const ORGANIZATION_ROOM_CARDS: TierSelectorCardData[] = [
     heading: "Ready to rethink more than one room?",
     body: "For larger organization needs spanning multiple spaces or the home as a whole, we'll build the project around the scope of your home rather than forcing it into a predetermined package.",
     priceLabel: "Custom Project — Quote Required",
-    primaryCTA: { label: "Request a Whole-Home Estimate", href: "/home-organization/whole-home-organization" },
+    primaryCTA: { label: "Request a Whole-Home Quote", href: "/home-organization/whole-home-organization" },
   },
 ];
 
@@ -155,7 +155,7 @@ export const HOME_ORG_PROCESS_STEPS: ProcessStep[] = [
   },
 ];
 
-export const HOME_ORG_PROCESS_CTA: CTAData = { label: "Start Your Organization Estimate", href: ESTIMATE_CTA.href };
+export const HOME_ORG_PROCESS_CTA: CTAData = { label: "Start Your Organization Quote", href: ORGANIZATION_QUOTE_CTA.href };
 
 export const HOME_ORG_VS_CLEANING_INTRO: ContentSlot = {
   eyebrow: "Not Sure Which You Need?",
@@ -176,7 +176,7 @@ export const HOME_ORG_VS_CLEANING_CARDS: TeaserCardData[] = [
   {
     heading: "Need Both?",
     body: "You don't necessarily have to choose one or the other. Cleaning and Organization can work together when your home needs both kinds of support.",
-    cta: { label: "Start an Estimate", href: ESTIMATE_CTA.href },
+    cta: { label: "Get Started", href: ESTIMATE_CTA.href },
   },
 ];
 
@@ -190,7 +190,7 @@ export const HOME_ORG_SERVICE_AREA: ContentSlot = {
   eyebrow: "Areas We Serve",
   heading: "Home organization across Northern Virginia and Fredericksburg.",
   body: "Elevated Home Resets serves Alexandria, Arlington, Ashburn, Fairfax, Falls Church, Herndon, Leesburg, Manassas, Manassas Park, Reston, Tysons, Vienna, Woodbridge, and Fredericksburg.",
-  primaryCTA: { label: "Start Your Estimate", href: ESTIMATE_CTA.href },
+  primaryCTA: { label: "Start Your Organization Quote", href: ORGANIZATION_QUOTE_CTA.href },
 };
 
 /** Universal — reused verbatim on every dedicated room page. */
@@ -198,6 +198,6 @@ export const HOME_ORG_FINAL_CTA: ContentSlot = {
   eyebrow: "Your Space Can Work Better",
   heading: "Start with the room you're tired of fighting.",
   body: "You don't have to have the solution figured out.\n\nShow us the space, tell us what isn't working, and give us a better understanding of what you need help with.\n\nWe'll take it from there.",
-  primaryCTA: { label: "Start Your Organization Estimate", href: ESTIMATE_CTA.href },
+  primaryCTA: { label: "Start Your Organization Quote", href: ORGANIZATION_QUOTE_CTA.href },
   secondaryCTA: { label: "View Organization Packages", href: "/home-organization/organization-packages" },
 };

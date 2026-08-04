@@ -1,11 +1,11 @@
 import type { ContentSlot, HeroPriceData, ServiceDetailSection, CTAData } from "@/lib/types";
-import { ESTIMATE_CTA } from "@/content/navigation";
+import { ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
 
 /** Final approved copy for the dedicated Laundry Room Organization page,
  *  provided directly by the client. No process/steps content was given
  *  for this room, so this page has no process section. */
 
-const LAUNDRY_CTA: CTAData = { label: "Start Your Laundry Room Estimate", href: ESTIMATE_CTA.href };
+const LAUNDRY_CTA: CTAData = { label: "Start Your Laundry Room Quote", href: `${ORGANIZATION_QUOTE_CTA.href}?space=laundry-room-organization` };
 
 export const LAUNDRY_SEO = {
   title: "Laundry Room Organization Services | Elevated Home Resets",
@@ -50,7 +50,7 @@ export const LAUNDRY_SECTIONS: ServiceDetailSection[] = [
       { label: "Oversized Laundry / Household Utility Room", priceLabel: "Starting-price guidance: $600" },
     ],
     disclaimer: "Final project pricing is quote-required.",
-    cta: { label: "Request Your Laundry Room Estimate", href: ESTIMATE_CTA.href },
+    cta: { label: "Request Your Laundry Room Quote", href: `${ORGANIZATION_QUOTE_CTA.href}?space=laundry-room-organization` },
   },
   {
     type: "statement",

@@ -1,10 +1,10 @@
 import type { ContentSlot, HeroPriceData, ServiceDetailSection, ServiceSnapshotData, ChecklistSection, CTAData } from "@/lib/types";
-import { ESTIMATE_CTA } from "@/content/navigation";
+import { BOOK_CLEANING_CTA } from "@/content/navigation";
 
 /** Final approved copy for the Standard Clean detail + "What's Included"
  *  pages, provided directly by the client. */
 
-const BOOK_CTA: CTAData = { label: "Book Your Standard Clean", href: ESTIMATE_CTA.href };
+const BOOK_CTA: CTAData = { label: "Book Your Standard Clean", href: `${BOOK_CLEANING_CTA.href}?service=standard-clean` };
 
 export const STANDARD_CLEAN_HERO: ContentSlot = {
   eyebrow: "Standard Clean",

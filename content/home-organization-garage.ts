@@ -1,5 +1,5 @@
 import type { ContentSlot, HeroPriceData, ServiceDetailSection, CTAData } from "@/lib/types";
-import { ESTIMATE_CTA } from "@/content/navigation";
+import { ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
 
 /** Final approved copy for the dedicated Garage Organization page,
  *  provided directly by the client. No process/steps content was given
@@ -7,7 +7,7 @@ import { ESTIMATE_CTA } from "@/content/navigation";
  *  approved scope boundary: this is professional organization, not
  *  junk/hazmat/hoarding cleanup. */
 
-const GARAGE_CTA: CTAData = { label: "Start Your Garage Estimate", href: ESTIMATE_CTA.href };
+const GARAGE_CTA: CTAData = { label: "Start Your Garage Quote", href: `${ORGANIZATION_QUOTE_CTA.href}?space=garage-organization` };
 
 export const GARAGE_SEO = {
   title: "Garage Organization Services | Elevated Home Resets",
@@ -50,7 +50,7 @@ export const GARAGE_SECTIONS: ServiceDetailSection[] = [
       { label: "Oversized / 3+ Car Garage", priceLabel: "Starting-price guidance: $700+" },
     ],
     disclaimer: "Final pricing is quote-required and based on project scope.",
-    cta: { label: "Request Your Garage Estimate", href: ESTIMATE_CTA.href },
+    cta: { label: "Request Your Garage Quote", href: `${ORGANIZATION_QUOTE_CTA.href}?space=garage-organization` },
   },
   {
     type: "statement",

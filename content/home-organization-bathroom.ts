@@ -1,11 +1,11 @@
 import type { ContentSlot, HeroPriceData, ServiceDetailSection, CTAData } from "@/lib/types";
-import { ESTIMATE_CTA } from "@/content/navigation";
+import { ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
 
 /** Final approved copy for the dedicated Bathroom Organization page,
  *  provided directly by the client. No process/steps content was given
  *  for this room, so this page has no process section. */
 
-const BATHROOM_CTA: CTAData = { label: "Start Your Bathroom Estimate", href: ESTIMATE_CTA.href };
+const BATHROOM_CTA: CTAData = { label: "Start Your Bathroom Quote", href: `${ORGANIZATION_QUOTE_CTA.href}?space=bathroom-organization` };
 
 export const BATHROOM_SEO = {
   title: "Bathroom Organization Services | Elevated Home Resets",
@@ -48,7 +48,7 @@ export const BATHROOM_SECTIONS: ServiceDetailSection[] = [
       { label: "Oversized / Extensive Bathroom Storage", priceLabel: "Starting-price guidance: $500" },
     ],
     disclaimer: "Final price is determined by project quote.",
-    cta: { label: "Request Your Bathroom Estimate", href: ESTIMATE_CTA.href },
+    cta: { label: "Request Your Bathroom Quote", href: `${ORGANIZATION_QUOTE_CTA.href}?space=bathroom-organization` },
   },
   {
     type: "statement",

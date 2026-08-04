@@ -1,10 +1,10 @@
 import type { ContentSlot, HeroPriceData, ServiceDetailSection, ServiceSnapshotData, ChecklistSection, CTAData, InclusionsIntroSegment } from "@/lib/types";
-import { ESTIMATE_CTA } from "@/content/navigation";
+import { BOOK_CLEANING_CTA } from "@/content/navigation";
 
 /** Final approved copy for the Elevated Reset Clean detail + "What's
  *  Included" pages, provided directly by the client. */
 
-const BOOK_CTA: CTAData = { label: "Book Your Elevated Reset", href: ESTIMATE_CTA.href };
+const BOOK_CTA: CTAData = { label: "Book Your Elevated Reset", href: `${BOOK_CLEANING_CTA.href}?service=elevated-reset-clean` };
 
 export const ELEVATED_RESET_CLEAN_HERO: ContentSlot = {
   eyebrow: "Elevated Reset Clean",

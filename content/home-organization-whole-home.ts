@@ -1,6 +1,6 @@
 import type { ContentSlot, HeroPriceData, CTAData } from "@/lib/types";
 import type { ProcessStep } from "@/components/content/Process";
-import { ESTIMATE_CTA } from "@/content/navigation";
+import { ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
 
 /** Final approved copy for the dedicated Whole-Home Organization page,
  *  provided directly by the client. This page is structured differently
@@ -9,7 +9,7 @@ import { ESTIMATE_CTA } from "@/content/navigation";
  *  combine, and a 5-step process) so it isn't built from
  *  OrganizationRoomTemplate. */
 
-const WHOLE_HOME_CTA: CTAData = { label: "Request a Whole-Home Estimate", href: ESTIMATE_CTA.href };
+const WHOLE_HOME_CTA: CTAData = { label: "Request a Whole-Home Quote", href: `${ORGANIZATION_QUOTE_CTA.href}?space=whole-home-organization` };
 const EXPLORE_SPACES_CTA: CTAData = { label: "Explore Individual Spaces", href: "/home-organization#organization-services" };
 const EXPLORE_SERVICES_CTA: CTAData = { label: "Explore Organization Services", href: "/home-organization#organization-services" };
 
@@ -40,7 +40,7 @@ export const WHOLE_HOME_FRICTION: ContentSlot = {
 export const WHOLE_HOME_CUSTOM_PROJECT: ContentSlot = {
   heading: "Your home doesn't need to fit into a package.",
   body: "Whole-home projects can vary substantially in size and complexity.\n\nThat's why we don't attach an artificial starting price to this service.\n\nInstead, you provide information about the home, the spaces involved, and what you need help with. From there, the project can be scoped and quoted around the actual work.\n\nQuote Required",
-  primaryCTA: { label: "Start Your Whole-Home Estimate", href: ESTIMATE_CTA.href },
+  primaryCTA: { label: "Start Your Whole-Home Quote", href: `${ORGANIZATION_QUOTE_CTA.href}?space=whole-home-organization` },
 };
 
 export const WHOLE_HOME_CONNECTIONS_INTRO = "A whole-home project can involve multiple organization areas such as:";

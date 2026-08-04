@@ -74,10 +74,28 @@ export const COMPANY_LINKS: ServiceNode[] = [
   { title: "Contact", slug: "contact", category: "company", status: "active", href: "/contact" },
 ];
 
-/** Primary conversion CTA — centralized so every "Get Your Free Estimate"
- *  button on the site points at one place. Change here, changes everywhere. */
+/**
+ * Two purpose-built conversion funnels, per the approved service model:
+ * Cleaning is direct booking, Home Organization is quote-request. Use
+ * these two CTAs on any page scoped to one funnel; reserve ESTIMATE_CTA
+ * (the gateway page) for pages where the visitor hasn't chosen a service
+ * yet (home, about, "need both" moments).
+ */
+export const BOOK_CLEANING_CTA: CTAData = {
+  label: "Book Your Clean",
+  href: "/book-cleaning",
+};
+
+export const ORGANIZATION_QUOTE_CTA: CTAData = {
+  label: "Request an Organization Quote",
+  href: "/organization-quote",
+};
+
+/** General/undecided-visitor CTA — centralized so every generic "get
+ *  started" button on the site points at the gateway page, which routes
+ *  to one of the two funnels above. Change here, changes everywhere. */
 export const ESTIMATE_CTA: CTAData = {
-  label: "Get Your Free Estimate",
+  label: "Get Started",
   href: "/estimate",
 };
 

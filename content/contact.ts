@@ -5,5 +5,5 @@ import type { ContentSlot } from "@/lib/types";
  * copy exists yet.
  */
 export const CONTACT_SLOT: ContentSlot = {
-  heading: "Get Your Free Estimate",
+  heading: "Get In Touch",
 };

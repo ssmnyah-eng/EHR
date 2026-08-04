@@ -1,11 +1,11 @@
 import type { ContentSlot, HeroPriceData, ServiceDetailSection, CTAData } from "@/lib/types";
-import { ESTIMATE_CTA } from "@/content/navigation";
+import { ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
 
 /** Final approved copy for the dedicated Home Office Organization page,
  *  provided directly by the client. No process/steps content was given
  *  for this room, so this page has no process section. */
 
-const OFFICE_CTA: CTAData = { label: "Start Your Office Estimate", href: ESTIMATE_CTA.href };
+const OFFICE_CTA: CTAData = { label: "Start Your Office Quote", href: `${ORGANIZATION_QUOTE_CTA.href}?space=home-office-organization` };
 
 export const HOME_OFFICE_SEO = {
   title: "Home Office Organization Services | Elevated Home Resets",
@@ -48,7 +48,7 @@ export const HOME_OFFICE_SECTIONS: ServiceDetailSection[] = [
       { label: "Extensive Office / File Storage", priceLabel: "Starting-price guidance: $600" },
     ],
     disclaimer: "Final project price is determined by quote.",
-    cta: { label: "Request Your Office Estimate", href: ESTIMATE_CTA.href },
+    cta: { label: "Request Your Office Quote", href: `${ORGANIZATION_QUOTE_CTA.href}?space=home-office-organization` },
   },
   {
     type: "statement",

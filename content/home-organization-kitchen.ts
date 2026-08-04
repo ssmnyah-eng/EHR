@@ -1,11 +1,11 @@
 import type { ContentSlot, HeroPriceData, ServiceDetailSection, CTAData } from "@/lib/types";
 import type { ProcessStep } from "@/components/content/Process";
-import { ESTIMATE_CTA } from "@/content/navigation";
+import { ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
 
 /** Final approved copy for the dedicated Kitchen Organization page,
  *  provided directly by the client. */
 
-const KITCHEN_CTA: CTAData = { label: "Start Your Kitchen Estimate", href: ESTIMATE_CTA.href };
+const KITCHEN_CTA: CTAData = { label: "Start Your Kitchen Quote", href: `${ORGANIZATION_QUOTE_CTA.href}?space=kitchen-organization` };
 
 export const KITCHEN_SEO = {
   title: "Kitchen Organization Services | Elevated Home Resets",
@@ -49,7 +49,7 @@ export const KITCHEN_SECTIONS: ServiceDetailSection[] = [
       { label: "Oversized Kitchen", priceLabel: "Starting-price guidance: $600" },
     ],
     disclaimer: "Final organization projects are quote-required.",
-    cta: { label: "Request Your Kitchen Estimate", href: ESTIMATE_CTA.href },
+    cta: { label: "Request Your Kitchen Quote", href: `${ORGANIZATION_QUOTE_CTA.href}?space=kitchen-organization` },
   },
   {
     type: "statement",

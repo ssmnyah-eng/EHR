@@ -7,6 +7,7 @@ import { Text } from "@/components/typography/Text";
 import { MediaSlot } from "@/components/media/MediaSlot";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import { findTransformationBySlug, TRANSFORMATIONS } from "@/content/transformations";
+import { ESTIMATE_CTA } from "@/content/navigation";
 import type { ContentSlot } from "@/lib/types";
 
 export function generateStaticParams() {
@@ -23,7 +24,7 @@ export async function generateMetadata(props: PageProps<"/transformations/[slug]
   };
 }
 
-const DETAIL_INQUIRY_SLOT: ContentSlot = { heading: "Get Your Free Estimate" };
+const DETAIL_INQUIRY_SLOT: ContentSlot = { heading: "Ready to Get Started?", primaryCTA: ESTIMATE_CTA };
 
 export default async function TransformationDetailPage(props: PageProps<"/transformations/[slug]">) {
   const { slug } = await props.params;
@@ -52,7 +53,7 @@ export default async function TransformationDetailPage(props: PageProps<"/transf
 
       <Section spacing="lg" surface="muted">
         <Container>
-          <InquiryCTA slot={DETAIL_INQUIRY_SLOT} />
+          <InquiryCTA slot={DETAIL_INQUIRY_SLOT} showForm={false} />
         </Container>
       </Section>
     </>

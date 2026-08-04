@@ -1,10 +1,10 @@
 import type { ContentSlot, HeroPriceData, ServiceDetailSection, ServiceSnapshotData, ChecklistSection, CTAData, InclusionsIntroSegment } from "@/lib/types";
-import { ESTIMATE_CTA } from "@/content/navigation";
+import { BOOK_CLEANING_CTA } from "@/content/navigation";
 
 /** Final approved copy for the Deep Premium Clean detail + "What's
  *  Included" pages, provided directly by the client. */
 
-const BOOK_CTA: CTAData = { label: "Book Your Deep Premium Clean", href: ESTIMATE_CTA.href };
+const BOOK_CTA: CTAData = { label: "Book Your Deep Premium Clean", href: `${BOOK_CLEANING_CTA.href}?service=deep-premium-clean` };
 
 export const DEEP_PREMIUM_CLEAN_HERO: ContentSlot = {
   eyebrow: "Deep Premium Clean",
