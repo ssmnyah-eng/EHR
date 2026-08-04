@@ -1,14 +1,19 @@
 import type { Metadata } from "next";
-import { OrganizationServiceTemplate } from "@/components/services/OrganizationServiceTemplate";
-import { findOrganizationRoomBySlug } from "@/content/home-organization-rooms";
-
-const room = findOrganizationRoomBySlug("closet-organization")!;
+import { OrganizationRoomTemplate } from "@/components/services/OrganizationRoomTemplate";
+import { CLOSET_SEO, CLOSET_HERO, CLOSET_HERO_PRICE, CLOSET_SECTIONS, CLOSET_FINAL_CTA } from "@/content/home-organization-closet";
 
 export const metadata: Metadata = {
-  title: `${room.navLabel} | Elevated Home Resets`,
-  description: room.heroSlot.body,
+  title: CLOSET_SEO.title,
+  description: CLOSET_SEO.description,
 };
 
 export default function ClosetOrganizationPage() {
-  return <OrganizationServiceTemplate heroSlot={room.heroSlot} heroPrice={room.heroPrice} />;
+  return (
+    <OrganizationRoomTemplate
+      heroSlot={CLOSET_HERO}
+      heroPrice={CLOSET_HERO_PRICE}
+      sections={CLOSET_SECTIONS}
+      finalCTA={CLOSET_FINAL_CTA}
+    />
+  );
 }

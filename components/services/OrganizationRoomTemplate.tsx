@@ -18,7 +18,7 @@ interface OrganizationRoomTemplateProps {
   heroSlot: ContentSlot;
   heroPrice: HeroPriceData;
   sections: ServiceDetailSection[];
-  process: OrganizationRoomProcess;
+  process?: OrganizationRoomProcess;
   finalCTA: ContentSlot;
 }
 
@@ -26,7 +26,8 @@ interface OrganizationRoomTemplateProps {
  * Shared structure for a dedicated Home Organization room page: hero (with
  * starting-price guidance), a sequence of editorial/pricing/comparison
  * sections (problem, outcome, project options, light cleaning, etc. — the
- * exact mix varies room to room), a process, and a final CTA.
+ * exact mix varies room to room), an optional process (not every room's
+ * approved copy includes one), and a final CTA.
  */
 export function OrganizationRoomTemplate({ heroSlot, heroPrice, sections, process, finalCTA }: OrganizationRoomTemplateProps) {
   return (
@@ -39,11 +40,13 @@ export function OrganizationRoomTemplate({ heroSlot, heroPrice, sections, proces
 
       <ServiceSectionList sections={sections} />
 
-      <Section spacing="lg" surface="surface">
-        <Container>
-          <Process eyebrow={process.eyebrow} heading={process.heading} steps={process.steps} cta={process.cta} />
-        </Container>
-      </Section>
+      {process ? (
+        <Section spacing="lg" surface="surface">
+          <Container>
+            <Process eyebrow={process.eyebrow} heading={process.heading} steps={process.steps} cta={process.cta} />
+          </Container>
+        </Section>
+      ) : null}
 
       <Section spacing="lg" surface="muted">
         <Container>
