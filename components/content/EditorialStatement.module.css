@@ -14,7 +14,14 @@
   margin-inline: auto;
 }
 
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
 .cta {
   display: inline-block;
-  margin-top: var(--space-lg);
 }

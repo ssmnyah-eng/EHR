@@ -26,10 +26,19 @@ export function EditorialStatement({ slot }: EditorialStatementProps) {
         <Text size="lg" className={styles.supporting}>
           <SlotText label="SUPPORTING COPY" value={slot.body} />
         </Text>
-        {slot.primaryCTA ? (
-          <Button href={slot.primaryCTA.href} variant="text" className={styles.cta}>
-            {slot.primaryCTA.label} &rarr;
-          </Button>
+        {slot.primaryCTA || slot.secondaryCTA ? (
+          <div className={styles.ctaRow}>
+            {slot.primaryCTA ? (
+              <Button href={slot.primaryCTA.href} variant="text" className={styles.cta}>
+                {slot.primaryCTA.label} &rarr;
+              </Button>
+            ) : null}
+            {slot.secondaryCTA ? (
+              <Button href={slot.secondaryCTA.href} variant="text" className={styles.cta}>
+                {slot.secondaryCTA.label} &rarr;
+              </Button>
+            ) : null}
+          </div>
         ) : null}
       </div>
     </Reveal>
