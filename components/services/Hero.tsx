@@ -30,9 +30,11 @@ export function Hero({ slot, price }: HeroProps) {
               <Text as="span" size="sm" tone="primary" className={styles.priceLabel}>
                 {price.label}
               </Text>
-              <Text as="span" size="sm" className={styles.priceNote}>
-                {price.note}
-              </Text>
+              {price.note ? (
+                <Text as="span" size="sm" className={styles.priceNote}>
+                  {price.note}
+                </Text>
+              ) : null}
             </div>
           ) : null}
           {slot.primaryCTA || slot.secondaryCTA ? (

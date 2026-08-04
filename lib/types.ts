@@ -115,7 +115,7 @@ export interface ResourceItem {
 /** Pricing/labor callout shown in a service hero (e.g. "Starting at $140"). */
 export interface HeroPriceData {
   label: string;
-  note: string;
+  note?: string;
 }
 
 /** Bordered "at a glance" box on a service detail page. */
@@ -142,4 +142,37 @@ export interface ChecklistSection {
   heading: string;
   intro?: string;
   items: string[];
+}
+
+/**
+ * A single tier/room card in a hub-page selector grid (e.g. the 3 cleaning
+ * tiers on /cleaning, the 8 rooms on /home-organization). `kicker` and
+ * `bestFit` are optional since not every hub uses them.
+ */
+export interface TierSelectorCardData {
+  label: string;
+  kicker?: string;
+  heading: string;
+  body: string;
+  priceLabel: string;
+  bestFit?: string;
+  primaryCTA: CTAData;
+  secondaryCTA?: CTAData;
+}
+
+/** Data for one dedicated Home Organization room/service page. */
+export interface OrganizationRoomData {
+  slug: string;
+  navLabel: string;
+  heroSlot: ContentSlot;
+  heroPrice: HeroPriceData;
+}
+
+/** Compact "which one do I need" comparison card (e.g. the 3-tier quick
+ *  comparison on /cleaning). */
+export interface ComparisonSummaryCardData {
+  title: string;
+  priceLabel: string;
+  summary: string;
+  think: string;
 }

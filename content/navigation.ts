@@ -7,11 +7,10 @@
  * the single source of truth that drives desktop nav, mobile nav, service
  * explorers, related-service components, and (later) sitemap generation.
  *
- * Individual room pathways under Home Organization intentionally do not
- * have their own routes yet (see brief: "do not create thin SEO pages
- * simply because each room is listed in navigation"). Their hrefs point at
- * the Organization Packages / Home Organization overview until a real
- * SEO/content strategy calls for dedicated pages.
+ * Room pathways under Home Organization link to their own dedicated pages
+ * now that approved copy exists for each (see
+ * content/home-organization-rooms.ts). "Whole Room" has no matching
+ * dedicated page yet and still points at the Home Organization overview.
  */
 
 import type { ServiceNode, CTAData } from "@/lib/types";
@@ -31,13 +30,13 @@ export const HOME_ORGANIZATION: ServiceNode = {
       href: "/home-organization/organization-packages",
     },
     { title: "Whole Room", slug: "whole-room", category: "home-organization", status: "active", href: "/home-organization" },
-    { title: "Kitchen", slug: "kitchen", category: "home-organization", status: "active", href: "/home-organization" },
-    { title: "Pantry", slug: "pantry", category: "home-organization", status: "active", href: "/home-organization" },
-    { title: "Closet", slug: "closet", category: "home-organization", status: "active", href: "/home-organization" },
-    { title: "Bathroom", slug: "bathroom", category: "home-organization", status: "active", href: "/home-organization" },
-    { title: "Garage", slug: "garage", category: "home-organization", status: "active", href: "/home-organization" },
-    { title: "Home Office", slug: "home-office", category: "home-organization", status: "active", href: "/home-organization" },
-    { title: "Laundry Room", slug: "laundry-room", category: "home-organization", status: "active", href: "/home-organization" },
+    { title: "Kitchen", slug: "kitchen", category: "home-organization", status: "active", href: "/home-organization/kitchen-organization" },
+    { title: "Pantry", slug: "pantry", category: "home-organization", status: "active", href: "/home-organization/pantry-organization" },
+    { title: "Closet", slug: "closet", category: "home-organization", status: "active", href: "/home-organization/closet-organization" },
+    { title: "Bathroom", slug: "bathroom", category: "home-organization", status: "active", href: "/home-organization/bathroom-organization" },
+    { title: "Garage", slug: "garage", category: "home-organization", status: "active", href: "/home-organization/garage-organization" },
+    { title: "Home Office", slug: "home-office", category: "home-organization", status: "active", href: "/home-organization/home-office-organization" },
+    { title: "Laundry Room", slug: "laundry-room", category: "home-organization", status: "active", href: "/home-organization/laundry-room-organization" },
   ],
 };
 
