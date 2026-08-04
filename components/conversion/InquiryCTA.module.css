@@ -1,0 +1,21 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+@media (max-width: 56rem) {
+  .wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+.intro {
+  max-width: 32rem;
+}
+
+.body {
+  margin-top: var(--space-md);
+  max-width: 34ch;
+}

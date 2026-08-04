@@ -1,0 +1,117 @@
+.panel {
+  position: fixed;
+  inset: 0;
+  top: 0;
+  z-index: var(--z-mobile-nav);
+  background: var(--color-background);
+  transform: translateY(-8px);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity var(--duration-medium) var(--ease-standard),
+    transform var(--duration-medium) var(--ease-standard),
+    visibility 0s linear var(--duration-medium);
+  overflow-y: auto;
+  padding-top: 4.5rem;
+}
+
+.panel.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transition: opacity var(--duration-medium) var(--ease-standard),
+    transform var(--duration-medium) var(--ease-standard);
+}
+
+@media (min-width: 64rem) {
+  .panel {
+    display: none;
+  }
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-lg) var(--page-gutter-mobile) var(--space-xl);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.topLink {
+  display: block;
+  padding: var(--space-md) 0;
+  font-family: var(--font-display);
+  font-size: var(--heading-sm);
+  color: var(--color-text-primary);
+}
+
+.groupTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-md) 0;
+  text-align: left;
+}
+
+.groupTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-display);
+  font-size: var(--heading-sm);
+  color: var(--color-text-primary);
+}
+
+.chevron {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-right: 1.5px solid var(--color-text-primary);
+  border-bottom: 1.5px solid var(--color-text-primary);
+  transform: rotate(45deg);
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.chevronOpen {
+  transform: rotate(225deg);
+}
+
+.sublist {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows var(--duration-medium) var(--ease-standard);
+}
+
+.sublist > * {
+  overflow: hidden;
+}
+
+.sublistOpen {
+  grid-template-rows: 1fr;
+  padding-bottom: var(--space-sm);
+}
+
+.subLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: var(--space-xs) 0 var(--space-xs) var(--space-md);
+  font-family: var(--font-body);
+  font-size: var(--body-lg);
+  color: var(--color-text-secondary);
+}
+
+.cta {
+  width: 100%;
+}

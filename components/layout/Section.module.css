@@ -1,0 +1,36 @@
+.section {
+  width: 100%;
+}
+
+.spacing-sm {
+  padding-block: var(--section-sm);
+}
+
+.spacing-md {
+  padding-block: var(--section-md);
+}
+
+.spacing-lg {
+  padding-block: var(--section-lg);
+}
+
+.spacing-xl {
+  padding-block: var(--section-xl);
+}
+
+.surface-background {
+  background: var(--color-background);
+}
+
+.surface-surface {
+  background: var(--color-surface);
+}
+
+.surface-muted {
+  background: var(--color-surface-muted);
+}
+
+.surface-accent {
+  background: var(--color-accent);
+  color: var(--color-text-inverse);
+}
