@@ -1,0 +1,11 @@
+.intro {
+  margin-bottom: var(--space-xl);
+}
+
+.choices {
+  margin-top: var(--space-lg);
+}
+
+.contactRow {
+  margin-top: var(--space-md);
+}

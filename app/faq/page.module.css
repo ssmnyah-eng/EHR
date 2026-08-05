@@ -1,0 +1,8 @@
+.intro {
+  max-width: 46ch;
+  margin-bottom: var(--space-lg);
+}
+
+.pathwayStrip {
+  margin-top: var(--space-xl);
+}

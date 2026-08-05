@@ -1,0 +1,10 @@
+.heading {
+  font-family: var(--font-display);
+  letter-spacing: var(--tracking-tight);
+  font-weight: 500;
+}
+
+.xl { font-size: var(--heading-xl); }
+.lg { font-size: var(--heading-lg); }
+.md { font-size: var(--heading-md); }
+.sm { font-size: var(--heading-sm); }

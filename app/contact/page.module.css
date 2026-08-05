@@ -1,0 +1,24 @@
+.intro {
+  max-width: 46ch;
+  margin-bottom: var(--space-lg);
+}
+
+.routing {
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-xl);
+  max-width: 34rem;
+}
+
+.routingLabel {
+  font-size: var(--body-sm);
+  color: var(--color-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.routingRow {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}

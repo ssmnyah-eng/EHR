@@ -1,0 +1,27 @@
+.statement {
+  max-width: 48rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.large {
+  margin-top: var(--space-md);
+}
+
+.supporting {
+  margin-top: var(--space-lg);
+  max-width: 36ch;
+  margin-inline: auto;
+}
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.cta {
+  display: inline-block;
+}

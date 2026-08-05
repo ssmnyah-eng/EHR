@@ -1,0 +1,33 @@
+.heading {
+  margin-top: var(--space-xs);
+  margin-bottom: var(--space-xs);
+}
+
+.intro {
+  max-width: 46ch;
+}
+
+.serviceArea {
+  margin-top: var(--space-xs);
+  max-width: 46ch;
+}
+
+.ctaBody {
+  margin-top: var(--space-2xs);
+  margin-bottom: var(--space-md);
+  max-width: 46ch;
+}
+
+.ctaRow {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.relatedHeading {
+  margin-bottom: var(--space-md);
+}
+
+.backLink {
+  padding: 0;
+}

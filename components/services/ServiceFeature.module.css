@@ -1,0 +1,27 @@
+.feature {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.heading {
+  margin-top: var(--space-sm);
+  max-width: 24ch;
+}
+
+.bodyRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.body {
+  max-width: 34ch;
+}
+
+.media {
+  width: 100%;
+}

@@ -1,0 +1,13 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-status-coming-soon-text);
+  background: var(--color-status-coming-soon-bg);
+  border-radius: var(--radius-sm);
+  padding: 0.1875rem 0.4375rem;
+}

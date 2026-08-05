@@ -1,0 +1,13 @@
+.text {
+  font-family: var(--font-body);
+  line-height: var(--leading-relaxed);
+  white-space: pre-line;
+}
+
+.lg { font-size: var(--body-lg); }
+.md { font-size: var(--body-md); }
+.sm { font-size: var(--body-sm); }
+
+.primary { color: var(--color-text-primary); }
+.secondary { color: var(--color-text-secondary); }
+.muted { color: var(--color-muted); }
