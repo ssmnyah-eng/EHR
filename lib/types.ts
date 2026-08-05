@@ -141,6 +141,10 @@ export interface FAQCategoryData {
 export interface TeaserCardData {
   heading: string;
   body?: string;
+  /** Optional starting-price callout (e.g. "Starting at $140") — reuses
+   *  the same approved figure already published on the service's own
+   *  detail page, never a new number. */
+  priceLabel?: string;
   cta: CTAData;
 }
 

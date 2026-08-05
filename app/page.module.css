@@ -17,6 +17,22 @@
   background: var(--color-border-strong);
 }
 
+/* Bare editorial pull-quote — no attribution/name beneath it, unlike
+   ServiceProof's QuoteBlock (which always renders one). Used for the
+   Cleaning chapter's short historical-review excerpt; matches
+   ServiceProof's own .editorialQuote treatment so it reads as the same
+   typographic moment. */
+.cleaningProofQuote {
+  font-family: var(--font-editorial);
+  font-size: clamp(2.75rem, 2rem + 3vw, 4rem);
+  font-style: italic;
+  line-height: var(--leading-tight);
+  max-width: 22ch;
+  margin-inline: auto;
+  text-align: center;
+  color: var(--color-text-primary);
+}
+
 .serviceAreaNote {
   margin-top: var(--space-lg);
   font-family: var(--font-body);

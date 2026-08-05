@@ -46,16 +46,26 @@ export const LASHON_PATTERSON = {
 
 /**
  * Historical testimonial from work performed under the founder's prior
- * business, Validate Your Vision (VYV) — approved for use on this site
- * as general founder/service-history proof, explicitly NOT as proof for
- * any specific current Cleaning or Organization service (see
- * attributionNote, which must always accompany this quote). Preserves
- * "VYV" verbatim; do not imply the review was originally about Elevated
- * Home Resets.
+ * business, Validate Your Vision (VYV). The fuller review + attribution
+ * note (see ABOUT_HISTORY_PROOF in content/about.ts) always keeps the
+ * VYV/prior-business context attached — that is where this quote's true
+ * provenance is preserved. The short `quotes.professionalism` excerpt
+ * below was separately approved for use as a general
+ * professionalism/service-quality proof moment (e.g. a bare editorial
+ * pull-quote, no name/source directly underneath, matching how other
+ * short excerpts appear elsewhere on the site) — it must never be
+ * presented as if originally submitted for Elevated Home Resets, and
+ * the junk-removal-specific portion of the full review (elided here)
+ * must never be used as evidence of a Cleaning result. Preserves "VYV"
+ * verbatim in the full review; do not imply the review was originally
+ * about Elevated Home Resets.
  */
 export const VICKI_JOHNSON = {
   name: "Vicki Johnson",
   attributionNote: "Client review from prior work under Validate Your Vision",
   fullReview:
     "Absolutely one of the most professional, accommodating, and hard workers that I have come across! I highly recommend VYV!! Super fast and great service! Had a ton of junk and broken things needed hauled away! They came when they said, took care of everything were friendly and professional. Prices very reasonable!",
+  quotes: {
+    professionalism: "Absolutely one of the most professional, accommodating, and hard workers that I have come across!",
+  },
 } as const;

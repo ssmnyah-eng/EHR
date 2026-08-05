@@ -27,6 +27,7 @@ export function ServiceEditorialGrid({ items, columns = 3 }: ServiceEditorialGri
             <Heading as="h3" size="md" className={styles.heading}>
               {item.heading}
             </Heading>
+            {item.priceLabel ? <span className={styles.price}>{item.priceLabel}</span> : null}
             {item.body ? (
               <Text size="md" className={styles.body}>
                 {item.body}

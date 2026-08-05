@@ -6,6 +6,12 @@ import { BOOK_CLEANING_CTA } from "@/content/navigation";
 
 const BOOK_CTA: CTAData = { label: "Book Your Standard Clean", href: `${BOOK_CLEANING_CTA.href}?service=standard-clean` };
 
+/** Reused verbatim as the supporting copy for the homepage's Cleaning
+ *  "value moment" (see CLEANING_VALUE_HEADING in content/home.ts) — one
+ *  string, two placements, so it can never drift between them. */
+export const STANDARD_CLEAN_DETAIL_BODY =
+  "Counters cleaned. Bathrooms refreshed. Floors cared for. Dust addressed. Beds straightened. High-touch areas cleaned. Everyday surfaces brought back to a fresh baseline.\n\nThe goal isn't simply to check off chores.\n\nIt's to leave your home feeling noticeably cared for when you walk back into it.";
+
 export const STANDARD_CLEAN_HERO: ContentSlot = {
   eyebrow: "Standard Clean",
   heading: "Keep your home feeling clean, comfortable, and cared for.",
@@ -33,7 +39,7 @@ export const STANDARD_CLEAN_SECTIONS: ServiceDetailSection[] = [
     slot: {
       eyebrow: "What It Takes Off Your Plate",
       heading: "Less time catching up. More time enjoying your home.",
-      body: "Counters cleaned. Bathrooms refreshed. Floors cared for. Dust addressed. Beds straightened. High-touch areas cleaned. Everyday surfaces brought back to a fresh baseline.\n\nThe goal isn't simply to check off chores.\n\nIt's to leave your home feeling noticeably cared for when you walk back into it.",
+      body: STANDARD_CLEAN_DETAIL_BODY,
       media: { type: "image", alt: "A freshly cleaned kitchen counter and sink", variant: "landscape" },
     },
   },

@@ -16,6 +16,14 @@ import { ESTIMATE_CTA, BOOK_CLEANING_CTA } from "@/content/navigation";
  * into distinct narrative chapters) reordered which section each of
  * these slots renders in on app/page.tsx — again, no string below was
  * added, removed, or reworded.
+ *
+ * CLEANING_EXPLANATION_SLOT and CLEANING_VALUE_SLOT's headings are new
+ * copy, explicitly supplied and approved by the owner (in the request
+ * that asked for a fuller Cleaning chapter) rather than pre-existing
+ * approved text — every other string in this file predates that
+ * request. CLEANING_VALUE_SLOT's body reuses an already-approved
+ * paragraph from content/cleaning-standard.ts verbatim rather than
+ * inventing new supporting copy.
  */
 
 export const HERO_SLOT: ContentSlot = {
@@ -66,19 +74,45 @@ export const CLEANING_TIER_CARDS: TeaserCardData[] = [
   {
     heading: "Standard Clean",
     body: "For homes that need consistent cleaning and ongoing maintenance.",
+    // Reuses the exact approved starting price already published on
+    // /cleaning and the tier's own detail page — not a new figure.
+    priceLabel: "Starting at $140",
     cta: { label: "Explore Standard Clean", href: "/cleaning/standard-clean" },
   },
   {
     heading: "Deep Premium Clean",
     body: "For homes that need more detailed attention beyond routine cleaning.",
+    priceLabel: "Starting at $270",
     cta: { label: "Explore Deep Premium Clean", href: "/cleaning/deep-premium-clean" },
   },
   {
     heading: "Elevated Reset Clean",
     body: "For homes that need a more comprehensive cleaning reset before moving forward.",
+    priceLabel: "Starting at $400",
     cta: { label: "Explore Elevated Reset Clean", href: "/cleaning/elevated-reset-clean" },
   },
 ];
+
+/**
+ * New copy, owner-approved specifically for expanding the homepage's
+ * Cleaning chapter (see the "Cleaning homepage chapter needs more
+ * depth" request) — explains WHY Cleaning comes in different levels,
+ * ahead of the three tiers below it.
+ */
+export const CLEANING_EXPLANATION_SLOT: ContentSlot = {
+  eyebrow: "Why Different Levels of Care",
+  heading: "Your home doesn't always need more cleaning. It needs the right level of cleaning.",
+  body: "Some homes need ongoing upkeep. Some need more time and attention. Some need a more complete reset. Elevated Home Resets offers different levels of Cleaning so customers can choose the service that fits what their home needs.",
+};
+
+/**
+ * New heading, owner-approved for the same Cleaning-chapter-expansion
+ * request. Body reuses the existing approved paragraph from
+ * STANDARD_CLEAN_SECTIONS (content/cleaning-standard.ts) verbatim
+ * rather than inventing new supporting copy — see the import in
+ * app/page.tsx.
+ */
+export const CLEANING_VALUE_HEADING = "The details change how the whole home feels.";
 
 export const BRAND_DIFFERENTIATION_SLOT: ContentSlot = {
   eyebrow: "A Different Kind of Home Service",

@@ -20,7 +20,9 @@ import { ServicePathwayStrip } from "@/components/content/ServicePathwayStrip";
 import { LIFESTYLE_RESETS, CLEANING_PATHWAY_PANEL, ORGANIZATION_PATHWAY_PANEL } from "@/content/navigation";
 import { HOME_ORG_PROOF } from "@/content/home-organization";
 import { SERVICE_AREAS_INTRO } from "@/content/service-areas";
-import { KIM_NELSON } from "@/content/testimonials";
+import { KIM_NELSON, VICKI_JOHNSON } from "@/content/testimonials";
+import { CLEANING_FINAL_CTA } from "@/content/cleaning";
+import { STANDARD_CLEAN_DETAIL_BODY } from "@/content/cleaning-standard";
 import styles from "./page.module.css";
 import {
   HERO_SLOT,
@@ -29,6 +31,8 @@ import {
   SERVICE_PATHWAY_CARDS,
   CLEANING_SERVICES_INTRO,
   CLEANING_TIER_CARDS,
+  CLEANING_EXPLANATION_SLOT,
+  CLEANING_VALUE_HEADING,
   BRAND_DIFFERENTIATION_SLOT,
   OUTCOME_SLOT,
   HOW_IT_WORKS_EYEBROW,
@@ -86,6 +90,13 @@ const CLEANING_MEDIA: MediaSlotData = {
   variant: "landscape",
 };
 
+const CLEANING_DETAIL_MEDIA: MediaSlotData = {
+  type: "image",
+  alt: "A freshly cleaned kitchen counter and sink",
+  variant: "portrait",
+  aspectRatio: "4 / 5",
+};
+
 const ORGANIZATION_MEDIA: MediaSlotData = {
   type: "image",
   alt: "A completed Home Organization project",
@@ -141,13 +152,15 @@ export default function HomePage() {
       </Section>
 
       {/* ===== CLEANING CHAPTER =====
-          04 — Opens immediately after the brand promise: why Cleaning
-          isn't one-size-fits-all, then the three service levels. id
-          "services" now lives here (was on the pathways-recap section
-          below) since this is where service explanation actually
-          begins post-reorder — see Hero's "Explore Services" CTA. */}
+          04a — Opens immediately after the brand promise: a "Cleaning"
+          chapter tag (mirrors the "Home Organization" tag below), why
+          Cleaning isn't one-size-fits-all, then the three service
+          levels. id "services" lives here since this is where service
+          explanation actually begins — see Hero's "Explore Services"
+          CTA. */}
       <Section spacing="lg" surface="surface" id="services">
         <Container width="wide">
+          <Eyebrow className={styles.chapterTag}>{CLEANING_PATHWAY_PANEL.eyebrow}</Eyebrow>
           <EditorialSplit
             eyebrow={CLEANING_SERVICES_INTRO.eyebrow}
             heading={CLEANING_SERVICES_INTRO.heading ?? ""}
@@ -158,6 +171,68 @@ export default function HomePage() {
         </Container>
         <Container width="wide" className={styles.tierGrid}>
           <ServiceEditorialGrid items={CLEANING_TIER_CARDS} columns={3} />
+        </Container>
+      </Section>
+
+      {/* 04b — Why different levels exist at all, ahead of visitors
+          picking one. */}
+      <Section spacing="lg" surface="background">
+        <Container width="wide">
+          <TypeLedStatement
+            eyebrow={CLEANING_EXPLANATION_SLOT.eyebrow}
+            heading={CLEANING_EXPLANATION_SLOT.heading ?? ""}
+            body={CLEANING_EXPLANATION_SLOT.body ?? ""}
+          />
+        </Container>
+      </Section>
+
+      {/* 04c — Cleaning editorial/value moment: large statement paired
+          with Cleaning-specific media. Body copy reuses the approved
+          Standard Clean detail paragraph verbatim. */}
+      <Section spacing="lg" surface="surface">
+        <Container width="wide">
+          <EditorialSplit heading={CLEANING_VALUE_HEADING} body={STANDARD_CLEAN_DETAIL_BODY} media={CLEANING_DETAIL_MEDIA} reverse />
+        </Container>
+      </Section>
+
+      {/* 04d — Cleaning social proof: a short, approved excerpt from a
+          historical review (prior business, full context preserved on
+          /about) — bare editorial pull-quote, no name/source beneath it,
+          consistent with how other short excerpts appear on this page. */}
+      <Section spacing="lg" surface="muted">
+        <Container width="content">
+          <blockquote className={styles.cleaningProofQuote}>&ldquo;{VICKI_JOHNSON.quotes.professionalism}&rdquo;</blockquote>
+        </Container>
+      </Section>
+
+      {/* 04e — Cleaning reassurance: this statement's own language
+          ("you don't need to clean before we clean") is the most
+          Cleaning-specific reassurance line in the approved copy, so it
+          moved here from the Organization chapter (which keeps its own
+          separate reassurance moment — see ABOUT_TEASER below). */}
+      <Section spacing="lg" surface="surface">
+        <Container width="wide">
+          <EditorialSplit
+            eyebrow={BRAND_DIFFERENTIATION_SLOT.eyebrow}
+            heading={BRAND_DIFFERENTIATION_SLOT.heading ?? ""}
+            body={BRAND_DIFFERENTIATION_SLOT.body}
+            media={CUSTOMER_LIFE_MEDIA}
+          />
+        </Container>
+      </Section>
+
+      {/* 04f — Cleaning conversion moment, before the chapter ends.
+          Reuses the Cleaning hub's own approved final-CTA copy
+          verbatim; only the secondary link target changes (from
+          "#compare", an anchor that only exists on /cleaning, to the
+          Cleaning hub itself — a same-page-anchor would 404 as a
+          homepage link). */}
+      <Section spacing="lg" surface="muted">
+        <Container>
+          <InquiryCTA
+            slot={{ ...CLEANING_FINAL_CTA, secondaryCTA: { label: "Explore Cleaning Services", href: "/cleaning" } }}
+            showForm={false}
+          />
         </Container>
       </Section>
 
@@ -210,23 +285,14 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* 08 — Organization reassurance: clutter/overwhelm empathy,
-          image-left copy-right */}
-      <Section spacing="lg" surface="surface">
-        <Container width="wide">
-          <EditorialSplit
-            eyebrow={BRAND_DIFFERENTIATION_SLOT.eyebrow}
-            heading={BRAND_DIFFERENTIATION_SLOT.heading ?? ""}
-            body={BRAND_DIFFERENTIATION_SLOT.body}
-            media={CUSTOMER_LIFE_MEDIA}
-            reverse
-          />
-        </Container>
-      </Section>
-
-      {/* 09 — Organization reassurance, continued: personal-care closer,
-          copy-left media-right */}
-      <Section spacing="lg" surface="background">
+      {/* 08 — Organization reassurance / personal-care closer. (The
+          Organization chapter previously also carried
+          BRAND_DIFFERENTIATION_SLOT here — that statement's own
+          language is Cleaning-specific ("you don't need to clean
+          before we clean"), so it now lives in the Cleaning chapter
+          instead; Organization keeps this one as its own distinct
+          reassurance moment, per the no-duplication instruction.) */}
+      <Section spacing="lg" surface="muted">
         <Container width="wide">
           <EditorialSplit
             eyebrow={ABOUT_TEASER.eyebrow}
