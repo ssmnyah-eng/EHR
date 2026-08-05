@@ -1,0 +1,12 @@
+.pathwaysGrid {
+  margin-top: var(--space-xl);
+}
+
+.tierGrid {
+  margin-top: var(--space-2xl);
+}
+
+.serviceAreaNote {
+  margin-top: var(--space-xl);
+  text-align: center;
+}

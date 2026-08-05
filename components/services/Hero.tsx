@@ -1,4 +1,5 @@
 import type { ContentSlot, HeroPriceData } from "@/lib/types";
+import { Eyebrow } from "@/components/typography/Eyebrow";
 import { Display } from "@/components/typography/Display";
 import { Text } from "@/components/typography/Text";
 import { Button } from "@/components/content/Button";
@@ -18,9 +19,16 @@ export function Hero({ slot, price }: HeroProps) {
   return (
     <div className={styles.hero}>
       <div className={styles.top}>
-        <Display as="h1" size="xl" className={styles.heading}>
-          <SlotText label="LARGE H1 SLOT" value={slot.heading} />
-        </Display>
+        <div className={styles.headingCol}>
+          {slot.eyebrow ? (
+            <Eyebrow className={styles.eyebrow}>
+              <SlotText label="EYEBROW" value={slot.eyebrow} />
+            </Eyebrow>
+          ) : null}
+          <Display as="h1" size="xl" className={styles.heading}>
+            <SlotText label="LARGE H1 SLOT" value={slot.heading} />
+          </Display>
+        </div>
         <div className={styles.support}>
           <Text size="lg">
             <SlotText label="SUPPORT COPY" value={slot.body} />

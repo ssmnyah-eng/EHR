@@ -35,6 +35,10 @@ interface ServiceProofProps {
    *  renders only the quote and attribution, no eyebrow/heading/body/
    *  media/CTA even if supplied. */
   compact?: boolean;
+  /** Renders the primary quote at large, standalone pull-quote scale —
+   *  for a homepage/hub moment where the testimonial itself is the
+   *  section's focal point rather than a supporting element. */
+  editorial?: boolean;
 }
 
 function Stars({ rating }: { rating: number }) {
@@ -46,11 +50,20 @@ function Stars({ rating }: { rating: number }) {
   );
 }
 
-function QuoteBlock({ quote, attribution, attributionNote, rating, secondary }: ServiceProofQuote & { secondary?: boolean }) {
+function QuoteBlock({
+  quote,
+  attribution,
+  attributionNote,
+  rating,
+  secondary,
+  editorial,
+}: ServiceProofQuote & { secondary?: boolean; editorial?: boolean }) {
   return (
     <figure className={secondary ? styles.secondaryQuoteBlock : styles.quoteBlock}>
       {rating ? <Stars rating={rating} /> : null}
-      <blockquote className={secondary ? styles.secondaryQuote : styles.quote}>&ldquo;{quote}&rdquo;</blockquote>
+      <blockquote className={[secondary ? styles.secondaryQuote : styles.quote, editorial ? styles.editorialQuote : ""].join(" ")}>
+        &ldquo;{quote}&rdquo;
+      </blockquote>
       <figcaption className={styles.attribution}>
         <span className={styles.name}>{attribution}</span>
         {attributionNote ? <span className={styles.attributionNote}>{attributionNote}</span> : null}
@@ -66,7 +79,7 @@ function QuoteBlock({ quote, attribution, attributionNote, rating, secondary }: 
  * Never renders placeholder/fabricated content — every prop here should
  * trace to a real, approved testimonial (see content/testimonials.ts).
  */
-export function ServiceProof({ eyebrow, heading, body, primary, secondary, media, cta, compact = false }: ServiceProofProps) {
+export function ServiceProof({ eyebrow, heading, body, primary, secondary, media, cta, compact = false, editorial = false }: ServiceProofProps) {
   if (compact) {
     return (
       <div className={styles.compact}>
@@ -116,7 +129,7 @@ export function ServiceProof({ eyebrow, heading, body, primary, secondary, media
           </div>
         ) : null}
 
-        <QuoteBlock {...primary} />
+        <QuoteBlock {...primary} editorial={editorial} />
         {secondary ? <QuoteBlock {...secondary} secondary /> : null}
 
         {cta ? (

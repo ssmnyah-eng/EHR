@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { MediaSlotData } from "@/lib/types";
+import { SHOW_SLOT_LABELS } from "@/lib/dev";
 import styles from "./MediaSlot.module.css";
 
 interface MediaSlotProps {
@@ -36,8 +37,13 @@ export function MediaSlot({ data, className, fill = false }: MediaSlotProps) {
         style={{ aspectRatio }}
         data-media-slot
       >
-        <span className={styles.placeholderLabel}>MEDIA SLOT</span>
-        {data?.alt ? <span className={styles.placeholderCaption}>{data.alt}</span> : null}
+        {/* Dev-only label so the empty framework stays inspectable while
+            building — never shipped to production (see lib/dev.ts). The
+            visual treatment itself (the gradient background) is what
+            production sees: an intentional neutral placeholder, not a
+            blank box or a "MEDIA SLOT" dev label. */}
+        {SHOW_SLOT_LABELS ? <span className={styles.placeholderLabel}>MEDIA SLOT</span> : null}
+        {SHOW_SLOT_LABELS && data?.alt ? <span className={styles.placeholderCaption}>{data.alt}</span> : null}
       </div>
     );
   }

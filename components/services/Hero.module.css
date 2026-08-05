@@ -18,6 +18,15 @@
   }
 }
 
+.headingCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.eyebrow {
+  margin-bottom: var(--space-sm);
+}
+
 .heading {
   max-width: 16ch;
 }

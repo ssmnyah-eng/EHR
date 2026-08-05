@@ -83,6 +83,12 @@
   color: var(--color-text-primary);
 }
 
+.editorialQuote {
+  font-size: var(--display-md);
+  line-height: var(--leading-tight);
+  max-width: 22ch;
+}
+
 .secondaryQuoteBlock {
   display: flex;
   flex-direction: column;

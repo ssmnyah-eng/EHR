@@ -13,7 +13,14 @@
 
 .line-reveal {
   transform: translateY(0.5rem);
-  clip-path: inset(0 0 100% 0);
+  /* A fully-collapsed clip (100%) leaves the element with zero rendered
+     area, which makes IntersectionObserver report a permanent 0
+     intersection ratio in Chromium — the observer's callback never fires
+     `isIntersecting: true`, so the element never becomes visible at all.
+     Stop just short of fully clipped (still reads as the same "line
+     reveal" effect) so the target always has a non-zero intersecting
+     area to observe. */
+  clip-path: inset(0 0 96% 0);
   transition: opacity var(--duration-slow) var(--ease-enter), transform var(--duration-slow) var(--ease-enter),
     clip-path var(--duration-slow) var(--ease-enter);
 }

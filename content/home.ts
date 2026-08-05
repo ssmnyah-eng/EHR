@@ -1,12 +1,17 @@
 import type { ContentSlot, TeaserCardData, CTAData } from "@/lib/types";
 import type { ProcessStep } from "@/components/content/Process";
-import { ESTIMATE_CTA } from "@/content/navigation";
-import { LASHON_PATTERSON } from "@/content/testimonials";
+import { ESTIMATE_CTA, BOOK_CLEANING_CTA } from "@/content/navigation";
 
 /**
  * Final approved homepage copy, provided directly by the client. Every
- * section below maps 1:1 to a section of the approved copy doc — do not
- * add, remove, or reword sections without new instruction.
+ * string below is the exact approved copy — do not add, remove, or
+ * reword any of it without new instruction. The homepage-correction pass
+ * (editorial density + composition) only changed which component renders
+ * each section and added CTA wiring to already-existing routes/CTA
+ * constants — it did not touch any of the text itself. The homepage's
+ * social-proof and systems-positioning moment now reuses HOME_ORG_PROOF
+ * from content/home-organization.ts (already-approved copy, already
+ * published there) instead of duplicating a thinner version of it here.
  */
 
 export const HERO_SLOT: ContentSlot = {
@@ -15,6 +20,10 @@ export const HERO_SLOT: ContentSlot = {
   body: "Thoughtful cleaning and home organization designed to bring your home back to a cleaner, calmer, more manageable place.",
   primaryCTA: ESTIMATE_CTA,
   secondaryCTA: { label: "Explore Services", href: "#services" },
+  // Explicit aspect ratio override — the "hero" variant default (3/2) reads
+  // very tall/blank on a full-width hero; a shorter editorial ratio keeps
+  // the same full-bleed placeholder system but in a more proportionate size.
+  media: { type: "image", alt: "Hero media", variant: "hero", aspectRatio: "2 / 1", priority: true },
 };
 
 export const INTRO_SLOT: ContentSlot = {
@@ -42,14 +51,11 @@ export const SERVICE_PATHWAY_CARDS: TeaserCardData[] = [
   },
 ];
 
-export const HOME_ORG_PROOF_POINT = {
-  primary: { quote: LASHON_PATTERSON.quotes.maintainability, attribution: LASHON_PATTERSON.name, rating: LASHON_PATTERSON.rating },
-};
-
 export const CLEANING_SERVICES_INTRO: ContentSlot = {
   eyebrow: "Cleaning Services",
   heading: "Not every home needs the same kind of clean.",
   body: "Choose the level of care that matches your home today.",
+  primaryCTA: BOOK_CLEANING_CTA,
 };
 
 export const CLEANING_TIER_CARDS: TeaserCardData[] = [
@@ -101,6 +107,14 @@ export const HOW_IT_WORKS_STEPS: ProcessStep[] = [
 
 export const HOW_IT_WORKS_CTA: CTAData = ESTIMATE_CTA;
 
+/**
+ * Approved copy, kept for reuse — the homepage correction pass
+ * de-emphasizes Transformations as a homepage promotion per the current
+ * launch strategy (before/after proof gets distributed onto the pages
+ * for the service being sold, rather than centered in its own homepage
+ * section), so this is not currently rendered on / . The /transformations
+ * route itself is untouched.
+ */
 export const TRANSFORMATIONS_TEASER: ContentSlot = {
   eyebrow: "Transformations",
   heading: "See the difference a reset can make.",

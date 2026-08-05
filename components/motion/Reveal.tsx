@@ -37,7 +37,14 @@ export function Reveal({ variant = "fade-up", delay = 0, children, className }: 
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
+      // A non-zero threshold interacts badly with the clip-path variants
+      // above: intersectionRatio is computed against the *clipped*
+      // rendered area, not the full layout box, so a mostly-clipped
+      // "line-reveal" element (only a small sliver visible at rest) can
+      // never reach a 15%-of-original-box ratio and would never fire.
+      // threshold: 0 fires on any non-zero intersection instead, which
+      // rootMargin alone is enough to time reasonably.
+      { threshold: 0, rootMargin: "0px 0px -8% 0px" }
     );
 
     observer.observe(node);
