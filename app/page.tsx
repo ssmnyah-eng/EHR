@@ -8,12 +8,14 @@ import { TeaserCard } from "@/components/content/TeaserCard";
 import { ComingSoonPreview } from "@/components/services/ComingSoonPreview";
 import { Process } from "@/components/content/Process";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
+import { ServiceProof } from "@/components/content/ServiceProof";
 import { LIFESTYLE_RESETS } from "@/content/navigation";
 import {
   HERO_SLOT,
   INTRO_SLOT,
   SERVICE_PATHWAYS_INTRO,
   SERVICE_PATHWAY_CARDS,
+  HOME_ORG_PROOF_POINT,
   CLEANING_SERVICES_INTRO,
   CLEANING_TIER_CARDS,
   BRAND_DIFFERENTIATION_SLOT,
@@ -63,6 +65,9 @@ export default function HomePage() {
               <TeaserCard key={card.heading} card={card} delay={index * 60} />
             ))}
           </Grid>
+        </Container>
+        <Container width="content">
+          <ServiceProof primary={HOME_ORG_PROOF_POINT.primary} compact />
         </Container>
       </Section>
 

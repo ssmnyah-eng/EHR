@@ -7,6 +7,8 @@ import { ServiceSectionList } from "@/components/services/ServiceSectionList";
 import { Process } from "@/components/content/Process";
 import { RelatedOrganizationLinks } from "@/components/services/RelatedOrganizationLinks";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
+import { ServiceProof } from "@/components/content/ServiceProof";
+import type { ServiceProofQuote, ServiceProofMedia } from "@/components/content/ServiceProof";
 
 interface OrganizationRoomProcess {
   eyebrow?: string;
@@ -15,12 +17,25 @@ interface OrganizationRoomProcess {
   cta?: CTAData;
 }
 
+interface OrganizationRoomProof {
+  eyebrow?: string;
+  heading?: string;
+  body?: string;
+  primary: ServiceProofQuote;
+  secondary?: ServiceProofQuote;
+  media?: ServiceProofMedia;
+}
+
 interface OrganizationRoomTemplateProps {
   currentSlug: string;
   heroSlot: ContentSlot;
   heroPrice: HeroPriceData;
   sections: ServiceDetailSection[];
   process?: OrganizationRoomProcess;
+  /** Optional real-customer-proof section, rendered after Process and
+   *  before the related-rooms/final-CTA close. Omit entirely on rooms
+   *  without a supplied testimonial — do not fabricate one. */
+  proof?: OrganizationRoomProof;
   finalCTA: ContentSlot;
 }
 
@@ -32,7 +47,7 @@ interface OrganizationRoomTemplateProps {
  * approved copy includes one), cross-links to the hub/packages/other
  * rooms, and a final CTA.
  */
-export function OrganizationRoomTemplate({ currentSlug, heroSlot, heroPrice, sections, process, finalCTA }: OrganizationRoomTemplateProps) {
+export function OrganizationRoomTemplate({ currentSlug, heroSlot, heroPrice, sections, process, proof, finalCTA }: OrganizationRoomTemplateProps) {
   return (
     <>
       <Section spacing="lg" surface="background">
@@ -47,6 +62,21 @@ export function OrganizationRoomTemplate({ currentSlug, heroSlot, heroPrice, sec
         <Section spacing="lg" surface="surface">
           <Container>
             <Process eyebrow={process.eyebrow} heading={process.heading} steps={process.steps} cta={process.cta} />
+          </Container>
+        </Section>
+      ) : null}
+
+      {proof ? (
+        <Section spacing="lg" surface="muted">
+          <Container width="content">
+            <ServiceProof
+              eyebrow={proof.eyebrow}
+              heading={proof.heading}
+              body={proof.body}
+              primary={proof.primary}
+              secondary={proof.secondary}
+              media={proof.media}
+            />
           </Container>
         </Section>
       ) : null}

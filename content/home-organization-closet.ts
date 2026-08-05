@@ -1,5 +1,6 @@
 import type { ContentSlot, HeroPriceData, ServiceDetailSection, CTAData } from "@/lib/types";
 import { ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
+import { KIM_NELSON } from "@/content/testimonials";
 
 /** Final approved copy for the dedicated Closet Organization page,
  *  provided directly by the client. No process/steps content was given
@@ -65,6 +66,13 @@ export const CLOSET_SECTIONS: ServiceDetailSection[] = [
     },
   },
 ];
+
+export const CLOSET_PROOF = {
+  eyebrow: "What Clients Say",
+  heading: "From overwhelmed to easy to live with.",
+  primary: { quote: KIM_NELSON.quotes.overwhelm, attribution: KIM_NELSON.name, rating: KIM_NELSON.rating },
+  secondary: { quote: KIM_NELSON.quotes.system, attribution: KIM_NELSON.name },
+};
 
 export const CLOSET_FINAL_CTA: ContentSlot = {
   heading: "Stop fighting your closet.",

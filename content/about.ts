@@ -1,5 +1,6 @@
 import type { ContentSlot } from "@/lib/types";
 import { ESTIMATE_CTA } from "@/content/navigation";
+import { VICKI_JOHNSON } from "@/content/testimonials";
 
 /** Final approved copy for the About page, provided directly by the
  *  client. */
@@ -47,6 +48,15 @@ export const ABOUT_PERSONAL_CLOSE_SLOT: ContentSlot = {
   heading: "This company is personal to me.",
   body: "When you invite someone into your home, you're trusting them with a space that is incredibly personal.\n\nI don't take that lightly.\n\nElevated Home Resets is the company I created because I believe home services can be thoughtful, detailed, supportive, and genuinely helpful—not just transactional.\n\nMy hope is that when the work is finished, you notice more than what we cleaned or organized.\n\nI hope you feel the difference.",
   media: { type: "image", alt: "Second founder image / candid lifestyle image", variant: "portrait" },
+};
+
+export const ABOUT_HISTORY_PROOF = {
+  eyebrow: "Before Elevated Home Resets",
+  primary: {
+    quote: VICKI_JOHNSON.fullReview,
+    attribution: VICKI_JOHNSON.name,
+    attributionNote: VICKI_JOHNSON.attributionNote,
+  },
 };
 
 export const ABOUT_FINAL_CTA_SLOT: ContentSlot = {

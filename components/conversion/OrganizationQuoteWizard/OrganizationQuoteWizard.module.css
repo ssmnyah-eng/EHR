@@ -312,6 +312,10 @@
   margin-top: var(--space-lg);
 }
 
+.trustQuote {
+  margin-top: var(--space-md);
+}
+
 .photoInstructionItem {
   display: flex;
   flex-direction: column;

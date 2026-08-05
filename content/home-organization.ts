@@ -1,6 +1,7 @@
 import type { ContentSlot, TierSelectorCardData, TeaserCardData, CTAData } from "@/lib/types";
 import type { ProcessStep } from "@/components/content/Process";
 import { ESTIMATE_CTA, ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
+import { KIM_NELSON, LASHON_PATTERSON } from "@/content/testimonials";
 
 /**
  * Final approved copy for the Home Organization hub page
@@ -191,6 +192,14 @@ export const HOME_ORG_SERVICE_AREA: ContentSlot = {
   heading: "Home organization across Northern Virginia and Fredericksburg.",
   body: "Elevated Home Resets serves Alexandria, Arlington, Ashburn, Fairfax, Falls Church, Herndon, Leesburg, Manassas, Manassas Park, Reston, Tysons, Vienna, Woodbridge, and Fredericksburg.",
   primaryCTA: { label: "Start Your Organization Quote", href: ORGANIZATION_QUOTE_CTA.href },
+};
+
+export const HOME_ORG_PROOF = {
+  eyebrow: "Pretty Isn't Enough",
+  heading: "The system has to work.",
+  body: "Anyone can make a space look organized for one afternoon. What matters is whether it still makes sense weeks later, once real life — groceries, laundry, kids, routines — starts happening in it again.",
+  primary: { quote: LASHON_PATTERSON.quotes.maintainability, attribution: LASHON_PATTERSON.name, rating: LASHON_PATTERSON.rating },
+  secondary: { quote: KIM_NELSON.quotes.system, attribution: KIM_NELSON.name },
 };
 
 /** Universal — reused verbatim on every dedicated room page. */

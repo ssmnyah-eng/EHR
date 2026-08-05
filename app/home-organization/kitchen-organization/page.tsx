@@ -6,6 +6,7 @@ import {
   KITCHEN_HERO_PRICE,
   KITCHEN_SECTIONS,
   KITCHEN_PROCESS_STEPS,
+  KITCHEN_PROOF,
   KITCHEN_FINAL_CTA,
 } from "@/content/home-organization-kitchen";
 
@@ -22,6 +23,7 @@ export default function KitchenOrganizationPage() {
       heroPrice={KITCHEN_HERO_PRICE}
       sections={KITCHEN_SECTIONS}
       process={{ steps: KITCHEN_PROCESS_STEPS }}
+      proof={KITCHEN_PROOF}
       finalCTA={KITCHEN_FINAL_CTA}
     />
   );

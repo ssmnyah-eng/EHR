@@ -1,6 +1,7 @@
 import type { ContentSlot, HeroPriceData, CTAData } from "@/lib/types";
 import type { ProcessStep } from "@/components/content/Process";
 import { ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
+import { KIM_NELSON } from "@/content/testimonials";
 
 /** Final approved copy for the dedicated Whole-Home Organization page,
  *  provided directly by the client. This page is structured differently
@@ -93,6 +94,13 @@ export const WHOLE_HOME_NO_JUDGMENT: ContentSlot = {
   eyebrow: "Show Us the Real Home",
   heading: "Please don't organize before asking us to organize.",
   body: "We need to understand what's actually happening across the spaces you want help with.\n\nYou don't need to make them presentable first.\n\nYou don't need to apologize for them.\n\nAnd you don't need to know how to fix them before contacting us.\n\nThat's why you're asking for help.",
+};
+
+export const WHOLE_HOME_PROOF = {
+  eyebrow: "What Clients Say",
+  heading: "From overwhelmed to functioning as a whole.",
+  primary: { quote: KIM_NELSON.quotes.overwhelm, attribution: KIM_NELSON.name, rating: KIM_NELSON.rating },
+  secondary: { quote: KIM_NELSON.quotes.system, attribution: KIM_NELSON.name },
 };
 
 export const WHOLE_HOME_FINAL_CTA: ContentSlot = {

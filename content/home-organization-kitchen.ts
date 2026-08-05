@@ -1,6 +1,7 @@
 import type { ContentSlot, HeroPriceData, ServiceDetailSection, CTAData } from "@/lib/types";
 import type { ProcessStep } from "@/components/content/Process";
 import { ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
+import { KIM_NELSON } from "@/content/testimonials";
 
 /** Final approved copy for the dedicated Kitchen Organization page,
  *  provided directly by the client. */
@@ -79,6 +80,13 @@ export const KITCHEN_PROCESS_STEPS: ProcessStep[] = [
     description: "We work through the organization project with function and everyday usability in mind.",
   },
 ];
+
+export const KITCHEN_PROOF = {
+  eyebrow: "What Clients Say",
+  heading: "Function, not just a fresh look.",
+  body: "Kitchen Organization is about creating placement that matches how you actually cook, shop, and move through the space.",
+  primary: { quote: KIM_NELSON.quotes.system, attribution: KIM_NELSON.name, rating: KIM_NELSON.rating },
+};
 
 export const KITCHEN_FINAL_CTA: ContentSlot = {
   heading: "Your kitchen should work as hard as you do.",

@@ -235,7 +235,8 @@ export const HOME_ORGANIZATION_FAQ_SECTIONS: FAQSection[] = [
       },
       {
         question: "What if I feel overwhelmed by the space?",
-        answer: "That's a normal reason to reach out. Our quote process asks how the space is affecting you so we understand what you want it to feel like when we're done, not just where things go.",
+        answer:
+          "That's a normal reason to reach out. Our quote process asks how the space is affecting you so we understand what you want it to feel like when we're done, not just where things go.\n\n“Everything started off overwhelmingly cluttered, and I honestly didn't know where to begin.” — Kim Nelson",
       },
       {
         question: "What if the room has become difficult to use?",

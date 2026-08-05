@@ -5,6 +5,7 @@ import {
   HOME_OFFICE_HERO,
   HOME_OFFICE_HERO_PRICE,
   HOME_OFFICE_SECTIONS,
+  HOME_OFFICE_PROOF,
   HOME_OFFICE_FINAL_CTA,
 } from "@/content/home-organization-home-office";
 
@@ -20,6 +21,7 @@ export default function HomeOfficeOrganizationPage() {
       heroSlot={HOME_OFFICE_HERO}
       heroPrice={HOME_OFFICE_HERO_PRICE}
       sections={HOME_OFFICE_SECTIONS}
+      proof={HOME_OFFICE_PROOF}
       finalCTA={HOME_OFFICE_FINAL_CTA}
     />
   );

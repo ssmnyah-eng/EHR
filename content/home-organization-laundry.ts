@@ -1,5 +1,6 @@
 import type { ContentSlot, HeroPriceData, ServiceDetailSection, CTAData } from "@/lib/types";
 import { ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
+import { KIM_NELSON } from "@/content/testimonials";
 
 /** Final approved copy for the dedicated Laundry Room Organization page,
  *  provided directly by the client. No process/steps content was given
@@ -59,6 +60,11 @@ export const LAUNDRY_SECTIONS: ServiceDetailSection[] = [
     },
   },
 ];
+
+export const LAUNDRY_PROOF = {
+  eyebrow: "What Clients Say About Home Organization",
+  primary: { quote: KIM_NELSON.quotes.system, attribution: KIM_NELSON.name, rating: KIM_NELSON.rating },
+};
 
 export const LAUNDRY_FINAL_CTA: ContentSlot = {
   heading: "Make the room behind the chores feel like less of a chore.",

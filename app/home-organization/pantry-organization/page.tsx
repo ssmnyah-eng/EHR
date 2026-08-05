@@ -6,6 +6,7 @@ import {
   PANTRY_HERO_PRICE,
   PANTRY_SECTIONS,
   PANTRY_PROCESS_STEPS,
+  PANTRY_PROOF,
   PANTRY_FINAL_CTA,
 } from "@/content/home-organization-pantry";
 
@@ -22,6 +23,7 @@ export default function PantryOrganizationPage() {
       heroPrice={PANTRY_HERO_PRICE}
       sections={PANTRY_SECTIONS}
       process={{ steps: PANTRY_PROCESS_STEPS }}
+      proof={PANTRY_PROOF}
       finalCTA={PANTRY_FINAL_CTA}
     />
   );

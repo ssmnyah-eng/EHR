@@ -1,6 +1,7 @@
 import type { ContentSlot, TeaserCardData, CTAData } from "@/lib/types";
 import type { ProcessStep } from "@/components/content/Process";
 import { ESTIMATE_CTA, BOOK_CLEANING_CTA, ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
+import { LASHON_PATTERSON } from "@/content/testimonials";
 
 /**
  * Final approved homepage copy, provided directly by the client. Every
@@ -40,6 +41,10 @@ export const SERVICE_PATHWAY_CARDS: TeaserCardData[] = [
     cta: { label: "Explore Home Organization", href: "/home-organization" },
   },
 ];
+
+export const HOME_ORG_PROOF_POINT = {
+  primary: { quote: LASHON_PATTERSON.quotes.maintainability, attribution: LASHON_PATTERSON.name, rating: LASHON_PATTERSON.rating },
+};
 
 export const CLEANING_SERVICES_INTRO: ContentSlot = {
   eyebrow: "Cleaning Services",

@@ -7,6 +7,7 @@ import { LinkedConnections } from "@/components/services/LinkedConnections";
 import { Process } from "@/components/content/Process";
 import { RelatedOrganizationLinks } from "@/components/services/RelatedOrganizationLinks";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
+import { ServiceProof } from "@/components/content/ServiceProof";
 import {
   WHOLE_HOME_SEO,
   WHOLE_HOME_HERO,
@@ -21,6 +22,7 @@ import {
   WHOLE_HOME_PRODUCTS,
   WHOLE_HOME_PROCESS_STEPS,
   WHOLE_HOME_NO_JUDGMENT,
+  WHOLE_HOME_PROOF,
   WHOLE_HOME_FINAL_CTA,
 } from "@/content/home-organization-whole-home";
 
@@ -87,6 +89,17 @@ export default function WholeHomeOrganizationPage() {
       <Section spacing="lg" surface="muted">
         <Container width="content">
           <EditorialStatement slot={WHOLE_HOME_NO_JUDGMENT} />
+        </Container>
+      </Section>
+
+      <Section spacing="lg" surface="background">
+        <Container width="content">
+          <ServiceProof
+            eyebrow={WHOLE_HOME_PROOF.eyebrow}
+            heading={WHOLE_HOME_PROOF.heading}
+            primary={WHOLE_HOME_PROOF.primary}
+            secondary={WHOLE_HOME_PROOF.secondary}
+          />
         </Container>
       </Section>
 

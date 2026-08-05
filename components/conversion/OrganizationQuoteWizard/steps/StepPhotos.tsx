@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, type ChangeEvent } from "react";
 import { PHOTO_INSTRUCTIONS, PHOTO_PRIVACY_NOTE } from "@/content/organization-quote";
+import { KIM_NELSON } from "@/content/testimonials";
+import { ServiceProof } from "@/components/content/ServiceProof";
 import type { StepProps } from "../types";
 import styles from "../OrganizationQuoteWizard.module.css";
 
@@ -97,6 +99,13 @@ export function StepPhotos({ state, updateField }: StepProps) {
         </div>
 
         <p className={styles.helpText}>{PHOTO_PRIVACY_NOTE}</p>
+
+        <div className={styles.trustQuote}>
+          <ServiceProof
+            primary={{ quote: KIM_NELSON.quotes.care, attribution: KIM_NELSON.name }}
+            compact
+          />
+        </div>
       </div>
 
       <div className={`${styles.fieldGroup} ${styles.measurementsGroup}`}>

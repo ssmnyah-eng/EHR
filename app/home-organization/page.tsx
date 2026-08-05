@@ -8,6 +8,7 @@ import { TierSelectorCard } from "@/components/services/TierSelectorCard";
 import { TeaserCard } from "@/components/content/TeaserCard";
 import { Process } from "@/components/content/Process";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
+import { ServiceProof } from "@/components/content/ServiceProof";
 import {
   HOME_ORG_HUB_HERO,
   HOME_ORG_INTRO,
@@ -27,6 +28,7 @@ import {
   HOME_ORG_VS_CLEANING_CARDS,
   HOME_ORG_TRUST,
   HOME_ORG_SERVICE_AREA,
+  HOME_ORG_PROOF,
   HOME_ORG_FINAL_CTA,
 } from "@/content/home-organization";
 
@@ -145,6 +147,19 @@ export default function HomeOrganizationHubPage() {
       <Section spacing="lg" surface="background">
         <Container width="content">
           <EditorialStatement slot={HOME_ORG_SERVICE_AREA} />
+        </Container>
+      </Section>
+
+      {/* Real-results proof */}
+      <Section spacing="lg" surface="muted">
+        <Container width="content">
+          <ServiceProof
+            eyebrow={HOME_ORG_PROOF.eyebrow}
+            heading={HOME_ORG_PROOF.heading}
+            body={HOME_ORG_PROOF.body}
+            primary={HOME_ORG_PROOF.primary}
+            secondary={HOME_ORG_PROOF.secondary}
+          />
         </Container>
       </Section>
 

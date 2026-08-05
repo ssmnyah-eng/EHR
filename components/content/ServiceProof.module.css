@@ -1,0 +1,138 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  max-width: var(--reading-max);
+}
+
+.heading {
+  margin-top: var(--space-2xs);
+}
+
+.body {
+  max-width: 60ch;
+}
+
+/* ===== Media ===== */
+
+.mediaPair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+@media (max-width: 40rem) {
+  .mediaPair {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mediaSingle {
+  max-width: 32rem;
+}
+
+.mediaItem {
+  position: relative;
+}
+
+.mediaLabel {
+  position: absolute;
+  top: var(--space-xs);
+  left: var(--space-xs);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: rgba(23, 24, 26, 0.72);
+  color: #faf9f6;
+  font-size: var(--caption-size);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+.mediaCaption {
+  margin-top: var(--space-xs);
+  font-size: var(--body-sm);
+  color: var(--color-muted);
+}
+
+/* ===== Quotes ===== */
+
+.stars {
+  color: var(--color-accent);
+  font-size: var(--body-md);
+  letter-spacing: 0.1em;
+}
+
+.quoteBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  max-width: var(--reading-max);
+}
+
+.quote {
+  font-family: var(--font-display);
+  font-size: var(--heading-md);
+  line-height: var(--leading-snug);
+  color: var(--color-text-primary);
+}
+
+.secondaryQuoteBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  max-width: var(--reading-max);
+  padding-top: var(--space-md);
+  border-top: var(--border-hairline);
+}
+
+.secondaryQuote {
+  font-family: var(--font-display);
+  font-size: var(--body-lg);
+  line-height: var(--leading-snug);
+  color: var(--color-text-primary);
+}
+
+.attribution {
+  display: flex;
+  flex-direction: column;
+  font-style: normal;
+}
+
+.name {
+  font-family: var(--font-body);
+  font-size: var(--body-sm);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.attributionNote {
+  font-size: var(--caption-size);
+  color: var(--color-muted);
+}
+
+.cta {
+  align-self: flex-start;
+}
+
+/* ===== Compact (inline) variant ===== */
+
+.compact {
+  padding-left: var(--space-sm);
+  border-left: 2px solid var(--color-border-strong);
+}
+
+.compact .quoteBlock {
+  gap: var(--space-2xs);
+}
+
+.compact .quote {
+  font-size: var(--body-lg);
+  line-height: var(--leading-normal);
+}

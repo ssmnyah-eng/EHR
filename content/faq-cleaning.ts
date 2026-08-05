@@ -350,7 +350,7 @@ export const CLEANING_FAQ_SECTIONS: FAQSection[] = [
       {
         question: "What if cleaning isn't actually my main problem?",
         answer:
-          "If your surfaces need cleaning, Cleaning is probably the right place to start.\n\nIf the bigger problem is that your belongings do not have functional places to go, storage has stopped working, you cannot easily find things, or a room repeatedly becomes disorganized, you may need Home Organization.\n\nHome Organization is available for spaces including pantries, kitchens, closets, bathrooms, laundry rooms, home offices, garages, and whole-home projects.",
+          "If your surfaces need cleaning, Cleaning is probably the right place to start.\n\nIf the bigger problem is that your belongings do not have functional places to go, storage has stopped working, you cannot easily find things, or a room repeatedly becomes disorganized, you may need Home Organization. Repeatedly cleaning or straightening a space isn't always the same as fixing what's causing it to become disorganized in the first place.\n\nHome Organization is available for spaces including pantries, kitchens, closets, bathrooms, laundry rooms, home offices, garages, and whole-home projects.\n\n“I would clean it all the time and with my large family it would get unorganized quickly but the bins and the way she organized it has been great.” — Lashon Patterson",
         links: [{ label: "Explore Home Organization", href: "/home-organization" }],
       },
       {

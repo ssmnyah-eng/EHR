@@ -1,5 +1,6 @@
 import type { ContentSlot, HeroPriceData, ServiceDetailSection, CTAData } from "@/lib/types";
 import { ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
+import { KIM_NELSON } from "@/content/testimonials";
 
 /** Final approved copy for the dedicated Home Office Organization page,
  *  provided directly by the client. No process/steps content was given
@@ -57,6 +58,11 @@ export const HOME_OFFICE_SECTIONS: ServiceDetailSection[] = [
     },
   },
 ];
+
+export const HOME_OFFICE_PROOF = {
+  eyebrow: "What Clients Say About Home Organization",
+  primary: { quote: KIM_NELSON.quotes.system, attribution: KIM_NELSON.name, rating: KIM_NELSON.rating },
+};
 
 export const HOME_OFFICE_FINAL_CTA: ContentSlot = {
   heading: "Clear the space around the work.",

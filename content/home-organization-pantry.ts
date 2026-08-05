@@ -1,6 +1,7 @@
 import type { ContentSlot, HeroPriceData, ServiceDetailSection, CTAData } from "@/lib/types";
 import type { ProcessStep } from "@/components/content/Process";
 import { ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
+import { LASHON_PATTERSON } from "@/content/testimonials";
 
 /** Final approved copy for the dedicated Pantry Organization page,
  *  provided directly by the client. */
@@ -83,6 +84,14 @@ export const PANTRY_PROCESS_STEPS: ProcessStep[] = [
     description: "Your two-person organizing team completes the project with a focus on order and everyday function.",
   },
 ];
+
+export const PANTRY_PROOF = {
+  eyebrow: "Real Home. Real System.",
+  heading: "Designed for what happens after we leave.",
+  body: "A pantry can look beautiful on day one. The real test is whether the system makes sense when groceries come in, family members use it, and everyday life starts happening again.\n\nThat's why our Pantry Organization service focuses on creating clear homes for what you keep and a system built around how the space is actually used.",
+  primary: { quote: LASHON_PATTERSON.quotes.maintainability, attribution: LASHON_PATTERSON.name, rating: LASHON_PATTERSON.rating },
+  secondary: { quote: LASHON_PATTERSON.quotes.largeFamily, attribution: LASHON_PATTERSON.name },
+};
 
 export const PANTRY_FINAL_CTA: ContentSlot = {
   heading: "Ready for a pantry that makes more sense?",
