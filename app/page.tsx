@@ -11,7 +11,7 @@ import { EditorialStatement } from "@/components/content/EditorialStatement";
 import { EditorialSplit } from "@/components/content/EditorialSplit";
 import { FullBleedMedia } from "@/components/media/FullBleedMedia";
 import { ServiceEditorialGrid } from "@/components/content/ServiceEditorialGrid";
-import { ProjectMediaCarousel } from "@/components/content/ProjectMediaCarousel";
+import { SharedBeforeAfterSection } from "@/components/content/SharedBeforeAfterSection";
 import { ComingSoonPreview } from "@/components/services/ComingSoonPreview";
 import { Process } from "@/components/content/Process";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
@@ -24,7 +24,6 @@ import { HOME_ORG_PROOF } from "@/content/home-organization";
 import { SERVICE_AREAS_INTRO } from "@/content/service-areas";
 import { KIM_NELSON, VICKI_JOHNSON } from "@/content/testimonials";
 import { CLEANING_FINAL_CTA } from "@/content/cleaning";
-import { HOMEPAGE_TRANSFORMATION_PROJECTS } from "@/content/transformations";
 import { STANDARD_CLEAN_DETAIL_BODY } from "@/content/cleaning-standard";
 import { HOMEPAGE_FAQ_ITEMS } from "@/content/faq";
 import styles from "./page.module.css";
@@ -43,7 +42,6 @@ import {
   HOW_IT_WORKS_HEADING,
   HOW_IT_WORKS_STEPS,
   HOW_IT_WORKS_CTA,
-  TRANSFORMATIONS_TEASER,
   ABOUT_TEASER,
   LIFESTYLE_RESETS_INTRO,
   FAQ_TEASER,
@@ -368,16 +366,7 @@ export default function HomePage() {
           before this reorder. */}
       <Section spacing="lg" surface="surface">
         <Container width="wide">
-          <ProjectMediaCarousel
-            eyebrow={TRANSFORMATIONS_TEASER.eyebrow}
-            heading={TRANSFORMATIONS_TEASER.heading ?? ""}
-            body={TRANSFORMATIONS_TEASER.body}
-            projects={HOMEPAGE_TRANSFORMATION_PROJECTS}
-            placeholderAlt="A space before and after its Elevated Home Resets project"
-            mediaFit="contain"
-            stageAspectRatio="1 / 1"
-            showPositionIndicator
-          />
+          <SharedBeforeAfterSection />
         </Container>
       </Section>
 

@@ -55,7 +55,7 @@ export const CLEANING_SERVICES: ServiceNode = {
     { title: "Standard Clean", slug: "standard-clean", category: "cleaning", status: "active", href: "/cleaning/standard-clean" },
     { title: "Deep Premium Clean", slug: "deep-premium-clean", category: "cleaning", status: "active", href: "/cleaning/deep-premium-clean" },
     { title: "Elevated Reset Clean", slug: "elevated-reset-clean", category: "cleaning", status: "active", href: "/cleaning/elevated-reset-clean" },
-    { title: "Maid Services", slug: "maid-services", category: "cleaning", status: "coming-soon", href: "/cleaning" },
+    { title: "Maid Services", slug: "maid-services", category: "cleaning", status: "coming-soon", href: "/cleaning/maid-services" },
   ],
 };
 

@@ -65,7 +65,6 @@ export const LAUNDRY_SECTIONS: ServiceDetailSection[] = [
 export const LAUNDRY_PROOF = {
   eyebrow: "What Clients Say About Home Organization",
   primary: { quote: KIM_NELSON.quotes.system, attribution: KIM_NELSON.name, rating: KIM_NELSON.rating },
-  media: { type: "single" as const, image: { type: "image" as const, alt: "A completed laundry room organization project", variant: "portrait" as const, aspectRatio: "4 / 5" } },
 };
 
 export const LAUNDRY_FINAL_CTA: ContentSlot = {

@@ -108,7 +108,6 @@ export const WHOLE_HOME_PROOF = {
   heading: "From overwhelmed to functioning as a whole.",
   primary: { quote: KIM_NELSON.quotes.overwhelm, attribution: KIM_NELSON.name, rating: KIM_NELSON.rating },
   secondary: { quote: KIM_NELSON.quotes.system, attribution: KIM_NELSON.name },
-  media: { type: "single" as const, image: { type: "image" as const, alt: "A completed multi-room organization project", variant: "portrait" as const, aspectRatio: "4 / 5" } },
 };
 
 export const WHOLE_HOME_FINAL_CTA: ContentSlot = {

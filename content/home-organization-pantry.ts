@@ -98,16 +98,6 @@ export const PANTRY_PROOF = {
   body: "A pantry can look beautiful on day one. The real test is whether the system makes sense when groceries come in, family members use it, and everyday life starts happening again.\n\nThat's why our Pantry Organization service focuses on creating clear homes for what you keep and a system built around how the space is actually used.",
   primary: { quote: LASHON_PATTERSON.quotes.maintainability, attribution: LASHON_PATTERSON.name, rating: LASHON_PATTERSON.rating },
   secondary: { quote: LASHON_PATTERSON.quotes.largeFamily, attribution: LASHON_PATTERSON.name },
-  media: {
-    type: "single" as const,
-    image: {
-      type: "image" as const,
-      src: "/images/organization/pantry-cabinet-jars.jpg",
-      alt: "Labeled glass jars of pantry staples arranged on organized shelving",
-      variant: "portrait" as const,
-      aspectRatio: "4 / 5",
-    },
-  },
 };
 
 export const PANTRY_FINAL_CTA: ContentSlot = {

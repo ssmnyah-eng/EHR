@@ -10,10 +10,9 @@ import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import { ServiceProof } from "@/components/content/ServiceProof";
 import type { ServiceProofQuote, ServiceProofMedia } from "@/components/content/ServiceProof";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
-import { ProjectMediaCarousel } from "@/components/content/ProjectMediaCarousel";
-import { TRANSFORMATIONS_TEASER } from "@/content/home";
-import { findTransformationsByCategory } from "@/content/transformations";
+import { SharedBeforeAfterSection } from "@/components/content/SharedBeforeAfterSection";
 import { ORGANIZATION_ROOMS } from "@/content/home-organization-rooms";
+import { getServiceMedia } from "@/content/service-media";
 
 interface OrganizationRoomProcess {
   eyebrow?: string;
@@ -54,13 +53,7 @@ interface OrganizationRoomTemplateProps {
  */
 export function OrganizationRoomTemplate({ currentSlug, heroSlot, heroPrice, sections, process, proof, finalCTA }: OrganizationRoomTemplateProps) {
   const roomLabel = ORGANIZATION_ROOMS.find((room) => room.slug === currentSlug)?.navLabel ?? currentSlug;
-  // Derived from the slug (e.g. "pantry-organization" -> "pantry",
-  // "home-office-organization" -> "home office") so each room's carousel
-  // only ever surfaces its own real projects — never another room's —
-  // via findTransformationsByCategory's substring match. Rooms with no
-  // real assets yet (Garage, Laundry Room, Whole-Home) simply match
-  // nothing and fall back to the carousel's placeholder slides.
-  const roomCategoryKeyword = currentSlug.replace(/-organization$/, "").replace(/-/g, " ");
+  const media = getServiceMedia(currentSlug);
 
   return (
     <>
@@ -69,11 +62,11 @@ export function OrganizationRoomTemplate({ currentSlug, heroSlot, heroPrice, sec
           <Breadcrumb
             items={[{ label: "Home", href: "/" }, { label: "Home Organization", href: "/home-organization" }, { label: roomLabel }]}
           />
-          <Hero slot={heroSlot} price={heroPrice} />
+          <Hero slot={{ ...heroSlot, media: media.bannerVideo }} price={heroPrice} />
         </Container>
       </Section>
 
-      <ServiceSectionList sections={sections} />
+      <ServiceSectionList sections={sections} featureMedia={media.images[2] ?? media.images[0]} />
 
       {process ? (
         <Section spacing="lg" surface="surface">
@@ -100,13 +93,7 @@ export function OrganizationRoomTemplate({ currentSlug, heroSlot, heroPrice, sec
 
       <Section spacing="lg" surface="surface">
         <Container width="wide">
-          <ProjectMediaCarousel
-            eyebrow={TRANSFORMATIONS_TEASER.eyebrow}
-            heading={TRANSFORMATIONS_TEASER.heading ?? ""}
-            body={TRANSFORMATIONS_TEASER.body}
-            projects={findTransformationsByCategory(roomCategoryKeyword)}
-            placeholderAlt="A completed Home Organization project"
-          />
+          <SharedBeforeAfterSection />
         </Container>
       </Section>
 

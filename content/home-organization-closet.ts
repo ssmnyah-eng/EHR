@@ -78,17 +78,6 @@ export const CLOSET_PROOF = {
   heading: "From overwhelmed to easy to live with.",
   primary: { quote: KIM_NELSON.quotes.overwhelm, attribution: KIM_NELSON.name, rating: KIM_NELSON.rating },
   secondary: { quote: KIM_NELSON.quotes.system, attribution: KIM_NELSON.name },
-  media: {
-    type: "single" as const,
-    image: {
-      type: "image" as const,
-      src: "/images/organization/kids-closet.jpg",
-      alt: "A children's closet with clothing organized by category and a hanging shoe and toy organizer",
-      variant: "portrait" as const,
-      aspectRatio: "4 / 5",
-      objectPosition: "30% center",
-    },
-  },
 };
 
 export const CLOSET_FINAL_CTA: ContentSlot = {

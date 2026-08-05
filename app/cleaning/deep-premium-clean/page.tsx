@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 export default function DeepPremiumCleanPage() {
   return (
     <ServiceDetailTemplate
+      slug="deep-premium-clean"
       heroSlot={DEEP_PREMIUM_CLEAN_HERO}
       heroPrice={DEEP_PREMIUM_CLEAN_PRICE}
       sections={DEEP_PREMIUM_CLEAN_SECTIONS}

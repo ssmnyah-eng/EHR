@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 export default function ElevatedResetCleanPage() {
   return (
     <ServiceDetailTemplate
+      slug="elevated-reset-clean"
       heroSlot={ELEVATED_RESET_CLEAN_HERO}
       heroPrice={ELEVATED_RESET_CLEAN_PRICE}
       sections={ELEVATED_RESET_CLEAN_SECTIONS}

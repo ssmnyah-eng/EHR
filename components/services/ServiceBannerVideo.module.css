@@ -1,0 +1,17 @@
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+@media (max-width: 40rem) {
+  .frame {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+.media {
+  height: 100%;
+}

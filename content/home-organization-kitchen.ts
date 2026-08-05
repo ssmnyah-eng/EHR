@@ -93,17 +93,6 @@ export const KITCHEN_PROOF = {
   heading: "Function, not just a fresh look.",
   body: "Kitchen Organization is about creating placement that matches how you actually cook, shop, and move through the space.",
   primary: { quote: KIM_NELSON.quotes.system, attribution: KIM_NELSON.name, rating: KIM_NELSON.rating },
-  media: {
-    type: "single" as const,
-    image: {
-      type: "image" as const,
-      src: "/images/organization/kitchen-corner.jpg",
-      alt: "An organized wall shelf with labeled spice jars above a kitchen counter",
-      variant: "portrait" as const,
-      aspectRatio: "4 / 5",
-      objectPosition: "62% 62%",
-    },
-  },
 };
 
 export const KITCHEN_FINAL_CTA: ContentSlot = {

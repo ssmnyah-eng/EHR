@@ -65,7 +65,6 @@ export const GARAGE_SECTIONS: ServiceDetailSection[] = [
 export const GARAGE_PROOF = {
   eyebrow: "What Clients Say About Home Organization",
   primary: { quote: KIM_NELSON.quotes.system, attribution: KIM_NELSON.name, rating: KIM_NELSON.rating },
-  media: { type: "single" as const, image: { type: "image" as const, alt: "A completed garage organization project", variant: "portrait" as const, aspectRatio: "4 / 5" } },
 };
 
 export const GARAGE_FINAL_CTA: ContentSlot = {

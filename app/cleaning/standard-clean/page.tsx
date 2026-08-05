@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 export default function StandardCleanPage() {
   return (
     <ServiceDetailTemplate
+      slug="standard-clean"
       heroSlot={STANDARD_CLEAN_HERO}
       heroPrice={STANDARD_CLEAN_PRICE}
       sections={STANDARD_CLEAN_SECTIONS}

@@ -4,6 +4,7 @@ import { Display } from "@/components/typography/Display";
 import { Text } from "@/components/typography/Text";
 import { Button } from "@/components/content/Button";
 import { MediaSlot } from "@/components/media/MediaSlot";
+import { ServiceBannerVideo } from "@/components/services/ServiceBannerVideo";
 import { SlotText } from "@/components/content/SlotText";
 import styles from "./Hero.module.css";
 
@@ -62,7 +63,11 @@ export function Hero({ slot, price }: HeroProps) {
         </div>
       </div>
 
-      <MediaSlot data={slot.media ?? { type: "image", alt: "Hero media", variant: "hero", priority: true }} className={styles.media} />
+      {slot.media?.type === "video" ? (
+        <ServiceBannerVideo media={slot.media} />
+      ) : (
+        <MediaSlot data={slot.media ?? { type: "image", alt: "Hero media", variant: "hero", priority: true }} className={styles.media} />
+      )}
     </div>
   );
 }

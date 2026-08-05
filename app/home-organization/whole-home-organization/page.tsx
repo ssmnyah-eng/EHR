@@ -4,15 +4,15 @@ import { Container } from "@/components/layout/Container";
 import { Hero } from "@/components/services/Hero";
 import { EditorialStatement } from "@/components/content/EditorialStatement";
 import { EditorialSplit } from "@/components/content/EditorialSplit";
+import { FullBleedMedia } from "@/components/media/FullBleedMedia";
 import { LinkedConnections } from "@/components/services/LinkedConnections";
 import { Process } from "@/components/content/Process";
 import { RelatedOrganizationLinks } from "@/components/services/RelatedOrganizationLinks";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import { ServiceProof } from "@/components/content/ServiceProof";
-import { ProjectMediaCarousel } from "@/components/content/ProjectMediaCarousel";
+import { SharedBeforeAfterSection } from "@/components/content/SharedBeforeAfterSection";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
-import { TRANSFORMATIONS_TEASER } from "@/content/home";
-import { findTransformationsByCategory } from "@/content/transformations";
+import { getServiceMedia } from "@/content/service-media";
 import {
   WHOLE_HOME_SEO,
   WHOLE_HOME_HERO,
@@ -37,6 +37,8 @@ export const metadata: Metadata = {
 };
 
 export default function WholeHomeOrganizationPage() {
+  const media = getServiceMedia("whole-home-organization");
+
   return (
     <>
       <Section spacing="lg" surface="background">
@@ -48,7 +50,7 @@ export default function WholeHomeOrganizationPage() {
               { label: "Whole-Home Organization" },
             ]}
           />
-          <Hero slot={WHOLE_HOME_HERO} price={WHOLE_HOME_HERO_PRICE} />
+          <Hero slot={{ ...WHOLE_HOME_HERO, media: media.bannerVideo }} price={WHOLE_HOME_HERO_PRICE} />
         </Container>
       </Section>
 
@@ -102,10 +104,16 @@ export default function WholeHomeOrganizationPage() {
         </Container>
       </Section>
 
-      <Section spacing="lg" surface="muted">
-        <Container width="content">
-          <EditorialStatement slot={WHOLE_HOME_NO_JUDGMENT} />
-        </Container>
+      <Section spacing="sm" surface="background">
+        <FullBleedMedia
+          media={media.images[2]}
+          fallbackLabel={media.images[2]?.alt ?? "Feature media"}
+          overlayEyebrow={WHOLE_HOME_NO_JUDGMENT.eyebrow}
+          overlayText={WHOLE_HOME_NO_JUDGMENT.heading}
+          overlayBody={WHOLE_HOME_NO_JUDGMENT.body}
+          align="center"
+          tall
+        />
       </Section>
 
       <Section spacing="lg" surface="background">
@@ -115,20 +123,13 @@ export default function WholeHomeOrganizationPage() {
             heading={WHOLE_HOME_PROOF.heading}
             primary={WHOLE_HOME_PROOF.primary}
             secondary={WHOLE_HOME_PROOF.secondary}
-            media={WHOLE_HOME_PROOF.media}
           />
         </Container>
       </Section>
 
       <Section spacing="lg" surface="surface">
         <Container width="wide">
-          <ProjectMediaCarousel
-            eyebrow={TRANSFORMATIONS_TEASER.eyebrow}
-            heading={TRANSFORMATIONS_TEASER.heading ?? ""}
-            body={TRANSFORMATIONS_TEASER.body}
-            projects={findTransformationsByCategory("whole home")}
-            placeholderAlt="A completed Home Organization project"
-          />
+          <SharedBeforeAfterSection />
         </Container>
       </Section>
 
