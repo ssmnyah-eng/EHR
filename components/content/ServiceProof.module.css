@@ -19,6 +19,53 @@
   max-width: 60ch;
 }
 
+/* ===== Split (image-left, testimonial-right) ===== */
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+  gap: var(--space-2xl);
+  align-items: center;
+}
+
+@media (max-width: 56rem) {
+  .split {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+}
+
+.splitMedia {
+  /* Explicit height, not min-height — see EditorialSplit.module.css for
+     why min-height alone won't let the height:100% media child resolve. */
+  height: 22rem;
+}
+
+/* The height:100% chain has to hold at every level between .splitMedia
+   and the MediaSlot itself — .mediaSingle only sets a max-width normally
+   (see the stacked layout above), so it needs an explicit height:100%
+   override here too, or the chain breaks at that link. */
+.splitMedia .mediaSingle {
+  max-width: none;
+  height: 100%;
+}
+
+.splitMedia .mediaItem {
+  height: 100%;
+}
+
+@media (max-width: 40rem) {
+  .splitMedia {
+    height: 16rem;
+  }
+}
+
+.splitText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
 /* ===== Media ===== */
 
 .mediaPair {

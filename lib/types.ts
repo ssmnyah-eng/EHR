@@ -57,6 +57,9 @@ export type MediaVariant =
 export interface MediaSlotData {
   type: "image" | "video";
   src?: string;
+  /** Optional WebM source, preferred over `src` when the browser supports
+   *  it (rendered as the first <source>, `src` as the MP4 fallback). */
+  srcWebm?: string;
   poster?: string;
   alt: string;
   variant: MediaVariant;

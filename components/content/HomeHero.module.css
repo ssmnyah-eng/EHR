@@ -1,0 +1,95 @@
+.hero {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  min-height: clamp(34rem, 92svh, 56rem);
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  /* Warm-neutral (not pure black) tint matching --color-text-primary, so
+     it reads consistently whether it's sitting over real photography or
+     the neutral placeholder gradient. Darkest at the bottom, where the
+     overlaid copy sits. */
+  background: linear-gradient(
+    190deg,
+    rgba(23, 24, 26, 0.12) 0%,
+    rgba(23, 24, 26, 0.38) 55%,
+    rgba(23, 24, 26, 0.72) 100%
+  );
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: var(--space-md);
+  width: 100%;
+  padding-inline: var(--page-gutter-mobile);
+  padding-block: var(--space-xl) var(--space-2xl);
+  color: var(--color-text-inverse);
+}
+
+@media (min-width: 48rem) {
+  .content {
+    padding-inline: var(--page-gutter-tablet);
+  }
+}
+
+@media (min-width: 75rem) {
+  .content {
+    padding-inline: var(--page-gutter-desktop);
+  }
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--caption-size);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.heading {
+  max-width: 18ch;
+  color: var(--color-text-inverse);
+}
+
+.body {
+  font-family: var(--font-body);
+  font-size: var(--body-lg);
+  line-height: var(--leading-relaxed);
+  max-width: 34ch;
+  opacity: 0.92;
+}
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-xs);
+}
+
+.secondaryCta {
+  border-color: rgba(250, 249, 246, 0.5);
+  color: var(--color-text-inverse);
+}
+
+.secondaryCta:hover {
+  border-color: var(--color-text-inverse);
+  color: var(--color-text-inverse);
+}

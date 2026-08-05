@@ -34,7 +34,8 @@ export function MediaSlot({ data, className, fill = false }: MediaSlotProps) {
     return (
       <div
         className={[styles.placeholder, className].filter(Boolean).join(" ")}
-        style={{ aspectRatio }}
+        style={fill ? undefined : { aspectRatio }}
+        data-fill={fill || undefined}
         data-media-slot
       >
         {/* Dev-only label so the empty framework stays inspectable while
@@ -62,9 +63,11 @@ export function MediaSlot({ data, className, fill = false }: MediaSlotProps) {
           loop
           playsInline
           autoPlay
+          preload={data.priority ? "auto" : "metadata"}
           style={{ objectPosition: data.objectPosition }}
         >
-          <source src={data.src} />
+          {data.srcWebm ? <source src={data.srcWebm} type="video/webm" /> : null}
+          <source src={data.src} type="video/mp4" />
         </video>
       ) : (
         <Image

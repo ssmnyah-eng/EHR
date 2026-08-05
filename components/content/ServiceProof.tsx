@@ -39,6 +39,10 @@ interface ServiceProofProps {
    *  for a homepage/hub moment where the testimonial itself is the
    *  section's focal point rather than a supporting element. */
   editorial?: boolean;
+  /** "split" arranges media and the intro/quote/CTA column side by side
+   *  (image-left, testimonial-right) instead of the default stacked
+   *  media-above-quote layout. Ignored when `media` isn't supplied. */
+  layout?: "stack" | "split";
 }
 
 function Stars({ rating }: { rating: number }) {
@@ -79,7 +83,18 @@ function QuoteBlock({
  * Never renders placeholder/fabricated content — every prop here should
  * trace to a real, approved testimonial (see content/testimonials.ts).
  */
-export function ServiceProof({ eyebrow, heading, body, primary, secondary, media, cta, compact = false, editorial = false }: ServiceProofProps) {
+export function ServiceProof({
+  eyebrow,
+  heading,
+  body,
+  primary,
+  secondary,
+  media,
+  cta,
+  compact = false,
+  editorial = false,
+  layout = "stack",
+}: ServiceProofProps) {
   if (compact) {
     return (
       <div className={styles.compact}>
@@ -88,55 +103,78 @@ export function ServiceProof({ eyebrow, heading, body, primary, secondary, media
     );
   }
 
+  const mediaBlock = media ? (
+    <div className={media.type === "before-after" ? styles.mediaPair : styles.mediaSingle}>
+      {media.type === "before-after" ? (
+        <>
+          <div className={styles.mediaItem}>
+            <MediaSlot data={media.before} />
+            <span className={styles.mediaLabel}>Before</span>
+          </div>
+          <div className={styles.mediaItem}>
+            <MediaSlot data={media.after} />
+            <span className={styles.mediaLabel}>After</span>
+          </div>
+        </>
+      ) : (
+        <div className={styles.mediaItem}>
+          <MediaSlot data={media.image} fill={layout === "split"} />
+        </div>
+      )}
+      {media.caption ? <p className={styles.mediaCaption}>{media.caption}</p> : null}
+    </div>
+  ) : null;
+
+  const introBlock =
+    eyebrow || heading || body ? (
+      <div className={styles.intro}>
+        {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
+        {heading ? (
+          <Heading as="h2" size="lg" className={styles.heading}>
+            {heading}
+          </Heading>
+        ) : null}
+        {body ? (
+          <Text size="lg" tone="secondary" className={styles.body}>
+            {body}
+          </Text>
+        ) : null}
+      </div>
+    ) : null;
+
+  const quoteBlock = (
+    <>
+      <QuoteBlock {...primary} editorial={editorial} />
+      {secondary ? <QuoteBlock {...secondary} secondary /> : null}
+
+      {cta ? (
+        <Button href={cta.href} variant="secondary" className={styles.cta}>
+          {cta.label}
+        </Button>
+      ) : null}
+    </>
+  );
+
+  if (layout === "split" && media) {
+    return (
+      <Reveal variant="fade-up">
+        <div className={styles.split}>
+          <div className={styles.splitMedia}>{mediaBlock}</div>
+          <div className={styles.splitText}>
+            {introBlock}
+            {quoteBlock}
+          </div>
+        </div>
+      </Reveal>
+    );
+  }
+
   return (
     <Reveal variant="fade-up">
       <div className={styles.wrapper}>
-        {eyebrow || heading || body ? (
-          <div className={styles.intro}>
-            {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
-            {heading ? (
-              <Heading as="h2" size="lg" className={styles.heading}>
-                {heading}
-              </Heading>
-            ) : null}
-            {body ? (
-              <Text size="lg" tone="secondary" className={styles.body}>
-                {body}
-              </Text>
-            ) : null}
-          </div>
-        ) : null}
-
-        {media ? (
-          <div className={media.type === "before-after" ? styles.mediaPair : styles.mediaSingle}>
-            {media.type === "before-after" ? (
-              <>
-                <div className={styles.mediaItem}>
-                  <MediaSlot data={media.before} />
-                  <span className={styles.mediaLabel}>Before</span>
-                </div>
-                <div className={styles.mediaItem}>
-                  <MediaSlot data={media.after} />
-                  <span className={styles.mediaLabel}>After</span>
-                </div>
-              </>
-            ) : (
-              <div className={styles.mediaItem}>
-                <MediaSlot data={media.image} />
-              </div>
-            )}
-            {media.caption ? <p className={styles.mediaCaption}>{media.caption}</p> : null}
-          </div>
-        ) : null}
-
-        <QuoteBlock {...primary} editorial={editorial} />
-        {secondary ? <QuoteBlock {...secondary} secondary /> : null}
-
-        {cta ? (
-          <Button href={cta.href} variant="secondary" className={styles.cta}>
-            {cta.label}
-          </Button>
-        ) : null}
+        {introBlock}
+        {mediaBlock}
+        {quoteBlock}
       </div>
     </Reveal>
   );

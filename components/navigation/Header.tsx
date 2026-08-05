@@ -48,9 +48,18 @@ export function Header() {
     };
   }, []);
 
+  // The homepage opens with a full-bleed dark hero; while the header sits
+  // transparent over it (before the user scrolls), nav/logo text needs to
+  // read light instead of the usual dark-on-light. Every other route is
+  // completely unaffected — `onHero` is only ever true on "/".
+  const onHero = pathname === "/" && !scrolled;
+
   return (
     <>
-      <header ref={headerRef} className={[styles.header, scrolled && styles.scrolled].filter(Boolean).join(" ")}>
+      <header
+        ref={headerRef}
+        className={[styles.header, scrolled && styles.scrolled, onHero && styles.onHero].filter(Boolean).join(" ")}
+      >
         <div className={styles.bar}>
           <Link href="/" className={styles.brand} aria-label="Elevated Home Resets — Home">
             Elevated Home Resets

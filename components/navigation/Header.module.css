@@ -14,6 +14,27 @@
   border-bottom-color: var(--color-border);
 }
 
+/* Transparent header sitting over the homepage's dark hero media —
+   swap text to light so it stays legible against the photo/scrim, and
+   give the header its own subtle dark backdrop rather than relying on
+   the hero media/scrim underneath it (which can be light at the very
+   top, e.g. the neutral placeholder gradient) to provide contrast. */
+.header.onHero {
+  background: linear-gradient(180deg, rgba(23, 24, 26, 0.38) 0%, rgba(23, 24, 26, 0.05) 100%);
+}
+
+.header.onHero .brand,
+.header.onHero .navTrigger,
+.header.onHero .plainLink {
+  color: var(--color-text-inverse);
+}
+
+.header.onHero .menuIcon,
+.header.onHero .menuIcon::before,
+.header.onHero .menuIcon::after {
+  background: var(--color-text-inverse);
+}
+
 .bar {
   display: flex;
   align-items: center;

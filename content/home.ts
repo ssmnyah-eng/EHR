@@ -20,10 +20,10 @@ export const HERO_SLOT: ContentSlot = {
   body: "Thoughtful cleaning and home organization designed to bring your home back to a cleaner, calmer, more manageable place.",
   primaryCTA: ESTIMATE_CTA,
   secondaryCTA: { label: "Explore Services", href: "#services" },
-  // Explicit aspect ratio override — the "hero" variant default (3/2) reads
-  // very tall/blank on a full-width hero; a shorter editorial ratio keeps
-  // the same full-bleed placeholder system but in a more proportionate size.
-  media: { type: "image", alt: "Hero media", variant: "hero", aspectRatio: "2 / 1", priority: true },
+  // Rendered as a full-bleed background by HomeHero (fill mode — sized by
+  // the hero section's CSS min-height, not this aspect ratio). Intended
+  // for real hero video/photography; see HomeHero for MP4/WebM support.
+  media: { type: "image", alt: "Hero media", variant: "fullBleed", priority: true },
 };
 
 export const INTRO_SLOT: ContentSlot = {
@@ -108,12 +108,10 @@ export const HOW_IT_WORKS_STEPS: ProcessStep[] = [
 export const HOW_IT_WORKS_CTA: CTAData = ESTIMATE_CTA;
 
 /**
- * Approved copy, kept for reuse — the homepage correction pass
- * de-emphasizes Transformations as a homepage promotion per the current
- * launch strategy (before/after proof gets distributed onto the pages
- * for the service being sold, rather than centered in its own homepage
- * section), so this is not currently rendered on / . The /transformations
- * route itself is untouched.
+ * Used as the intro copy for the homepage's before/after proof section
+ * (a real-project-proof moment, not a large standalone promotional push —
+ * the "View Transformations" link stays a modest inline link, consistent
+ * with the earlier instruction to de-emphasize it as a major homepage CTA).
  */
 export const TRANSFORMATIONS_TEASER: ContentSlot = {
   eyebrow: "Transformations",

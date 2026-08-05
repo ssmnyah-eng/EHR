@@ -1,12 +1,49 @@
-.pathwaysGrid {
-  margin-top: var(--space-xl);
+.serviceAreaNote {
+  margin-top: var(--space-lg);
+  font-family: var(--font-body);
+  font-size: var(--body-sm);
+  color: var(--color-muted);
+  max-width: 40ch;
 }
 
 .tierGrid {
   margin-top: var(--space-2xl);
 }
 
-.serviceAreaNote {
-  margin-top: var(--space-xl);
-  text-align: center;
+/* Services editorial: statement + service nav in a narrower left column,
+   large media filling the right column. */
+.servicesEditorial {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+@media (max-width: 56rem) {
+  .servicesEditorial {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+}
+
+.servicesCopy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.servicesMedia {
+  /* Explicit height, not min-height — see EditorialSplit.module.css for
+     why min-height alone won't let the height:100% media child resolve. */
+  height: 26rem;
+}
+
+.servicesMedia > * {
+  height: 100%;
+}
+
+@media (max-width: 40rem) {
+  .servicesMedia {
+    height: 16rem;
+  }
 }

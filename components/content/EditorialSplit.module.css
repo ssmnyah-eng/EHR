@@ -52,12 +52,16 @@
 }
 
 .mediaCol {
-  min-height: 20rem;
+  /* Explicit height, not min-height — a percentage-height child (the
+     media fill layer) can only resolve against a definite height, and
+     min-height alone doesn't count as definite, so the media would
+     otherwise collapse to its own (empty) intrinsic height. */
+  height: 20rem;
 }
 
 @media (max-width: 40rem) {
   .mediaCol {
-    min-height: 14rem;
+    height: 14rem;
   }
 }
 
