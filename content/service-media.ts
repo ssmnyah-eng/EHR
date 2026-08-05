@@ -8,16 +8,19 @@ import type { MediaSlotData } from "@/lib/types";
  * own media imports, so replacing a page's banner video or image N is a
  * one-line change here rather than a page-by-page edit.
  *
- * Naming convention (brief section 3/6): each page's dedicated assets are
- * expected at:
+ * Naming convention (brief section 3/6): each page's dedicated assets live
+ * at:
  *   /videos/services/[slug]-banner-video.mp4 (+ matching -poster.jpg)
  *   /images/services/[slug]-1.jpg ... [slug]-5.jpg
- * None of those page-specific files have been supplied yet. Until they are,
- * this config either (a) temporarily points a slot at an appropriate
- * existing real Elevated Home Resets photo already in the project, or
- * (b) leaves the slot with no `src`, which renders MediaSlot's neutral
- * placeholder (dev builds show the expected filename via SHOW_SLOT_LABELS).
- * See the implementation report for the full per-page media audit.
+ *
+ * Pantry Organization, Bathroom Organization (banner), Closet Organization
+ * (banner), and Kitchen Organization (banner) have no dedicated video yet —
+ * those slots stay MediaSlot placeholders (no `src`) until supplied. See
+ * the implementation report for the full per-page media audit, including a
+ * flagged concern that several of the newly supplied Home Organization
+ * images (bathroom/laundry/closet/kitchen/garage) visually read as generic
+ * stock photography rather than real Elevated Home Resets project photos —
+ * used here per explicit instruction, not silently.
  */
 
 export interface ServicePageMedia {
@@ -33,49 +36,62 @@ function placeholderBanner(slug: string, context: string): MediaSlotData {
   };
 }
 
-function placeholderImage(slug: string, index: number, context: string): MediaSlotData {
-  return {
-    type: "image",
-    alt: `${context} — expected at /images/services/${slug}-${index}.jpg`,
-    variant: "landscape",
-  };
-}
-
 /**
- * Whole-Home Organization's own banner video does not exist yet either.
- * Deep Premium Clean is instructed to temporarily reuse "the existing
- * Whole-Home Organization banner video" — since that source doesn't exist
- * yet, both slots share this exact object reference so that supplying
- * ONE real video (src + poster on this const) instantly populates both
- * pages without touching either page's own config entry.
+ * Whole-Home Organization's real banner video is also the temporary Deep
+ * Premium Clean banner, per explicit instruction — both slots share this
+ * exact object reference so replacing this one const's src/poster updates
+ * both pages at once.
  */
-const WHOLE_HOME_BANNER: MediaSlotData = placeholderBanner("whole-home-organization", "Whole-Home Organization");
+const WHOLE_HOME_BANNER: MediaSlotData = {
+  type: "video",
+  src: "/videos/services/whole-home-organization-banner-video.mp4",
+  poster: "/images/services/whole-home-organization-banner-video-poster.jpg",
+  alt: "A walkthrough of a connected, organized living space",
+  variant: "fullBleed",
+};
 
 export const SERVICE_MEDIA: Record<string, ServicePageMedia> = {
   // ===== Cleaning Services =====
   "standard-clean": {
-    bannerVideo: placeholderBanner("standard-clean", "Standard Clean"),
+    bannerVideo: {
+      type: "video",
+      src: "/videos/services/standard-clean-banner-video.mp4",
+      poster: "/images/services/standard-clean-banner-video-poster.jpg",
+      alt: "A home being tidied and reset room by room",
+      variant: "fullBleed",
+    },
     images: [
-      { type: "image", src: "/images/cleaning/not-every-home-same-clean.jpg", alt: "An empty, freshly presented living room with hardwood floors and a fireplace", variant: "landscape" },
-      { type: "image", src: "/images/cleaning/personal-living-space.jpg", alt: "A lived-in living and dining space with natural light", variant: "landscape", objectPosition: "center 60%" },
-      { type: "image", src: "/images/cleaning/right-level-of-cleaning.jpg", alt: "A bright, open hallway leading into a calm, minimally furnished living space", variant: "landscape" },
+      { type: "image", src: "/images/services/standard-clean-1.jpg", alt: "Cleaning supplies — gloves, a spray bottle, and a cloth — set out on a side table", variant: "landscape" },
+      { type: "image", src: "/images/services/standard-clean-2.jpg", alt: "A living and dining space being cleaned and reset", variant: "landscape" },
+      { type: "image", src: "/images/services/standard-clean-3.jpg", alt: "A home's floor being cleaned", variant: "landscape" },
+      { type: "image", src: "/images/services/standard-clean-4.jpg", alt: "A freshly cleaned living space", variant: "landscape" },
+      { type: "image", src: "/images/services/standard-clean-5.jpg", alt: "A tidy, freshly cleaned room", variant: "landscape" },
     ],
   },
   "deep-premium-clean": {
     // Intentional temporary reuse — see WHOLE_HOME_BANNER above.
     bannerVideo: WHOLE_HOME_BANNER,
     images: [
-      { type: "image", src: "/images/cleaning/details-change-whole-home.jpg", alt: "Two people relaxing together in a bright, tidy living room", variant: "landscape" },
-      { type: "image", src: "/images/cleaning/right-level-of-cleaning.jpg", alt: "A bright, open hallway leading into a calm, minimally furnished living space", variant: "landscape" },
-      { type: "image", src: "/images/cleaning/not-every-home-same-clean.jpg", alt: "An empty, freshly presented living room with hardwood floors and a fireplace", variant: "landscape" },
+      { type: "image", src: "/images/services/deep-premium-clean-1.jpg", alt: "A detailed, deep clean of a home surface", variant: "landscape" },
+      { type: "image", src: "/images/services/deep-premium-clean-2.jpg", alt: "A home being deep cleaned", variant: "landscape" },
+      { type: "image", src: "/images/services/deep-premium-clean-3.jpg", alt: "A deep-cleaned home detail", variant: "landscape" },
+      { type: "image", src: "/images/services/deep-premium-clean-4.jpg", alt: "A freshly deep-cleaned space", variant: "landscape" },
+      { type: "image", src: "/images/services/deep-premium-clean-5.jpg", alt: "A finished deep-clean result", variant: "landscape" },
     ],
   },
   "elevated-reset-clean": {
-    bannerVideo: placeholderBanner("elevated-reset-clean", "Elevated Reset Clean"),
+    bannerVideo: {
+      type: "video",
+      src: "/videos/services/elevated-reset-clean-banner-video.mp4",
+      poster: "/images/services/elevated-reset-clean-banner-video-poster.jpg",
+      alt: "A calm, finished entryway and living space",
+      variant: "fullBleed",
+    },
     images: [
-      { type: "image", src: "/images/cleaning/home-doesnt-need-to-be-ready.jpg", alt: "A woman gathering an armful of laundry in a lived-in home", variant: "landscape", objectPosition: "72% 45%" },
-      { type: "image", src: "/images/cleaning/personal-living-space.jpg", alt: "A lived-in living and dining space with natural light", variant: "landscape", objectPosition: "center 60%" },
-      { type: "image", src: "/images/cleaning/details-change-whole-home.jpg", alt: "Two people relaxing together in a bright, tidy living room", variant: "landscape" },
+      { type: "image", src: "/images/services/elevated-reset-clean-1.jpg", alt: "A calm, finished living space after an Elevated Reset", variant: "landscape" },
+      { type: "image", src: "/images/services/elevated-reset-clean-2.jpg", alt: "A reset, finished room", variant: "landscape" },
+      { type: "image", src: "/images/services/elevated-reset-clean-3.jpg", alt: "A finished space after an Elevated Reset Clean", variant: "landscape" },
+      { type: "image", src: "/images/services/elevated-reset-clean-4.jpg", alt: "A finished, put-together living space", variant: "landscape" },
     ],
   },
 
@@ -83,9 +99,11 @@ export const SERVICE_MEDIA: Record<string, ServicePageMedia> = {
   "kitchen-organization": {
     bannerVideo: placeholderBanner("kitchen-organization", "Kitchen Organization"),
     images: [
-      { type: "image", src: "/images/organization/kitchen-cabinet-dishes.jpg", alt: "An organized kitchen cabinet with pantry containers and dishes arranged on a dish rack", variant: "landscape", objectPosition: "center 40%" },
-      { type: "image", src: "/images/organization/kitchen-corner.jpg", alt: "An organized wall shelf with labeled spice jars above a kitchen counter", variant: "portrait", aspectRatio: "4 / 5", objectPosition: "62% 62%" },
-      { type: "image", src: "/images/organization/kitchen-corner.jpg", alt: "An organized wall shelf with labeled spice jars above a kitchen counter", variant: "landscape", objectPosition: "62% 45%" },
+      { type: "image", src: "/images/services/kitchen-organization-1.jpg", alt: "Organized kitchen counter storage", variant: "landscape" },
+      { type: "image", src: "/images/services/kitchen-organization-2.jpg", alt: "An organized kitchen drawer with utensils and dishware", variant: "landscape" },
+      { type: "image", src: "/images/services/kitchen-organization-3.jpg", alt: "Organized kitchen storage", variant: "landscape" },
+      { type: "image", src: "/images/services/kitchen-organization-4.jpg", alt: "An organized kitchen space", variant: "landscape" },
+      { type: "image", src: "/images/services/kitchen-organization-5.jpg", alt: "Organized kitchen cabinets", variant: "landscape" },
     ],
   },
   "pantry-organization": {
@@ -99,49 +117,68 @@ export const SERVICE_MEDIA: Record<string, ServicePageMedia> = {
   "closet-organization": {
     bannerVideo: placeholderBanner("closet-organization", "Closet Organization"),
     images: [
-      { type: "image", src: "/images/organization/walk-in-closet.jpg", alt: "A walk-in closet with clothing sorted by type and color, drawers, and shoe shelving", variant: "landscape" },
-      { type: "image", src: "/images/organization/kids-closet.jpg", alt: "A children's closet with clothing organized by category and a hanging shoe and toy organizer", variant: "portrait", aspectRatio: "4 / 5", objectPosition: "30% center" },
-      { type: "image", src: "/images/organization/kids-closet.jpg", alt: "A children's closet with clothing organized by category and a hanging shoe and toy organizer", variant: "landscape", objectPosition: "30% 40%" },
+      { type: "image", src: "/images/services/closet-organization-1.jpg", alt: "Organized closet shelving with folded items, bags, and storage boxes", variant: "landscape" },
+      { type: "image", src: "/images/services/closet-organization-2.jpg", alt: "An organized closet space", variant: "landscape" },
+      { type: "image", src: "/images/services/closet-organization-3.jpg", alt: "Organized closet storage", variant: "landscape" },
+      { type: "image", src: "/images/services/closet-organization-4.jpg", alt: "An organized closet", variant: "landscape" },
     ],
   },
   "bathroom-organization": {
     bannerVideo: placeholderBanner("bathroom-organization", "Bathroom Organization"),
     images: [
-      { type: "image", src: "/images/organization/bathroom-cabinet.jpg", alt: "An organized bathroom cabinet with woven baskets, a folded towel, and a soap pump in place", variant: "landscape", objectPosition: "55% 55%" },
-      placeholderImage("bathroom-organization", 2, "Bathroom Organization"),
-      { type: "image", src: "/images/organization/bathroom-cabinet.jpg", alt: "An organized bathroom cabinet with woven baskets, a folded towel, and a soap pump in place", variant: "landscape", objectPosition: "50% 40%" },
+      { type: "image", src: "/images/services/bathroom-organization-1.jpg", alt: "A finished bathroom space", variant: "landscape" },
+      { type: "image", src: "/images/services/bathroom-organization-2.jpg", alt: "An organized bathroom space", variant: "landscape" },
+      { type: "image", src: "/images/services/bathroom-organization-3.jpg", alt: "Bathroom storage", variant: "landscape" },
+      { type: "image", src: "/images/services/bathroom-organization-4.jpg", alt: "A finished bathroom", variant: "landscape" },
     ],
   },
   "garage-organization": {
-    bannerVideo: placeholderBanner("garage-organization", "Garage Organization"),
+    bannerVideo: {
+      type: "video",
+      src: "/videos/services/garage-organization-banner-video.mp4",
+      poster: "/images/services/garage-organization-banner-video-poster.jpg",
+      alt: "An organized garage with clear floor space",
+      variant: "fullBleed",
+    },
     images: [
-      placeholderImage("garage-organization", 1, "Garage Organization"),
-      placeholderImage("garage-organization", 2, "Garage Organization"),
-      placeholderImage("garage-organization", 3, "Garage Organization"),
+      { type: "image", src: "/images/services/garage-organization-1.jpg", alt: "Labeled garage storage bins", variant: "landscape" },
+      { type: "image", src: "/images/services/garage-organization-2.jpg", alt: "Organized garage storage", variant: "landscape" },
     ],
   },
   "home-office-organization": {
-    bannerVideo: placeholderBanner("home-office-organization", "Home Office Organization"),
+    bannerVideo: {
+      type: "video",
+      src: "/videos/services/home-office-organization-banner-video.mp4",
+      poster: "/images/services/home-office-organization-banner-video-poster.jpg",
+      alt: "A calm, organized home office workspace",
+      variant: "fullBleed",
+    },
     images: [
-      { type: "image", src: "/images/organization/home-office.jpg", alt: "An organized home office desk with a bookshelf, desk organizer, and clear work surface", variant: "landscape" },
-      placeholderImage("home-office-organization", 2, "Home Office Organization"),
-      { type: "image", src: "/images/organization/home-office.jpg", alt: "An organized home office desk with a bookshelf, desk organizer, and clear work surface", variant: "landscape", objectPosition: "center 35%" },
+      { type: "image", src: "/images/services/home-office-organization-1.jpg", alt: "An organized home office desk", variant: "landscape" },
+      { type: "image", src: "/images/services/home-office-organization-2.jpg", alt: "An organized home office space", variant: "landscape" },
+      { type: "image", src: "/images/services/home-office-organization-3.jpg", alt: "Organized home office storage", variant: "landscape" },
+      { type: "image", src: "/images/services/home-office-organization-4.jpg", alt: "A finished home office setup", variant: "landscape" },
     ],
   },
   "laundry-room-organization": {
-    bannerVideo: placeholderBanner("laundry-room-organization", "Laundry Room Organization"),
+    bannerVideo: {
+      type: "video",
+      src: "/videos/services/laundry-room-organization-banner-video.mp4",
+      poster: "/images/services/laundry-room-organization-banner-video-poster.jpg",
+      alt: "Laundry being folded and put away",
+      variant: "fullBleed",
+    },
     images: [
-      placeholderImage("laundry-room-organization", 1, "Laundry Room Organization"),
-      placeholderImage("laundry-room-organization", 2, "Laundry Room Organization"),
-      placeholderImage("laundry-room-organization", 3, "Laundry Room Organization"),
+      { type: "image", src: "/images/services/laundry-room-organization-1.jpg", alt: "A laundry room moment", variant: "landscape" },
+      { type: "image", src: "/images/services/laundry-room-organization-2.jpg", alt: "Organized laundry room storage", variant: "landscape" },
     ],
   },
   "whole-home-organization": {
     bannerVideo: WHOLE_HOME_BANNER,
     images: [
-      { type: "image", src: "/images/organization/dining-living-room.jpg", alt: "A connected dining and living area in a client's home, both spaces working together", variant: "landscape", objectPosition: "center 58%" },
-      placeholderImage("whole-home-organization", 2, "Whole-Home Organization"),
-      { type: "image", src: "/images/organization/dining-living-room.jpg", alt: "A connected dining and living area in a client's home, both spaces working together", variant: "landscape", objectPosition: "center 45%" },
+      { type: "image", src: "/images/services/whole-home-organization-1.jpg", alt: "An organized kitchen drawer", variant: "landscape" },
+      { type: "image", src: "/images/services/whole-home-organization-2.jpg", alt: "A connected, organized living space", variant: "landscape" },
+      { type: "image", src: "/images/services/whole-home-organization-3.jpg", alt: "An organized space in a client's home", variant: "landscape" },
     ],
   },
 };
