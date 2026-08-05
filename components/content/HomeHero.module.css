@@ -63,9 +63,19 @@
   opacity: 0.85;
 }
 
-.heading {
+/* h1.heading (element + class) deliberately outranks Display's own .xl
+   rule (a single class) regardless of CSS-module bundling order, so this
+   reliably wins without needing !important. Targets roughly 72–100px on
+   large desktop, scaling down to a substantial-but-not-overflowing size
+   on mobile — see lib/homeFonts.ts for the Manrope weights this pairs
+   with (600 here: controlled semibold, not the "bold" end of the range). */
+h1.heading {
   max-width: 18ch;
   color: var(--color-text-inverse);
+  font-size: clamp(2.75rem, 1.95rem + 4vw, 6.25rem);
+  line-height: 1.04;
+  font-weight: 600;
+  letter-spacing: var(--tracking-tight);
 }
 
 .body {

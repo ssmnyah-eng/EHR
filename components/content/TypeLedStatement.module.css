@@ -18,8 +18,15 @@
   gap: var(--space-sm);
 }
 
-.heading {
+/* p.heading (element + class) outranks Display's own .md rule the same
+   way h1.heading does in HomeHero.module.css — see that file for why.
+   Targets roughly 48–72px on desktop for these "major statement"
+   sections, distinct from Display's sitewide --display-md scale used
+   elsewhere. */
+p.heading {
   max-width: 20ch;
+  font-size: clamp(2.5rem, 1.9rem + 2.6vw, 4.5rem);
+  line-height: 1.08;
 }
 
 .bodyCol {

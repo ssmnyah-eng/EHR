@@ -5,6 +5,21 @@
   margin-top: auto;
 }
 
+/* Homepage-only Manrope override (see Footer.tsx) — .link/.comingSoon/
+   .legal have no font-family of their own, so this base rule reaches
+   them by inheritance; .brand/.tagline/.columnLabel/.cta each set their
+   own font-family and need the explicit override below. */
+.footer.homepageType {
+  font-family: var(--font-manrope), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.footer.homepageType .brand,
+.footer.homepageType .tagline,
+.footer.homepageType .columnLabel,
+.footer.homepageType .cta {
+  font-family: var(--font-manrope), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
 .top {
   display: flex;
   flex-wrap: wrap;

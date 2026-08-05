@@ -124,16 +124,21 @@
 }
 
 .quote {
-  font-family: var(--font-display);
+  /* Falls back to the sitewide --font-display (Fraunces) everywhere
+     except the homepage, which defines --font-editorial (Cormorant
+     Garamond) — customer quotations are exactly the "selective accent"
+     moment that font is for. */
+  font-family: var(--font-editorial, var(--font-display));
   font-size: var(--heading-md);
   line-height: var(--leading-snug);
   color: var(--color-text-primary);
 }
 
 .editorialQuote {
-  font-size: var(--display-md);
+  font-size: clamp(2.75rem, 2rem + 3vw, 4rem);
   line-height: var(--leading-tight);
   max-width: 22ch;
+  font-style: italic;
 }
 
 .secondaryQuoteBlock {
@@ -146,7 +151,7 @@
 }
 
 .secondaryQuote {
-  font-family: var(--font-display);
+  font-family: var(--font-editorial, var(--font-display));
   font-size: var(--body-lg);
   line-height: var(--leading-snug);
   color: var(--color-text-primary);

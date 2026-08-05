@@ -1,20 +1,31 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { CLEANING_SERVICES, COMPANY_LINKS, ESTIMATE_CTA } from "@/content/navigation";
 import { ORGANIZATION_ROOMS } from "@/content/home-organization-rooms";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/content/Button";
+import { manrope } from "@/lib/homeFonts";
 import styles from "./Footer.module.css";
 
 /**
  * Verified social/contact links are intentionally omitted — the brief
  * says not to include unverified links. Wire these up once real,
  * confirmed URLs/details are provided.
+ *
+ * Typography: the homepage's Manrope system (see lib/homeFonts.ts) is
+ * gated to pathname === "/" here — same pattern as Header's "onHero"
+ * mode — so the footer renders in the new type system only when it's
+ * actually part of the homepage being reviewed, and stays exactly as it
+ * was (Fraunces/Inter) on every other route.
  */
 export function Footer() {
   const activeCleaningTiers = CLEANING_SERVICES.children?.filter((c) => c.status === "active") ?? [];
+  const isHomepage = usePathname() === "/";
 
   return (
-    <footer className={styles.footer}>
+    <footer className={[styles.footer, isHomepage && manrope.variable, isHomepage && styles.homepageType].filter(Boolean).join(" ")}>
       <Container>
         <div className={styles.top}>
           <div>
