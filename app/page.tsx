@@ -4,6 +4,7 @@ import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { HomeHero } from "@/components/content/HomeHero";
 import { MediaSlot } from "@/components/media/MediaSlot";
+import { Eyebrow } from "@/components/typography/Eyebrow";
 import { TrustStrip } from "@/components/content/TrustStrip";
 import { TypeLedStatement } from "@/components/content/TypeLedStatement";
 import { EditorialStatement } from "@/components/content/EditorialStatement";
@@ -131,80 +132,21 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* Oversized statement + supporting copy */}
+      {/* 03 — Opening brand promise: the broad Elevated Home Resets
+          promise, before the page narrows into a specific service */}
       <Section spacing="lg" surface="background">
         <Container width="wide">
           <TypeLedStatement eyebrow={INTRO_SLOT.eyebrow} heading={INTRO_SLOT.heading ?? ""} body={INTRO_SLOT.body ?? ""} />
         </Container>
       </Section>
 
-      {/* 03 — Customer problem / empathy: image-left, copy-right */}
-      <Section spacing="lg" surface="surface">
-        <Container width="wide">
-          <EditorialSplit
-            eyebrow={BRAND_DIFFERENTIATION_SLOT.eyebrow}
-            heading={BRAND_DIFFERENTIATION_SLOT.heading ?? ""}
-            body={BRAND_DIFFERENTIATION_SLOT.body}
-            media={CUSTOMER_LIFE_MEDIA}
-            reverse
-          />
-        </Container>
-      </Section>
-
-      {/* 04 — Human / why Elevated: copy-left, media-right */}
-      <Section spacing="lg" surface="background">
-        <Container width="wide">
-          <EditorialSplit
-            eyebrow={ABOUT_TEASER.eyebrow}
-            heading={ABOUT_TEASER.heading ?? ""}
-            body={ABOUT_TEASER.body}
-            primaryCTA={ABOUT_TEASER.primaryCTA ?? undefined}
-            media={FOUNDER_MEDIA}
-          />
-        </Container>
-      </Section>
-
-      {/* 05 — Services editorial: statement + service nav left, media right */}
+      {/* ===== CLEANING CHAPTER =====
+          04 — Opens immediately after the brand promise: why Cleaning
+          isn't one-size-fits-all, then the three service levels. id
+          "services" now lives here (was on the pathways-recap section
+          below) since this is where service explanation actually
+          begins post-reorder — see Hero's "Explore Services" CTA. */}
       <Section spacing="lg" surface="surface" id="services">
-        <Container width="wide">
-          <div className={styles.servicesEditorial}>
-            <div className={styles.servicesCopy}>
-              <EditorialStatement slot={SERVICE_PATHWAYS_INTRO} />
-              <ServiceEditorialGrid items={SERVICE_PATHWAY_CARDS} columns={2} />
-              <p className={styles.serviceAreaNote}>{SERVICE_AREAS_INTRO}</p>
-            </div>
-            <div className={styles.servicesMedia}>
-              <MediaSlot data={SERVICES_MEDIA} fill />
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* 06 — Full-bleed visual / process interruption */}
-      <Section spacing="sm" surface="background">
-        <FullBleedMedia
-          media={PROCESS_MEDIA}
-          fallbackLabel={PROCESS_MEDIA.alt}
-          overlayText={OUTCOME_SLOT.heading}
-          overlayBody={OUTCOME_SLOT.body}
-          tall
-        />
-      </Section>
-
-      {/* How it works — concrete steps following the process moment above */}
-      <Section spacing="lg" surface="surface">
-        <Container>
-          <Process
-            eyebrow={HOW_IT_WORKS_EYEBROW}
-            heading={HOW_IT_WORKS_HEADING}
-            steps={HOW_IT_WORKS_STEPS}
-            cta={HOW_IT_WORKS_CTA}
-          />
-        </Container>
-      </Section>
-
-      {/* 07 — Cleaning: media + copy, then service-level nav */}
-      <Section spacing="lg" surface="background">
         <Container width="wide">
           <EditorialSplit
             eyebrow={CLEANING_SERVICES_INTRO.eyebrow}
@@ -219,9 +161,30 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* 08 — Home Organization / systems: large proof + substantial imagery */}
+      {/* ===== TRANSITION =====
+          05 — Full-bleed emotional bridge from Cleaning into
+          Organization. Kept exactly as-is: large media + statement only,
+          no added chapter copy — this is the moment the owner
+          specifically likes. */}
+      <Section spacing="sm" surface="background">
+        <FullBleedMedia
+          media={PROCESS_MEDIA}
+          fallbackLabel={PROCESS_MEDIA.alt}
+          overlayText={OUTCOME_SLOT.heading}
+          overlayBody={OUTCOME_SLOT.body}
+          tall
+        />
+      </Section>
+
+      {/* ===== HOME ORGANIZATION CHAPTER =====
+          06 — Systems/function: a small "Home Organization" chapter tag
+          (reusing the exact approved eyebrow string already used for
+          this service elsewhere on this page, in TrustStrip and
+          ServicePathwayStrip) makes the shift from Cleaning unmistakable
+          before the section's own "Pretty Isn't Enough" proof intro. */}
       <Section spacing="lg" surface="muted">
         <Container width="content">
+          <Eyebrow className={styles.chapterTag}>{ORGANIZATION_PATHWAY_PANEL.eyebrow}</Eyebrow>
           <ServiceProof
             eyebrow={HOME_ORG_PROOF.eyebrow}
             heading={HOME_ORG_PROOF.heading}
@@ -234,7 +197,81 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* 09 — Real work / before & after media */}
+      {/* 07 — Organization proof: real project testimonial (Kim Nelson's
+          kitchen + closets review) */}
+      <Section spacing="lg" surface="background">
+        <Container width="wide">
+          <ServiceProof
+            primary={{ quote: KIM_NELSON.quotes.care, attribution: KIM_NELSON.name, rating: KIM_NELSON.rating }}
+            media={{ type: "single", image: TESTIMONIAL_MEDIA }}
+            layout="split"
+            editorial
+          />
+        </Container>
+      </Section>
+
+      {/* 08 — Organization reassurance: clutter/overwhelm empathy,
+          image-left copy-right */}
+      <Section spacing="lg" surface="surface">
+        <Container width="wide">
+          <EditorialSplit
+            eyebrow={BRAND_DIFFERENTIATION_SLOT.eyebrow}
+            heading={BRAND_DIFFERENTIATION_SLOT.heading ?? ""}
+            body={BRAND_DIFFERENTIATION_SLOT.body}
+            media={CUSTOMER_LIFE_MEDIA}
+            reverse
+          />
+        </Container>
+      </Section>
+
+      {/* 09 — Organization reassurance, continued: personal-care closer,
+          copy-left media-right */}
+      <Section spacing="lg" surface="background">
+        <Container width="wide">
+          <EditorialSplit
+            eyebrow={ABOUT_TEASER.eyebrow}
+            heading={ABOUT_TEASER.heading ?? ""}
+            body={ABOUT_TEASER.body}
+            primaryCTA={ABOUT_TEASER.primaryCTA ?? undefined}
+            media={FOUNDER_MEDIA}
+          />
+        </Container>
+      </Section>
+
+      {/* ===== GETTING STARTED =====
+          10 — Now that both chapters are established, recap the two
+          pathways side by side and let the visitor choose. */}
+      <Section spacing="lg" surface="surface">
+        <Container width="wide">
+          <div className={styles.servicesEditorial}>
+            <div className={styles.servicesCopy}>
+              <EditorialStatement slot={SERVICE_PATHWAYS_INTRO} />
+              <ServiceEditorialGrid items={SERVICE_PATHWAY_CARDS} columns={2} />
+              <p className={styles.serviceAreaNote}>{SERVICE_AREAS_INTRO}</p>
+            </div>
+            <div className={styles.servicesMedia}>
+              <MediaSlot data={SERVICES_MEDIA} fill />
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* 11 — How it works — concrete process steps, now that the visitor
+          understands which pathway they're entering */}
+      <Section spacing="lg" surface="background">
+        <Container>
+          <Process
+            eyebrow={HOW_IT_WORKS_EYEBROW}
+            heading={HOW_IT_WORKS_HEADING}
+            steps={HOW_IT_WORKS_STEPS}
+            cta={HOW_IT_WORKS_CTA}
+          />
+        </Container>
+      </Section>
+
+      {/* 12 — Real work / before & after media ("See the Difference a
+          Reset Can Make") — everything from here down is unchanged from
+          before this reorder. */}
       <Section spacing="lg" surface="surface">
         <Container width="wide">
           <BeforeAfterMedia
@@ -243,18 +280,6 @@ export default function HomePage() {
             body={TRANSFORMATIONS_TEASER.body}
             before={BEFORE_MEDIA}
             after={AFTER_MEDIA}
-          />
-        </Container>
-      </Section>
-
-      {/* 10 — Testimonial + image */}
-      <Section spacing="lg" surface="background">
-        <Container width="wide">
-          <ServiceProof
-            primary={{ quote: KIM_NELSON.quotes.care, attribution: KIM_NELSON.name, rating: KIM_NELSON.rating }}
-            media={{ type: "single", image: TESTIMONIAL_MEDIA }}
-            layout="split"
-            editorial
           />
         </Container>
       </Section>
@@ -282,7 +307,7 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* 12 — Dual conversion strip */}
+      {/* 13 — Dual conversion strip */}
       <Section spacing="sm" surface="muted">
         <ServicePathwayStrip cleaning={CLEANING_PATHWAY_PANEL} organization={ORGANIZATION_PATHWAY_PANEL} />
       </Section>

@@ -12,6 +12,10 @@ import { ESTIMATE_CTA, BOOK_CLEANING_CTA } from "@/content/navigation";
  * social-proof and systems-positioning moment now reuses HOME_ORG_PROOF
  * from content/home-organization.ts (already-approved copy, already
  * published there) instead of duplicating a thinner version of it here.
+ * A later content-order pass (separating Cleaning and Home Organization
+ * into distinct narrative chapters) reordered which section each of
+ * these slots renders in on app/page.tsx — again, no string below was
+ * added, removed, or reworded.
  */
 
 export const HERO_SLOT: ContentSlot = {
