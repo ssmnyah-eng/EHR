@@ -107,14 +107,14 @@ export default function CleaningHubPage() {
       </Section>
 
       {/* Add-ons */}
-      <Section spacing="lg" surface="background">
+      <Section spacing="lg" surface="background" id="add-ons">
         <Container width="content">
           <EditorialStatement slot={CLEANING_ADD_ONS} />
         </Container>
       </Section>
 
       {/* Recurring cleaning */}
-      <Section spacing="lg" surface="surface">
+      <Section spacing="lg" surface="surface" id="recurring">
         <Container width="content">
           <EditorialStatement slot={CLEANING_RECURRING} />
         </Container>

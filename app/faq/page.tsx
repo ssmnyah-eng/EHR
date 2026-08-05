@@ -1,19 +1,39 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
-import { FAQAccordion } from "@/components/content/FAQAccordion";
-import { getAllFAQItems } from "@/content/faq";
+import { Grid } from "@/components/layout/Grid";
+import { Heading } from "@/components/typography/Heading";
+import { Text } from "@/components/typography/Text";
+import { Eyebrow } from "@/components/typography/Eyebrow";
+import { FAQCategoryCard } from "@/components/content/FAQCategoryCard";
+import { FAQ_CATEGORIES } from "@/content/faq-categories";
+import { FAQ_HUB_EYEBROW, FAQ_HUB_HEADING, FAQ_HUB_BODY } from "@/content/faq";
+import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "FAQ | Elevated Home Resets",
-  description: "Frequently asked questions about Elevated Home Resets.",
+  title: "FAQs | Elevated Home Resets",
+  description: "Frequently asked questions about Cleaning, Home Organization, booking, pricing, and what to expect from Elevated Home Resets.",
 };
 
 export default function FAQPage() {
   return (
     <Section spacing="lg" surface="background">
       <Container width="content">
-        <FAQAccordion items={getAllFAQItems()} />
+        <Eyebrow>{FAQ_HUB_EYEBROW}</Eyebrow>
+        <Heading as="h1" size="xl">
+          {FAQ_HUB_HEADING}
+        </Heading>
+        <Text size="lg" tone="secondary" className={styles.intro}>
+          {FAQ_HUB_BODY}
+        </Text>
+      </Container>
+
+      <Container>
+        <Grid columns={3} gap="md">
+          {FAQ_CATEGORIES.map((category, index) => (
+            <FAQCategoryCard key={category.slug} category={category} delay={index * 60} />
+          ))}
+        </Grid>
       </Container>
     </Section>
   );

@@ -71,6 +71,7 @@ export const LIFESTYLE_RESETS: ServiceNode = {
 
 export const COMPANY_LINKS: ServiceNode[] = [
   { title: "About", slug: "about", category: "company", status: "active", href: "/about" },
+  { title: "FAQs", slug: "faq", category: "company", status: "active", href: "/faq" },
   { title: "Contact", slug: "contact", category: "company", status: "active", href: "/contact" },
 ];
 

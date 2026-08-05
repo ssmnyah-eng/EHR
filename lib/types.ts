@@ -86,15 +86,48 @@ export interface TransformationProject {
   href: string;
 }
 
+/** One link shown beneath an FAQ answer (e.g. "See the full checklist"). */
+export interface FAQAnswerLink {
+  label: string;
+  href: string;
+}
+
 export interface FAQItem {
   question: string;
   answer: string;
+  links?: FAQAnswerLink[];
 }
 
-export interface FAQDataset {
-  id: "cleaning" | "organizing" | "general";
-  label: string;
+/** A named group of questions within one FAQ category page (e.g.
+ *  "Choosing a Cleaning Service", "What We Clean"). */
+export interface FAQSection {
+  heading: string;
   items: FAQItem[];
+}
+
+/** A question whose answer depends on a business rule that hasn't been
+ *  approved yet (payment methods, cancellation window, access policy,
+ *  etc.). Tracked in each category's content file for business review —
+ *  never imported by a page, so it can't accidentally get published. */
+export interface PendingFAQItem {
+  question: string;
+  reason: string;
+}
+
+/** Directory entry for one of the 6 FAQ category pages — drives the hub
+ *  grid, breadcrumbs, and related-category cards. Each category's actual
+ *  question data lives in its own content/faq-{category}.ts file. */
+export interface FAQCategoryData {
+  slug: string;
+  eyebrow?: string;
+  title: string;
+  navLabel: string;
+  hubDescription: string;
+  cta: CTAData;
+  media: MediaSlotData;
+  heroIntro: string;
+  seoTitle: string;
+  seoDescription: string;
 }
 
 export interface TeaserCardData {

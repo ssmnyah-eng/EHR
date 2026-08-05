@@ -1,0 +1,4 @@
+.intro {
+  max-width: 46ch;
+  margin-bottom: var(--space-lg);
+}
