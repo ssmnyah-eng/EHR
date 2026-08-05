@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { Heading } from "@/components/typography/Heading";
 import { Text } from "@/components/typography/Text";
 import { CleaningBookingForm } from "@/components/conversion/CleaningBookingForm";
+import { CleaningBookingFormClient } from "@/components/conversion/CleaningBookingFormClient";
 import { BOOK_CLEANING_HEADING, BOOK_CLEANING_BODY } from "@/content/book-cleaning";
 import styles from "./page.module.css";
 
@@ -12,11 +14,7 @@ export const metadata: Metadata = {
   description: "Book your Standard, Deep Premium, or Elevated Reset clean with Elevated Home Resets.",
 };
 
-export default async function BookCleaningPage(props: PageProps<"/book-cleaning">) {
-  const searchParams = await props.searchParams;
-  const serviceParam = searchParams.service;
-  const preselectedService = typeof serviceParam === "string" ? serviceParam : undefined;
-
+export default function BookCleaningPage() {
   return (
     <Section spacing="lg" surface="background">
       <Container width="content">
@@ -27,7 +25,13 @@ export default async function BookCleaningPage(props: PageProps<"/book-cleaning"
           {BOOK_CLEANING_BODY}
         </Text>
         <div className={styles.formWrapper}>
-          <CleaningBookingForm preselectedService={preselectedService} />
+          {/* Fallback renders the full working form with no tier
+              preselected, so the static export ships a complete, usable
+              form immediately — the client wrapper then hydrates in the
+              `?service=` preselection without changing the form's shape. */}
+          <Suspense fallback={<CleaningBookingForm />}>
+            <CleaningBookingFormClient />
+          </Suspense>
         </div>
       </Container>
     </Section>

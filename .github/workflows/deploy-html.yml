@@ -6,7 +6,7 @@ on:
   workflow_dispatch: {}
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -15,44 +15,55 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy to gh-pages
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # /resources/[slug] and /transformations/[slug] have no published
+      # entries yet (their content arrays are intentionally empty), so
+      # generateStaticParams() returns []. `output: "export"` requires at
+      # least one static param per dynamic route, since there's no server
+      # left to resolve unknown slugs at request time — the build fails
+      # otherwise. Nothing currently links to these routes (no resource or
+      # transformation exists to link to), so excluding them from THIS
+      # runner's checkout only is safe: this never touches the committed
+      # source tree, only this ephemeral build. Delete this step once real
+      # resource/transformation content ships and these routes generate
+      # real params again.
+      - name: Exclude dynamic routes with zero static params
+        run: rm -rf "app/resources/[slug]" "app/transformations/[slug]"
+
+      - name: Build static export
+        env:
+          GITHUB_PAGES: "true"
+        run: npm run build
+
+      - name: Verify static output
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
+          test -d out || (echo "Static export did not produce an out/ directory" && exit 1)
+          test -f out/index.html || (echo "out/index.html is missing" && exit 1)
 
-          # Create or switch to gh-pages branch
-          git fetch origin gh-pages 2>/dev/null || true
-          git checkout --orphan gh-pages || git checkout gh-pages
+      - name: Add .nojekyll
+        run: touch out/.nojekyll
 
-          # Copy HTML, CSS, JS, and other files
-          git checkout ${{ github.head_ref || github.ref_name }} -- \
-            index.html \
-            styles.css \
-            script.js \
-            contact/ \
-            services/ \
-            about/ \
-            privacy/ \
-            terms/ \
-            apps-script.gs \
-            2>/dev/null || true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
 
-          # Commit and push
-          git add -A
-          git commit -m "Deploy static HTML site" --allow-empty
-          git push origin gh-pages -f
-
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
-
-      - name: Enable GitHub Pages
-        run: |
-          echo "GitHub Pages should be enabled in repository settings:"
-          echo "1. Go to Settings → Pages"
-          echo "2. Set Source to 'Deploy from a branch'"
-          echo "3. Select gh-pages branch and / (root) folder"
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

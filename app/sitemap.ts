@@ -9,6 +9,10 @@ import type { MetadataRoute } from "next";
  */
 const BASE_URL = "https://elevatedhomeresets.com";
 
+// Required for `output: "export"` (GitHub Pages build) — this route has
+// no dynamic input, so it's safe to mark explicitly static.
+export const dynamic = "force-static";
+
 const STATIC_ROUTES = [
   "/",
   "/about",

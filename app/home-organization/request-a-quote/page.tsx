@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { Heading } from "@/components/typography/Heading";
 import { Text } from "@/components/typography/Text";
 import { OrganizationQuoteWizard } from "@/components/conversion/OrganizationQuoteWizard/OrganizationQuoteWizard";
+import { OrganizationQuoteWizardClient } from "@/components/conversion/OrganizationQuoteWizard/OrganizationQuoteWizardClient";
 import { QUOTE_HEADING, QUOTE_BODY } from "@/content/organization-quote";
 import styles from "./page.module.css";
 
@@ -12,11 +14,7 @@ export const metadata: Metadata = {
   description: "Request a Home Organization project quote from Elevated Home Resets.",
 };
 
-export default async function RequestAQuotePage(props: PageProps<"/home-organization/request-a-quote">) {
-  const searchParams = await props.searchParams;
-  const spaceParam = searchParams.space;
-  const preselectedService = typeof spaceParam === "string" ? spaceParam : undefined;
-
+export default function RequestAQuotePage() {
   return (
     <Section spacing="lg" surface="background">
       <Container width="content">
@@ -26,7 +24,13 @@ export default async function RequestAQuotePage(props: PageProps<"/home-organiza
         <Text size="lg" tone="secondary" className={styles.intro}>
           {QUOTE_BODY}
         </Text>
-        <OrganizationQuoteWizard preselectedService={preselectedService} />
+        {/* Fallback renders the full working wizard with no room
+            preselected, so the static export ships a complete, usable
+            wizard immediately — the client wrapper then hydrates in the
+            `?space=` preselection without changing the wizard's shape. */}
+        <Suspense fallback={<OrganizationQuoteWizard />}>
+          <OrganizationQuoteWizardClient />
+        </Suspense>
       </Container>
     </Section>
   );
