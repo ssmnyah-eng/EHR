@@ -67,11 +67,12 @@ const CUSTOMER_LIFE_MEDIA: MediaSlotData = {
   objectPosition: "60% 55%",
 };
 
-const FOUNDER_MEDIA: MediaSlotData = {
+const ABOUT_TEASER_MEDIA: MediaSlotData = {
   type: "image",
-  alt: "Founder or team at work in a client's home",
-  variant: "portrait",
-  aspectRatio: "4 / 5",
+  src: "/images/cleaning/personal-living-space.jpg",
+  alt: "A lived-in living and dining space with natural light",
+  variant: "landscape",
+  objectPosition: "center 60%",
 };
 
 const SERVICES_MEDIA: MediaSlotData = {
@@ -93,8 +94,10 @@ const PROCESS_MEDIA: MediaSlotData = {
 
 const CLEANING_MEDIA: MediaSlotData = {
   type: "image",
-  alt: "A freshly cleaned room",
+  src: "/images/cleaning/not-every-home-same-clean.jpg",
+  alt: "An empty, freshly presented living room with hardwood floors and a fireplace",
   variant: "landscape",
+  objectPosition: "center 55%",
 };
 
 const CLEANING_EXPLANATION_MEDIA: MediaSlotData = {
@@ -107,9 +110,19 @@ const CLEANING_EXPLANATION_MEDIA: MediaSlotData = {
 
 const CLEANING_DETAIL_MEDIA: MediaSlotData = {
   type: "image",
-  alt: "A freshly cleaned kitchen counter and sink",
+  src: "/images/cleaning/details-change-whole-home.jpg",
+  alt: "Two people relaxing together in a bright, tidy living room",
   variant: "portrait",
   aspectRatio: "4 / 5",
+  objectPosition: "64% 58%",
+};
+
+const FINAL_CTA_MEDIA: MediaSlotData = {
+  type: "image",
+  src: "/images/cleaning/home-doesnt-need-to-be-ready.jpg",
+  alt: "A woman gathering an armful of laundry in a lived-in home",
+  variant: "fullBleed",
+  objectPosition: "72% 45%",
 };
 
 const ORGANIZATION_MEDIA: MediaSlotData = {
@@ -322,7 +335,7 @@ export default function HomePage() {
             heading={ABOUT_TEASER.heading ?? ""}
             body={ABOUT_TEASER.body}
             primaryCTA={ABOUT_TEASER.primaryCTA ?? undefined}
-            media={FOUNDER_MEDIA}
+            media={ABOUT_TEASER_MEDIA}
           />
         </Container>
       </Section>
@@ -390,10 +403,22 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      <Section spacing="lg" surface="muted">
-        <Container>
-          <InquiryCTA slot={FINAL_CTA_SLOT} showForm={false} />
-        </Container>
+      {/* Closing statement — full-bleed background photo with centered
+          copy, same treatment as the "right level of cleaning" section
+          above. FINAL_CTA_SLOT has no CTA buttons of its own (it's a
+          closing statement, not a conversion push), so this maps
+          directly onto FullBleedMedia's overlay without needing
+          InquiryCTA's button/form support. */}
+      <Section spacing="sm" surface="muted">
+        <FullBleedMedia
+          media={FINAL_CTA_MEDIA}
+          fallbackLabel={FINAL_CTA_MEDIA.alt}
+          overlayEyebrow={FINAL_CTA_SLOT.eyebrow}
+          overlayText={FINAL_CTA_SLOT.heading}
+          overlayBody={FINAL_CTA_SLOT.body}
+          align="center"
+          tall
+        />
       </Section>
 
       {/* 13 — Dual conversion strip */}

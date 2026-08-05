@@ -17,7 +17,14 @@ export const CLEANING_HUB_HERO: ContentSlot = {
   body: "Whether you're keeping up with your home, catching up on the details, or ready for a more complete reset, Elevated Home Resets gives you a clear level of care to start from.",
   primaryCTA: { label: "Find Your Clean", href: "#selector" },
   secondaryCTA: BOOK_CLEANING_CTA,
-  media: { type: "image", alt: "A freshly cleaned room in a client's home", variant: "fullBleed", priority: true },
+  media: {
+    type: "image",
+    src: "/images/cleaning/not-every-home-same-clean.jpg",
+    alt: "An empty, freshly presented living room with hardwood floors and a fireplace",
+    variant: "fullBleed",
+    objectPosition: "center 45%",
+    priority: true,
+  },
 };
 
 export const CLEANING_HUB_INTRO: ContentSlot = {
@@ -83,7 +90,14 @@ export const CLEANING_DIFFERENTIATION: ContentSlot = {
   eyebrow: "The Elevated Approach",
   heading: "Your home doesn't need to be ready for us.",
   body: "You don't need to clean before the cleaners arrive.\n\nYou don't need to apologize for what fell behind.\n\nAnd you don't need to figure out every detail before getting started.\n\nHomes are lived in. Life gets busy. Sometimes routine maintenance is enough, and sometimes a home needs more.\n\nThat's why we offer different levels of care instead of treating every home like it needs the exact same cleaning experience.",
-  media: { type: "image", alt: "A calm, lived-in room before its cleaning appointment", variant: "portrait", aspectRatio: "5 / 6" },
+  media: {
+    type: "image",
+    src: "/images/cleaning/home-doesnt-need-to-be-ready.jpg",
+    alt: "A woman gathering an armful of laundry in a lived-in home",
+    variant: "portrait",
+    aspectRatio: "5 / 6",
+    objectPosition: "70% 48%",
+  },
 };
 
 export const CLEANING_SCOPE_PREVIEW: ContentSlot = {
