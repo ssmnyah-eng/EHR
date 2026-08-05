@@ -114,9 +114,10 @@ const CLEANING_DETAIL_MEDIA: MediaSlotData = {
 
 const ORGANIZATION_MEDIA: MediaSlotData = {
   type: "image",
-  src: "/images/organization/walk-in-closet.jpg",
-  alt: "A completed walk-in closet organization project with clothing sorted and displayed by category",
+  src: "/images/organization/pantry.jpg",
+  alt: "A comprehensive organized pantry with labeled shelving for cookware, appliances, and pantry staples",
   variant: "landscape",
+  objectPosition: "center 45%",
 };
 
 const BEFORE_MEDIA: MediaSlotData = {
