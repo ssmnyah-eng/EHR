@@ -146,6 +146,124 @@ export const TRANSFORMATIONS: TransformationProject[] = [
     },
     href: "/transformations/living-room-shoe-storage-reset",
   },
+  // The 7 entries below are combined before/after comparison assets — each
+  // heroMedia IS the full before-and-after proof (a single composite photo,
+  // or a video that itself shows the transformation), not a single "after"
+  // shot. No `category` on purpose: these power the homepage carousel
+  // directly (see HOMEPAGE_TRANSFORMATION_PROJECTS below) and shouldn't
+  // also surface a second time via findTransformationsByCategory() on the
+  // Closet/Kitchen/Pantry room pages.
+  {
+    title: "A Shoe Closet, Before and After",
+    slug: "closet-shoe-shelving-before-after",
+    summary: "Wire shelving that was overflowing with shoes and boots, sorted and organized by shoe type.",
+    heroMedia: {
+      type: "image",
+      src: "/images/transformations/before-after-closet-shoes.jpg",
+      alt: "Before and after comparison of a closet's wire shelving: shoes and boots overflowing on the left, the same shelving organized by shoe type on the right",
+      variant: "square",
+      aspectRatio: "1 / 1",
+    },
+    href: "/transformations/closet-shoe-shelving-before-after",
+  },
+  {
+    title: "A Walk-In Closet, Before and After",
+    slug: "closet-walk-in-before-after",
+    summary: "A walk-in closet with clothing piled on the floor, reset with everything sorted onto shelving.",
+    heroMedia: {
+      type: "image",
+      src: "/images/transformations/before-after-closet-2.jpg",
+      alt: "Before and after comparison of a walk-in closet: clothes piled on the floor on the left, the same closet organized with clothing on wire shelving on the right",
+      variant: "square",
+      aspectRatio: "1 / 1",
+    },
+    href: "/transformations/closet-walk-in-before-after",
+  },
+  {
+    title: "A Coat Closet, Before and After",
+    slug: "closet-coats-before-after",
+    summary: "A coat closet reset from a cluttered rod and floor hamper to organized coats and neatly stored luggage.",
+    heroMedia: {
+      type: "image",
+      src: "/images/transformations/before-after-closet-3.jpg",
+      alt: "Before and after comparison of a coat closet: coats crowded on a rod above a floor hamper on the left, the same closet with coats on wire shelving and luggage neatly stored on the right",
+      variant: "square",
+      aspectRatio: "1 / 1",
+    },
+    href: "/transformations/closet-coats-before-after",
+  },
+  {
+    title: "A Closet Reset, Before and After",
+    slug: "closet-reset-before-after-video",
+    summary: "A cluttered closet and overflowing shelving, reset side by side in this before-and-after video.",
+    heroMedia: {
+      type: "video",
+      src: "/videos/before-after-closet.mp4",
+      poster: "/images/transformations/before-after-closet-video-poster.jpg",
+      alt: "Before and after video of a closet reset, showing the cluttered closet and shelving alongside the organized result",
+      variant: "portrait",
+      aspectRatio: "9 / 16",
+    },
+    href: "/transformations/closet-reset-before-after-video",
+  },
+  {
+    title: "A Kitchen Memo Area, Before and After",
+    slug: "kitchen-memo-area-before-after",
+    summary: "A kitchen message-center cabinet and counter reset from overflowing clutter to a clear, labeled space.",
+    heroMedia: {
+      type: "image",
+      src: "/images/transformations/before-after-kitchen-memo-area.jpg",
+      alt: "Before and after comparison of a kitchen memo area: papers and clutter covering the cabinet and counter on the left, the same space organized with labeled bottles and a clear counter on the right",
+      variant: "square",
+      aspectRatio: "1 / 1",
+    },
+    href: "/transformations/kitchen-memo-area-before-after",
+  },
+  {
+    title: "A Kitchen Memo Area, Before and After",
+    slug: "kitchen-memo-area-before-after-video",
+    summary: "The kitchen message-center area reset, shown before and after in this walkthrough video.",
+    heroMedia: {
+      type: "video",
+      src: "/videos/before-after-kitchen-memo-area.mp4",
+      poster: "/images/transformations/before-after-kitchen-memo-area-video-poster.jpg",
+      alt: "Before and after video of a kitchen memo area reset, transitioning from the cluttered cabinet and counter to the organized result",
+      variant: "portrait",
+      aspectRatio: "9 / 16",
+    },
+    href: "/transformations/kitchen-memo-area-before-after-video",
+  },
+  {
+    title: "A Kitchen Pantry, Before and After",
+    slug: "kitchen-pantry-before-after-video",
+    summary: "A kitchen pantry reset from crowded, hard-to-see shelves to an organized, easy-to-use space.",
+    heroMedia: {
+      type: "video",
+      src: "/videos/before-after-kitchen-pantry.mp4",
+      poster: "/images/transformations/before-after-kitchen-pantry-poster.jpg",
+      alt: "Before and after video of a kitchen pantry reset, transitioning from crowded shelves to an organized pantry",
+      variant: "portrait",
+      aspectRatio: "9 / 16",
+    },
+    href: "/transformations/kitchen-pantry-before-after-video",
+  },
+];
+
+/**
+ * Curated order for the homepage's "See the Difference a Reset Can Make"
+ * carousel (Rule 3/9 of the before/after media-structure task) — the 4
+ * combined before/after photos, then the 3 before/after videos, same
+ * object references as their TRANSFORMATIONS entries above so each slide
+ * still links to a real `/transformations/{slug}` detail page.
+ */
+export const HOMEPAGE_TRANSFORMATION_PROJECTS: TransformationProject[] = [
+  TRANSFORMATIONS.find((p) => p.slug === "closet-shoe-shelving-before-after")!,
+  TRANSFORMATIONS.find((p) => p.slug === "closet-walk-in-before-after")!,
+  TRANSFORMATIONS.find((p) => p.slug === "closet-coats-before-after")!,
+  TRANSFORMATIONS.find((p) => p.slug === "closet-reset-before-after-video")!,
+  TRANSFORMATIONS.find((p) => p.slug === "kitchen-memo-area-before-after")!,
+  TRANSFORMATIONS.find((p) => p.slug === "kitchen-memo-area-before-after-video")!,
+  TRANSFORMATIONS.find((p) => p.slug === "kitchen-pantry-before-after-video")!,
 ];
 
 export function findTransformationBySlug(slug: string): TransformationProject | undefined {

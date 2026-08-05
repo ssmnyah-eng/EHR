@@ -21,6 +21,19 @@ interface ProjectMediaCarouselProps {
   projects: TransformationProject[];
   placeholderAlt: string;
   placeholderCount?: number;
+  /** "cover" (default) crops each slide to the frame — right for ordinary
+   *  project photography. "contain" shows each asset in full (e.g. a
+   *  composite before/after image where cropping either side would
+   *  destroy the comparison). */
+  mediaFit?: "cover" | "contain";
+  /** Overrides the built-in 16:9 (desktop) / 4:5 (mobile) frame ratio —
+   *  for media whose own aspect ratio doesn't fit that split, applied at
+   *  every breakpoint. */
+  stageAspectRatio?: string;
+  /** Adds a visible "N / Total" label next to the dots, for sections
+   *  where the dot row alone isn't an explicit enough position cue.
+   *  Defaults to false so existing usages are unchanged. */
+  showPositionIndicator?: boolean;
 }
 
 interface Slide {
@@ -39,7 +52,17 @@ interface Slide {
  * pages should pass Organization-category (optionally room-specific)
  * projects — never unrelated project media just to fill the carousel.
  */
-export function ProjectMediaCarousel({ eyebrow, heading, body, projects, placeholderAlt, placeholderCount = 3 }: ProjectMediaCarouselProps) {
+export function ProjectMediaCarousel({
+  eyebrow,
+  heading,
+  body,
+  projects,
+  placeholderAlt,
+  placeholderCount = 3,
+  mediaFit = "cover",
+  stageAspectRatio,
+  showPositionIndicator = false,
+}: ProjectMediaCarouselProps) {
   const slides: Slide[] =
     projects.length > 0
       ? projects.map((project) => ({
@@ -86,7 +109,7 @@ export function ProjectMediaCarousel({ eyebrow, heading, body, projects, placeho
   }
 
   const current = slides[index];
-  const media = <MediaSlot data={current.media} fill className={styles.media} />;
+  const media = <MediaSlot data={current.media} fill className={styles.media} objectFit={mediaFit} decorative={false} />;
 
   return (
     <div className={styles.wrapper}>
@@ -114,7 +137,7 @@ export function ProjectMediaCarousel({ eyebrow, heading, body, projects, placeho
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
-        <div className={styles.frame}>
+        <div className={[styles.frame, mediaFit === "contain" ? styles.frameContain : ""].filter(Boolean).join(" ")} style={stageAspectRatio ? { aspectRatio: stageAspectRatio } : undefined}>
           {current.href ? (
             <Link href={current.href} className={styles.mediaLink} aria-label={current.title ?? "View project"}>
               {media}
@@ -143,18 +166,25 @@ export function ProjectMediaCarousel({ eyebrow, heading, body, projects, placeho
       </div>
 
       {slides.length > 1 ? (
-        <div className={styles.dots} role="tablist" aria-label="Choose a project">
-          {slides.map((slide, i) => (
-            <button
-              key={slide.key}
-              type="button"
-              role="tab"
-              aria-selected={i === index}
-              aria-label={`Project ${i + 1} of ${slides.length}`}
-              className={[styles.dot, i === index ? styles.dotActive : ""].filter(Boolean).join(" ")}
-              onClick={() => goTo(i)}
-            />
-          ))}
+        <div className={styles.navRow}>
+          <div className={styles.dots} role="tablist" aria-label="Choose a project">
+            {slides.map((slide, i) => (
+              <button
+                key={slide.key}
+                type="button"
+                role="tab"
+                aria-selected={i === index}
+                aria-label={`Project ${i + 1} of ${slides.length}`}
+                className={[styles.dot, i === index ? styles.dotActive : ""].filter(Boolean).join(" ")}
+                onClick={() => goTo(i)}
+              />
+            ))}
+          </div>
+          {showPositionIndicator ? (
+            <span className={styles.positionIndicator} aria-hidden="true">
+              {index + 1} / {slides.length}
+            </span>
+          ) : null}
         </div>
       ) : null}
 

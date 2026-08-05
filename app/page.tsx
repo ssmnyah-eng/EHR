@@ -11,7 +11,7 @@ import { EditorialStatement } from "@/components/content/EditorialStatement";
 import { EditorialSplit } from "@/components/content/EditorialSplit";
 import { FullBleedMedia } from "@/components/media/FullBleedMedia";
 import { ServiceEditorialGrid } from "@/components/content/ServiceEditorialGrid";
-import { BeforeAfterMedia } from "@/components/content/BeforeAfterMedia";
+import { ProjectMediaCarousel } from "@/components/content/ProjectMediaCarousel";
 import { ComingSoonPreview } from "@/components/services/ComingSoonPreview";
 import { Process } from "@/components/content/Process";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
@@ -24,6 +24,7 @@ import { HOME_ORG_PROOF } from "@/content/home-organization";
 import { SERVICE_AREAS_INTRO } from "@/content/service-areas";
 import { KIM_NELSON, VICKI_JOHNSON } from "@/content/testimonials";
 import { CLEANING_FINAL_CTA } from "@/content/cleaning";
+import { HOMEPAGE_TRANSFORMATION_PROJECTS } from "@/content/transformations";
 import { STANDARD_CLEAN_DETAIL_BODY } from "@/content/cleaning-standard";
 import { HOMEPAGE_FAQ_ITEMS } from "@/content/faq";
 import styles from "./page.module.css";
@@ -134,18 +135,6 @@ const ORGANIZATION_MEDIA: MediaSlotData = {
   alt: "A comprehensive organized pantry with labeled shelving for cookware, appliances, and pantry staples",
   variant: "landscape",
   objectPosition: "center 45%",
-};
-
-const BEFORE_MEDIA: MediaSlotData = {
-  type: "image",
-  alt: "A space before its Elevated Home Resets project",
-  variant: "beforeAfter",
-};
-
-const AFTER_MEDIA: MediaSlotData = {
-  type: "image",
-  alt: "The same space after its Elevated Home Resets project",
-  variant: "beforeAfter",
 };
 
 const TESTIMONIAL_MEDIA: MediaSlotData = {
@@ -379,12 +368,15 @@ export default function HomePage() {
           before this reorder. */}
       <Section spacing="lg" surface="surface">
         <Container width="wide">
-          <BeforeAfterMedia
+          <ProjectMediaCarousel
             eyebrow={TRANSFORMATIONS_TEASER.eyebrow}
-            heading={TRANSFORMATIONS_TEASER.heading}
+            heading={TRANSFORMATIONS_TEASER.heading ?? ""}
             body={TRANSFORMATIONS_TEASER.body}
-            before={BEFORE_MEDIA}
-            after={AFTER_MEDIA}
+            projects={HOMEPAGE_TRANSFORMATION_PROJECTS}
+            placeholderAlt="A space before and after its Elevated Home Resets project"
+            mediaFit="contain"
+            stageAspectRatio="1 / 1"
+            showPositionIndicator
           />
         </Container>
       </Section>

@@ -9,6 +9,15 @@ interface MediaSlotProps {
   data?: MediaSlotData | null;
   className?: string;
   fill?: boolean;
+  /** "cover" (default) fills the frame, cropping overflow — right for
+   *  ordinary photography. "contain" shows the whole asset with no
+   *  cropping, for media (like a composite before/after image) where
+   *  cutting off any edge would lose part of what the photo proves. */
+  objectFit?: "cover" | "contain";
+  /** False marks this media as meaningful content rather than ambient
+   *  background — removes aria-hidden and gives video an accessible
+   *  name. Defaults to true (today's decorative-background behavior). */
+  decorative?: boolean;
 }
 
 const DEFAULT_ASPECT: Record<MediaSlotData["variant"], string> = {
@@ -29,7 +38,7 @@ const DEFAULT_ASPECT: Record<MediaSlotData["variant"], string> = {
  * automatically-inserted stock photo (per brief section 38/55 — empty
  * media must gracefully fall back, never break the layout).
  */
-export function MediaSlot({ data, className, fill = false }: MediaSlotProps) {
+export function MediaSlot({ data, className, fill = false, objectFit = "cover", decorative = true }: MediaSlotProps) {
   const aspectRatio = data?.aspectRatio ?? (data ? DEFAULT_ASPECT[data.variant] : "4 / 3");
 
   if (!data || !data.src) {
@@ -58,7 +67,7 @@ export function MediaSlot({ data, className, fill = false }: MediaSlotProps) {
       data-fill={fill || undefined}
     >
       {data.type === "video" ? (
-        <VideoMedia data={data} />
+        <VideoMedia data={data} objectFit={objectFit} decorative={decorative} />
       ) : (
         <Image
           src={assetPath(data.src)}
@@ -67,7 +76,7 @@ export function MediaSlot({ data, className, fill = false }: MediaSlotProps) {
           priority={data.priority}
           sizes="100vw"
           className={styles.media}
-          style={{ objectPosition: data.objectPosition }}
+          style={{ objectPosition: data.objectPosition, objectFit }}
         />
       )}
     </div>

@@ -7,6 +7,11 @@ import styles from "./MediaSlot.module.css";
 
 interface VideoMediaProps {
   data: MediaSlotData;
+  objectFit?: "cover" | "contain";
+  /** False for video that IS the content (e.g. a before/after proof
+   *  clip) rather than ambient background — gives it an accessible name
+   *  instead of hiding it from assistive tech. */
+  decorative?: boolean;
 }
 
 const REDUCE_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
@@ -33,7 +38,7 @@ function getServerSnapshot() {
  * continuous motion. No audio track is ever shipped for these files, so
  * there's nothing for assistive tech to be forced to consume.
  */
-export function VideoMedia({ data }: VideoMediaProps) {
+export function VideoMedia({ data, objectFit = "cover", decorative = true }: VideoMediaProps) {
   const ref = useRef<HTMLVideoElement>(null);
   const reduceMotion = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
@@ -60,8 +65,9 @@ export function VideoMedia({ data }: VideoMediaProps) {
       playsInline
       autoPlay={!reduceMotion}
       preload={data.priority ? "auto" : "metadata"}
-      style={{ objectPosition: data.objectPosition }}
-      aria-hidden="true"
+      style={{ objectPosition: data.objectPosition, objectFit }}
+      aria-hidden={decorative || undefined}
+      aria-label={decorative ? undefined : data.alt}
     >
       {data.srcWebm ? <source src={assetPath(data.srcWebm)} type="video/webm" /> : null}
       {data.src ? <source src={assetPath(data.src)} type="video/mp4" /> : null}

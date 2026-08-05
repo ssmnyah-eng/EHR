@@ -49,6 +49,16 @@
   height: 100%;
 }
 
+/* Contain-mode slides (e.g. a composite before/after photo that must
+   show in full) can leave letterbox/pillarbox space around the media —
+   the frame's own tinted background (inherited from MediaSlot's
+   .frame) already reads as a deliberate panel rather than an empty box,
+   so no extra treatment is needed here beyond the object-fit switch
+   applied via MediaSlot's objectFit prop. */
+.frameContain {
+  background: var(--color-surface-muted);
+}
+
 .mediaLink {
   display: block;
   height: 100%;
@@ -117,10 +127,26 @@
   }
 }
 
+.navRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
 .dots {
   display: flex;
   justify-content: center;
   gap: var(--space-xs);
+}
+
+.positionIndicator {
+  font-family: var(--font-body);
+  font-size: var(--caption-size);
+  font-weight: 600;
+  color: var(--color-muted);
+  letter-spacing: var(--tracking-wide);
+  font-variant-numeric: tabular-nums;
 }
 
 .dot {
