@@ -34,16 +34,17 @@ export const HERO_SLOT: ContentSlot = {
   secondaryCTA: { label: "Explore Services", href: "#services" },
   // Rendered as a full-bleed background by HomeHero (fill mode — sized by
   // the hero section's CSS min-height, not this aspect ratio). Real
-  // client-supplied footage: a bright, organized kitchen. Decorative
+  // client-supplied footage: a walkthrough montage of a home's entryway,
+  // living spaces, and kitchens, including a cleaning moment. Decorative
   // (muted, looping, aria-hidden — see VideoMedia), so the alt text below
   // exists for maintainability, not assistive tech.
   media: {
     type: "video",
     src: "/videos/homepage-hero.mp4",
     poster: "/videos/homepage-hero-poster.jpg",
-    alt: "A woman reaching for an item on an open kitchen shelf in a bright, organized home",
+    alt: "A walkthrough of a home's entryway and living spaces, including a moment of dusting a shelf",
     variant: "fullBleed",
-    objectPosition: "32% 35%",
+    objectPosition: "center center",
     priority: true,
   },
 };
