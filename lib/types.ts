@@ -102,9 +102,12 @@ export interface FAQItem {
 }
 
 /** A named group of questions within one FAQ category page (e.g.
- *  "Choosing a Cleaning Service", "What We Clean"). */
+ *  "Choosing a Cleaning Service", "What We Clean"). `heading` is optional
+ *  for contexts that already carry their own on-page heading immediately
+ *  above the accordion (e.g. the homepage FAQ preview, under FAQ_TEASER)
+ *  and don't need a second one — see FAQAccordion. */
 export interface FAQSection {
-  heading: string;
+  heading?: string;
   items: FAQItem[];
 }
 

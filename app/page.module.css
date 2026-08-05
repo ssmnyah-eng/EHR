@@ -82,3 +82,18 @@
     height: 16rem;
   }
 }
+
+/* Homepage FAQ preview: separates the centered EditorialStatement intro
+   from the left-aligned accordion list below it (EditorialStatement has
+   no bottom margin of its own — see EditorialStatement.module.css). The
+   closing "View All FAQs" button is centered below, like the category
+   pages' own contextual-CTA rows. */
+.faqAccordionWrap {
+  margin-top: var(--space-2xl);
+}
+
+.faqViewAllRow {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-xl);
+}

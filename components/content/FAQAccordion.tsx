@@ -49,11 +49,13 @@ export function FAQAccordion({ sections }: FAQAccordionProps) {
 
   return (
     <div className={styles.sections}>
-      {sections.map((section) => (
-        <div key={section.heading} className={styles.section}>
-          <Heading as="h2" size="md" className={styles.sectionHeading}>
-            {section.heading}
-          </Heading>
+      {sections.map((section, sectionIndex) => (
+        <div key={section.heading ?? sectionIndex} className={styles.section}>
+          {section.heading ? (
+            <Heading as="h2" size="md" className={styles.sectionHeading}>
+              {section.heading}
+            </Heading>
+          ) : null}
           <ul className={styles.list}>
             {section.items.map((item) => {
               const id = slugify(item.question);
@@ -76,7 +78,18 @@ export function FAQAccordion({ sections }: FAQAccordionProps) {
                       <span className={[styles.icon, isOpen && styles.iconOpen].filter(Boolean).join(" ")} aria-hidden="true" />
                     </button>
                   </h3>
-                  <div id={panelId} role="region" aria-labelledby={buttonId} className={[styles.panel, isOpen && styles.panelOpen].filter(Boolean).join(" ")}>
+                  <div
+                    id={panelId}
+                    role="region"
+                    aria-labelledby={buttonId}
+                    className={[styles.panel, isOpen && styles.panelOpen].filter(Boolean).join(" ")}
+                    // Collapsed panels stay in the DOM (crawlable answer
+                    // text, per brief) but shouldn't be reachable by Tab
+                    // or exposed to assistive tech while visually
+                    // collapsed to zero height — inert removes both
+                    // without touching the rendered markup search engines see.
+                    inert={!isOpen}
+                  >
                     <div className={styles.answerWrapper}>
                       <p className={styles.answer}>{item.answer}</p>
                       {item.links && item.links.length > 0 ? (

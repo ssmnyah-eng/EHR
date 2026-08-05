@@ -17,12 +17,15 @@ import { Process } from "@/components/content/Process";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import { ServiceProof } from "@/components/content/ServiceProof";
 import { ServicePathwayStrip } from "@/components/content/ServicePathwayStrip";
+import { FAQAccordion } from "@/components/content/FAQAccordion";
+import { Button } from "@/components/content/Button";
 import { LIFESTYLE_RESETS, CLEANING_PATHWAY_PANEL, ORGANIZATION_PATHWAY_PANEL } from "@/content/navigation";
 import { HOME_ORG_PROOF } from "@/content/home-organization";
 import { SERVICE_AREAS_INTRO } from "@/content/service-areas";
 import { KIM_NELSON, VICKI_JOHNSON } from "@/content/testimonials";
 import { CLEANING_FINAL_CTA } from "@/content/cleaning";
 import { STANDARD_CLEAN_DETAIL_BODY } from "@/content/cleaning-standard";
+import { HOMEPAGE_FAQ_ITEMS } from "@/content/faq";
 import styles from "./page.module.css";
 import {
   HERO_SLOT,
@@ -397,9 +400,23 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      <Section spacing="sm" surface="background">
+      {/* Homepage FAQ preview — 6 questions (content/faq.ts:HOMEPAGE_FAQ_ITEMS,
+          the single source of truth for this section), reusing the same
+          accordion the dedicated /faq category pages use. Answers stay in
+          the server-rendered HTML regardless of open/closed state (see
+          FAQAccordion), so this doubles as an SEO/internal-linking moment,
+          not just a UI teaser. */}
+      <Section spacing="lg" surface="background">
         <Container width="content">
           <EditorialStatement slot={FAQ_TEASER} />
+          <div className={styles.faqAccordionWrap}>
+            <FAQAccordion sections={[{ items: HOMEPAGE_FAQ_ITEMS }]} />
+          </div>
+          <div className={styles.faqViewAllRow}>
+            <Button href="/faq" variant="secondary" size="lg">
+              View All FAQs
+            </Button>
+          </div>
         </Container>
       </Section>
 

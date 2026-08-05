@@ -81,7 +81,12 @@
 
 .panel {
   display: grid;
-  grid-template-rows: 0fr;
+  /* minmax(0, 0fr), not bare 0fr — a grid track's automatic minimum size
+     is content-based ("auto") unless explicitly overridden, so without
+     the minmax() the collapsed row still reserves space for the
+     answer's min-content height (one line of text visibly bleeds
+     through even though aria-expanded is false). */
+  grid-template-rows: minmax(0, 0fr);
   overflow: hidden;
   transition: grid-template-rows var(--duration-medium) var(--ease-standard);
 }
@@ -91,7 +96,7 @@
 }
 
 .panelOpen {
-  grid-template-rows: 1fr;
+  grid-template-rows: minmax(0, 1fr);
 }
 
 .answerWrapper {
