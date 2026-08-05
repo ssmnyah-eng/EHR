@@ -33,7 +33,13 @@ export const FAQ_CATEGORIES: FAQCategoryData[] = [
     hubDescription:
       "Questions about organization projects, quotes, photos, clutter, organizing products, light cleaning, and what happens during an Organization Reset.",
     cta: { label: "Organization Questions", href: "/faq/home-organization" },
-    media: { type: "image", alt: "An organized pantry with labeled bins and baskets", variant: "landscape" },
+    media: {
+      type: "image",
+      src: "/images/organization/pantry.jpg",
+      alt: "A comprehensive organized pantry with labeled shelving for cookware, appliances, and pantry staples",
+      variant: "landscape",
+      objectPosition: "center 45%",
+    },
     heroIntro: "Answers about requesting an Organization quote, what the photo process involves, and what happens during a project.",
     seoTitle: "Home Organization FAQs | Elevated Home Resets",
     seoDescription: "Answers to common questions about Home Organization projects, quotes, photos, and the organizing process from Elevated Home Resets.",
@@ -45,7 +51,13 @@ export const FAQ_CATEGORIES: FAQCategoryData[] = [
     hubDescription:
       "Not sure where to start? Learn the difference between Cleaning and Organization, how to choose a service, and what happens from your first click through service day.",
     cta: { label: "How It Works", href: "/faq/how-it-works" },
-    media: { type: "image", alt: "A calm, finished living room representing the Elevated experience", variant: "landscape" },
+    media: {
+      type: "image",
+      src: "/images/organization/living-room-organized.jpg",
+      alt: "A calm, finished living room and open kitchen representing the Elevated experience",
+      variant: "landscape",
+      objectPosition: "center 55%",
+    },
     heroIntro: "Answers about choosing between Cleaning and Organization, and what to expect from your first visit to our site through service day.",
     seoTitle: "How Our Services Work | FAQs | Elevated Home Resets",
     seoDescription: "Learn how Cleaning and Home Organization work at Elevated Home Resets, and how to choose the right service to start with.",

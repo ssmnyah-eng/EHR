@@ -69,7 +69,17 @@ export const BATHROOM_SECTIONS: ServiceDetailSection[] = [
 export const BATHROOM_PROOF = {
   eyebrow: "What Clients Say About Home Organization",
   primary: { quote: KIM_NELSON.quotes.system, attribution: KIM_NELSON.name, rating: KIM_NELSON.rating },
-  media: { type: "single" as const, image: { type: "image" as const, alt: "A completed bathroom organization project", variant: "portrait" as const, aspectRatio: "4 / 5" } },
+  media: {
+    type: "single" as const,
+    image: {
+      type: "image" as const,
+      src: "/images/organization/bathroom-cabinet.jpg",
+      alt: "An organized bathroom cabinet with woven baskets, a folded towel, and a soap pump in place",
+      variant: "portrait" as const,
+      aspectRatio: "4 / 5",
+      objectPosition: "55% 55%",
+    },
+  },
 };
 
 export const BATHROOM_FINAL_CTA: ContentSlot = {

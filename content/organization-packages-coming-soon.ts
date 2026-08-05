@@ -32,7 +32,12 @@ export const ORGANIZATION_PACKAGES_MEANTIME: ContentSlot = {
   heading: "Looking for help organizing your home now?",
   body: "Explore our Home Organization services to find support for individual spaces throughout your home.",
   primaryCTA: { label: "Explore Home Organization", href: "/home-organization" },
-  media: { type: "image", alt: "A completed Home Organization project", variant: "landscape" },
+  media: {
+    type: "image",
+    src: "/images/organization/walk-in-closet.jpg",
+    alt: "A completed walk-in closet organization project, with clothing hung and folders sorted on shelving",
+    variant: "landscape",
+  },
 };
 
 export const ORGANIZATION_PACKAGES_REMINDER: ContentSlot = {

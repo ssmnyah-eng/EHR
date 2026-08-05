@@ -68,7 +68,16 @@ export const HOME_OFFICE_SECTIONS: ServiceDetailSection[] = [
 export const HOME_OFFICE_PROOF = {
   eyebrow: "What Clients Say About Home Organization",
   primary: { quote: KIM_NELSON.quotes.system, attribution: KIM_NELSON.name, rating: KIM_NELSON.rating },
-  media: { type: "single" as const, image: { type: "image" as const, alt: "A completed home office organization project", variant: "portrait" as const, aspectRatio: "4 / 5" } },
+  media: {
+    type: "single" as const,
+    image: {
+      type: "image" as const,
+      src: "/images/organization/home-office.jpg",
+      alt: "An organized home office desk with a bookshelf, desk organizer, and clear work surface",
+      variant: "portrait" as const,
+      aspectRatio: "4 / 5",
+    },
+  },
 };
 
 export const HOME_OFFICE_FINAL_CTA: ContentSlot = {
