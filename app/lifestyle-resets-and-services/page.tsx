@@ -3,7 +3,7 @@ import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { ComingSoonHero } from "@/components/services/ComingSoonHero";
 import { ComingSoonNotificationForm } from "@/components/conversion/ComingSoonNotificationForm";
-import { EditorialStatement } from "@/components/content/EditorialStatement";
+import { EditorialSplit } from "@/components/content/EditorialSplit";
 import { Button } from "@/components/content/Button";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import {
@@ -42,8 +42,13 @@ export default function LifestyleResetsPage() {
       </Section>
 
       <Section spacing="lg" surface="surface">
-        <Container width="content">
-          <EditorialStatement slot={LIFESTYLE_RESETS_CURRENT_SERVICES} />
+        <Container width="wide">
+          <EditorialSplit
+            eyebrow={LIFESTYLE_RESETS_CURRENT_SERVICES.eyebrow}
+            heading={LIFESTYLE_RESETS_CURRENT_SERVICES.heading ?? ""}
+            body={LIFESTYLE_RESETS_CURRENT_SERVICES.body}
+            media={LIFESTYLE_RESETS_CURRENT_SERVICES.media!}
+          />
           <div className={styles.ctaRow}>
             <Button href="/cleaning" size="lg">
               Explore Cleaning

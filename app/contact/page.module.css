@@ -1,3 +1,28 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+@media (max-width: 56rem) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+}
+
+.media {
+  position: sticky;
+  top: var(--space-lg);
+}
+
+@media (max-width: 56rem) {
+  .media {
+    position: static;
+  }
+}
+
 .intro {
   max-width: 46ch;
   margin-bottom: var(--space-lg);

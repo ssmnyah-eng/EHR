@@ -32,6 +32,7 @@ export const LIFESTYLE_RESETS_CURRENT_SERVICES: ContentSlot = {
   eyebrow: "Need Help Now?",
   heading: "You don't have to wait to reset your home.",
   body: "Explore the Cleaning and Home Organization services currently available through Elevated Home Resets.",
+  media: { type: "image", alt: "A recently reset room in a client's home", variant: "landscape" },
 };
 
 export const LIFESTYLE_RESETS_REMINDER: ContentSlot = {

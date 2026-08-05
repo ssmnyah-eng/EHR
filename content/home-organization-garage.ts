@@ -40,6 +40,7 @@ export const GARAGE_SECTIONS: ServiceDetailSection[] = [
     slot: {
       heading: "Turn overflow back into usable space.",
       body: "A Garage Reset focuses on bringing greater structure to the belongings and storage within the garage so the space can function more intentionally.\n\nThis is professional organization—not junk hauling or extreme-condition cleanup.",
+      media: { type: "image", alt: "An organized garage storage wall with labeled bins and clear floor space", variant: "landscape" },
     },
   },
   {
@@ -64,6 +65,7 @@ export const GARAGE_SECTIONS: ServiceDetailSection[] = [
 export const GARAGE_PROOF = {
   eyebrow: "What Clients Say About Home Organization",
   primary: { quote: KIM_NELSON.quotes.system, attribution: KIM_NELSON.name, rating: KIM_NELSON.rating },
+  media: { type: "single" as const, image: { type: "image" as const, alt: "A completed garage organization project", variant: "portrait" as const, aspectRatio: "4 / 5" } },
 };
 
 export const GARAGE_FINAL_CTA: ContentSlot = {

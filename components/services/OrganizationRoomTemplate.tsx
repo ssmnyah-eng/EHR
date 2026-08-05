@@ -10,6 +10,9 @@ import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import { ServiceProof } from "@/components/content/ServiceProof";
 import type { ServiceProofQuote, ServiceProofMedia } from "@/components/content/ServiceProof";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
+import { ProjectMediaCarousel } from "@/components/content/ProjectMediaCarousel";
+import { TRANSFORMATIONS_TEASER } from "@/content/home";
+import { findTransformationsByCategory } from "@/content/transformations";
 import { ORGANIZATION_ROOMS } from "@/content/home-organization-rooms";
 
 interface OrganizationRoomProcess {
@@ -87,6 +90,18 @@ export function OrganizationRoomTemplate({ currentSlug, heroSlot, heroPrice, sec
           </Container>
         </Section>
       ) : null}
+
+      <Section spacing="lg" surface="surface">
+        <Container width="wide">
+          <ProjectMediaCarousel
+            eyebrow={TRANSFORMATIONS_TEASER.eyebrow}
+            heading={TRANSFORMATIONS_TEASER.heading ?? ""}
+            body={TRANSFORMATIONS_TEASER.body}
+            projects={findTransformationsByCategory("organization")}
+            placeholderAlt="A completed Home Organization project"
+          />
+        </Container>
+      </Section>
 
       <Section spacing="md" surface="background">
         <Container width="content">

@@ -39,6 +39,7 @@ export const LAUNDRY_SECTIONS: ServiceDetailSection[] = [
     slot: {
       heading: "Give the room a clearer job.",
       body: "A Laundry Room Reset focuses on creating greater order within the storage and space you already have so the room can function more intentionally.\n\nFor combined laundry and mudroom spaces, the project can account for the broader way the room is being used.",
+      media: { type: "image", alt: "An organized laundry room shelf with supplies in labeled containers", variant: "landscape" },
     },
   },
   {
@@ -64,6 +65,7 @@ export const LAUNDRY_SECTIONS: ServiceDetailSection[] = [
 export const LAUNDRY_PROOF = {
   eyebrow: "What Clients Say About Home Organization",
   primary: { quote: KIM_NELSON.quotes.system, attribution: KIM_NELSON.name, rating: KIM_NELSON.rating },
+  media: { type: "single" as const, image: { type: "image" as const, alt: "A completed laundry room organization project", variant: "portrait" as const, aspectRatio: "4 / 5" } },
 };
 
 export const LAUNDRY_FINAL_CTA: ContentSlot = {

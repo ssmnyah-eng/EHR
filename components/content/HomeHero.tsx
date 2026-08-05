@@ -11,11 +11,13 @@ interface HomeHeroProps {
 }
 
 /**
- * Full-bleed homepage hero — media fills the section as a background
+ * Full-bleed "hero pattern A" — media fills the section as a background
  * layer, with a scrim for legibility and the eyebrow/H1/body/CTAs
- * overlaid on top. Homepage-only: the shared Hero component (used by
- * About, the two service hubs, and every service-detail/room template)
- * is untouched, so this doesn't change any other route.
+ * overlaid on top. Used for the homepage and the two service hubs
+ * (Cleaning, Home Organization) — the visually strongest pages on the
+ * site. Every other route (About, individual service/room pages, FAQ,
+ * legal, forms) keeps the shared `Hero` component's split treatment
+ * ("pattern B"), which suits a page built around explanatory copy.
  */
 export function HomeHero({ slot, media }: HomeHeroProps) {
   return (

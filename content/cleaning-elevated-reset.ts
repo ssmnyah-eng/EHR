@@ -34,6 +34,7 @@ export const ELEVATED_RESET_CLEAN_SECTIONS: ServiceDetailSection[] = [
       eyebrow: "What \"Reset\" Means",
       heading: "The finishing touches change the experience.",
       body: "After the deeper cleaning is complete, we turn our attention to how the home is put back together.\n\nCountertops are reset.\n\nEveryday items are returned neatly to their established homes.\n\nBeds and pillows are finished.\n\nTowels and bath areas are straightened.\n\nLiving spaces are reset.\n\nRugs, mats, chairs, throws, and obvious visual disorder receive a final look before we leave.\n\nIt's the difference between finishing the cleaning and finishing the room.",
+      media: { type: "image", alt: "A freshly reset living room with pillows and throws arranged", variant: "landscape" },
     },
   },
   {

@@ -62,6 +62,7 @@ export const WHOLE_HOME_CONNECTIONS_TRAILING = "The exact project is determined 
 export const WHOLE_HOME_WHAT_CHANGES: ContentSlot = {
   heading: "Not just how the home looks. How it works together.",
   body: "When several spaces are difficult to use, the effect can extend beyond the clutter itself.\n\nEveryday belongings become harder to manage because one room's overflow becomes another room's problem.\n\nWhole-Home Organization gives us the opportunity to approach multiple spaces as part of a larger project instead of pretending every room exists in isolation.",
+  media: { type: "image", alt: "Multiple organized spaces throughout a home", variant: "landscape" },
 };
 
 export const WHOLE_HOME_LIGHT_CLEANING: ContentSlot = {
@@ -101,6 +102,7 @@ export const WHOLE_HOME_PROOF = {
   heading: "From overwhelmed to functioning as a whole.",
   primary: { quote: KIM_NELSON.quotes.overwhelm, attribution: KIM_NELSON.name, rating: KIM_NELSON.rating },
   secondary: { quote: KIM_NELSON.quotes.system, attribution: KIM_NELSON.name },
+  media: { type: "single" as const, image: { type: "image" as const, alt: "A completed multi-room organization project", variant: "portrait" as const, aspectRatio: "4 / 5" } },
 };
 
 export const WHOLE_HOME_FINAL_CTA: ContentSlot = {

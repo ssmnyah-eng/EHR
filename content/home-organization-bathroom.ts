@@ -38,6 +38,7 @@ export const BATHROOM_SECTIONS: ServiceDetailSection[] = [
     slot: {
       heading: "Less visual noise. More functional storage.",
       body: "The goal is to make bathroom storage easier to use and maintain within the space you already have.\n\nInstead of simply moving clutter out of sight, we focus on bringing greater order to the areas where your belongings actually live.",
+      media: { type: "image", alt: "An organized bathroom vanity drawer with everyday products in place", variant: "landscape" },
     },
   },
   {
@@ -62,6 +63,7 @@ export const BATHROOM_SECTIONS: ServiceDetailSection[] = [
 export const BATHROOM_PROOF = {
   eyebrow: "What Clients Say About Home Organization",
   primary: { quote: KIM_NELSON.quotes.system, attribution: KIM_NELSON.name, rating: KIM_NELSON.rating },
+  media: { type: "single" as const, image: { type: "image" as const, alt: "A completed bathroom organization project", variant: "portrait" as const, aspectRatio: "4 / 5" } },
 };
 
 export const BATHROOM_FINAL_CTA: ContentSlot = {

@@ -3,12 +3,16 @@ import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { Hero } from "@/components/services/Hero";
 import { EditorialStatement } from "@/components/content/EditorialStatement";
+import { EditorialSplit } from "@/components/content/EditorialSplit";
 import { LinkedConnections } from "@/components/services/LinkedConnections";
 import { Process } from "@/components/content/Process";
 import { RelatedOrganizationLinks } from "@/components/services/RelatedOrganizationLinks";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import { ServiceProof } from "@/components/content/ServiceProof";
+import { ProjectMediaCarousel } from "@/components/content/ProjectMediaCarousel";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
+import { TRANSFORMATIONS_TEASER } from "@/content/home";
+import { findTransformationsByCategory } from "@/content/transformations";
 import {
   WHOLE_HOME_SEO,
   WHOLE_HOME_HERO,
@@ -71,8 +75,12 @@ export default function WholeHomeOrganizationPage() {
       </Section>
 
       <Section spacing="lg" surface="background">
-        <Container width="content">
-          <EditorialStatement slot={WHOLE_HOME_WHAT_CHANGES} />
+        <Container width="wide">
+          <EditorialSplit
+            heading={WHOLE_HOME_WHAT_CHANGES.heading ?? ""}
+            body={WHOLE_HOME_WHAT_CHANGES.body}
+            media={WHOLE_HOME_WHAT_CHANGES.media!}
+          />
         </Container>
       </Section>
 
@@ -107,6 +115,19 @@ export default function WholeHomeOrganizationPage() {
             heading={WHOLE_HOME_PROOF.heading}
             primary={WHOLE_HOME_PROOF.primary}
             secondary={WHOLE_HOME_PROOF.secondary}
+            media={WHOLE_HOME_PROOF.media}
+          />
+        </Container>
+      </Section>
+
+      <Section spacing="lg" surface="surface">
+        <Container width="wide">
+          <ProjectMediaCarousel
+            eyebrow={TRANSFORMATIONS_TEASER.eyebrow}
+            heading={TRANSFORMATIONS_TEASER.heading ?? ""}
+            body={TRANSFORMATIONS_TEASER.body}
+            projects={findTransformationsByCategory("organization")}
+            placeholderAlt="A completed Home Organization project"
           />
         </Container>
       </Section>

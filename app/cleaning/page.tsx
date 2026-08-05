@@ -2,14 +2,18 @@ import type { Metadata } from "next";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { Grid } from "@/components/layout/Grid";
-import { Hero } from "@/components/services/Hero";
+import { HomeHero } from "@/components/content/HomeHero";
 import { EditorialStatement } from "@/components/content/EditorialStatement";
+import { EditorialSplit } from "@/components/content/EditorialSplit";
 import { TierSelectorCard } from "@/components/services/TierSelectorCard";
 import { ComparisonSummaryCard } from "@/components/services/ComparisonSummaryCard";
 import { Heading } from "@/components/typography/Heading";
 import { Text } from "@/components/typography/Text";
 import { Button } from "@/components/content/Button";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
+import { ProjectMediaCarousel } from "@/components/content/ProjectMediaCarousel";
+import { TRANSFORMATIONS_TEASER } from "@/content/home";
+import { findTransformationsByCategory } from "@/content/transformations";
 import styles from "./page.module.css";
 import {
   CLEANING_HUB_HERO,
@@ -38,12 +42,9 @@ export const metadata: Metadata = {
 export default function CleaningHubPage() {
   return (
     <>
-      {/* Hero */}
-      <Section spacing="lg" surface="background">
-        <Container>
-          <Hero slot={CLEANING_HUB_HERO} />
-        </Container>
-      </Section>
+      {/* Hero — full-bleed pattern A, matching the homepage and Home
+          Organization hub (the site's visually strongest pages) */}
+      <HomeHero slot={CLEANING_HUB_HERO} media={CLEANING_HUB_HERO.media!} />
 
       {/* Service intro */}
       <Section spacing="lg" surface="surface">
@@ -85,17 +86,42 @@ export default function CleaningHubPage() {
         </Container>
       </Section>
 
-      {/* Differentiation */}
+      {/* Differentiation — image + copy */}
       <Section spacing="lg" surface="muted">
-        <Container width="content">
-          <EditorialStatement slot={CLEANING_DIFFERENTIATION} />
+        <Container width="wide">
+          <EditorialSplit
+            eyebrow={CLEANING_DIFFERENTIATION.eyebrow}
+            heading={CLEANING_DIFFERENTIATION.heading ?? ""}
+            body={CLEANING_DIFFERENTIATION.body}
+            media={CLEANING_DIFFERENTIATION.media!}
+            reverse
+          />
         </Container>
       </Section>
 
-      {/* What's included / scope preview */}
+      {/* What's included / scope preview — copy + image */}
       <Section spacing="lg" surface="background">
-        <Container width="content">
-          <EditorialStatement slot={CLEANING_SCOPE_PREVIEW} />
+        <Container width="wide">
+          <EditorialSplit
+            eyebrow={CLEANING_SCOPE_PREVIEW.eyebrow}
+            heading={CLEANING_SCOPE_PREVIEW.heading ?? ""}
+            body={CLEANING_SCOPE_PREVIEW.body}
+            primaryCTA={CLEANING_SCOPE_PREVIEW.primaryCTA ?? undefined}
+            media={CLEANING_SCOPE_PREVIEW.media!}
+          />
+        </Container>
+      </Section>
+
+      {/* See the Difference a Reset Can Make — Cleaning proof */}
+      <Section spacing="lg" surface="muted">
+        <Container width="wide">
+          <ProjectMediaCarousel
+            eyebrow={TRANSFORMATIONS_TEASER.eyebrow}
+            heading={TRANSFORMATIONS_TEASER.heading ?? ""}
+            body={TRANSFORMATIONS_TEASER.body}
+            projects={findTransformationsByCategory("cleaning")}
+            placeholderAlt="A completed Cleaning project"
+          />
         </Container>
       </Section>
 

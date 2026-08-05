@@ -39,6 +39,7 @@ export const KITCHEN_SECTIONS: ServiceDetailSection[] = [
     slot: {
       heading: "Less searching. Less shifting. A kitchen that works better.",
       body: "The goal is not to create someone else's version of a perfect kitchen.\n\nIt's to create greater order within yours.\n\nWe focus on making the storage and organization of the kitchen more functional for the belongings and space you actually have.",
+      media: { type: "image", alt: "An organized kitchen cabinet with everyday items easy to reach", variant: "landscape" },
     },
   },
   {
@@ -86,6 +87,7 @@ export const KITCHEN_PROOF = {
   heading: "Function, not just a fresh look.",
   body: "Kitchen Organization is about creating placement that matches how you actually cook, shop, and move through the space.",
   primary: { quote: KIM_NELSON.quotes.system, attribution: KIM_NELSON.name, rating: KIM_NELSON.rating },
+  media: { type: "single" as const, image: { type: "image" as const, alt: "A completed kitchen organization project", variant: "portrait" as const, aspectRatio: "4 / 5" } },
 };
 
 export const KITCHEN_FINAL_CTA: ContentSlot = {

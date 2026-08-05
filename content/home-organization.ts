@@ -19,6 +19,7 @@ export const HOME_ORG_HUB_HERO: ContentSlot = {
   body: "Thoughtful home organization for the spaces that have become cluttered, frustrating, or harder to maintain—so everyday life can move a little more smoothly.",
   primaryCTA: { label: "Start Your Organization Quote", href: ORGANIZATION_QUOTE_CTA.href },
   secondaryCTA: { label: "Explore Organization Services", href: "#organization-services" },
+  media: { type: "image", alt: "A completed Home Organization project", variant: "fullBleed", priority: true },
 };
 
 export const HOME_ORG_INTRO: ContentSlot = {
@@ -31,6 +32,7 @@ export const HOME_ORG_PHILOSOPHY: ContentSlot = {
   eyebrow: "The Elevated Approach",
   heading: "We organize for real life.",
   body: "A beautiful space is nice.\n\nA beautiful space that actually works for you is better.\n\nOur approach focuses on bringing order, function, and intention back to the areas of your home that need it—without expecting your home, your belongings, or your routines to look like anyone else's.\n\nThe goal is not perfection.\n\nIt's a home that feels easier to use when we're finished.",
+  media: { type: "image", alt: "An organized shelf with everyday items in place", variant: "portrait", aspectRatio: "5 / 6" },
 };
 
 export const HOME_ORG_SERVICES_INTRO: ContentSlot = {
@@ -110,6 +112,7 @@ export const HOME_ORG_WHAT_HAPPENS: ContentSlot = {
   eyebrow: "More Than Straightening",
   heading: "We're not just making the room look better for a photograph.",
   body: "Home Organization is for spaces that need more than cleaning or putting a few things back where they already belong.\n\nIt's the service to choose when belongings need to be sorted, a space needs greater structure, or the way things are currently stored is no longer working for you.\n\nThe goal is to leave you with a space that makes more sense after we're gone—not simply one that looks tidy for the day.",
+  media: { type: "image", alt: "An organizer sorting belongings into labeled bins", variant: "portrait", aspectRatio: "4 / 5" },
 };
 
 /** Universal — reused verbatim on every dedicated room page. */
@@ -200,6 +203,7 @@ export const HOME_ORG_PROOF = {
   body: "Anyone can make a space look organized for one afternoon. What matters is whether it still makes sense weeks later, once real life — groceries, laundry, kids, routines — starts happening in it again.",
   primary: { quote: LASHON_PATTERSON.quotes.maintainability, attribution: LASHON_PATTERSON.name, rating: LASHON_PATTERSON.rating },
   secondary: { quote: KIM_NELSON.quotes.system, attribution: KIM_NELSON.name },
+  media: { type: "single" as const, image: { type: "image" as const, alt: "A completed Home Organization project", variant: "portrait" as const, aspectRatio: "4 / 5" } },
 };
 
 /** Universal — reused verbatim on every dedicated room page. */

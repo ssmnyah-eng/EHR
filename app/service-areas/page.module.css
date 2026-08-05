@@ -1,3 +1,27 @@
+.heroLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: var(--space-2xl);
+  align-items: center;
+}
+
+@media (max-width: 56rem) {
+  .heroLayout {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+}
+
+.heroMedia {
+  height: 22rem;
+}
+
+@media (max-width: 40rem) {
+  .heroMedia {
+    height: 16rem;
+  }
+}
+
 .intro {
   max-width: 46ch;
   margin-bottom: var(--space-lg);

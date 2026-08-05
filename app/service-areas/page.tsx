@@ -4,6 +4,7 @@ import { Container } from "@/components/layout/Container";
 import { Heading } from "@/components/typography/Heading";
 import { Text } from "@/components/typography/Text";
 import { Button } from "@/components/content/Button";
+import { MediaSlot } from "@/components/media/MediaSlot";
 import {
   SERVICE_AREAS_HEADING,
   SERVICE_AREAS_INTRO,
@@ -26,20 +27,30 @@ export default function ServiceAreasPage() {
   return (
     <>
       <Section spacing="lg" surface="background">
-        <Container width="content">
-          <Heading as="h1" size="xl">
-            {SERVICE_AREAS_HEADING}
-          </Heading>
-          <Text size="lg" tone="secondary" className={styles.intro}>
-            {SERVICE_AREAS_INTRO}
-          </Text>
+        <Container width="wide">
+          <div className={styles.heroLayout}>
+            <div>
+              <Heading as="h1" size="xl">
+                {SERVICE_AREAS_HEADING}
+              </Heading>
+              <Text size="lg" tone="secondary" className={styles.intro}>
+                {SERVICE_AREAS_INTRO}
+              </Text>
 
-          <div className={styles.regionList}>
-            {SERVICE_AREAS_REGIONS.map((region) => (
-              <span key={region} className={styles.regionChip}>
-                {region}
-              </span>
-            ))}
+              <div className={styles.regionList}>
+                {SERVICE_AREAS_REGIONS.map((region) => (
+                  <span key={region} className={styles.regionChip}>
+                    {region}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <MediaSlot
+              data={{ type: "image", alt: "A residential neighborhood in our Northern Virginia service area", variant: "landscape" }}
+              className={styles.heroMedia}
+              fill
+            />
           </div>
         </Container>
       </Section>

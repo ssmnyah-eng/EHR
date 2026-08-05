@@ -5,6 +5,7 @@ import { Heading } from "@/components/typography/Heading";
 import { Text } from "@/components/typography/Text";
 import { Button } from "@/components/content/Button";
 import { ContactForm } from "@/components/conversion/ContactForm";
+import { MediaSlot } from "@/components/media/MediaSlot";
 import { CONTACT_HEADING, CONTACT_BODY, CONTACT_ROUTING_INTRO, CONTACT_CLEANING_CTA, CONTACT_ORGANIZATION_CTA } from "@/content/contact";
 import styles from "./page.module.css";
 
@@ -16,27 +17,36 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <Section spacing="lg" surface="background">
-      <Container width="content">
-        <Heading as="h1" size="xl">
-          {CONTACT_HEADING}
-        </Heading>
-        <Text size="lg" tone="secondary" className={styles.intro}>
-          {CONTACT_BODY}
-        </Text>
+      <Container width="wide">
+        <div className={styles.layout}>
+          <div>
+            <Heading as="h1" size="xl">
+              {CONTACT_HEADING}
+            </Heading>
+            <Text size="lg" tone="secondary" className={styles.intro}>
+              {CONTACT_BODY}
+            </Text>
 
-        <div className={styles.routing}>
-          <p className={styles.routingLabel}>{CONTACT_ROUTING_INTRO}</p>
-          <div className={styles.routingRow}>
-            <Button href={CONTACT_CLEANING_CTA.href} variant="secondary">
-              {CONTACT_CLEANING_CTA.label}
-            </Button>
-            <Button href={CONTACT_ORGANIZATION_CTA.href} variant="secondary">
-              {CONTACT_ORGANIZATION_CTA.label}
-            </Button>
+            <div className={styles.routing}>
+              <p className={styles.routingLabel}>{CONTACT_ROUTING_INTRO}</p>
+              <div className={styles.routingRow}>
+                <Button href={CONTACT_CLEANING_CTA.href} variant="secondary">
+                  {CONTACT_CLEANING_CTA.label}
+                </Button>
+                <Button href={CONTACT_ORGANIZATION_CTA.href} variant="secondary">
+                  {CONTACT_ORGANIZATION_CTA.label}
+                </Button>
+              </div>
+            </div>
+
+            <ContactForm />
           </div>
-        </div>
 
-        <ContactForm />
+          <MediaSlot
+            data={{ type: "image", alt: "A calm, finished room in a client's home", variant: "portrait", aspectRatio: "4 / 5" }}
+            className={styles.media}
+          />
+        </div>
       </Container>
     </Section>
   );

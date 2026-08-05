@@ -3,7 +3,7 @@ import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { ComingSoonHero } from "@/components/services/ComingSoonHero";
 import { ComingSoonNotificationForm } from "@/components/conversion/ComingSoonNotificationForm";
-import { EditorialStatement } from "@/components/content/EditorialStatement";
+import { EditorialSplit } from "@/components/content/EditorialSplit";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import {
   ORGANIZATION_PACKAGES_SEO,
@@ -40,8 +40,14 @@ export default function OrganizationPackagesPage() {
       </Section>
 
       <Section spacing="lg" surface="surface">
-        <Container width="content">
-          <EditorialStatement slot={ORGANIZATION_PACKAGES_MEANTIME} />
+        <Container width="wide">
+          <EditorialSplit
+            eyebrow={ORGANIZATION_PACKAGES_MEANTIME.eyebrow}
+            heading={ORGANIZATION_PACKAGES_MEANTIME.heading ?? ""}
+            body={ORGANIZATION_PACKAGES_MEANTIME.body}
+            primaryCTA={ORGANIZATION_PACKAGES_MEANTIME.primaryCTA ?? undefined}
+            media={ORGANIZATION_PACKAGES_MEANTIME.media!}
+          />
         </Container>
       </Section>
 

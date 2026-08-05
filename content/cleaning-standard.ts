@@ -34,6 +34,7 @@ export const STANDARD_CLEAN_SECTIONS: ServiceDetailSection[] = [
       eyebrow: "What It Takes Off Your Plate",
       heading: "Less time catching up. More time enjoying your home.",
       body: "Counters cleaned. Bathrooms refreshed. Floors cared for. Dust addressed. Beds straightened. High-touch areas cleaned. Everyday surfaces brought back to a fresh baseline.\n\nThe goal isn't simply to check off chores.\n\nIt's to leave your home feeling noticeably cared for when you walk back into it.",
+      media: { type: "image", alt: "A freshly cleaned kitchen counter and sink", variant: "landscape" },
     },
   },
   {

@@ -6,6 +6,9 @@ import { ServiceSnapshot } from "@/components/services/ServiceSnapshot";
 import { ServiceSectionList } from "@/components/services/ServiceSectionList";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import { Breadcrumb, type BreadcrumbItem } from "@/components/content/Breadcrumb";
+import { ProjectMediaCarousel } from "@/components/content/ProjectMediaCarousel";
+import { TRANSFORMATIONS_TEASER } from "@/content/home";
+import { findTransformationsByCategory } from "@/content/transformations";
 
 interface ServiceDetailTemplateProps {
   heroSlot: ContentSlot;
@@ -35,6 +38,18 @@ export function ServiceDetailTemplate({ heroSlot, heroPrice, sections, snapshot,
       <ServiceSectionList sections={sections} />
 
       <Section spacing="lg" surface="muted">
+        <Container width="wide">
+          <ProjectMediaCarousel
+            eyebrow={TRANSFORMATIONS_TEASER.eyebrow}
+            heading={TRANSFORMATIONS_TEASER.heading ?? ""}
+            body={TRANSFORMATIONS_TEASER.body}
+            projects={findTransformationsByCategory("cleaning")}
+            placeholderAlt="A completed Cleaning project"
+          />
+        </Container>
+      </Section>
+
+      <Section spacing="lg" surface="surface">
         <Container width="content">
           <ServiceSnapshot data={snapshot} />
         </Container>

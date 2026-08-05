@@ -34,6 +34,7 @@ export const DEEP_PREMIUM_CLEAN_SECTIONS: ServiceDetailSection[] = [
       eyebrow: "Why It Feels Different",
       heading: "The difference is in the details.",
       body: "It's the buildup around the faucet.\n\nThe shower-door tracks.\n\nThe edges around appliances.\n\nThe baseboards and window tracks.\n\nThe corners behind doors.\n\nThe areas underneath removable sofa cushions.\n\nThe details you may not notice individually—but absolutely notice when the entire home has been thoroughly addressed.",
+      media: { type: "image", alt: "Detailed cleaning of a bathroom fixture and tile", variant: "landscape" },
     },
   },
   {

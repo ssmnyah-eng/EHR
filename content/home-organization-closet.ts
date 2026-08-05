@@ -39,6 +39,7 @@ export const CLOSET_SECTIONS: ServiceDetailSection[] = [
     slot: {
       heading: "See more of what you have. Use more of your space.",
       body: "Organization should make the closet easier to navigate and easier to use—not simply make everything look neat for a day.\n\nWe focus on creating greater order and function within the closet you already have.",
+      media: { type: "image", alt: "An organized closet with clothing and accessories easy to see", variant: "landscape" },
     },
   },
   {
@@ -72,6 +73,7 @@ export const CLOSET_PROOF = {
   heading: "From overwhelmed to easy to live with.",
   primary: { quote: KIM_NELSON.quotes.overwhelm, attribution: KIM_NELSON.name, rating: KIM_NELSON.rating },
   secondary: { quote: KIM_NELSON.quotes.system, attribution: KIM_NELSON.name },
+  media: { type: "single" as const, image: { type: "image" as const, alt: "A completed closet organization project", variant: "portrait" as const, aspectRatio: "4 / 5" } },
 };
 
 export const CLOSET_FINAL_CTA: ContentSlot = {
