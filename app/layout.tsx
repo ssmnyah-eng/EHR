@@ -1,18 +1,28 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Manrope, Cormorant_Garamond } from "next/font/google";
 import { AppShell } from "@/components/layout/AppShell";
 import "@/styles/tokens.css";
 import "./globals.css";
 
-const fraunces = Fraunces({
+/**
+ * Sitewide typography system: Manrope (primary — body, headings, nav,
+ * buttons, forms) and Cormorant Garamond (selective editorial accent —
+ * customer quotations only, opted into via --font-editorial; see
+ * ServiceProof.module.css). Weight sets are deliberately narrow — just
+ * what the site actually uses, not every available weight.
+ */
+const manrope = Manrope({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-manrope",
   display: "swap",
 });
 
-const inter = Inter({
+const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
   display: "swap",
 });
 
@@ -30,7 +40,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout(props: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
+    <html lang="en" className={`${manrope.variable} ${cormorantGaramond.variable}`}>
       <body>
         <AppShell>{props.children}</AppShell>
       </body>

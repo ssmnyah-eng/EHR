@@ -7,7 +7,6 @@ import { PRIMARY_NAVIGATION, COMPANY_LINKS, SERVICE_GROUPS, ESTIMATE_CTA } from 
 import { Button } from "@/components/content/Button";
 import { StatusBadge } from "@/components/content/StatusBadge";
 import { MobileMenu } from "@/components/navigation/MobileMenu";
-import { manrope } from "@/lib/homeFonts";
 import styles from "./Header.module.css";
 
 export function Header() {
@@ -54,23 +53,12 @@ export function Header() {
   // read light instead of the usual dark-on-light. Every other route is
   // completely unaffected — `onHero` is only ever true on "/".
   const onHero = pathname === "/" && !scrolled;
-  // Homepage's Manrope system (see lib/homeFonts.ts) — unlike onHero this
-  // isn't scroll-gated, since the header should stay Manrope the whole
-  // time the visitor is on "/", not just while it's sitting over the
-  // hero. Every other route keeps its existing Fraunces/Inter header.
-  const isHomepage = pathname === "/";
 
   return (
     <>
       <header
         ref={headerRef}
-        className={[
-          styles.header,
-          scrolled && styles.scrolled,
-          onHero && styles.onHero,
-          isHomepage && manrope.variable,
-          isHomepage && styles.homepageType,
-        ]
+        className={[styles.header, scrolled && styles.scrolled, onHero && styles.onHero]
           .filter(Boolean)
           .join(" ")}
       >

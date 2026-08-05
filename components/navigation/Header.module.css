@@ -35,17 +35,6 @@
   background: var(--color-text-inverse);
 }
 
-/* Homepage's Manrope system (see lib/homeFonts.ts + Header.tsx) — not
-   scroll-gated like .onHero above, so it stays applied for the whole
-   time the visitor is on "/". Every other route keeps Fraunces/Inter. */
-.header.homepageType .brand,
-.header.homepageType .navTrigger,
-.header.homepageType .plainLink,
-.header.homepageType .megaLink,
-.header.homepageType .desktopCta {
-  font-family: var(--font-manrope), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-
 .bar {
   display: flex;
   align-items: center;

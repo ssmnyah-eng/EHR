@@ -20,7 +20,6 @@ import { LIFESTYLE_RESETS, CLEANING_PATHWAY_PANEL, ORGANIZATION_PATHWAY_PANEL } 
 import { HOME_ORG_PROOF } from "@/content/home-organization";
 import { SERVICE_AREAS_INTRO } from "@/content/service-areas";
 import { KIM_NELSON } from "@/content/testimonials";
-import { manrope, cormorantGaramond } from "@/lib/homeFonts";
 import styles from "./page.module.css";
 import {
   HERO_SLOT,
@@ -119,7 +118,7 @@ const TRUST_STRIP_ITEMS = [
 
 export default function HomePage() {
   return (
-    <div className={`${manrope.variable} ${cormorantGaramond.variable} ${styles.homeTypography}`}>
+    <>
       {/* 01 — Hero: full-bleed media, nav overlays it (Header is
           transparent-until-scrolled sitewide; onHero styling only
           activates on this route), H1/copy/CTAs sit on top of the media */}
@@ -287,6 +286,6 @@ export default function HomePage() {
       <Section spacing="sm" surface="muted">
         <ServicePathwayStrip cleaning={CLEANING_PATHWAY_PANEL} organization={ORGANIZATION_PATHWAY_PANEL} />
       </Section>
-    </div>
+    </>
   );
 }

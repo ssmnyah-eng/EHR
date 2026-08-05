@@ -41,6 +41,15 @@ button {
   cursor: pointer;
 }
 
+/* Belt-and-suspenders alongside each form component's own explicit
+   font-family: var(--font-body) rule — browsers default form controls to
+   a system UI font otherwise, regardless of inherited font-family. */
+input,
+select,
+textarea {
+  font: inherit;
+}
+
 img,
 svg,
 video {
