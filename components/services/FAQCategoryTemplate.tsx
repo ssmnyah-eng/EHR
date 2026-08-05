@@ -43,13 +43,18 @@ export function FAQCategoryTemplate({ category, sections, contextualCTA, related
         <Container width="content">
           <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "FAQs", href: "/faq" }, { label: category.navLabel }]} />
 
-          <Eyebrow>Frequently Asked Questions</Eyebrow>
+          <Eyebrow>{category.title}</Eyebrow>
           <Heading as="h1" size="xl" className={styles.heading}>
-            {category.title}
+            {category.heroHeading ?? category.title}
           </Heading>
           <Text size="lg" tone="secondary" className={styles.intro}>
             {category.heroIntro}
           </Text>
+          {category.heroServiceArea ? (
+            <Text size="sm" tone="muted" className={styles.serviceArea}>
+              {category.heroServiceArea}
+            </Text>
+          ) : null}
         </Container>
       </Section>
 

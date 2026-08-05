@@ -126,6 +126,11 @@ export interface FAQCategoryData {
   cta: CTAData;
   media: MediaSlotData;
   heroIntro: string;
+  /** Punchy category-page H1, distinct from `title` (used for the hub
+   *  card heading and breadcrumb). Falls back to `title` when omitted. */
+  heroHeading?: string;
+  /** Optional short caption line under the hero intro (e.g. service area). */
+  heroServiceArea?: string;
   seoTitle: string;
   seoDescription: string;
 }

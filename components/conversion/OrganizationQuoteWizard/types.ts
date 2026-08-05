@@ -46,6 +46,8 @@ export interface OrganizationQuoteFormState {
   triedBeforeDetails: string;
   spaceConsiderations: string;
   whatMattersMost: string;
+  hazardPresent: "" | "yes" | "no";
+  hazardDetails: string;
 }
 
 export const INITIAL_FORM_STATE: OrganizationQuoteFormState = {
@@ -89,6 +91,8 @@ export const INITIAL_FORM_STATE: OrganizationQuoteFormState = {
   triedBeforeDetails: "",
   spaceConsiderations: "",
   whatMattersMost: "",
+  hazardPresent: "",
+  hazardDetails: "",
 };
 
 export const STEP_LABELS = ["Your Info", "Your Project", "Your Space", "Feelings", "Storage", "Photos", "Final Details", "Review"] as const;

@@ -7,6 +7,11 @@
   max-width: 46ch;
 }
 
+.serviceArea {
+  margin-top: var(--space-xs);
+  max-width: 46ch;
+}
+
 .ctaBody {
   margin-top: var(--space-2xs);
   margin-bottom: var(--space-md);

@@ -34,6 +34,11 @@ const STEP2_FIELD_IDS: Record<string, string> = {
   service: "oq-service",
 };
 
+const STEP7_FIELD_IDS: Record<string, string> = {
+  hazardPresent: "oq-hazard-yes",
+  hazardDetails: "oq-hazard-details",
+};
+
 function validateStep1(state: OrganizationQuoteFormState): Record<string, string> {
   const errors: Record<string, string> = {};
   if (!state.firstName.trim()) errors.firstName = "First name is required.";
@@ -54,15 +59,26 @@ function validateStep2(state: OrganizationQuoteFormState): Record<string, string
   return errors;
 }
 
+function validateStep7(state: OrganizationQuoteFormState): Record<string, string> {
+  const errors: Record<string, string> = {};
+  if (!state.hazardPresent) errors.hazardPresent = "Please let us know before we review your space.";
+  if (state.hazardPresent === "yes" && !state.hazardDetails.trim()) {
+    errors.hazardDetails = "Please describe what's present and where it's located.";
+  }
+  return errors;
+}
+
 function validateStep(step: number, state: OrganizationQuoteFormState): Record<string, string> {
   if (step === 1) return validateStep1(state);
   if (step === 2) return validateStep2(state);
+  if (step === 7) return validateStep7(state);
   return {};
 }
 
 function fieldIdsForStep(step: number): Record<string, string> {
   if (step === 1) return STEP1_FIELD_IDS;
   if (step === 2) return STEP2_FIELD_IDS;
+  if (step === 7) return STEP7_FIELD_IDS;
   return {};
 }
 
@@ -179,6 +195,9 @@ export function OrganizationQuoteWizard({ preselectedService }: OrganizationQuot
       formData.append("triedBeforeDetails", state.triedBeforeDetails);
       formData.append("spaceConsiderations", state.spaceConsiderations);
       formData.append("whatMattersMost", state.whatMattersMost);
+
+      formData.append("hazardPresent", state.hazardPresent);
+      formData.append("hazardDetails", state.hazardDetails);
 
       const response = await fetch(INQUIRY_FORM_ENDPOINT, {
         method: "POST",

@@ -18,9 +18,13 @@ export const FAQ_CATEGORIES: FAQCategoryData[] = [
       "Questions about Standard Clean, Deep Premium Clean, Elevated Reset Clean, what's included, preparing your home, and choosing the right level of cleaning.",
     cta: { label: "Cleaning Questions", href: "/faq/cleaning" },
     media: { type: "image", alt: "A cleaner detailing a kitchen surface", variant: "landscape" },
-    heroIntro: "Answers about our three cleaning levels, what's included in each, and what to expect before, during, and after your clean.",
-    seoTitle: "Cleaning FAQs | Elevated Home Resets",
-    seoDescription: "Answers to common questions about Standard Clean, Deep Premium Clean, and Elevated Reset Clean from Elevated Home Resets.",
+    heroHeading: "Questions about cleaning? Start here.",
+    heroIntro:
+      "Choosing a cleaning service shouldn't feel complicated. Find straightforward answers about our Cleaning services, what's included, how to prepare, what happens on service day, and what to expect before and after your appointment.",
+    heroServiceArea: "Serving homes throughout Northern Virginia and the Fredericksburg area.",
+    seoTitle: "House Cleaning FAQs | Elevated Home Resets",
+    seoDescription:
+      "Get answers about professional house cleaning with Elevated Home Resets, including Standard Clean, Deep Premium Clean, Elevated Reset Clean, what's included, preparing your home, pets, scheduling, deposits, and more in Northern Virginia and the Fredericksburg area.",
   },
   {
     slug: "home-organization",

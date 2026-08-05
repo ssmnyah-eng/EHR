@@ -32,6 +32,7 @@ interface CleaningBookingFormProps {
  */
 export function CleaningBookingForm({ preselectedService }: CleaningBookingFormProps) {
   const [state, setState] = useState<FormState>("idle");
+  const [hazardPresent, setHazardPresent] = useState<"" | "yes" | "no">("");
   const activeTiers = CLEANING_SERVICES.children?.filter((c) => c.status === "active") ?? [];
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -156,6 +157,55 @@ export function CleaningBookingForm({ preselectedService }: CleaningBookingFormP
         </label>
         <textarea id="cleaning-notes" name="notes" rows={3} className={styles.input} />
       </div>
+
+      <fieldset className={styles.fieldset}>
+        <legend className={styles.label}>Before we confirm your appointment</legend>
+        <p className={styles.hazardIntro}>
+          Are any of the following present in an area our team will be working in: blood or bodily fluids, human or animal waste, visible or
+          suspected mold, hazardous chemicals, or pest- or infestation-related waste?
+        </p>
+        <div className={styles.choiceRow}>
+          <label className={styles.checkboxLabel}>
+            <input
+              type="radio"
+              name="hazardPresent"
+              value="yes"
+              checked={hazardPresent === "yes"}
+              onChange={() => setHazardPresent("yes")}
+              required
+              className={styles.checkbox}
+            />
+            Yes
+          </label>
+          <label className={styles.checkboxLabel}>
+            <input
+              type="radio"
+              name="hazardPresent"
+              value="no"
+              checked={hazardPresent === "no"}
+              onChange={() => setHazardPresent("no")}
+              required
+              className={styles.checkbox}
+            />
+            No
+          </label>
+        </div>
+
+        {hazardPresent === "yes" ? (
+          <div className={styles.field}>
+            <label htmlFor="cleaning-hazard-details" className={styles.label}>
+              Please describe what&apos;s present and where it&apos;s located
+            </label>
+            <textarea id="cleaning-hazard-details" name="hazardDetails" rows={3} required className={styles.input} />
+          </div>
+        ) : null}
+
+        <p className={styles.hazardNote}>
+          We ask so we can bring the right materials, protective equipment, and staffing, and confirm we can safely complete the work.
+          Disclosing a condition here doesn&apos;t automatically mean we can&apos;t help, but it may affect scheduling, safety requirements, or
+          pricing — and it helps us determine whether we can accept the job.
+        </p>
+      </fieldset>
 
       <div className={styles.consentRow}>
         <input id="cleaning-consent" name="consent" type="checkbox" required className={styles.checkbox} />

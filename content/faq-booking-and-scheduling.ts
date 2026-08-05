@@ -32,20 +32,37 @@ export const BOOKING_FAQ_SECTIONS: FAQSection[] = [
       },
       {
         question: "Do you offer recurring Cleaning?",
-        answer: "Yes. Once your home reaches a maintainable baseline, you can set up recurring visits on a weekly, bi-weekly, or every-4-weeks rhythm.",
-        links: [{ label: "Explore recurring Cleaning", href: "/cleaning#recurring" }],
+        answer:
+          "Recurring Cleaning — weekly, bi-weekly, and approximately every four weeks — is part of our planned Cleaning service direction. Final recurring pricing and booking configuration should be confirmed before recurring plans are published for purchase.",
+        links: [{ label: "See Cleaning FAQs", href: "/faq/cleaning" }],
       },
       {
         question: "Can I book weekly Cleaning?",
-        answer: "Yes, weekly is one of our recurring cleaning options.",
+        answer: "Weekly Cleaning is planned as a recurring service frequency. Final customer-facing rates and booking configuration will be published once the recurring Cleaning program is finalized.",
       },
       {
         question: "Can I book bi-weekly Cleaning?",
-        answer: "Yes, bi-weekly (every two weeks) is one of our recurring cleaning options.",
+        answer: "Bi-weekly Cleaning — service approximately every two weeks — is planned as a recurring Cleaning option. Final recurring rates and booking details will be published once configured.",
       },
       {
         question: "Can I book every four weeks?",
-        answer: "Yes, every 4 weeks is one of our recurring cleaning options.",
+        answer: "An every-four-week Cleaning frequency is planned for customers who want ongoing maintenance less frequently than weekly or bi-weekly service. Final rates and booking details will be published once configured.",
+      },
+      {
+        question: "Can I reschedule?",
+        answer:
+          "Yes. Cancel or reschedule at least 24 hours before your scheduled service and your deposit moves with you to the new date. Changes made with less than 24 hours' notice remain subject to the late-change policy.",
+        links: [{ label: "See Cleaning FAQs", href: "/faq/cleaning" }],
+      },
+      {
+        question: "Can I cancel?",
+        answer:
+          "Yes. Cancel at least 24 hours before your scheduled service and the late-cancellation fee doesn't apply. With less than 24 hours' notice, we retain 50% of your $250 deposit ($125) and refund the remaining $125.",
+        links: [{ label: "See Cleaning FAQs", href: "/faq/cleaning" }],
+      },
+      {
+        question: "Can I request the same team?",
+        answer: "Yes. We'll do our best to accommodate a request for the same cleaner or team when they're available, but we can't guarantee the same person or team for every service.",
       },
     ],
   },
@@ -92,12 +109,9 @@ export const BOOKING_FAQ_SECTIONS: FAQSection[] = [
  */
 export const BOOKING_FAQ_PENDING: PendingFAQItem[] = [
   { question: "How far in advance should I book?", reason: "Scheduling lead-time policy not approved (Square-dependent)." },
-  { question: "Can I reschedule?", reason: "Rescheduling policy not approved." },
-  { question: "Can I cancel?", reason: "Cancellation policy not approved." },
   { question: "Can I change my recurring frequency later?", reason: "No approved policy for changing recurring frequency." },
   { question: "Can I skip a recurring visit?", reason: "No approved policy for skipping a recurring visit." },
   { question: "Can I pause recurring Cleaning?", reason: "No approved policy for pausing recurring service." },
-  { question: "Can I request the same team?", reason: "Same-team-guarantee policy not approved." },
   { question: "Can I change my project date?", reason: "No approved policy for changing a reserved Organization project date." },
   { question: "Can a project require more than one appointment?", reason: "Not documented whether larger Organization projects can span multiple appointments." },
 ];

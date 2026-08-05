@@ -161,6 +161,16 @@ export function StepReview({ state, onEdit, onSubmit, submitState }: StepReviewP
           />
           <ReviewRow label="Space Considerations" value={displayValue(state.spaceConsiderations)} />
           <ReviewRow label="What Matters Most" value={displayValue(state.whatMattersMost)} />
+          <ReviewRow
+            label="Hazard Disclosure"
+            value={
+              state.hazardPresent === "yes"
+                ? `Yes — ${displayValue(state.hazardDetails)}`
+                : state.hazardPresent === "no"
+                  ? "No"
+                  : "Not provided"
+            }
+          />
         </section>
       </div>
 

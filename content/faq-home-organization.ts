@@ -252,11 +252,13 @@ export const HOME_ORGANIZATION_FAQ_SECTIONS: FAQSection[] = [
       },
       {
         question: "Do you provide junk removal?",
-        answer: "This isn't a service we currently offer.",
+        answer:
+          "Reasonable car-load quantities of trash can be removed as part of your project when appropriate. Larger-volume hauling is a separate service and carries an additional fee.",
       },
       {
         question: "Do you haul away donations?",
-        answer: "This isn't a service we currently offer.",
+        answer:
+          "Reasonable car-load quantities of donations can be removed as part of your project when appropriate. Larger-volume hauling is a separate service and carries an additional fee.",
       },
       {
         question: "Do you work with hazardous materials?",

@@ -2,12 +2,14 @@ import type { FAQSection, PendingFAQItem } from "@/lib/types";
 
 /**
  * Approved Billing & Payments FAQ content (/faq/billing-and-payments).
- * Cleaning pricing is grounded in content/cleaning*.ts; the Organization
- * deposit policy (50% at quote acceptance / 50% after completion) is
- * grounded in content/home-organization.ts and every room file's process
- * steps. Payment methods, payment timing for Cleaning, tips, taxes,
- * refunds, and cancellation are explicitly NOT approved yet — see
- * BILLING_FAQ_PENDING.
+ * Cleaning pricing is grounded in content/cleaning*.ts; the confirmed
+ * Cleaning deposit ($250 flat), payment methods, and cancellation policy
+ * mirror content/faq-cleaning.ts. The Organization deposit policy (50%
+ * at quote acceptance / 50% after completion) is unchanged and grounded
+ * in content/home-organization.ts and every room file's process steps —
+ * it is a separate policy from Cleaning's flat $250 deposit. Receipts,
+ * tips, taxes, and a general refund policy beyond the confirmed
+ * cancellation/deposit rules remain unapproved — see BILLING_FAQ_PENDING.
  */
 
 export const BILLING_FAQ_SECTIONS: FAQSection[] = [
@@ -47,6 +49,32 @@ export const BILLING_FAQ_SECTIONS: FAQSection[] = [
         question: "How are add-ons priced?",
         answer: "Add-ons — like interior oven or refrigerator cleaning, cabinet interiors, interior window glass, linen changes, dishes, laundry, and pet-hair detailing — are available depending on your service and selected as part of the booking process.",
         links: [{ label: "See Cleaning add-ons", href: "/cleaning#add-ons" }],
+      },
+      {
+        question: "Is a deposit required for Cleaning?",
+        answer: "Yes. A $250 deposit is required before your Cleaning service.",
+      },
+      {
+        question: "What payment methods do you accept?",
+        answer: "Elevated Home Resets accepts credit cards, debit cards, and cash. Checks are not accepted.",
+      },
+      {
+        question: "What happens if the project takes longer?",
+        answer:
+          "For Cleaning, our team completes the approved scope that was booked for that appointment rather than expanding it into an unlimited same-day job. Additional work can be scheduled as a separately charged continuation appointment, which may be available as soon as the following day.",
+        links: [{ label: "See Cleaning FAQs", href: "/faq/cleaning" }],
+      },
+      {
+        question: "What happens if I need to change the scope?",
+        answer:
+          "For Cleaning, additional work isn't automatically added to an appointment just because the team is already there — the team completes the approved booked scope first, and additional work may need a separate appointment, additional staffing or materials, or an additional charge.",
+        links: [{ label: "See Cleaning FAQs", href: "/faq/cleaning" }],
+      },
+      {
+        question: "What happens if I need to cancel?",
+        answer:
+          "For Cleaning, cancel or reschedule at least 24 hours before your appointment and no late-cancellation fee applies. With less than 24 hours' notice, we retain 50% of your $250 deposit ($125) and refund the remaining $125.",
+        links: [{ label: "See Cleaning FAQs", href: "/faq/cleaning" }],
       },
     ],
   },
@@ -113,6 +141,10 @@ export const BILLING_FAQ_SECTIONS: FAQSection[] = [
         answer:
           "For Home Organization, yes — you'll receive your project quote before any deposit or booking. For Cleaning, starting prices are listed before you book, though your final price reflects the actual time and scope your home needs.",
       },
+      {
+        question: "When do I pay for Cleaning?",
+        answer: "A $250 deposit is required before your Cleaning service.",
+      },
     ],
   },
 ];
@@ -123,14 +155,10 @@ export const BILLING_FAQ_SECTIONS: FAQSection[] = [
  * imported by any page — for business review only.
  */
 export const BILLING_FAQ_PENDING: PendingFAQItem[] = [
-  { question: "When do I pay for Cleaning?", reason: "Cleaning payment timing not finalized (depends on Square configuration)." },
-  { question: "What payment methods do you accept?", reason: "Accepted payment methods not approved." },
+  { question: "When is the remaining Cleaning balance due after the $250 deposit?", reason: "Exact Cleaning final-payment timing after the deposit is not yet finalized." },
   { question: "Will I receive a receipt?", reason: "Receipt policy not approved." },
   { question: "Are tips required?", reason: "Tipping policy not approved." },
   { question: "Can I tip the team?", reason: "Tipping policy not approved." },
   { question: "Are taxes included?", reason: "Tax policy not approved." },
-  { question: "What happens if the project takes longer?", reason: "No approved policy for in-progress time/scope overruns." },
-  { question: "What happens if I need to change the scope?", reason: "No approved scope-change policy." },
-  { question: "Do you offer refunds?", reason: "Refund policy not approved." },
-  { question: "What happens if I need to cancel?", reason: "Cancellation policy not approved." },
+  { question: "Do you offer refunds?", reason: "General refund policy outside the confirmed cancellation/deposit rules is not approved." },
 ];

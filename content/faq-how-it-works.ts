@@ -122,6 +122,22 @@ export const HOW_IT_WORKS_FAQ_SECTIONS: FAQSection[] = [
         answer:
           "Through the details you share when you book or request a quote — home details, service, and add-ons for Cleaning, or your project details, photos, and preferences for Organization.",
       },
+      {
+        question: "Do I have to be home?",
+        answer: "No. For Cleaning, you can stay or leave — if you won't be home, you're responsible for arranging reliable access to the property.",
+        links: [{ label: "See Cleaning FAQs", href: "/faq/cleaning" }],
+      },
+      {
+        question: "Can I leave while you work?",
+        answer: "Yes, for Cleaning. You can stay home, leave, or work from home while our team is there, as long as they have reasonable access to the areas being serviced.",
+        links: [{ label: "See Cleaning FAQs", href: "/faq/cleaning" }],
+      },
+      {
+        question: "What happens if the scope is different when you arrive?",
+        answer:
+          "For Cleaning, our team completes the approved scope that was booked for that appointment rather than expanding it on the spot. If more work is needed, we're happy to schedule a separately charged continuation appointment, which may be available as soon as the following day.",
+        links: [{ label: "See Cleaning FAQs", href: "/faq/cleaning" }],
+      },
     ],
   },
 ];
@@ -133,9 +149,6 @@ export const HOW_IT_WORKS_FAQ_SECTIONS: FAQSection[] = [
  */
 export const HOW_IT_WORKS_FAQ_PENDING: PendingFAQItem[] = [
   { question: "What happens when the team arrives?", reason: "No approved arrival-process policy." },
-  { question: "Do I have to be home?", reason: "Access/presence policy not approved." },
-  { question: "Can I leave while you work?", reason: "Access/presence policy not approved." },
-  { question: "What happens if the scope is different when you arrive?", reason: "No approved mid-service scope-change/re-quote policy." },
   {
     question: "What happens when the service is finished?",
     reason: "Organization's remaining-balance step is approved, but a general completion/walkthrough process isn't documented for Cleaning, so a combined answer isn't safe to publish.",
