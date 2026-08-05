@@ -9,7 +9,8 @@ import { ComingSoonPreview } from "@/components/services/ComingSoonPreview";
 import { Process } from "@/components/content/Process";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import { ServiceProof } from "@/components/content/ServiceProof";
-import { LIFESTYLE_RESETS } from "@/content/navigation";
+import { ServicePathwayStrip } from "@/components/content/ServicePathwayStrip";
+import { LIFESTYLE_RESETS, CLEANING_PATHWAY_PANEL, ORGANIZATION_PATHWAY_PANEL } from "@/content/navigation";
 import {
   HERO_SLOT,
   INTRO_SLOT,
@@ -142,11 +143,16 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* Final CTA */}
+      {/* Final CTA intro */}
       <Section spacing="lg" surface="muted">
         <Container>
           <InquiryCTA slot={FINAL_CTA_SLOT} showForm={false} />
         </Container>
+      </Section>
+
+      {/* Dual conversion strip */}
+      <Section spacing="sm" surface="muted">
+        <ServicePathwayStrip cleaning={CLEANING_PATHWAY_PANEL} organization={ORGANIZATION_PATHWAY_PANEL} />
       </Section>
     </>
   );

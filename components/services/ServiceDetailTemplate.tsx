@@ -5,6 +5,7 @@ import { Hero } from "@/components/services/Hero";
 import { ServiceSnapshot } from "@/components/services/ServiceSnapshot";
 import { ServiceSectionList } from "@/components/services/ServiceSectionList";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
+import { Breadcrumb, type BreadcrumbItem } from "@/components/content/Breadcrumb";
 
 interface ServiceDetailTemplateProps {
   heroSlot: ContentSlot;
@@ -12,6 +13,7 @@ interface ServiceDetailTemplateProps {
   sections: ServiceDetailSection[];
   snapshot: ServiceSnapshotData;
   finalCTA: ContentSlot;
+  breadcrumb: BreadcrumbItem[];
 }
 
 /**
@@ -20,11 +22,12 @@ interface ServiceDetailTemplateProps {
  * editorial/comparison sections, a service snapshot, and a final CTA — a
  * new tier is a data change, not new markup.
  */
-export function ServiceDetailTemplate({ heroSlot, heroPrice, sections, snapshot, finalCTA }: ServiceDetailTemplateProps) {
+export function ServiceDetailTemplate({ heroSlot, heroPrice, sections, snapshot, finalCTA, breadcrumb }: ServiceDetailTemplateProps) {
   return (
     <>
       <Section spacing="lg" surface="background">
         <Container>
+          <Breadcrumb items={breadcrumb} />
           <Hero slot={heroSlot} price={heroPrice} />
         </Container>
       </Section>

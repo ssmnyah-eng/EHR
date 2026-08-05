@@ -25,6 +25,12 @@ export default function ElevatedResetCleanIncludedPage() {
       cta={ELEVATED_RESET_CLEAN_INCLUDED_CTA}
       backHref="/cleaning/elevated-reset-clean"
       backLabel="Back to Elevated Reset Clean"
+      breadcrumb={[
+        { label: "Home", href: "/" },
+        { label: "Cleaning", href: "/cleaning" },
+        { label: "Elevated Reset Clean", href: "/cleaning/elevated-reset-clean" },
+        { label: "What's Included" },
+      ]}
     />
   );
 }

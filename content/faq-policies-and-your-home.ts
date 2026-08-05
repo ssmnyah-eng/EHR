@@ -51,16 +51,16 @@ export const POLICIES_FAQ_SECTIONS: FAQSection[] = [
         answer:
           "We don't move furniture or belongings beyond what's necessary and safe — see \"Do you move heavy furniture?\" below for the specifics on Cleaning. If there's something specific you'd like us to know about, our booking and quote forms both include a place to share notes and considerations.",
         links: [
-          { label: "Book Your Clean", href: "/book-cleaning" },
-          { label: "Request an Organization Quote", href: "/home-organization/request-a-quote" },
+          { label: "Book Cleaning", href: "/book-cleaning" },
+          { label: "Request a Quote", href: "/home-organization/request-a-quote" },
         ],
       },
       {
         question: "Can I leave special instructions?",
         answer: "Yes. Both our Cleaning booking form and Organization quote request include a place to share notes, preferences, and anything else we should know.",
         links: [
-          { label: "Book Your Clean", href: "/book-cleaning" },
-          { label: "Request an Organization Quote", href: "/home-organization/request-a-quote" },
+          { label: "Book Cleaning", href: "/book-cleaning" },
+          { label: "Request a Quote", href: "/home-organization/request-a-quote" },
         ],
       },
     ],

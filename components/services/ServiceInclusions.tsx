@@ -5,6 +5,7 @@ import { Container } from "@/components/layout/Container";
 import { Heading } from "@/components/typography/Heading";
 import { Text } from "@/components/typography/Text";
 import { Button } from "@/components/content/Button";
+import { Breadcrumb, type BreadcrumbItem } from "@/components/content/Breadcrumb";
 import { Reveal } from "@/components/motion/Reveal";
 import styles from "./ServiceInclusions.module.css";
 
@@ -17,6 +18,7 @@ interface ServiceInclusionsProps {
   cta: CTAData;
   backHref: string;
   backLabel: string;
+  breadcrumb: BreadcrumbItem[];
 }
 
 /** Full room-by-room checklist page linked from a cleaning tier's "See
@@ -30,11 +32,13 @@ export function ServiceInclusions({
   cta,
   backHref,
   backLabel,
+  breadcrumb,
 }: ServiceInclusionsProps) {
   return (
     <>
       <Section spacing="lg" surface="background">
         <Container width="content">
+          <Breadcrumb items={breadcrumb} />
           <Link href={backHref} className={styles.backLink}>
             &larr; {backLabel}
           </Link>

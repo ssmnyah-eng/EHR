@@ -6,6 +6,8 @@ import { FounderStory } from "@/components/content/FounderStory";
 import { EditorialStatement } from "@/components/content/EditorialStatement";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import { ServiceProof } from "@/components/content/ServiceProof";
+import { ServicePathwayStrip } from "@/components/content/ServicePathwayStrip";
+import { CLEANING_PATHWAY_PANEL, ORGANIZATION_PATHWAY_PANEL } from "@/content/navigation";
 import {
   ABOUT_HERO_SLOT,
   ABOUT_FOUNDER_SLOT,
@@ -82,11 +84,16 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      {/* Final CTA */}
+      {/* Final CTA intro */}
       <Section spacing="lg" surface="muted">
         <Container>
           <InquiryCTA slot={ABOUT_FINAL_CTA_SLOT} showForm={false} />
         </Container>
+      </Section>
+
+      {/* Dual conversion strip */}
+      <Section spacing="sm" surface="muted">
+        <ServicePathwayStrip cleaning={CLEANING_PATHWAY_PANEL} organization={ORGANIZATION_PATHWAY_PANEL} />
       </Section>
     </>
   );

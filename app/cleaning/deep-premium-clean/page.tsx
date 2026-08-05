@@ -21,6 +21,11 @@ export default function DeepPremiumCleanPage() {
       sections={DEEP_PREMIUM_CLEAN_SECTIONS}
       snapshot={DEEP_PREMIUM_CLEAN_SNAPSHOT}
       finalCTA={DEEP_PREMIUM_CLEAN_FINAL_CTA}
+      breadcrumb={[
+        { label: "Home", href: "/" },
+        { label: "Cleaning", href: "/cleaning" },
+        { label: "Deep Premium Clean" },
+      ]}
     />
   );
 }

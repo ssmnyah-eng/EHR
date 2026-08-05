@@ -23,6 +23,12 @@ export default function DeepPremiumCleanIncludedPage() {
       cta={DEEP_PREMIUM_CLEAN_INCLUDED_CTA}
       backHref="/cleaning/deep-premium-clean"
       backLabel="Back to Deep Premium Clean"
+      breadcrumb={[
+        { label: "Home", href: "/" },
+        { label: "Cleaning", href: "/cleaning" },
+        { label: "Deep Premium Clean", href: "/cleaning/deep-premium-clean" },
+        { label: "What's Included" },
+      ]}
     />
   );
 }

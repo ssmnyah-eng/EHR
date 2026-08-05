@@ -16,7 +16,7 @@ export const BOOKING_FAQ_SECTIONS: FAQSection[] = [
       {
         question: "How do I book a Cleaning service?",
         answer: "Choose your cleaning level and book directly on our website — tell us about your home, and we'll follow up to confirm scheduling and payment.",
-        links: [{ label: "Book Your Clean", href: "/book-cleaning" }],
+        links: [{ label: "Book Cleaning", href: "/book-cleaning" }],
       },
       {
         question: "Can I choose my cleaning date?",
@@ -72,7 +72,7 @@ export const BOOKING_FAQ_SECTIONS: FAQSection[] = [
       {
         question: "How do I schedule Home Organization?",
         answer: "Request a quote first. Once you accept your quote, a 50% deposit reserves your project.",
-        links: [{ label: "Request an Organization Quote", href: "/home-organization/request-a-quote" }],
+        links: [{ label: "Request a Quote", href: "/home-organization/request-a-quote" }],
       },
       {
         question: "Can I book Organization immediately?",

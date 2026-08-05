@@ -61,7 +61,7 @@ export const HOW_IT_WORKS_FAQ_SECTIONS: FAQSection[] = [
       {
         question: "Do I book Cleaning online?",
         answer: "Yes. You can start the booking process directly on our website — tell us about your home and the service you'd like, and we'll follow up to confirm scheduling and payment.",
-        links: [{ label: "Book Your Clean", href: "/book-cleaning" }],
+        links: [{ label: "Book Cleaning", href: "/book-cleaning" }],
       },
       {
         question: "Can I see the starting price before booking?",
@@ -90,7 +90,7 @@ export const HOW_IT_WORKS_FAQ_SECTIONS: FAQSection[] = [
       {
         question: "How does Home Organization work?",
         answer: "You request a quote by sharing information and photos about your project, we review it and determine the scope, and once your quote is accepted, your project is reserved with a deposit.",
-        links: [{ label: "Request an Organization Quote", href: "/home-organization/request-a-quote" }],
+        links: [{ label: "Request a Quote", href: "/home-organization/request-a-quote" }],
       },
       {
         question: "Why is Organization quote-based?",

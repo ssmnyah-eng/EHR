@@ -21,6 +21,11 @@ export default function StandardCleanPage() {
       sections={STANDARD_CLEAN_SECTIONS}
       snapshot={STANDARD_CLEAN_SNAPSHOT}
       finalCTA={STANDARD_CLEAN_FINAL_CTA}
+      breadcrumb={[
+        { label: "Home", href: "/" },
+        { label: "Cleaning", href: "/cleaning" },
+        { label: "Standard Clean" },
+      ]}
     />
   );
 }

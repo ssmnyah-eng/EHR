@@ -23,6 +23,12 @@ export default function StandardCleanIncludedPage() {
       cta={STANDARD_CLEAN_INCLUDED_CTA}
       backHref="/cleaning/standard-clean"
       backLabel="Back to Standard Clean"
+      breadcrumb={[
+        { label: "Home", href: "/" },
+        { label: "Cleaning", href: "/cleaning" },
+        { label: "Standard Clean", href: "/cleaning/standard-clean" },
+        { label: "What's Included" },
+      ]}
     />
   );
 }

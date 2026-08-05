@@ -9,6 +9,8 @@ import { RelatedOrganizationLinks } from "@/components/services/RelatedOrganizat
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import { ServiceProof } from "@/components/content/ServiceProof";
 import type { ServiceProofQuote, ServiceProofMedia } from "@/components/content/ServiceProof";
+import { Breadcrumb } from "@/components/content/Breadcrumb";
+import { ORGANIZATION_ROOMS } from "@/content/home-organization-rooms";
 
 interface OrganizationRoomProcess {
   eyebrow?: string;
@@ -48,10 +50,15 @@ interface OrganizationRoomTemplateProps {
  * rooms, and a final CTA.
  */
 export function OrganizationRoomTemplate({ currentSlug, heroSlot, heroPrice, sections, process, proof, finalCTA }: OrganizationRoomTemplateProps) {
+  const roomLabel = ORGANIZATION_ROOMS.find((room) => room.slug === currentSlug)?.navLabel ?? currentSlug;
+
   return (
     <>
       <Section spacing="lg" surface="background">
         <Container>
+          <Breadcrumb
+            items={[{ label: "Home", href: "/" }, { label: "Home Organization", href: "/home-organization" }, { label: roomLabel }]}
+          />
           <Hero slot={heroSlot} price={heroPrice} />
         </Container>
       </Section>

@@ -284,8 +284,8 @@ export const CLEANING_FAQ_SECTIONS: FAQSection[] = [
         question: "How do I book a Cleaning service?",
         answer: "Cleaning customers book their Cleaning appointments through the Cleaning booking process.\n\nHome Organization works differently and requires a quote before scheduling.",
         links: [
-          { label: "Book Your Clean", href: "/book-cleaning" },
-          { label: "Request an Organization Quote", href: "/home-organization/request-a-quote" },
+          { label: "Book Cleaning", href: "/book-cleaning" },
+          { label: "Request a Quote", href: "/home-organization/request-a-quote" },
         ],
       },
       {

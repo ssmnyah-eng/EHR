@@ -21,6 +21,11 @@ export default function ElevatedResetCleanPage() {
       sections={ELEVATED_RESET_CLEAN_SECTIONS}
       snapshot={ELEVATED_RESET_CLEAN_SNAPSHOT}
       finalCTA={ELEVATED_RESET_CLEAN_FINAL_CTA}
+      breadcrumb={[
+        { label: "Home", href: "/" },
+        { label: "Cleaning", href: "/cleaning" },
+        { label: "Elevated Reset Clean" },
+      ]}
     />
   );
 }

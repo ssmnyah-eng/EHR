@@ -43,7 +43,7 @@ export const HOME_ORGANIZATION_FAQ_SECTIONS: FAQSection[] = [
         question: "Do I need to know exactly what organization service I need?",
         answer:
           "No. You don't have to have the solution figured out before reaching out. Show us the space, tell us what isn't working, and we'll take it from there.",
-        links: [{ label: "Request an Organization Quote", href: "/home-organization/request-a-quote" }],
+        links: [{ label: "Request a Quote", href: "/home-organization/request-a-quote" }],
       },
       {
         question: "Can you organize more than one room?",
@@ -104,7 +104,7 @@ export const HOME_ORGANIZATION_FAQ_SECTIONS: FAQSection[] = [
       {
         question: "How do I request an Organization quote?",
         answer: "Fill out our Organization Quote form — it walks through your project, your space, and photos, then we review it and follow up with your quote.",
-        links: [{ label: "Request an Organization Quote", href: "/home-organization/request-a-quote" }],
+        links: [{ label: "Request a Quote", href: "/home-organization/request-a-quote" }],
       },
       {
         question: "Why do you need photos of my space?",

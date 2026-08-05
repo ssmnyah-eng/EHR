@@ -6,7 +6,9 @@ import { Heading } from "@/components/typography/Heading";
 import { Text } from "@/components/typography/Text";
 import { Eyebrow } from "@/components/typography/Eyebrow";
 import { FAQCategoryCard } from "@/components/content/FAQCategoryCard";
+import { ServicePathwayStrip } from "@/components/content/ServicePathwayStrip";
 import { FAQ_CATEGORIES } from "@/content/faq-categories";
+import { CLEANING_PATHWAY_PANEL, ORGANIZATION_PATHWAY_PANEL } from "@/content/navigation";
 import { FAQ_HUB_EYEBROW, FAQ_HUB_HEADING, FAQ_HUB_BODY } from "@/content/faq";
 import styles from "./page.module.css";
 
@@ -35,6 +37,10 @@ export default function FAQPage() {
           ))}
         </Grid>
       </Container>
+
+      <div className={styles.pathwayStrip}>
+        <ServicePathwayStrip cleaning={CLEANING_PATHWAY_PANEL} organization={ORGANIZATION_PATHWAY_PANEL} />
+      </div>
     </Section>
   );
 }

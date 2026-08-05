@@ -8,6 +8,7 @@ import { Process } from "@/components/content/Process";
 import { RelatedOrganizationLinks } from "@/components/services/RelatedOrganizationLinks";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import { ServiceProof } from "@/components/content/ServiceProof";
+import { Breadcrumb } from "@/components/content/Breadcrumb";
 import {
   WHOLE_HOME_SEO,
   WHOLE_HOME_HERO,
@@ -36,6 +37,13 @@ export default function WholeHomeOrganizationPage() {
     <>
       <Section spacing="lg" surface="background">
         <Container>
+          <Breadcrumb
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Home Organization", href: "/home-organization" },
+              { label: "Whole-Home Organization" },
+            ]}
+          />
           <Hero slot={WHOLE_HOME_HERO} price={WHOLE_HOME_HERO_PRICE} />
         </Container>
       </Section>

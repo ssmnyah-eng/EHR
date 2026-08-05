@@ -8,9 +8,8 @@
  * explorers, related-service components, and (later) sitemap generation.
  *
  * Room pathways under Home Organization link to their own dedicated pages
- * now that approved copy exists for each (see
- * content/home-organization-rooms.ts). "Whole Room" has no matching
- * dedicated page yet and still points at the Home Organization overview.
+ * (see content/home-organization-rooms.ts for the same 8-room directory
+ * used to cross-link the room pages to each other).
  */
 
 import type { ServiceNode, CTAData } from "@/lib/types";
@@ -29,7 +28,13 @@ export const HOME_ORGANIZATION: ServiceNode = {
       status: "coming-soon",
       href: "/home-organization/organization-packages",
     },
-    { title: "Whole Room", slug: "whole-room", category: "home-organization", status: "active", href: "/home-organization" },
+    {
+      title: "Whole-Home Organization",
+      slug: "whole-home-organization",
+      category: "home-organization",
+      status: "active",
+      href: "/home-organization/whole-home-organization",
+    },
     { title: "Kitchen", slug: "kitchen", category: "home-organization", status: "active", href: "/home-organization/kitchen-organization" },
     { title: "Pantry", slug: "pantry", category: "home-organization", status: "active", href: "/home-organization/pantry-organization" },
     { title: "Closet", slug: "closet", category: "home-organization", status: "active", href: "/home-organization/closet-organization" },
@@ -72,6 +77,7 @@ export const LIFESTYLE_RESETS: ServiceNode = {
 export const COMPANY_LINKS: ServiceNode[] = [
   { title: "About", slug: "about", category: "company", status: "active", href: "/about" },
   { title: "FAQs", slug: "faq", category: "company", status: "active", href: "/faq" },
+  { title: "Service Areas", slug: "service-areas", category: "company", status: "active", href: "/service-areas" },
   { title: "Contact", slug: "contact", category: "company", status: "active", href: "/contact" },
 ];
 
@@ -83,13 +89,30 @@ export const COMPANY_LINKS: ServiceNode[] = [
  * yet (home, about, "need both" moments).
  */
 export const BOOK_CLEANING_CTA: CTAData = {
-  label: "Book Your Clean",
+  label: "Book Cleaning",
   href: "/book-cleaning",
 };
 
 export const ORGANIZATION_QUOTE_CTA: CTAData = {
-  label: "Request an Organization Quote",
+  label: "Request a Quote",
   href: "/home-organization/request-a-quote",
+};
+
+/** Shared copy for the two ServicePathwayStrip panels (see
+ *  components/content/ServicePathwayStrip.tsx) — centralized so every
+ *  placement of the strip reads identically sitewide. */
+export const CLEANING_PATHWAY_PANEL = {
+  eyebrow: "Cleaning",
+  heading: BOOK_CLEANING_CTA.label,
+  body: "Choose Standard, Deep Premium, or Elevated Reset and get on the schedule.",
+  cta: BOOK_CLEANING_CTA,
+};
+
+export const ORGANIZATION_PATHWAY_PANEL = {
+  eyebrow: "Home Organization",
+  heading: ORGANIZATION_QUOTE_CTA.label,
+  body: "Tell us about your space and we'll prepare your project quote.",
+  cta: ORGANIZATION_QUOTE_CTA,
 };
 
 /** General/undecided-visitor CTA — centralized so every generic "get

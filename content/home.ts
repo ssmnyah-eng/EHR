@@ -1,6 +1,6 @@
 import type { ContentSlot, TeaserCardData, CTAData } from "@/lib/types";
 import type { ProcessStep } from "@/components/content/Process";
-import { ESTIMATE_CTA, BOOK_CLEANING_CTA, ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
+import { ESTIMATE_CTA } from "@/content/navigation";
 import { LASHON_PATTERSON } from "@/content/testimonials";
 
 /**
@@ -132,6 +132,4 @@ export const FINAL_CTA_SLOT: ContentSlot = {
   eyebrow: "Start Your Reset",
   heading: "Your home doesn't need to be ready for us.",
   body: "That's the point.\n\nTell us what's going on at home and what you'd like help with. We'll help you take the next step toward a space that feels cleaner, calmer, and easier to manage.",
-  primaryCTA: BOOK_CLEANING_CTA,
-  secondaryCTA: ORGANIZATION_QUOTE_CTA,
 };
