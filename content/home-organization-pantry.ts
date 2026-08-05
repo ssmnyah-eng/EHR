@@ -40,7 +40,13 @@ export const PANTRY_SECTIONS: ServiceDetailSection[] = [
     slot: {
       heading: "Open the door and know where to look.",
       body: "The goal isn't a pantry that only looks good in a photograph.\n\nIt's a pantry that feels more ordered, easier to navigate, and better suited to the way your household actually uses it.\n\nWe work with the space and belongings you have to create a more intentional setup.",
-      media: { type: "image", alt: "An organized pantry with everything easy to see and reach", variant: "landscape" },
+      media: {
+        type: "image",
+        src: "/images/organization/pantry.jpg",
+        alt: "A comprehensive organized pantry with labeled shelving for cookware, appliances, and pantry staples",
+        variant: "landscape",
+        objectPosition: "center 45%",
+      },
     },
   },
   {
@@ -92,7 +98,16 @@ export const PANTRY_PROOF = {
   body: "A pantry can look beautiful on day one. The real test is whether the system makes sense when groceries come in, family members use it, and everyday life starts happening again.\n\nThat's why our Pantry Organization service focuses on creating clear homes for what you keep and a system built around how the space is actually used.",
   primary: { quote: LASHON_PATTERSON.quotes.maintainability, attribution: LASHON_PATTERSON.name, rating: LASHON_PATTERSON.rating },
   secondary: { quote: LASHON_PATTERSON.quotes.largeFamily, attribution: LASHON_PATTERSON.name },
-  media: { type: "single" as const, image: { type: "image" as const, alt: "A completed pantry organization project", variant: "portrait" as const, aspectRatio: "4 / 5" } },
+  media: {
+    type: "single" as const,
+    image: {
+      type: "image" as const,
+      src: "/images/organization/pantry-cabinet-jars.jpg",
+      alt: "Labeled glass jars of pantry staples arranged on organized shelving",
+      variant: "portrait" as const,
+      aspectRatio: "4 / 5",
+    },
+  },
 };
 
 export const PANTRY_FINAL_CTA: ContentSlot = {

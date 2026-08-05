@@ -60,9 +60,11 @@ export const metadata: Metadata = {
  */
 const CUSTOMER_LIFE_MEDIA: MediaSlotData = {
   type: "image",
-  alt: "A calm, lived-in room in a client's home",
+  src: "/images/organization/living-room.jpg",
+  alt: "A calm, lived-in living room seating area in a client's home",
   variant: "portrait",
   aspectRatio: "5 / 6",
+  objectPosition: "60% 55%",
 };
 
 const FOUNDER_MEDIA: MediaSlotData = {
@@ -74,14 +76,19 @@ const FOUNDER_MEDIA: MediaSlotData = {
 
 const SERVICES_MEDIA: MediaSlotData = {
   type: "image",
-  alt: "A recently reset room in a client's home",
+  src: "/images/organization/dining-living-room.jpg",
+  alt: "An open dining and living area in a client's home",
   variant: "landscape",
+  objectPosition: "center 58%",
 };
 
 const PROCESS_MEDIA: MediaSlotData = {
-  type: "image",
-  alt: "Elevated Home Resets at work in a client's home",
+  type: "video",
+  src: "/videos/homepage-transition.mp4",
+  poster: "/videos/homepage-transition-poster.jpg",
+  alt: "Hands organizing labeled pantry jars and sorting belongings into bins throughout a home",
   variant: "fullBleed",
+  objectPosition: "center 40%",
 };
 
 const CLEANING_MEDIA: MediaSlotData = {
@@ -99,7 +106,8 @@ const CLEANING_DETAIL_MEDIA: MediaSlotData = {
 
 const ORGANIZATION_MEDIA: MediaSlotData = {
   type: "image",
-  alt: "A completed Home Organization project",
+  src: "/images/organization/walk-in-closet.jpg",
+  alt: "A completed walk-in closet organization project with clothing sorted and displayed by category",
   variant: "landscape",
 };
 
@@ -117,9 +125,11 @@ const AFTER_MEDIA: MediaSlotData = {
 
 const TESTIMONIAL_MEDIA: MediaSlotData = {
   type: "image",
-  alt: "A completed project referenced in this client's review",
+  src: "/images/organization/kitchen-cabinet-dishes.jpg",
+  alt: "An organized kitchen cabinet with dishes arranged on a dish rack, part of Kim Nelson's kitchen and closets project",
   variant: "portrait",
   aspectRatio: "4 / 5",
+  objectPosition: "center 40%",
 };
 
 const TRUST_STRIP_ITEMS = [

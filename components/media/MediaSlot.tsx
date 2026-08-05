@@ -1,6 +1,8 @@
 import Image from "next/image";
 import type { MediaSlotData } from "@/lib/types";
 import { SHOW_SLOT_LABELS } from "@/lib/dev";
+import { VideoMedia } from "@/components/media/VideoMedia";
+import { assetPath } from "@/lib/assetPath";
 import styles from "./MediaSlot.module.css";
 
 interface MediaSlotProps {
@@ -56,22 +58,10 @@ export function MediaSlot({ data, className, fill = false }: MediaSlotProps) {
       data-fill={fill || undefined}
     >
       {data.type === "video" ? (
-        <video
-          className={styles.media}
-          poster={data.poster}
-          muted
-          loop
-          playsInline
-          autoPlay
-          preload={data.priority ? "auto" : "metadata"}
-          style={{ objectPosition: data.objectPosition }}
-        >
-          {data.srcWebm ? <source src={data.srcWebm} type="video/webm" /> : null}
-          <source src={data.src} type="video/mp4" />
-        </video>
+        <VideoMedia data={data} />
       ) : (
         <Image
-          src={data.src}
+          src={assetPath(data.src)}
           alt={data.alt}
           fill
           priority={data.priority}

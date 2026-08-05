@@ -33,9 +33,19 @@ export const HERO_SLOT: ContentSlot = {
   primaryCTA: ESTIMATE_CTA,
   secondaryCTA: { label: "Explore Services", href: "#services" },
   // Rendered as a full-bleed background by HomeHero (fill mode — sized by
-  // the hero section's CSS min-height, not this aspect ratio). Intended
-  // for real hero video/photography; see HomeHero for MP4/WebM support.
-  media: { type: "image", alt: "Hero media", variant: "fullBleed", priority: true },
+  // the hero section's CSS min-height, not this aspect ratio). Real
+  // client-supplied footage: a bright, organized kitchen. Decorative
+  // (muted, looping, aria-hidden — see VideoMedia), so the alt text below
+  // exists for maintainability, not assistive tech.
+  media: {
+    type: "video",
+    src: "/videos/homepage-hero.mp4",
+    poster: "/videos/homepage-hero-poster.jpg",
+    alt: "A woman reaching for an item on an open kitchen shelf in a bright, organized home",
+    variant: "fullBleed",
+    objectPosition: "32% 35%",
+    priority: true,
+  },
 };
 
 export const INTRO_SLOT: ContentSlot = {

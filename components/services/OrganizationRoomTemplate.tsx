@@ -54,6 +54,13 @@ interface OrganizationRoomTemplateProps {
  */
 export function OrganizationRoomTemplate({ currentSlug, heroSlot, heroPrice, sections, process, proof, finalCTA }: OrganizationRoomTemplateProps) {
   const roomLabel = ORGANIZATION_ROOMS.find((room) => room.slug === currentSlug)?.navLabel ?? currentSlug;
+  // Derived from the slug (e.g. "pantry-organization" -> "pantry",
+  // "home-office-organization" -> "home office") so each room's carousel
+  // only ever surfaces its own real projects — never another room's —
+  // via findTransformationsByCategory's substring match. Rooms with no
+  // real assets yet (Garage, Laundry Room, Whole-Home) simply match
+  // nothing and fall back to the carousel's placeholder slides.
+  const roomCategoryKeyword = currentSlug.replace(/-organization$/, "").replace(/-/g, " ");
 
   return (
     <>
@@ -97,7 +104,7 @@ export function OrganizationRoomTemplate({ currentSlug, heroSlot, heroPrice, sec
             eyebrow={TRANSFORMATIONS_TEASER.eyebrow}
             heading={TRANSFORMATIONS_TEASER.heading ?? ""}
             body={TRANSFORMATIONS_TEASER.body}
-            projects={findTransformationsByCategory("organization")}
+            projects={findTransformationsByCategory(roomCategoryKeyword)}
             placeholderAlt="A completed Home Organization project"
           />
         </Container>

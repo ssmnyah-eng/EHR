@@ -38,7 +38,13 @@ export const BATHROOM_SECTIONS: ServiceDetailSection[] = [
     slot: {
       heading: "Less visual noise. More functional storage.",
       body: "The goal is to make bathroom storage easier to use and maintain within the space you already have.\n\nInstead of simply moving clutter out of sight, we focus on bringing greater order to the areas where your belongings actually live.",
-      media: { type: "image", alt: "An organized bathroom vanity drawer with everyday products in place", variant: "landscape" },
+      media: {
+        type: "image",
+        src: "/images/organization/bathroom-cabinet.jpg",
+        alt: "An organized bathroom cabinet with woven baskets, a folded towel, and a soap pump in place",
+        variant: "landscape",
+        objectPosition: "55% 55%",
+      },
     },
   },
   {

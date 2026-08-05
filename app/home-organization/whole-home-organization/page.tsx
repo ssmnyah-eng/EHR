@@ -126,7 +126,7 @@ export default function WholeHomeOrganizationPage() {
             eyebrow={TRANSFORMATIONS_TEASER.eyebrow}
             heading={TRANSFORMATIONS_TEASER.heading ?? ""}
             body={TRANSFORMATIONS_TEASER.body}
-            projects={findTransformationsByCategory("organization")}
+            projects={findTransformationsByCategory("whole home")}
             placeholderAlt="A completed Home Organization project"
           />
         </Container>

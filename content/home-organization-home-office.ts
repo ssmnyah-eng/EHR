@@ -38,7 +38,12 @@ export const HOME_OFFICE_SECTIONS: ServiceDetailSection[] = [
     slot: {
       heading: "Less friction between you and the work you need to do.",
       body: "A Home Office Reset brings greater structure to the workspace, storage, and file areas so the room can better support the work happening inside it.\n\nThe goal isn't an office that looks untouched.\n\nIt's one that makes more sense to use.",
-      media: { type: "image", alt: "An organized home office desk and file storage area", variant: "landscape" },
+      media: {
+        type: "image",
+        src: "/images/organization/home-office.jpg",
+        alt: "An organized home office desk with a bookshelf, desk organizer, and clear work surface",
+        variant: "landscape",
+      },
     },
   },
   {

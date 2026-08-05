@@ -44,10 +44,14 @@ export default async function TransformationDetailPage(props: PageProps<"/transf
 
       <Section spacing="md" surface="surface">
         <Container>
-          <Grid columns={2} gap="md">
-            <MediaSlot data={project.beforeMedia} />
-            <MediaSlot data={project.afterMedia} />
-          </Grid>
+          {project.beforeMedia || project.afterMedia ? (
+            <Grid columns={2} gap="md">
+              <MediaSlot data={project.beforeMedia} />
+              <MediaSlot data={project.afterMedia} />
+            </Grid>
+          ) : (
+            <MediaSlot data={project.heroMedia} />
+          )}
         </Container>
       </Section>
 

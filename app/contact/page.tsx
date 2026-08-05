@@ -43,7 +43,14 @@ export default function ContactPage() {
           </div>
 
           <MediaSlot
-            data={{ type: "image", alt: "A calm, finished room in a client's home", variant: "portrait", aspectRatio: "4 / 5" }}
+            data={{
+              type: "image",
+              src: "/images/organization/living-room-reset.jpg",
+              alt: "A calm, finished living room in a client's home",
+              variant: "portrait",
+              aspectRatio: "4 / 5",
+              objectPosition: "center 55%",
+            }}
             className={styles.media}
           />
         </div>

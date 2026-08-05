@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
   ...(isGithubPages ? { output: "export" } : {}),
   basePath,
   assetPrefix: basePath,
+  // next/image prefixes its own src with basePath automatically, but a
+  // raw <video src>/poster (no equivalent built-in component) does not —
+  // expose the same value as a public env var so components can prefix
+  // those paths themselves (see lib/assetPath.ts).
+  env: { NEXT_PUBLIC_BASE_PATH: basePath },
   // Static export writes each route as a folder + index.html
   // (/about/index.html); trailingSlash keeps generated links matching
   // that on-disk shape. Gated the same way so a plain `next build`/
