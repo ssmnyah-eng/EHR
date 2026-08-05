@@ -97,6 +97,14 @@ const CLEANING_MEDIA: MediaSlotData = {
   variant: "landscape",
 };
 
+const CLEANING_EXPLANATION_MEDIA: MediaSlotData = {
+  type: "image",
+  src: "/images/cleaning/right-level-of-cleaning.jpg",
+  alt: "A bright, open hallway leading into a calm, minimally furnished living space",
+  variant: "fullBleed",
+  priority: false,
+};
+
 const CLEANING_DETAIL_MEDIA: MediaSlotData = {
   type: "image",
   alt: "A freshly cleaned kitchen counter and sink",
@@ -185,15 +193,19 @@ export default function HomePage() {
       </Section>
 
       {/* 04b — Why different levels exist at all, ahead of visitors
-          picking one. */}
-      <Section spacing="lg" surface="background">
-        <Container width="wide">
-          <TypeLedStatement
-            eyebrow={CLEANING_EXPLANATION_SLOT.eyebrow}
-            heading={CLEANING_EXPLANATION_SLOT.heading ?? ""}
-            body={CLEANING_EXPLANATION_SLOT.body ?? ""}
-          />
-        </Container>
+          picking one. Full-bleed background photo with centered copy —
+          the heading sits as the top element of a centered block rather
+          than the two-column TypeLedStatement treatment used elsewhere. */}
+      <Section spacing="sm" surface="background">
+        <FullBleedMedia
+          media={CLEANING_EXPLANATION_MEDIA}
+          fallbackLabel={CLEANING_EXPLANATION_MEDIA.alt}
+          overlayEyebrow={CLEANING_EXPLANATION_SLOT.eyebrow}
+          overlayText={CLEANING_EXPLANATION_SLOT.heading}
+          overlayBody={CLEANING_EXPLANATION_SLOT.body}
+          align="center"
+          tall
+        />
       </Section>
 
       {/* 04c — Cleaning editorial/value moment: large statement paired

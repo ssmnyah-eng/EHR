@@ -15,18 +15,24 @@ interface FullBleedMediaProps {
   /** Taller aspect ratio for sections carrying heading+body overlay copy
    *  (the plain pacing-break usage keeps the shorter cinematic default). */
   tall?: boolean;
+  /** "start" (default) keeps the existing bottom-left overlay used by the
+   *  Cleaning/Organization transition moment. "center" middles the scrim
+   *  and centers the overlay text block — for a statement-style section
+   *  where the heading is the top element of a centered block rather than
+   *  a corner caption. */
+  align?: "start" | "center";
 }
 
 /** Full-viewport-width visual interruption (brief section 15) — moves the
  *  page from describing services to showing the feeling/result. */
-export function FullBleedMedia({ media, overlayEyebrow, overlayText, overlayBody, fallbackLabel, tall = false }: FullBleedMediaProps) {
+export function FullBleedMedia({ media, overlayEyebrow, overlayText, overlayBody, fallbackLabel, tall = false, align = "start" }: FullBleedMediaProps) {
   const showOverlay = Boolean(overlayEyebrow || overlayText || overlayBody) || SHOW_SLOT_LABELS;
 
   return (
     <div className={[styles.wrapper, tall ? styles.tall : ""].filter(Boolean).join(" ")}>
       <MediaSlot data={media ?? { type: "image", alt: fallbackLabel, variant: "fullBleed" }} className={styles.media} />
       {showOverlay ? (
-        <div className={styles.overlay}>
+        <div className={[styles.overlay, align === "center" ? styles.overlayCenter : ""].filter(Boolean).join(" ")}>
           <div className={styles.overlayInner}>
             {overlayEyebrow ? <p className={styles.overlayEyebrow}>{overlayEyebrow}</p> : null}
             <p className={styles.overlayText}>

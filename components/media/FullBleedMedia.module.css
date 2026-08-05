@@ -35,11 +35,26 @@
   background: linear-gradient(190deg, rgba(23, 24, 26, 0.1) 0%, rgba(23, 24, 26, 0.32) 55%, rgba(23, 24, 26, 0.68) 100%);
 }
 
+/* Centered variant: text sits in the middle of the frame instead of the
+   bottom-left corner, so contrast can't rely on the bottom-heavy
+   gradient above — darken evenly across the whole frame instead. */
+.overlay.overlayCenter {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(23, 24, 26, 0.45) 0%, rgba(23, 24, 26, 0.55) 50%, rgba(23, 24, 26, 0.45) 100%);
+}
+
 .overlayInner {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
   max-width: 42rem;
+}
+
+.overlayCenter .overlayInner {
+  align-items: center;
+  margin-inline: auto;
 }
 
 .overlayEyebrow {
