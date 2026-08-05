@@ -3,8 +3,8 @@ import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { Heading } from "@/components/typography/Heading";
 import { Text } from "@/components/typography/Text";
-import { OrganizationQuoteForm } from "@/components/conversion/OrganizationQuoteForm";
-import { ORGANIZATION_QUOTE_HEADING, ORGANIZATION_QUOTE_BODY } from "@/content/organization-quote";
+import { OrganizationQuoteWizard } from "@/components/conversion/OrganizationQuoteWizard/OrganizationQuoteWizard";
+import { QUOTE_HEADING, QUOTE_BODY } from "@/content/organization-quote";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -12,23 +12,21 @@ export const metadata: Metadata = {
   description: "Request a Home Organization project quote from Elevated Home Resets.",
 };
 
-export default async function OrganizationQuotePage(props: PageProps<"/organization-quote">) {
+export default async function RequestAQuotePage(props: PageProps<"/home-organization/request-a-quote">) {
   const searchParams = await props.searchParams;
   const spaceParam = searchParams.space;
-  const preselectedSpace = typeof spaceParam === "string" ? spaceParam : undefined;
+  const preselectedService = typeof spaceParam === "string" ? spaceParam : undefined;
 
   return (
     <Section spacing="lg" surface="background">
       <Container width="content">
         <Heading as="h1" size="xl">
-          {ORGANIZATION_QUOTE_HEADING}
+          {QUOTE_HEADING}
         </Heading>
         <Text size="lg" tone="secondary" className={styles.intro}>
-          {ORGANIZATION_QUOTE_BODY}
+          {QUOTE_BODY}
         </Text>
-        <div className={styles.formWrapper}>
-          <OrganizationQuoteForm preselectedSpace={preselectedSpace} />
-        </div>
+        <OrganizationQuoteWizard preselectedService={preselectedService} />
       </Container>
     </Section>
   );

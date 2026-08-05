@@ -88,7 +88,7 @@ export const BOOK_CLEANING_CTA: CTAData = {
 
 export const ORGANIZATION_QUOTE_CTA: CTAData = {
   label: "Request an Organization Quote",
-  href: "/organization-quote",
+  href: "/home-organization/request-a-quote",
 };
 
 /** General/undecided-visitor CTA — centralized so every generic "get
