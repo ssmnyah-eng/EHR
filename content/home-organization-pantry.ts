@@ -33,6 +33,7 @@ export const PANTRY_SECTIONS: ServiceDetailSection[] = [
       eyebrow: "When the Pantry Stops Working",
       heading: "A full pantry isn't always a functional pantry.",
       body: "Food gets pushed behind other food. Categories disappear. Shelves become crowded. Everyday items end up wherever there was room.\n\nEventually, simply finding something can mean moving everything around it.\n\nPantry organization brings structure back to the space so it makes more sense for everyday use.",
+      primaryCTA: PANTRY_CTA,
     },
   },
   {
@@ -40,6 +41,7 @@ export const PANTRY_SECTIONS: ServiceDetailSection[] = [
     slot: {
       heading: "Open the door and know where to look.",
       body: "The goal isn't a pantry that only looks good in a photograph.\n\nIt's a pantry that feels more ordered, easier to navigate, and better suited to the way your household actually uses it.\n\nWe work with the space and belongings you have to create a more intentional setup.",
+      primaryCTA: PANTRY_CTA,
       media: {
         type: "image",
         src: "/images/organization/pantry.jpg",

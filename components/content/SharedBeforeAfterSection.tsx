@@ -19,6 +19,7 @@ export function SharedBeforeAfterSection() {
       eyebrow={TRANSFORMATIONS_TEASER.eyebrow}
       heading={TRANSFORMATIONS_TEASER.heading ?? ""}
       body={TRANSFORMATIONS_TEASER.body}
+      cta={TRANSFORMATIONS_TEASER.primaryCTA ?? undefined}
       projects={HOMEPAGE_TRANSFORMATION_PROJECTS}
       placeholderAlt="A space before and after its Elevated Home Resets project"
       mediaFit="contain"

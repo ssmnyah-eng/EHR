@@ -12,8 +12,27 @@
 }
 
 .item {
-  padding-top: var(--space-sm);
   border-top: var(--border-hairline);
+}
+
+.link {
+  position: relative;
+  display: block;
+  padding-top: var(--space-sm);
+  padding-right: var(--space-xl);
+  border-top: 2px solid transparent;
+  margin-top: -2px;
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.link:hover {
+  border-top-color: var(--color-accent);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
 }
 
 .label {
@@ -32,4 +51,21 @@
   line-height: var(--leading-normal);
   color: var(--color-text-secondary);
   max-width: 38ch;
+}
+
+.arrow {
+  position: absolute;
+  top: var(--space-sm);
+  right: 0;
+  color: var(--color-accent);
+  font-weight: 600;
+  opacity: 0;
+  transform: translateX(-0.25rem);
+  transition: opacity var(--duration-fast) var(--ease-standard), transform var(--duration-fast) var(--ease-standard);
+}
+
+.link:hover .arrow,
+.link:focus-visible .arrow {
+  opacity: 1;
+  transform: translateX(0);
 }

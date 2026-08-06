@@ -119,6 +119,7 @@ export default function CleaningHubPage() {
             eyebrow={TRANSFORMATIONS_TEASER.eyebrow}
             heading={TRANSFORMATIONS_TEASER.heading ?? ""}
             body={TRANSFORMATIONS_TEASER.body}
+            cta={TRANSFORMATIONS_TEASER.primaryCTA ?? undefined}
             projects={findTransformationsByCategory("cleaning")}
             placeholderAlt="A completed Cleaning project"
           />

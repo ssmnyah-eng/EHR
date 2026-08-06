@@ -20,6 +20,10 @@
   margin-inline: auto;
 }
 
+.cta {
+  margin-top: var(--space-md);
+}
+
 .stage {
   position: relative;
   outline: none;

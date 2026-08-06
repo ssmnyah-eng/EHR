@@ -59,6 +59,7 @@ export default function WholeHomeOrganizationPage() {
           <EditorialSplit
             heading={WHOLE_HOME_FRICTION.heading ?? ""}
             body={WHOLE_HOME_FRICTION.body}
+            primaryCTA={WHOLE_HOME_CUSTOM_PROJECT.primaryCTA ?? undefined}
             media={WHOLE_HOME_FRICTION.media!}
           />
         </Container>
@@ -91,6 +92,7 @@ export default function WholeHomeOrganizationPage() {
           <EditorialSplit
             heading={WHOLE_HOME_WHAT_CHANGES.heading ?? ""}
             body={WHOLE_HOME_WHAT_CHANGES.body}
+            primaryCTA={WHOLE_HOME_CUSTOM_PROJECT.primaryCTA ?? undefined}
             media={WHOLE_HOME_WHAT_CHANGES.media!}
           />
         </Container>

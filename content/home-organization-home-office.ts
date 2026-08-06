@@ -31,6 +31,7 @@ export const HOME_OFFICE_SECTIONS: ServiceDetailSection[] = [
     slot: {
       heading: "It's hard to focus when the room is competing for your attention.",
       body: "Paper accumulates. Supplies spread. Drawers become storage for everything without another home. Work surfaces slowly lose the space they were meant to provide.\n\nWhen home and work happen in the same place, a functional setup matters.",
+      primaryCTA: OFFICE_CTA,
     },
   },
   {
@@ -38,6 +39,7 @@ export const HOME_OFFICE_SECTIONS: ServiceDetailSection[] = [
     slot: {
       heading: "Less friction between you and the work you need to do.",
       body: "A Home Office Reset brings greater structure to the workspace, storage, and file areas so the room can better support the work happening inside it.\n\nThe goal isn't an office that looks untouched.\n\nIt's one that makes more sense to use.",
+      primaryCTA: OFFICE_CTA,
       media: {
         type: "image",
         src: "/images/organization/home-office.jpg",

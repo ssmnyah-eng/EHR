@@ -109,4 +109,5 @@ export const ABOUT_FINAL_CTA_SLOT: ContentSlot = {
   eyebrow: "Welcome to Elevated Home Resets",
   heading: "Let us help make home feel a little lighter.",
   body: "Whether you need cleaning, organization, or you're simply not sure where to start, tell us what's going on at home.\n\nYou don't need to have it figured out before you reach out.",
+  secondaryCTA: { label: "Frequently Asked Questions", href: "/faq" },
 };

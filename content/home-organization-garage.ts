@@ -33,6 +33,7 @@ export const GARAGE_SECTIONS: ServiceDetailSection[] = [
     slot: {
       heading: "“Put it in the garage” works—until it doesn't.",
       body: "Boxes arrive.\n\nSeasonal items accumulate.\n\nTools, household supplies, equipment, and things without another obvious home all compete for the same space.\n\nEventually the garage can become difficult to navigate, difficult to maintain, and harder to use for what you actually need it for.",
+      primaryCTA: GARAGE_CTA,
       media: {
         type: "image",
         src: "/images/services/garage-organization-2.jpg",
@@ -46,6 +47,7 @@ export const GARAGE_SECTIONS: ServiceDetailSection[] = [
     slot: {
       heading: "Turn overflow back into usable space.",
       body: "A Garage Reset focuses on bringing greater structure to the belongings and storage within the garage so the space can function more intentionally.\n\nThis is professional organization—not junk hauling or extreme-condition cleanup.",
+      primaryCTA: GARAGE_CTA,
       media: {
         type: "image",
         src: "/images/services/garage-organization-1.jpg",

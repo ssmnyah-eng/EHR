@@ -145,9 +145,9 @@ const TESTIMONIAL_MEDIA: MediaSlotData = {
 };
 
 const TRUST_STRIP_ITEMS = [
-  { label: "Cleaning", body: CLEANING_PATHWAY_PANEL.body },
-  { label: "Home Organization", body: ORGANIZATION_PATHWAY_PANEL.body },
-  { label: "Service Area", body: SERVICE_AREAS_INTRO },
+  { label: "Cleaning", body: CLEANING_PATHWAY_PANEL.body, href: "/cleaning" },
+  { label: "Home Organization", body: ORGANIZATION_PATHWAY_PANEL.body, href: "/home-organization" },
+  { label: "Service Area", body: SERVICE_AREAS_INTRO, href: "/service-areas" },
 ];
 
 export default function HomePage() {
@@ -207,6 +207,7 @@ export default function HomePage() {
           overlayEyebrow={CLEANING_EXPLANATION_SLOT.eyebrow}
           overlayText={CLEANING_EXPLANATION_SLOT.heading}
           overlayBody={CLEANING_EXPLANATION_SLOT.body}
+          overlayCTA={CLEANING_PATHWAY_PANEL.cta}
           align="center"
           tall
         />
@@ -217,7 +218,13 @@ export default function HomePage() {
           Standard Clean detail paragraph verbatim. */}
       <Section spacing="lg" surface="surface">
         <Container width="wide">
-          <EditorialSplit heading={CLEANING_VALUE_HEADING} body={STANDARD_CLEAN_DETAIL_BODY} media={CLEANING_DETAIL_MEDIA} reverse />
+          <EditorialSplit
+            heading={CLEANING_VALUE_HEADING}
+            body={STANDARD_CLEAN_DETAIL_BODY}
+            primaryCTA={CLEANING_PATHWAY_PANEL.cta}
+            media={CLEANING_DETAIL_MEDIA}
+            reverse
+          />
         </Container>
       </Section>
 
@@ -293,6 +300,7 @@ export default function HomePage() {
             primary={HOME_ORG_PROOF.primary}
             secondary={HOME_ORG_PROOF.secondary}
             media={{ type: "single", image: ORGANIZATION_MEDIA }}
+            cta={ORGANIZATION_PATHWAY_PANEL.cta}
             editorial
           />
         </Container>

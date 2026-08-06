@@ -13,6 +13,7 @@ import { ServiceProof } from "@/components/content/ServiceProof";
 import { ProjectMediaCarousel } from "@/components/content/ProjectMediaCarousel";
 import { TRANSFORMATIONS_TEASER } from "@/content/home";
 import { findTransformationsByCategory } from "@/content/transformations";
+import { ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
 import {
   HOME_ORG_HUB_HERO,
   HOME_ORG_INTRO,
@@ -96,6 +97,7 @@ export default function HomeOrganizationHubPage() {
             eyebrow={HOME_ORG_WHAT_HAPPENS.eyebrow}
             heading={HOME_ORG_WHAT_HAPPENS.heading ?? ""}
             body={HOME_ORG_WHAT_HAPPENS.body}
+            primaryCTA={ORGANIZATION_QUOTE_CTA}
             media={HOME_ORG_WHAT_HAPPENS.media!}
           />
         </Container>
@@ -184,6 +186,7 @@ export default function HomeOrganizationHubPage() {
             eyebrow={TRANSFORMATIONS_TEASER.eyebrow}
             heading={TRANSFORMATIONS_TEASER.heading ?? ""}
             body={TRANSFORMATIONS_TEASER.body}
+            cta={TRANSFORMATIONS_TEASER.primaryCTA ?? undefined}
             projects={findTransformationsByCategory("organization")}
             placeholderAlt="A completed Home Organization project"
           />

@@ -32,6 +32,7 @@ export const CLOSET_SECTIONS: ServiceDetailSection[] = [
     slot: {
       heading: "Your closet can hold everything and still not work.",
       body: "When clothing, shoes, accessories, and everyday items compete for the same space, finding what you need becomes harder.\n\nThings disappear behind other things. Surfaces become storage. The floor fills up. Putting something away requires moving something else first.\n\nA Closet Reset is designed to bring greater structure back to the space.",
+      primaryCTA: CLOSET_CTA,
     },
   },
   {
@@ -39,6 +40,7 @@ export const CLOSET_SECTIONS: ServiceDetailSection[] = [
     slot: {
       heading: "See more of what you have. Use more of your space.",
       body: "Organization should make the closet easier to navigate and easier to use—not simply make everything look neat for a day.\n\nWe focus on creating greater order and function within the closet you already have.",
+      primaryCTA: CLOSET_CTA,
       media: {
         type: "image",
         src: "/images/organization/walk-in-closet.jpg",

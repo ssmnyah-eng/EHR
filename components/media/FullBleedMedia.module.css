@@ -83,3 +83,12 @@
   opacity: 0.92;
   max-width: 46ch;
 }
+
+.overlayCta {
+  margin-top: var(--space-2xs);
+  align-self: flex-start;
+}
+
+.overlayCenter .overlayCta {
+  align-self: center;
+}

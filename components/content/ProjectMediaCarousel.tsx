@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { useCallback, useRef, useState, type KeyboardEvent, type TouchEvent } from "react";
-import type { MediaSlotData, TransformationProject } from "@/lib/types";
+import type { CTAData, MediaSlotData, TransformationProject } from "@/lib/types";
 import { Eyebrow } from "@/components/typography/Eyebrow";
 import { Display } from "@/components/typography/Display";
 import { Text } from "@/components/typography/Text";
+import { Button } from "@/components/content/Button";
 import { MediaSlot } from "@/components/media/MediaSlot";
 import { Reveal } from "@/components/motion/Reveal";
 import styles from "./ProjectMediaCarousel.module.css";
@@ -14,6 +15,10 @@ interface ProjectMediaCarouselProps {
   eyebrow?: string;
   heading: string;
   body?: string;
+  /** Optional single section-level CTA under the intro copy — never
+   *  placed per-slide, so browsing projects never turns into a wall of
+   *  repeated buttons. */
+  cta?: CTAData;
   /** Real completed projects to show. When empty, renders `placeholderCount`
    *  structural placeholder slides instead of hiding the section entirely
    *  — the owner needs to see where this media will live before it's
@@ -57,6 +62,7 @@ export function ProjectMediaCarousel({
   heading,
   body,
   projects,
+  cta,
   placeholderAlt,
   placeholderCount = 3,
   mediaFit = "cover",
@@ -123,6 +129,11 @@ export function ProjectMediaCarousel({
             <Text size="lg" className={styles.body}>
               {body}
             </Text>
+          ) : null}
+          {cta ? (
+            <Button href={cta.href} variant="secondary" className={styles.cta}>
+              {cta.label}
+            </Button>
           ) : null}
         </div>
       </Reveal>
