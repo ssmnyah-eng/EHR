@@ -62,9 +62,9 @@ export function OrganizationRoomTemplate({ currentSlug, heroSlot, heroPrice, sec
           <Breadcrumb
             items={[{ label: "Home", href: "/" }, { label: "Home Organization", href: "/home-organization" }, { label: roomLabel }]}
           />
-          <Hero slot={{ ...heroSlot, media: media.bannerVideo }} price={heroPrice} />
         </Container>
       </Section>
+      <Hero slot={{ ...heroSlot, media: media.bannerVideo }} price={heroPrice} />
 
       <ServiceSectionList sections={sections} featureMedia={media.images[2] ?? media.images[0]} />
 

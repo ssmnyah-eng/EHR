@@ -70,3 +70,156 @@
 .media {
   width: 100%;
 }
+
+/* ---- Overlay hero (real banner video/image) ----
+   Media fills the section as a full-bleed background layer; a scrim sits
+   above it for legibility; the same copy/CTA content from the layout
+   above is overlaid on top. Rendered full-width by the page templates
+   (outside any Container), so .heroOverlay itself carries no horizontal
+   padding — .overlayContent adds the page gutters back for the copy. */
+.heroOverlay {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  min-height: clamp(30rem, 76svh, 46rem);
+}
+
+.overlayMedia {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.overlayScrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  /* Warm-neutral tint matching --color-text-primary, darkest at the
+     bottom where the copy sits — same treatment as HomeHero so every
+     full-bleed hero on the site reads consistently. */
+  background: linear-gradient(
+    190deg,
+    rgba(23, 24, 26, 0.14) 0%,
+    rgba(23, 24, 26, 0.4) 55%,
+    rgba(23, 24, 26, 0.74) 100%
+  );
+}
+
+.overlayContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  padding-inline: var(--page-gutter-mobile);
+  padding-block: var(--space-xl) var(--space-2xl);
+}
+
+@media (min-width: 48rem) {
+  .overlayContent {
+    padding-inline: var(--page-gutter-tablet);
+  }
+}
+
+@media (min-width: 75rem) {
+  .overlayContent {
+    padding-inline: var(--page-gutter-desktop);
+  }
+}
+
+.overlayTop {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: var(--space-xl);
+  align-items: end;
+}
+
+@media (max-width: 56rem) {
+  .overlayTop {
+    grid-template-columns: 1fr;
+  }
+}
+
+.overlayHeadingCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.overlayEyebrow {
+  margin-bottom: var(--space-sm);
+  font-family: var(--font-body);
+  font-size: var(--caption-size);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-text-inverse);
+  opacity: 0.85;
+}
+
+/* h1.overlayHeading (element + class) outranks Display's own .xl rule —
+   see HomeHero.module.css for why this pattern is needed. */
+h1.overlayHeading {
+  max-width: 16ch;
+  color: var(--color-text-inverse);
+}
+
+.overlaySupport {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  max-width: 30ch;
+  color: var(--color-text-inverse);
+}
+
+.overlayBody {
+  font-family: var(--font-body);
+  font-size: var(--body-lg);
+  line-height: var(--leading-relaxed);
+  opacity: 0.92;
+}
+
+.overlayPrice {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid rgba(250, 249, 246, 0.5);
+  border-radius: var(--radius-sm);
+  max-width: 32ch;
+  background: rgba(23, 24, 26, 0.28);
+  backdrop-filter: blur(3px);
+}
+
+.overlayPriceLabel {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: var(--caption-size);
+  color: var(--color-text-inverse);
+}
+
+.overlayPriceNote {
+  font-size: var(--caption-size);
+  color: rgba(250, 249, 246, 0.75);
+}
+
+.overlayCtaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-xs);
+}
+
+.overlaySecondaryCta {
+  border-color: rgba(250, 249, 246, 0.5);
+  color: var(--color-text-inverse);
+}
+
+.overlaySecondaryCta:hover {
+  border-color: var(--color-text-inverse);
+  color: var(--color-text-inverse);
+}

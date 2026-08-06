@@ -38,9 +38,9 @@ export function ServiceDetailTemplate({ slug, heroSlot, heroPrice, sections, sna
       <Section spacing="lg" surface="background">
         <Container>
           <Breadcrumb items={breadcrumb} />
-          <Hero slot={{ ...heroSlot, media: media.bannerVideo }} price={heroPrice} />
         </Container>
       </Section>
+      <Hero slot={{ ...heroSlot, media: media.bannerVideo }} price={heroPrice} />
 
       <ServiceSectionList sections={sections} featureMedia={media.images[2] ?? media.images[0]} />
 

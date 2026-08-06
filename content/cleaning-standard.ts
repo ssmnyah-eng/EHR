@@ -32,6 +32,12 @@ export const STANDARD_CLEAN_SECTIONS: ServiceDetailSection[] = [
       eyebrow: "Everyday Maintenance, Elevated",
       heading: "When your home needs upkeep—not a complete overhaul.",
       body: "The Standard Clean is designed to maintain your home and take routine cleaning off your plate.\n\nWe take care of the essential cleaning throughout your kitchen, bathrooms, bedrooms, living areas, hallways, stairs, and other serviced spaces, while also paying attention to details that can easily get missed during everyday upkeep.\n\nIt's the starting point for keeping a home consistently refreshed and easier to maintain.",
+      media: {
+        type: "image",
+        src: "/images/services/standard-clean-1.jpg",
+        alt: "Cleaning supplies — gloves, a spray bottle, and a cloth — set out and ready to use",
+        variant: "landscape",
+      },
     },
   },
   {
@@ -40,7 +46,12 @@ export const STANDARD_CLEAN_SECTIONS: ServiceDetailSection[] = [
       eyebrow: "What It Takes Off Your Plate",
       heading: "Less time catching up. More time enjoying your home.",
       body: STANDARD_CLEAN_DETAIL_BODY,
-      media: { type: "image", alt: "A freshly cleaned kitchen counter and sink", variant: "landscape" },
+      media: {
+        type: "image",
+        src: "/images/services/deep-premium-clean-1.jpg",
+        alt: "A hard floor being cleaned with a spray mop",
+        variant: "landscape",
+      },
     },
   },
   {

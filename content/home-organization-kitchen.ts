@@ -32,6 +32,12 @@ export const KITCHEN_SECTIONS: ServiceDetailSection[] = [
     slot: {
       heading: "When everything has a place—but none of the places make sense.",
       body: "A kitchen can have plenty of cabinets and still be frustrating to use.\n\nEveryday items get buried. Drawers become catchalls. Storage gets crowded. Things end up wherever they fit rather than where they're easiest to use.\n\nKitchen organization is about looking at how the space is functioning and bringing more intention to it.",
+      media: {
+        type: "image",
+        src: "/images/services/kitchen-organization-1.jpg",
+        alt: "Everyday kitchen items being sorted into a countertop caddy",
+        variant: "landscape",
+      },
     },
   },
   {

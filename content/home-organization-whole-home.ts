@@ -36,12 +36,24 @@ export const WHOLE_HOME_HERO_PRICE: HeroPriceData = {
 export const WHOLE_HOME_FRICTION: ContentSlot = {
   heading: "Sometimes the friction follows you from room to room.",
   body: "The pantry isn't the only space that needs attention.\n\nNeither is the closet.\n\nOr the office.\n\nWhen multiple areas of the home have stopped functioning the way you need them to, solving one room at a time may not reflect the project you actually want completed.\n\nWhole-Home Organization gives us room to look at the larger scope.",
+  media: {
+    type: "image",
+    src: "/images/services/whole-home-organization-1.jpg",
+    alt: "An organized kitchen drawer with utensils and glassware in place",
+    variant: "landscape",
+  },
 };
 
 export const WHOLE_HOME_CUSTOM_PROJECT: ContentSlot = {
   heading: "Your home doesn't need to fit into a package.",
   body: "Whole-home projects can vary substantially in size and complexity.\n\nThat's why we don't attach an artificial starting price to this service.\n\nInstead, you provide information about the home, the spaces involved, and what you need help with. From there, the project can be scoped and quoted around the actual work.\n\nQuote Required",
   primaryCTA: { label: "Start Your Whole-Home Quote", href: `${ORGANIZATION_QUOTE_CTA.href}?space=whole-home-organization` },
+  media: {
+    type: "image",
+    src: "/images/services/whole-home-organization-2.jpg",
+    alt: "Sorting and organizing belongings into a cabinet in a client's home",
+    variant: "landscape",
+  },
 };
 
 export const WHOLE_HOME_CONNECTIONS_INTRO = "A whole-home project can involve multiple organization areas such as:";

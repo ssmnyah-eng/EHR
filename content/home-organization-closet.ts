@@ -61,8 +61,15 @@ export const CLOSET_SECTIONS: ServiceDetailSection[] = [
   },
   {
     type: "statement",
+    reverseMedia: false,
     slot: {
       body: "When appropriate shelving and accessible surfaces are emptied during the organization process, light wiping or vacuuming of those accessible areas is included before belongings are returned.",
+      media: {
+        type: "image",
+        src: "/images/services/closet-organization-4.jpg",
+        alt: "Closet shelving with hat boxes and neatly hung clothing",
+        variant: "landscape",
+      },
     },
   },
   {

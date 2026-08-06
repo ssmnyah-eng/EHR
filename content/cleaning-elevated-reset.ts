@@ -22,10 +22,17 @@ export const ELEVATED_RESET_CLEAN_PRICE: HeroPriceData = {
 export const ELEVATED_RESET_CLEAN_SECTIONS: ServiceDetailSection[] = [
   {
     type: "statement",
+    reverseMedia: true,
     slot: {
       eyebrow: "More Than a Deep Clean",
       heading: "Because sometimes you don't just want it cleaned. You want it reset.",
       body: "Elevated Reset begins with everything included in Standard and Deep Premium cleaning.\n\nThen we take one more step.\n\nBefore we leave, we intentionally reset the spaces we've serviced using the organization your home already has—straightening, returning everyday items to their established places, resetting surfaces, arranging pillows and throws, tending to beds and towels, and completing a final presentation walkthrough.\n\nThe result is a home that feels intentionally finished.",
+      media: {
+        type: "image",
+        src: "/images/services/elevated-reset-clean-4.jpg",
+        alt: "A professional cleaner in protective attire vacuuming a hard floor",
+        variant: "landscape",
+      },
     },
   },
   {
@@ -34,7 +41,12 @@ export const ELEVATED_RESET_CLEAN_SECTIONS: ServiceDetailSection[] = [
       eyebrow: "What \"Reset\" Means",
       heading: "The finishing touches change the experience.",
       body: "After the deeper cleaning is complete, we turn our attention to how the home is put back together.\n\nCountertops are reset.\n\nEveryday items are returned neatly to their established homes.\n\nBeds and pillows are finished.\n\nTowels and bath areas are straightened.\n\nLiving spaces are reset.\n\nRugs, mats, chairs, throws, and obvious visual disorder receive a final look before we leave.\n\nIt's the difference between finishing the cleaning and finishing the room.",
-      media: { type: "image", alt: "A freshly reset living room with pillows and throws arranged", variant: "landscape" },
+      media: {
+        type: "image",
+        src: "/images/services/elevated-reset-clean-3.jpg",
+        alt: "A tidy, finished living and dining space",
+        variant: "landscape",
+      },
     },
   },
   {

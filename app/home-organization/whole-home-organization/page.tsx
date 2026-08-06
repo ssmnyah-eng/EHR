@@ -50,19 +50,29 @@ export default function WholeHomeOrganizationPage() {
               { label: "Whole-Home Organization" },
             ]}
           />
-          <Hero slot={{ ...WHOLE_HOME_HERO, media: media.bannerVideo }} price={WHOLE_HOME_HERO_PRICE} />
         </Container>
       </Section>
+      <Hero slot={{ ...WHOLE_HOME_HERO, media: media.bannerVideo }} price={WHOLE_HOME_HERO_PRICE} />
 
       <Section spacing="lg" surface="surface">
-        <Container width="content">
-          <EditorialStatement slot={WHOLE_HOME_FRICTION} />
+        <Container width="wide">
+          <EditorialSplit
+            heading={WHOLE_HOME_FRICTION.heading ?? ""}
+            body={WHOLE_HOME_FRICTION.body}
+            media={WHOLE_HOME_FRICTION.media!}
+          />
         </Container>
       </Section>
 
       <Section spacing="lg" surface="background">
-        <Container width="content">
-          <EditorialStatement slot={WHOLE_HOME_CUSTOM_PROJECT} />
+        <Container width="wide">
+          <EditorialSplit
+            heading={WHOLE_HOME_CUSTOM_PROJECT.heading ?? ""}
+            body={WHOLE_HOME_CUSTOM_PROJECT.body}
+            primaryCTA={WHOLE_HOME_CUSTOM_PROJECT.primaryCTA ?? undefined}
+            media={WHOLE_HOME_CUSTOM_PROJECT.media!}
+            reverse
+          />
         </Container>
       </Section>
 

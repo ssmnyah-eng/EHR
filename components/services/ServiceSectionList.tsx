@@ -89,7 +89,7 @@ export function ServiceSectionList({ sections, startIndex = 0, featureMedia }: S
                     primaryCTA={section.slot.primaryCTA ?? undefined}
                     secondaryCTA={section.slot.secondaryCTA ?? undefined}
                     media={section.slot.media}
-                    reverse={(startIndex + index) % 2 === 1}
+                    reverse={section.reverseMedia ?? (startIndex + index) % 2 === 1}
                   />
                 </Container>
               </Section>

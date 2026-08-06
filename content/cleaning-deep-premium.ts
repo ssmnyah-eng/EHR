@@ -26,6 +26,12 @@ export const DEEP_PREMIUM_CLEAN_SECTIONS: ServiceDetailSection[] = [
       eyebrow: "Go Beyond the Surface",
       heading: "For the details that don't need attention every week—but eventually do.",
       body: "Routine cleaning handles the everyday.\n\nDeep Premium goes further.\n\nWe begin with everything included in our Standard Clean, then spend additional attention on the areas where buildup and overlooked detail tend to accumulate—from kitchen edges and appliance details to bathroom fixtures, window tracks, baseboards, door frames, floor perimeters, vents, furniture details, and more.\n\nIt's designed for the home that doesn't necessarily need reorganizing—it simply needs a deeper level of cleaning.",
+      media: {
+        type: "image",
+        src: "/images/services/deep-premium-clean-2.jpg",
+        alt: "An open kitchen and dining space in a serviced home",
+        variant: "landscape",
+      },
     },
   },
   {
@@ -34,7 +40,12 @@ export const DEEP_PREMIUM_CLEAN_SECTIONS: ServiceDetailSection[] = [
       eyebrow: "Why It Feels Different",
       heading: "The difference is in the details.",
       body: "It's the buildup around the faucet.\n\nThe shower-door tracks.\n\nThe edges around appliances.\n\nThe baseboards and window tracks.\n\nThe corners behind doors.\n\nThe areas underneath removable sofa cushions.\n\nThe details you may not notice individually—but absolutely notice when the entire home has been thoroughly addressed.",
-      media: { type: "image", alt: "Detailed cleaning of a bathroom fixture and tile", variant: "landscape" },
+      media: {
+        type: "image",
+        src: "/images/services/deep-premium-clean-5.jpg",
+        alt: "Dusting a light fixture in careful, close-up detail",
+        variant: "landscape",
+      },
     },
   },
   {

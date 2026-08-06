@@ -183,7 +183,16 @@ export interface ServiceSnapshotData {
  * starting-price guidance).
  */
 export type ServiceDetailSection =
-  | { type: "statement"; slot: ContentSlot }
+  | {
+      type: "statement";
+      slot: ContentSlot;
+      /** Explicit media-side override for the automatic alternating
+       *  image/copy rhythm in ServiceSectionList — omit to use the
+       *  default index-parity alternation. Set only when a specific page
+       *  spec requires a particular section to break that alternation
+       *  (e.g. "this one must be image-left regardless of position"). */
+      reverseMedia?: boolean;
+    }
   | { type: "comparison"; eyebrow?: string; heading?: string; cards: TeaserCardData[] }
   | { type: "pricing"; eyebrow?: string; items: PricingOptionItem[]; disclaimer?: string; cta: CTAData };
 
