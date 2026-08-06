@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
-import { Hero } from "@/components/services/Hero";
-import { FounderStory } from "@/components/content/FounderStory";
-import { EditorialStatement } from "@/components/content/EditorialStatement";
+import { AboutHero } from "@/components/content/AboutHero";
+import { EditorialSplit } from "@/components/content/EditorialSplit";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import { ServiceProof } from "@/components/content/ServiceProof";
 import { ServicePathwayStrip } from "@/components/content/ServicePathwayStrip";
@@ -28,52 +27,88 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      {/* Hero */}
+      {/* Hero — the one page on the site that isn't a full-bleed video
+          overlay; a straightforward two-column editorial layout instead
+          (copy + a substantial portrait, nothing overlaid on the photo). */}
       <Section spacing="lg" surface="background">
         <Container>
-          <Hero slot={ABOUT_HERO_SLOT} />
+          <AboutHero slot={ABOUT_HERO_SLOT} />
         </Container>
       </Section>
 
-      {/* Founder story */}
+      {/* Founder story — copy left / image right */}
       <Section spacing="lg" surface="surface">
-        <Container>
-          <FounderStory slot={ABOUT_FOUNDER_SLOT} />
+        <Container width="wide">
+          <EditorialSplit
+            eyebrow={ABOUT_FOUNDER_SLOT.eyebrow}
+            heading={ABOUT_FOUNDER_SLOT.heading ?? ""}
+            body={ABOUT_FOUNDER_SLOT.body}
+            media={ABOUT_FOUNDER_SLOT.media!}
+          />
         </Container>
       </Section>
 
-      {/* Why Elevated is different */}
+      {/* Why Elevated is different — image left / copy right */}
       <Section spacing="lg" surface="background">
-        <Container width="content">
-          <EditorialStatement slot={ABOUT_DIFFERENT_SLOT} />
+        <Container width="wide">
+          <EditorialSplit
+            eyebrow={ABOUT_DIFFERENT_SLOT.eyebrow}
+            heading={ABOUT_DIFFERENT_SLOT.heading ?? ""}
+            body={ABOUT_DIFFERENT_SLOT.body}
+            media={ABOUT_DIFFERENT_SLOT.media!}
+            reverse
+          />
         </Container>
       </Section>
 
-      {/* The reality of home */}
+      {/* The reality of home — copy left / image right */}
       <Section spacing="lg" surface="surface">
-        <Container width="content">
-          <EditorialStatement slot={ABOUT_REALITY_SLOT} />
+        <Container width="wide">
+          <EditorialSplit
+            eyebrow={ABOUT_REALITY_SLOT.eyebrow}
+            heading={ABOUT_REALITY_SLOT.heading ?? ""}
+            body={ABOUT_REALITY_SLOT.body}
+            media={ABOUT_REALITY_SLOT.media!}
+          />
         </Container>
       </Section>
 
-      {/* What "Elevated" means */}
+      {/* What "Elevated" means — image left / copy right */}
       <Section spacing="lg" surface="background">
-        <Container width="content">
-          <EditorialStatement slot={ABOUT_STANDARD_SLOT} />
+        <Container width="wide">
+          <EditorialSplit
+            eyebrow={ABOUT_STANDARD_SLOT.eyebrow}
+            heading={ABOUT_STANDARD_SLOT.heading ?? ""}
+            body={ABOUT_STANDARD_SLOT.body}
+            media={ABOUT_STANDARD_SLOT.media!}
+            reverse
+          />
         </Container>
       </Section>
 
-      {/* Cleaning + Organization */}
+      {/* Cleaning + Organization — copy left / image right */}
       <Section spacing="lg" surface="surface">
-        <Container width="content">
-          <EditorialStatement slot={ABOUT_TWO_WAYS_SLOT} />
+        <Container width="wide">
+          <EditorialSplit
+            eyebrow={ABOUT_TWO_WAYS_SLOT.eyebrow}
+            heading={ABOUT_TWO_WAYS_SLOT.heading ?? ""}
+            body={ABOUT_TWO_WAYS_SLOT.body}
+            primaryCTA={ABOUT_TWO_WAYS_SLOT.primaryCTA ?? undefined}
+            secondaryCTA={ABOUT_TWO_WAYS_SLOT.secondaryCTA ?? undefined}
+            media={ABOUT_TWO_WAYS_SLOT.media!}
+          />
         </Container>
       </Section>
 
-      {/* Founder / personal close */}
+      {/* Founder / personal close — image left / copy right */}
       <Section spacing="lg" surface="background">
-        <Container>
-          <FounderStory slot={ABOUT_PERSONAL_CLOSE_SLOT} />
+        <Container width="wide">
+          <EditorialSplit
+            heading={ABOUT_PERSONAL_CLOSE_SLOT.heading ?? ""}
+            body={ABOUT_PERSONAL_CLOSE_SLOT.body}
+            media={ABOUT_PERSONAL_CLOSE_SLOT.media!}
+            reverse
+          />
         </Container>
       </Section>
 

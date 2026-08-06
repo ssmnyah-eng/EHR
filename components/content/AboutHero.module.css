@@ -1,0 +1,54 @@
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+  gap: var(--space-2xl);
+  align-items: center;
+}
+
+@media (max-width: 56rem) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  margin-top: var(--space-sm);
+  max-width: 15ch;
+}
+
+.body {
+  margin-top: var(--space-lg);
+  max-width: 42ch;
+}
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+/* Substantial, intentional portrait — not a small card. Explicit height
+   (not aspect-ratio) so the MediaSlot `fill` layer has a definite box to
+   fill, matching the pattern used by EditorialSplit/ServiceAreas hero.
+   Taller than a typical section image so it reads with real vertical
+   presence beside the copy column. */
+.mediaCol {
+  height: clamp(28rem, 44vw, 38rem);
+}
+
+@media (max-width: 56rem) {
+  .mediaCol {
+    height: 26rem;
+  }
+}
+
+.media {
+  height: 100%;
+}
