@@ -22,6 +22,18 @@ export default function CleaningFAQPage() {
         secondaryCTA: { label: "See How Our Services Work", href: "/faq/how-it-works" },
       }}
       relatedSlugs={["billing-and-payments", "booking-and-scheduling", "how-it-works"]}
+      heroMedia={{
+        type: "image",
+        src: "/images/services/standard-clean-5.jpg",
+        alt: "Cleaning a glass surface with a squeegee",
+        variant: "landscape",
+      }}
+      ctaMedia={{
+        type: "image",
+        src: "/images/services/deep-premium-clean-4.jpg",
+        alt: "A warm, freshly cleaned living room with a lit fireplace",
+        variant: "landscape",
+      }}
     />
   );
 }

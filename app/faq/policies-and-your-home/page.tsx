@@ -23,6 +23,20 @@ export default function PoliciesFAQPage() {
         secondaryCTA: { label: "Contact Us", href: "/contact" },
       }}
       relatedSlugs={["cleaning", "home-organization", "how-it-works"]}
+      heroMedia={{
+        type: "image",
+        src: "/images/about/about-team-organizing.png",
+        alt: "Two Elevated Home Resets team members organizing a linen closet in a client's home",
+        variant: "portrait",
+        objectPosition: "center 35%",
+      }}
+      ctaMedia={{
+        type: "image",
+        src: "/images/services/deep-premium-clean-5.jpg",
+        alt: "Careful, close-up dusting of a light fixture",
+        variant: "landscape",
+      }}
+      ctaMediaReverse
     />
   );
 }

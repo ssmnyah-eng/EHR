@@ -23,6 +23,20 @@ export default function BillingFAQPage() {
         secondaryCTA: { label: "Contact Us", href: "/contact" },
       }}
       relatedSlugs={["cleaning", "home-organization", "booking-and-scheduling"]}
+      heroMedia={{
+        type: "image",
+        src: "/images/services/standard-clean-3.jpg",
+        alt: "A polished, put-together kitchen and living space",
+        variant: "landscape",
+      }}
+      ctaMedia={{
+        type: "image",
+        src: "/images/organization/kitchen-corner.jpg",
+        alt: "Neatly organized labeled jars and utensils on a kitchen shelf",
+        variant: "portrait",
+        objectPosition: "center 25%",
+      }}
+      ctaMediaReverse
     />
   );
 }

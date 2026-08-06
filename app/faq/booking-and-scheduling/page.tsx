@@ -23,6 +23,18 @@ export default function BookingFAQPage() {
         secondaryCTA: ORGANIZATION_QUOTE_CTA,
       }}
       relatedSlugs={["cleaning", "home-organization", "billing-and-payments"]}
+      heroMedia={{
+        type: "image",
+        src: "/images/cleaning/not-every-home-same-clean.jpg",
+        alt: "An open front door welcoming visitors into a lived-in home",
+        variant: "landscape",
+      }}
+      ctaMedia={{
+        type: "image",
+        src: "/images/organization/dining-living-room.jpg",
+        alt: "A welcoming, put-together dining and living space",
+        variant: "landscape",
+      }}
     />
   );
 }
