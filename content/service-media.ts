@@ -13,27 +13,20 @@ import type { MediaSlotData } from "@/lib/types";
  *   /videos/services/[slug]-banner-video.mp4 (+ matching -poster.jpg)
  *   /images/services/[slug]-1.jpg ... [slug]-5.jpg
  *
- * Pantry Organization, Bathroom Organization (banner), Closet Organization
- * (banner), and Kitchen Organization (banner) have no dedicated video yet —
- * those slots stay MediaSlot placeholders (no `src`) until supplied. See
- * the implementation report for the full per-page media audit, including a
- * flagged concern that several of the newly supplied Home Organization
- * images (bathroom/laundry/closet/kitchen/garage) visually read as generic
- * stock photography rather than real Elevated Home Resets project photos —
- * used here per explicit instruction, not silently.
+ * Every active page now has a real dedicated banner video. Pantry
+ * Organization has no dedicated images yet and reuses the real
+ * pantry.jpg / pantry-cabinet-jars.jpg from content/home-organization.ts
+ * instead. See the implementation report for the full per-page media
+ * audit, including a flagged concern that several of the newly supplied
+ * Home Organization images (bathroom/laundry/closet/kitchen/garage)
+ * visually read as generic stock photography rather than real Elevated
+ * Home Resets project photos — used here per explicit instruction, not
+ * silently.
  */
 
 export interface ServicePageMedia {
   bannerVideo: MediaSlotData;
   images: MediaSlotData[];
-}
-
-function placeholderBanner(slug: string, context: string): MediaSlotData {
-  return {
-    type: "video",
-    alt: `${context} banner video — expected at /videos/services/${slug}-banner-video.mp4`,
-    variant: "fullBleed",
-  };
 }
 
 /**
@@ -97,7 +90,13 @@ export const SERVICE_MEDIA: Record<string, ServicePageMedia> = {
 
   // ===== Home Organization =====
   "kitchen-organization": {
-    bannerVideo: placeholderBanner("kitchen-organization", "Kitchen Organization"),
+    bannerVideo: {
+      type: "video",
+      src: "/videos/services/kitchen-organization-banner-video.mp4",
+      poster: "/images/services/kitchen-organization-banner-video-poster.jpg",
+      alt: "A walkthrough of an open, organized kitchen",
+      variant: "fullBleed",
+    },
     images: [
       { type: "image", src: "/images/services/kitchen-organization-1.jpg", alt: "Organized kitchen counter storage", variant: "landscape" },
       { type: "image", src: "/images/services/kitchen-organization-2.jpg", alt: "An organized kitchen drawer with utensils and dishware", variant: "landscape" },
@@ -107,7 +106,13 @@ export const SERVICE_MEDIA: Record<string, ServicePageMedia> = {
     ],
   },
   "pantry-organization": {
-    bannerVideo: placeholderBanner("pantry-organization", "Pantry Organization"),
+    bannerVideo: {
+      type: "video",
+      src: "/videos/services/pantry-organization-banner-video.mp4",
+      poster: "/images/services/pantry-organization-banner-video-poster.jpg",
+      alt: "A walkthrough of an organized kitchen pantry",
+      variant: "fullBleed",
+    },
     images: [
       { type: "image", src: "/images/organization/pantry.jpg", alt: "A comprehensive organized pantry with labeled shelving for cookware, appliances, and pantry staples", variant: "landscape", objectPosition: "center 45%" },
       { type: "image", src: "/images/organization/pantry-cabinet-jars.jpg", alt: "Labeled glass jars of pantry staples arranged on organized shelving", variant: "portrait", aspectRatio: "4 / 5" },
@@ -115,7 +120,13 @@ export const SERVICE_MEDIA: Record<string, ServicePageMedia> = {
     ],
   },
   "closet-organization": {
-    bannerVideo: placeholderBanner("closet-organization", "Closet Organization"),
+    bannerVideo: {
+      type: "video",
+      src: "/videos/services/closet-organization-banner-video.mp4",
+      poster: "/images/services/closet-organization-banner-video-poster.jpg",
+      alt: "A walkthrough of an organized closet with clothing hung by type",
+      variant: "fullBleed",
+    },
     images: [
       { type: "image", src: "/images/services/closet-organization-1.jpg", alt: "Organized closet shelving with folded items, bags, and storage boxes", variant: "landscape" },
       { type: "image", src: "/images/services/closet-organization-2.jpg", alt: "An organized closet space", variant: "landscape" },
@@ -124,7 +135,13 @@ export const SERVICE_MEDIA: Record<string, ServicePageMedia> = {
     ],
   },
   "bathroom-organization": {
-    bannerVideo: placeholderBanner("bathroom-organization", "Bathroom Organization"),
+    bannerVideo: {
+      type: "video",
+      src: "/videos/services/bathroom-organization-banner-video.mp4",
+      poster: "/images/services/bathroom-organization-banner-video-poster.jpg",
+      alt: "A walkthrough of an organized, finished bathroom",
+      variant: "fullBleed",
+    },
     images: [
       { type: "image", src: "/images/services/bathroom-organization-1.jpg", alt: "A finished bathroom space", variant: "landscape" },
       { type: "image", src: "/images/services/bathroom-organization-2.jpg", alt: "An organized bathroom space", variant: "landscape" },
