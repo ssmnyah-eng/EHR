@@ -21,6 +21,26 @@ export const SERVICE_AREAS_INTRO =
 
 export const SERVICE_AREAS_REGIONS: string[] = ["Northern Virginia", "Fredericksburg area"];
 
+/**
+ * Detailed locality breakdown within our two broad service regions.
+ * Approved list — do not add, remove, or infer additional localities,
+ * ZIP codes, or boundaries beyond what's provided here. "Areas We Serve"
+ * is used as the section heading (not "Cities We Serve") since this list
+ * mixes independent cities, towns, counties, and unincorporated
+ * communities/CDPs — calling all of them "cities" would be inaccurate.
+ */
+export const SERVICE_AREAS_LOCAL_HEADING = "Areas We Serve";
+export const SERVICE_AREAS_LOCAL_INTRO =
+  "A closer look at the cities, towns, and communities within our two service regions.";
+
+export const SERVICE_AREAS_FREDERICKSBURG_HEADING = "Fredericksburg & the Surrounding Area";
+export const SERVICE_AREAS_FREDERICKSBURG_BODY =
+  "In the Fredericksburg area, we serve Fredericksburg, Spotsylvania, Stafford, and King George — including Spotsylvania County, Stafford County, and King George County.";
+
+export const SERVICE_AREAS_NOVA_HEADING = "Northern Virginia";
+export const SERVICE_AREAS_NOVA_BODY =
+  "Throughout Northern Virginia, we serve Alexandria, Arlington, Fairfax, Falls Church, McLean, Tysons, Vienna, Oakton, Annandale, Burke, Springfield, Lorton, Centreville, Chantilly, Reston, Herndon, Great Falls, Sterling, Ashburn, Leesburg, South Riding, Manassas, Manassas Park, Gainesville, Haymarket, Bristow, Woodbridge, Lake Ridge, Dumfries, and Occoquan — including Arlington County, Fairfax County, Loudoun County, and Prince William County.";
+
 export const SERVICE_AREAS_BOTH_SERVICES_HEADING = "Both services, one service area.";
 export const SERVICE_AREAS_BOTH_SERVICES_BODY =
   "Cleaning and Home Organization are both available throughout our service area. Cleaning is booked directly — choose your service and get on the schedule. Home Organization starts with a quote, since project pricing depends on your specific space.";

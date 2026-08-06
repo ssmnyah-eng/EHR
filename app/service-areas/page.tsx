@@ -9,6 +9,12 @@ import {
   SERVICE_AREAS_HEADING,
   SERVICE_AREAS_INTRO,
   SERVICE_AREAS_REGIONS,
+  SERVICE_AREAS_LOCAL_HEADING,
+  SERVICE_AREAS_LOCAL_INTRO,
+  SERVICE_AREAS_FREDERICKSBURG_HEADING,
+  SERVICE_AREAS_FREDERICKSBURG_BODY,
+  SERVICE_AREAS_NOVA_HEADING,
+  SERVICE_AREAS_NOVA_BODY,
   SERVICE_AREAS_BOTH_SERVICES_HEADING,
   SERVICE_AREAS_BOTH_SERVICES_BODY,
   SERVICE_AREAS_UNSURE_HEADING,
@@ -56,6 +62,35 @@ export default function ServiceAreasPage() {
       </Section>
 
       <Section spacing="lg" surface="surface">
+        <Container width="content">
+          <Heading as="h2" size="md">
+            {SERVICE_AREAS_LOCAL_HEADING}
+          </Heading>
+          <Text size="md" tone="secondary" className={styles.body}>
+            {SERVICE_AREAS_LOCAL_INTRO}
+          </Text>
+
+          <div className={styles.localityGroup}>
+            <Heading as="h3" size="sm">
+              {SERVICE_AREAS_FREDERICKSBURG_HEADING}
+            </Heading>
+            <Text size="md" tone="secondary" className={styles.body}>
+              {SERVICE_AREAS_FREDERICKSBURG_BODY}
+            </Text>
+          </div>
+
+          <div className={styles.localityGroup}>
+            <Heading as="h3" size="sm">
+              {SERVICE_AREAS_NOVA_HEADING}
+            </Heading>
+            <Text size="md" tone="secondary" className={styles.body}>
+              {SERVICE_AREAS_NOVA_BODY}
+            </Text>
+          </div>
+        </Container>
+      </Section>
+
+      <Section spacing="lg" surface="background">
         <Container width="content">
           <Heading as="h2" size="md">
             {SERVICE_AREAS_BOTH_SERVICES_HEADING}
