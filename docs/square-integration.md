@@ -1,10 +1,13 @@
-# Square Integration Architecture (design doc — not deployed)
+# Square Integration Architecture
 
 This document describes how the Cleaning booking wizard (`components/conversion/CleaningBookingWizard/`)
-should connect to Square once a secure backend exists. **Nothing described
-here has been deployed or configured.** No Square credentials exist in this
-project, and none should ever be added to frontend code or committed to the
-repo.
+connects to Square. The backend platform is **approved: Cloudflare Workers**,
+and the Worker is **scaffolded and typechecked at `workers/square-api/`** —
+but **not deployed**. No Cloudflare account, Square account, or any
+credentials exist in this project or the environment it was built in; the
+owner still needs to run the deploy steps in `workers/square-api/README.md`
+with their own accounts before any of this goes live. No Square credentials
+should ever be added to frontend code or committed to this repo.
 
 ## Why a backend is required at all
 
@@ -34,99 +37,92 @@ the frontend; a small new secure layer needs to be introduced purely to hold
 the Square token and make the handful of calls below on the frontend's
 behalf.
 
-## Recommended smallest secure layer (needs your sign-off before anything is created)
+## Chosen backend: Cloudflare Workers (approved, scaffolded, not deployed)
 
-Recommendation: a small set of **serverless functions**, not a
-always-on server. The traffic here is a handful of calls per booking
-(one price-recheck + checkout creation, an optional availability lookup,
-one booking creation, one webhook delivery) — nowhere near what justifies
-running/maintaining a server. Reasonable options, roughly in order of "least
-new infrastructure to learn/manage" for a project that has zero backend
-today:
+Approved by EHR. The traffic here is a handful of calls per booking (one
+price-recheck + checkout creation, an optional availability lookup, one
+booking creation, one webhook delivery) — nowhere near what justifies an
+always-on server, so a Worker (not Cloudflare Pages Functions, not a VM) is
+the right shape. Free tier covers this volume many times over.
 
-1. **Cloudflare Workers** (or Cloudflare Pages Functions) — free tier
-   covers this volume many times over, secrets are stored via `wrangler
-   secret put` (never in a repo file), deploys from a small separate
-   directory/repo, and nothing about GitHub Pages needs to change.
-2. **Vercel Serverless/Edge Functions** — same shape, if there's a
-   preference for Vercel's dashboard/env-var UI over Wrangler.
-3. **AWS Lambda + API Gateway** — more setup (IAM, API Gateway config) than
-   the above two, worth it only if EHR already has AWS infrastructure to
-   fold this into.
+The Worker lives at **`workers/square-api/`** as its own small package
+(own `package.json`, `wrangler.toml`, `tsconfig.json`) — deployed
+separately from the Next.js/GitHub Pages site, sharing nothing with it at
+build time except one public URL. It re-imports `lib/cleaning-pricing/`
+directly via relative path (`../../../../lib/cleaning-pricing/engine`) so
+the pricing/duration logic has exactly one source of truth — verified this
+resolves correctly with `npx wrangler deploy --dry-run` (bundles clean,
+18 KB gzipped, no missing-module errors).
 
-Cloudflare Workers is the specific recommendation, but **per your
-instruction I have not selected or deployed a hosting/platform product** —
-this needs your explicit go-ahead (and in particular, confirmation of budget
-if a paid tier ever becomes necessary, though the free tier is expected to
-be sufficient at EHR's booking volume).
+**Not done, and outside what I have access to:** logging into a Cloudflare
+account (`wrangler login`), setting the two secrets, filling in the real
+Square IDs in `wrangler.toml`, and actually running `wrangler deploy`. Full
+steps are in `workers/square-api/README.md`.
 
-Whatever platform is chosen, the frontend only needs one thing from it: a
-base URL, set as `NEXT_PUBLIC_BOOKING_API_BASE` in the GitHub Pages build
-(this value is public and fine to expose — it's just a hostname, not a
-secret). `lib/square-client.ts` already reads this variable and throws a
-catchable `BookingApiNotConfiguredError` until it's set, so today's static
-site keeps working (falling back to the existing Formspree intake) with no
-further frontend changes required once the backend exists.
+Once deployed, the frontend only needs one thing: the Worker's URL, set as
+`NEXT_PUBLIC_BOOKING_API_BASE` in the GitHub Pages build (this value is
+public and fine to expose — it's just a hostname, not a secret).
+`lib/square-client.ts` already reads this variable and throws a catchable
+`BookingApiNotConfiguredError` until it's set, so today's static site keeps
+working (falling back to the existing Formspree intake) with no further
+frontend changes required once the Worker is live.
 
-## Endpoints the secure layer needs to implement
+## Endpoints (implemented in `workers/square-api/src/`)
 
-### `POST /checkout/create`
-Body: `{ bookingId, amountCents, customerEmail, customerName }` (see
-`DepositCheckoutRequest` in `lib/square-client.ts`).
+### `POST /checkout/create` — `src/routes/checkout.ts`
+Body: `{ bookingId, pricingInput, amountCents, customerEmail, customerName }`
+(see `DepositCheckoutRequest` in `lib/square-client.ts` — `pricingInput` is
+the full `CleaningPricingInput`, not just a headline number).
 
-Server-side, in order:
-1. **Recompute the price server-side.** The full booking answers must be
-   sent (not just a headline number) so the server can call
-   `lib/cleaning-pricing/engine.ts`'s `calculatePrice()`/`calculateDeposit()`
-   itself and treat that as authoritative. `amountCents` from the client is
-   informational only — **never trust a client-submitted price.** If the
-   server's recomputed deposit doesn't match, reject the request rather than
-   charging the client-submitted number.
-2. Create a Square **ad-hoc Checkout Link** (Square's Checkout API,
-   "Quick Pay" / custom-amount flow) for the server-computed `depositDue`.
-   This does **not** require a Square catalog item or fixed price — it takes
-   an amount directly, which is exactly what's needed since the deposit is
-   `min(140, finalTotal)` and varies by booking.
-3. Use `bookingId` as an **idempotency key** on the Square API call (Square's
-   Payments/Checkout APIs accept one) so a retried/double-submitted request
-   can't create two charges.
-4. Return `{ checkoutUrl, squareOrderId }`. The frontend redirects the
+What it does, in order:
+1. **Recomputes the price server-side** by calling `calculatePrice()` /
+   `calculateDeposit()` from `lib/cleaning-pricing/engine.ts` directly
+   (imported by relative path from the Worker) and treats that as
+   authoritative. `amountCents` from the client is compared only for a
+   mismatch warning — **the client-submitted number never sets the charge.**
+2. Creates a Square **ad-hoc "Quick Pay" Checkout Link** for the
+   server-computed `depositDue` cents. No Square catalog item is needed —
+   it takes an amount directly, which is exactly what's needed since the
+   deposit is `min(140, finalTotal)` and varies by booking.
+3. Uses `bookingId` as the **idempotency key** on the Square API call so a
+   retried/double-submitted request can't create two charges.
+4. Returns `{ checkoutUrl, squareOrderId }`. The frontend redirects the
    customer to `checkoutUrl` to pay.
 
-### `POST /availability`
-Body: `{ serviceDate, appointmentMinutes, zip }` (see `AvailabilityRequest`).
+### `POST /availability` — `src/routes/availability.ts`
+Body: `{ serviceDate, appointmentMinutes, zip }` (see `AvailabilityRequest`
+in `lib/square-client.ts`).
 
-Server-side: call Square Bookings' availability search using the
-`location_id` and `service_variation_id` configured in Square Dashboard
-(below), for a duration of `appointmentMinutes` (the value the frontend
-already computed via `calculateDuration()` — includes the specialty
-contingency and scheduling buffer, already rounded to the next 30-minute
-block). Square's availability search also requires a `team_member_id` (or
-"any available team member" segment filter) — this stays entirely
-server-side; the customer never sees or picks a team member.
+Calls Square Bookings' availability search for `SQUARE_LOCATION_ID` /
+`SQUARE_SERVICE_VARIATION_ID`, for a duration of `appointmentMinutes` (the
+value the frontend already computed via `calculateDuration()` — includes
+the specialty contingency and scheduling buffer, already rounded to the
+next 30-minute block). No `team_member_id` is passed, so Square returns
+availability across any bookable team member — the customer never sees or
+picks one. `zip` is accepted for a future territory/multi-location rule but
+unused today (EHR currently books through a single Square location).
 
-Return a list of bookable time slots. The frontend does not need to know
-which/how many team members back any slot.
+### `POST /bookings/create` — `src/routes/bookings.ts`
+Body: `{ bookingId, startAt, appointmentMinutes, firstName, lastName, email, phone, note? }`.
 
-### `POST /bookings/create` *(not yet stubbed in `lib/square-client.ts` — add
-when this layer is built)*
-Body: the full booking record (customer details, chosen slot, `bookingId`,
-Square order/payment identifier from the checkout step).
+Re-searches availability for a narrow window around the requested `startAt`
+to find which team member Square would actually assign (rather than
+trusting a slot the customer saw earlier), creates/reuses the Square
+customer, then creates the Bookings appointment. Returns 409 if the slot is
+no longer available. **Not yet called from the wizard UI** — intentionally,
+because whether appointment creation should be fully automatic on deposit
+payment vs. require staff confirmation first is a business decision for
+EHR, not one this build makes unilaterally. Natural call site is the
+webhook handler below, once that decision is made.
 
-Server-side: create the Square Bookings appointment for the confirmed slot,
-using the same `location_id` / `service_variation_id` / `team_member_id`
-config as availability. Store the resulting Square booking ID alongside the
-booking record described in the spec's data-retention list (customer
-details, scope, condition answers, add-ons, specialty info, calculated
-total/deposit/remaining balance, estimated cleaner-minutes, buffered
-appointment duration, chosen time, Square identifiers).
-
-### `POST /webhooks/square` *(not yet stubbed — add when this layer is
-built)*
-Square webhook receiver for payment/checkout completion events. Must verify
-Square's webhook signature (`x-square-hmacsha256-signature` header against
-the webhook signature key) before trusting any payload. On a verified
-"payment completed" event, mark the booking's deposit as paid.
+### `POST /webhooks/square` — `src/routes/webhooks.ts`
+Verifies Square's webhook signature (`x-square-hmacsha256-signature` header,
+HMAC-SHA256 against `SQUARE_WEBHOOK_SIGNATURE_KEY`) before trusting
+anything in the payload — an unverified POST here is never treated as a
+real Square event. Currently verifies and logs only; there's no database
+in this project to persist booking/payment state against, so marking a
+deposit "paid" and/or auto-calling `/bookings/create` is a `TODO` in that
+file pending EHR's decision above and a place to store that state.
 
 ## Required credentials, and exactly where each is entered
 
@@ -176,17 +172,46 @@ integration — not the account owner's personal Square login.
 
 ## What could and couldn't be tested here
 
-**Could not be tested at all in this environment:** anything involving
-Square, sandbox or otherwise. There is no Square account, application, or
+**Could not be tested at all in this environment:** anything involving a
+real Square or Cloudflare account. There are no Cloudflare or Square
 credentials available in this project or session — I have not created, do
-not have access to, and would not fabricate any of it. This is a genuine
-blocker on verifying the Square side end-to-end, not a task I skipped.
+not have access to, and would not fabricate any of it. This means the
+Worker has never actually called Square, and has never been deployed. This
+is a genuine blocker on end-to-end verification, not a task I skipped.
 
-**What was tested instead, thoroughly:** everything on this project's side
-of the boundary — the full pricing/duration engine (27 hand-verified
-assertions), the wizard's price computation and display end-to-end, and
-`lib/square-client.ts`'s fallback behavior (confirmed the wizard correctly
-catches `BookingApiNotConfiguredError` today, since
-`NEXT_PUBLIC_BOOKING_API_BASE` is unset, and submits through the existing
-Formspree channel with honest, non-fake "a person will follow up" copy
-instead of a fake payment success).
+**What was verified instead, thoroughly:**
+- The full pricing/duration engine — 27 hand-verified assertions, plus the
+  updated whole-home price bands re-checked against `wholeHomeSizeBand()`'s
+  boundaries.
+- The wizard's price computation and display end-to-end (Playwright).
+- `lib/square-client.ts`'s fallback behavior — confirmed the wizard
+  correctly catches `BookingApiNotConfiguredError` today, since
+  `NEXT_PUBLIC_BOOKING_API_BASE` is unset, and submits through the existing
+  Formspree channel with honest, non-fake "a person will follow up" copy
+  instead of a fake payment success.
+- The Worker itself typechecks cleanly (`npx tsc --noEmit` in
+  `workers/square-api/`) and **bundles successfully** via
+  `npx wrangler deploy --dry-run` — confirming its relative imports into
+  `lib/cleaning-pricing/` resolve correctly and the whole thing is
+  syntactically/structurally sound. This is as far as it can be verified
+  without a Cloudflare account to actually deploy it and a Square sandbox
+  app to actually call.
+
+## What's left before this goes live
+
+1. `cd workers/square-api && npx wrangler login` (EHR's own Cloudflare
+   account).
+2. Complete the Square Dashboard setup above; fill the resulting IDs into
+   `wrangler.toml`'s `[vars]`.
+3. `npx wrangler secret put SQUARE_ACCESS_TOKEN` and
+   `npx wrangler secret put SQUARE_WEBHOOK_SIGNATURE_KEY`.
+4. `npx wrangler deploy` — note the printed Worker URL.
+5. Set `NEXT_PUBLIC_BOOKING_API_BASE` to that URL as a GitHub Actions
+   variable for the Pages build (not a secret — it's just a hostname), and
+   set `ALLOWED_ORIGIN` in `wrangler.toml` to the real GitHub Pages origin
+   instead of `"*"`.
+6. Decide, and then wire up, whether `/bookings/create` fires automatically
+   from the webhook handler on a completed deposit payment, or waits for
+   staff confirmation.
+7. Test the whole flow against **Square Sandbox** end to end before
+   flipping `SQUARE_ENVIRONMENT` to `"production"`.

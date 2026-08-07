@@ -17,6 +17,8 @@
  * required endpoints, and what each one needs to do server-side.
  */
 
+import type { CleaningPricingInput } from "./cleaning-pricing/types";
+
 export class BookingApiNotConfiguredError extends Error {
   constructor() {
     super("NEXT_PUBLIC_BOOKING_API_BASE is not configured — the secure Square integration layer is not deployed yet.");
@@ -34,10 +36,14 @@ export interface DepositCheckoutRequest {
   /** Idempotency key — the server must treat repeated calls with the
    *  same bookingId as the same request, not a duplicate charge. */
   bookingId: string;
-  /** The server MUST re-derive this from the submitted booking answers
-   *  using lib/cleaning-pricing/engine — never trust amountCents sent by
-   *  the browser as authoritative. Sent here only so the server can
-   *  cross-check against what it independently computes. */
+  /** The full booking answers. The server MUST run this through
+   *  lib/cleaning-pricing/engine itself (calculatePrice + calculateDeposit)
+   *  and treat that recomputed figure as authoritative — never the
+   *  client-computed amountCents below. */
+  pricingInput: CleaningPricingInput;
+  /** Client-computed deposit, in cents. Sent only so the server can
+   *  cross-check/flag a mismatch (e.g. tampered frontend) — never trusted
+   *  on its own to set the charge amount. */
   amountCents: number;
   customerEmail: string;
   customerName: string;
@@ -88,5 +94,39 @@ export async function getAvailability(request: AvailabilityRequest): Promise<Ava
     body: JSON.stringify(request),
   });
   if (!response.ok) throw new Error(`Availability lookup failed (${response.status})`);
+  return response.json();
+}
+
+export interface CreateBookingRequest {
+  bookingId: string;
+  startAt: string;
+  appointmentMinutes: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  note?: string;
+}
+
+export interface CreateBookingResult {
+  squareBookingId: string;
+  status: string;
+}
+
+/** POST /bookings/create on the secure API layer. Server-side, this
+ *  re-validates the slot is still available, creates/reuses the Square
+ *  customer, and creates the Square Bookings appointment — the
+ *  bookable-team-member selection Square requires stays entirely
+ *  server-side (see docs/square-integration.md). Not yet called by the
+ *  wizard UI; wire this in once EHR decides whether appointment creation
+ *  should be automatic on deposit payment or require staff confirmation
+ *  first. */
+export async function createBooking(request: CreateBookingRequest): Promise<CreateBookingResult> {
+  const response = await fetch(`${apiBase()}/bookings/create`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(request),
+  });
+  if (!response.ok) throw new Error(`Booking creation failed (${response.status})`);
   return response.json();
 }

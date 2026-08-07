@@ -1,0 +1,16 @@
+{
+  "name": "ehr-square-api",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Cloudflare Worker: secure server-side layer for the Elevated Home Resets Cleaning booking Square integration. Holds the Square access token and does everything that must never run in the browser. See ../../docs/square-integration.md.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "wrangler": "^3.90.0",
+    "@cloudflare/workers-types": "^4.20250101.0"
+  }
+}

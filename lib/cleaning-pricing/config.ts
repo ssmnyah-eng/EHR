@@ -44,37 +44,38 @@ export const TIER_LABELS: Record<CleaningTier, string> = {
 };
 
 /**
- * Whole-home base price bands. The <1,500 sq ft figure for every tier is
- * the exact approved starting price already published on each tier's
- * detail page (Standard $140 / Deep Premium $270 / Elevated Reset $400 —
- * see HeroPriceData in content/cleaning-*.ts). The two larger bands are
- * derived from those anchors using the same proportional relationship as
- * the initial whole-home cleaner-hour model below (e.g. Standard's
- * 1,500–2,500 band = $140 × (5.0 / 3.0) cleaner-hours, rounded to the
- * nearest $5) — a transparent placeholder scaling, not an invented
- * figure, until EHR supplies real approved size-band pricing. If EHR's
- * approved pricing structure ever grows additional size bands beyond
- * 3,500 sq ft, add them here — never delete a supplied band.
+ * OWNER-CONFIGURABLE — whole-home base price bands, approved by EHR.
+ * Edit the numbers in WHOLE_HOME_BASE_PRICE directly to change pricing;
+ * nothing else in this file or engine.ts needs to change. Bands:
+ * under 1,500 sq ft / 1,500–2,500 sq ft / 2,500–4,000 sq ft. Homes over
+ * 4,000 sq ft use the top band's price until a larger band is supplied
+ * (documented assumption, not an invented figure) — add a fourth band
+ * below and extend wholeHomeSizeBand()'s type + logic if/when EHR
+ * approves one; never delete a supplied band.
  */
-export const WHOLE_HOME_BASE_PRICE: Record<CleaningTier, { under1500: number; from1500to2500: number; from2501to3500: number }> = {
-  "standard-clean": { under1500: 140, from1500to2500: 235, from2501to3500: 305 },
-  "deep-premium-clean": { under1500: 270, from1500to2500: 420, from2501to3500: 540 },
-  "elevated-reset-clean": { under1500: 400, from1500to2500: 620, from2501to3500: 800 },
+export const WHOLE_HOME_BASE_PRICE: Record<CleaningTier, { under1500: number; from1500to2500: number; from2500to4000: number }> = {
+  "standard-clean": { under1500: 140, from1500to2500: 190, from2500to4000: 260 },
+  "deep-premium-clean": { under1500: 270, from1500to2500: 365, from2500to4000: 495 },
+  "elevated-reset-clean": { under1500: 400, from1500to2500: 550, from2500to4000: 725 },
 };
 
-export function wholeHomeSizeBand(squareFootage: number): "under1500" | "from1500to2500" | "from2501to3500" {
+export function wholeHomeSizeBand(squareFootage: number): "under1500" | "from1500to2500" | "from2500to4000" {
   if (squareFootage < 1500) return "under1500";
   if (squareFootage <= 2500) return "from1500to2500";
-  return "from2501to3500";
+  return "from2500to4000";
 }
 
-/** Initial whole-home cleaner-hour scheduling assumptions (Section 7).
- *  Used for appointment-duration scheduling only — never shown to the
- *  customer as a promised labor-hour figure. */
-export const WHOLE_HOME_CLEANER_HOURS: Record<CleaningTier, { under1500: number; from1500to2500: number; from2501to3500: number }> = {
-  "standard-clean": { under1500: 3.0, from1500to2500: 5.0, from2501to3500: 6.5 },
-  "deep-premium-clean": { under1500: 4.5, from1500to2500: 7.0, from2501to3500: 9.0 },
-  "elevated-reset-clean": { under1500: 5.5, from1500to2500: 8.5, from2501to3500: 11.0 },
+/** Initial whole-home cleaner-hour scheduling assumptions (Section 7),
+ *  used for appointment-duration scheduling only — never shown to the
+ *  customer as a promised labor-hour figure. The hour figures themselves
+ *  (3.0/5.0/6.5 etc.) are exactly as originally approved for the
+ *  "2,501–3,500 sq ft" band; the key is named from2500to4000 only to
+ *  share wholeHomeSizeBand() with the (separately updated) price bands
+ *  above — no duration number here has changed. */
+export const WHOLE_HOME_CLEANER_HOURS: Record<CleaningTier, { under1500: number; from1500to2500: number; from2500to4000: number }> = {
+  "standard-clean": { under1500: 3.0, from1500to2500: 5.0, from2500to4000: 6.5 },
+  "deep-premium-clean": { under1500: 4.5, from1500to2500: 7.0, from2500to4000: 9.0 },
+  "elevated-reset-clean": { under1500: 5.5, from1500to2500: 8.5, from2500to4000: 11.0 },
 };
 
 /** Selected-area (non-whole-home) per-unit prices. Flat-rate areas only —

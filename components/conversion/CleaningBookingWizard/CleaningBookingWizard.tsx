@@ -215,6 +215,7 @@ export function CleaningBookingWizard() {
       // ad-hoc deposit Checkout Link and send the customer to pay it.
       const checkout = await createDepositCheckout({
         bookingId: `${Date.now()}`,
+        pricingInput: input,
         amountCents: Math.round(deposit.depositDue * 100),
         customerEmail: state.email,
         customerName: `${state.firstName} ${state.lastName}`,

@@ -1,0 +1,29 @@
+# Cloudflare Worker config for the EHR Square integration backend.
+# See ../../docs/square-integration.md for the full architecture and
+# exactly where each credential below is entered.
+#
+# Deploy with: npx wrangler deploy   (run from this directory)
+# Requires a Cloudflare account logged in via `npx wrangler login` — not
+# done here; this repo has no Cloudflare credentials.
+
+name = "ehr-square-api"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+# Non-secret configuration. Safe to commit — these are IDs, not credentials.
+# Fill in the real values once they exist in the Square Dashboard (see
+# docs/square-integration.md "What needs to be configured in the Square
+# Dashboard"). SQUARE_ENVIRONMENT starts as "sandbox" until EHR is ready
+# to go live with real charges.
+[vars]
+SQUARE_ENVIRONMENT = "sandbox"
+SQUARE_LOCATION_ID = ""
+SQUARE_SERVICE_VARIATION_ID = ""
+# Restrict CORS to the real GitHub Pages origin once known, e.g.
+# "https://elevatedhomeresets.com" or "https://<owner>.github.io".
+ALLOWED_ORIGIN = "*"
+
+# SECRETS — never put these here. Set them with:
+#   npx wrangler secret put SQUARE_ACCESS_TOKEN
+#   npx wrangler secret put SQUARE_WEBHOOK_SIGNATURE_KEY
+# Wrangler stores these encrypted in Cloudflare, not in this repo.
