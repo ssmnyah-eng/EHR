@@ -502,6 +502,8 @@ export const PROFESSIONAL_ORGANIZING_ASSISTANT_JOB: JobListing = {
     body: "If you're dependable, detail-oriented, enjoy helping others, and want to be part of a growing company passionate about creating functional, lasting organizing solutions, we'd love to hear from you.",
     image: { src: "/images/services/whole-home-organization-2.jpg", alt: "A beautifully organized, functional living space" },
   },
+
+  applyUrl: "https://tally.so/r/D4o9oR",
 };
 
 export const WORK_WITH_US_JOBS: JobListing[] = [CLEANING_TECHNICIAN_JOB, PROFESSIONAL_ORGANIZING_ASSISTANT_JOB];
