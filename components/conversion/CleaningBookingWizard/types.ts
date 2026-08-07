@@ -72,6 +72,16 @@ export interface CleaningBookingFormState {
 
   // Step 8 — Schedule
   preferredDate: string;
+  /** Set once real Square availability is fetched and the customer picks
+   *  a real open slot — "" until then. When this is set, Continue goes
+   *  to the live Payment step (9). */
+  selectedSlotStart: string;
+  selectedSlotEnd: string;
+  /** Fallback-only: if live availability can't be reached, the customer
+   *  can pick a general time window instead and the booking is submitted
+   *  through the existing staff-follow-up (Formspree) channel rather
+   *  than the live Square payment flow. Meaningless once selectedSlotStart
+   *  is set. */
   preferredTimeWindow: string;
   schedulingNotes: string;
 }
@@ -120,13 +130,17 @@ export const INITIAL_FORM_STATE: CleaningBookingFormState = {
   specialtyPhotos: [],
 
   preferredDate: "",
+  selectedSlotStart: "",
+  selectedSlotEnd: "",
   preferredTimeWindow: "",
   schedulingNotes: "",
 };
 
-/** Numbered per the brief's 9-step structure. Step 6 (Specialty Details)
- *  is skipped in navigation/progress when hasSpecialtyCondition is
- *  false — see stepSequence() in CleaningBookingWizard.tsx. */
+/** Step 6 (Specialty Details) is skipped in navigation/progress when
+ *  hasSpecialtyCondition is false — see stepSequence() in
+ *  CleaningBookingWizard.tsx. Step 9 (Payment) is only ever reached when
+ *  the customer picked a real live Square slot in Step 8 — the fallback
+ *  path submits directly from Step 8 and never shows it. */
 export const STEP_LABELS = [
   "Cleaning & Home",
   "Areas Being Cleaned",
@@ -135,13 +149,15 @@ export const STEP_LABELS = [
   "Your Details",
   "Specialty Details",
   "Review & Price",
-  "Schedule & Deposit",
+  "Schedule",
+  "Payment",
 ] as const;
 
 export const TOTAL_STEPS = STEP_LABELS.length;
 export const SPECIALTY_STEP = 6;
 export const REVIEW_STEP = 7;
 export const SCHEDULE_STEP = 8;
+export const PAYMENT_STEP = 9;
 
 export interface StepProps {
   state: CleaningBookingFormState;

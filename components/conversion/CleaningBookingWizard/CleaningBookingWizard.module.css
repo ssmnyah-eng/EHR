@@ -419,6 +419,58 @@
   cursor: not-allowed;
 }
 
+/* ===== Live availability slots / Square card element ===== */
+
+.slotGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: var(--space-xs);
+}
+
+.slotButton {
+  min-height: 2.75rem;
+  padding: 0.625rem var(--space-sm);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: var(--body-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.slotButton[aria-pressed="true"] {
+  border-color: var(--color-accent);
+  background: var(--color-surface-muted);
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
+.slotButton:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.slotButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cardElement {
+  min-height: 3.25rem;
+  padding: var(--space-sm);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+}
+
+.inlineNote {
+  font-size: var(--body-sm);
+  color: var(--color-muted);
+  margin: 0;
+}
+
 /* ===== Price summary ===== */
 
 .priceCard {

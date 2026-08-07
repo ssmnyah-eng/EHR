@@ -6,9 +6,9 @@ import Link from "next/link";
 import { INQUIRY_FORM_ENDPOINT } from "@/lib/config";
 import { TIER_LABELS } from "@/lib/cleaning-pricing/config";
 import { calculateDeposit, calculateDuration, calculatePrice } from "@/lib/cleaning-pricing/engine";
-import { createDepositCheckout, BookingApiNotConfiguredError } from "@/lib/square-client";
+import { createOrGetCustomer, createAppointment, cancelAppointment, createDepositPayment } from "@/lib/square-client";
 import { buildPricingInput } from "./buildPricingInput";
-import { INITIAL_FORM_STATE, TOTAL_STEPS, type CleaningBookingFormState } from "./types";
+import { INITIAL_FORM_STATE, TOTAL_STEPS, SCHEDULE_STEP, PAYMENT_STEP, type CleaningBookingFormState } from "./types";
 import { WizardProgress } from "./WizardProgress";
 import { Step1CleaningHome } from "./steps/Step1CleaningHome";
 import { Step2Areas } from "./steps/Step2Areas";
@@ -18,10 +18,19 @@ import { Step5Details } from "./steps/Step5Details";
 import { Step6Specialty } from "./steps/Step6Specialty";
 import { Step7Review } from "./steps/Step7Review";
 import { Step8Schedule } from "./steps/Step8Schedule";
+import { Step9Payment } from "./steps/Step9Payment";
 import styles from "./CleaningBookingWizard.module.css";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const SCHEDULE_STEP = 8;
+
+interface BookingConfirmation {
+  finalCleaningTotal: number;
+  depositDue: number;
+  remainingBalance: number;
+  startAt: string;
+  squareBookingId: string;
+  paymentId: string;
+}
 
 const FIELD_IDS: Record<number, Record<string, string>> = {
   1: { tier: "step1-tier-error", scope: "step1-scope-error", squareFootage: "step1-sqft" },
@@ -50,7 +59,7 @@ const FIELD_IDS: Record<number, Record<string, string>> = {
     specialtyExtent: "step6-description",
     specialtyDescription: "step6-description",
   },
-  8: { preferredDate: "step8-date", preferredTimeWindow: "step8-date" },
+  8: { preferredDate: "step8-date", selectedSlotStart: "step8-date" },
 };
 
 function hasSpecialtyCondition(state: CleaningBookingFormState): boolean {
@@ -120,7 +129,9 @@ function validateStep(step: number, state: CleaningBookingFormState): Record<str
 
   if (step === 8) {
     if (!state.preferredDate) errors.preferredDate = "Please choose a preferred date.";
-    if (!state.preferredTimeWindow) errors.preferredTimeWindow = "Please choose a preferred time window.";
+    else if (!state.selectedSlotStart && !state.preferredTimeWindow) {
+      errors.selectedSlotStart = "Please select an available time, or choose a preferred time window if live scheduling isn't showing times.";
+    }
   }
 
   return errors;
@@ -157,7 +168,9 @@ export function CleaningBookingWizard() {
   const [currentStep, setCurrentStep] = useState(1);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitState, setSubmitState] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [submitErrorMessage, setSubmitErrorMessage] = useState("");
   const [depositMode, setDepositMode] = useState<"pending-followup" | "paid-online">("pending-followup");
+  const [confirmation, setConfirmation] = useState<BookingConfirmation | null>(null);
   const stepWrapperRef = useRef<HTMLDivElement>(null);
   const errorSummaryRef = useRef<HTMLDivElement>(null);
   const hasFocusedInitialStep = useRef(false);
@@ -205,13 +218,98 @@ export function CleaningBookingWizard() {
     if (id) document.getElementById(id)?.focus();
   }
 
-  async function handleSubmit() {
+  /** Step 8's "Continue"/"Book" button — routes to the live Payment step
+   *  when a real Square slot was picked, or straight to the fallback
+   *  submission when the customer used the general time-window option
+   *  instead (live availability wasn't reachable). */
+  function handleScheduleContinue() {
     const stepErrors = validateStep(SCHEDULE_STEP, state);
     if (Object.keys(stepErrors).length > 0) {
       setErrors(stepErrors);
       return;
     }
+    setErrors({});
+    if (state.selectedSlotStart) {
+      setCurrentStep(PAYMENT_STEP);
+    } else {
+      void handleFallbackSubmit();
+    }
+  }
 
+  /** Live path: create/reuse the Square customer, create the real
+   *  appointment for the selected slot, then charge the deposit with the
+   *  one-time card token Step9Payment produced. If the payment step
+   *  fails after the appointment was already created, releases the slot
+   *  again rather than leaving it silently held. Throws on any failure
+   *  so Step9Payment knows to stop showing its own "processing" state —
+   *  the actual user-facing message is set here via submitErrorMessage. */
+  async function handlePayAndBook(sourceId: string) {
+    const input = buildPricingInput(state);
+    if (!input || !state.selectedSlotStart) return;
+
+    setSubmitState("loading");
+    setSubmitErrorMessage("");
+    let createdBookingId: string | null = null;
+
+    try {
+      const customer = await createOrGetCustomer({
+        firstName: state.firstName,
+        lastName: state.lastName,
+        email: state.email,
+        phone: state.phone,
+      });
+
+      const appointment = await createAppointment({
+        customerId: customer.customerId,
+        startAt: state.selectedSlotStart,
+        pricingInput: input,
+        note: state.schedulingNotes || undefined,
+        idempotencyKey: crypto.randomUUID(),
+      });
+      createdBookingId = appointment.squareBookingId;
+
+      const payment = await createDepositPayment({
+        sourceId,
+        pricingInput: input,
+        customerId: customer.customerId,
+        squareBookingId: appointment.squareBookingId,
+        buyerEmail: state.email,
+        idempotencyKey: crypto.randomUUID(),
+      });
+
+      setDepositMode("paid-online");
+      setConfirmation({
+        finalCleaningTotal: payment.finalCleaningTotal,
+        depositDue: payment.depositDue,
+        remainingBalance: payment.remainingBalance,
+        startAt: appointment.startAt,
+        squareBookingId: appointment.squareBookingId,
+        paymentId: payment.paymentId,
+      });
+      setSubmitState("success");
+    } catch (err) {
+      if (createdBookingId) {
+        try {
+          await cancelAppointment(createdBookingId);
+        } catch {
+          // Best-effort release — if this also fails, the appointment
+          // stays held and needs a person to clear it manually; the
+          // customer's card was not charged either way since payment is
+          // always the step after appointment creation.
+        }
+      }
+      setSubmitErrorMessage(err instanceof Error ? err.message : "Something went wrong processing your payment. Please try again.");
+      setSubmitState("error");
+      throw err;
+    }
+  }
+
+  /** Fallback path — used when live Square availability/payment can't be
+   *  reached. Submits the complete booking record through the site's
+   *  existing working intake channel so EHR actually receives it today,
+   *  and tells the customer a person will follow up to collect the
+   *  deposit and confirm their time. Never fakes a payment success. */
+  async function handleFallbackSubmit() {
     const input = buildPricingInput(state);
     if (!input) return;
 
@@ -220,31 +318,6 @@ export function CleaningBookingWizard() {
     const price = calculatePrice(input);
     const duration = calculateDuration(input);
     const deposit = calculateDeposit(price.finalTotal);
-
-    try {
-      // Real path, once the secure server layer exists: create a Square
-      // ad-hoc deposit Checkout Link and send the customer to pay it.
-      const checkout = await createDepositCheckout({
-        bookingId: `${Date.now()}`,
-        pricingInput: input,
-        amountCents: Math.round(deposit.depositDue * 100),
-        customerEmail: state.email,
-        customerName: `${state.firstName} ${state.lastName}`,
-      });
-      setDepositMode("paid-online");
-      window.location.href = checkout.checkoutUrl;
-      return;
-    } catch (err) {
-      if (!(err instanceof BookingApiNotConfiguredError)) {
-        setSubmitState("error");
-        return;
-      }
-      // Honest fallback: the secure Square layer isn't deployed yet.
-      // Submit the complete booking record through the site's existing
-      // working intake channel so EHR actually receives it today, and
-      // tell the customer a person will follow up to collect the
-      // deposit and confirm their time — never fake a payment success.
-    }
 
     try {
       const formData = new FormData();
@@ -317,15 +390,17 @@ export function CleaningBookingWizard() {
     const input = buildPricingInput(state);
     const price = input ? calculatePrice(input) : null;
     const deposit = price ? calculateDeposit(price.finalTotal) : null;
+    const appointmentTime = confirmation
+      ? new Intl.DateTimeFormat(undefined, { weekday: "long", month: "long", day: "numeric", hour: "numeric", minute: "2-digit" }).format(new Date(confirmation.startAt))
+      : null;
 
     return (
       <div className={styles.success} role="status">
-        <p className={styles.successHeadline}>Booking request received.</p>
+        <p className={styles.successHeadline}>{depositMode === "paid-online" ? "You're booked." : "Booking request received."}</p>
         <p>
-          We&apos;ve got your details{price ? ` for your $${price.finalTotal} Cleaning` : ""}
-          {depositMode === "pending-followup"
-            ? `. Online deposit payment isn't available yet, so a member of our team will contact you within one business day to confirm your appointment time and collect your $${deposit?.depositDue ?? 140} deposit.`
-            : "."}
+          {depositMode === "paid-online" && confirmation
+            ? `Your $${confirmation.depositDue} deposit is paid and your ${appointmentTime} appointment is confirmed. Your remaining balance of $${confirmation.remainingBalance} is due at service.`
+            : `We've got your details${price ? ` for your $${price.finalTotal} Cleaning` : ""}. Online deposit payment isn't available right now, so a member of our team will contact you within one business day to confirm your appointment time and collect your $${deposit?.depositDue ?? 140} deposit.`}
         </p>
         {input?.hasSpecialtyCondition ? (
           <p>Because of what you shared about your home&apos;s condition, our team will personally review this booking before it&apos;s confirmed.</p>
@@ -347,7 +422,8 @@ export function CleaningBookingWizard() {
 
   const stepErrorMessages = Object.entries(errors);
   const isReviewStep = currentStep === 7;
-  const isScheduleStep = currentStep === 8;
+  const isScheduleStep = currentStep === SCHEDULE_STEP;
+  const isPaymentStep = currentStep === PAYMENT_STEP;
   const isSpecialtyStep = currentStep === 6;
 
   return (
@@ -379,9 +455,10 @@ export function CleaningBookingWizard() {
         {isSpecialtyStep ? <Step6Specialty state={state} updateField={updateField} errors={errors} /> : null}
         {isReviewStep ? <Step7Review state={state} onEdit={goToStep} /> : null}
         {isScheduleStep ? <Step8Schedule state={state} updateField={updateField} errors={errors} /> : null}
+        {isPaymentStep ? <Step9Payment state={state} onPay={handlePayAndBook} errorMessage={submitErrorMessage} /> : null}
       </div>
 
-      {submitState === "error" ? (
+      {submitState === "error" && !isPaymentStep ? (
         <p className={styles.fieldError} role="alert" style={{ marginTop: "var(--space-sm)" }}>
           Something went wrong submitting this. Please try again, or contact us directly.
         </p>
@@ -395,9 +472,9 @@ export function CleaningBookingWizard() {
         ) : (
           <span />
         )}
-        {isScheduleStep ? (
-          <button type="button" onClick={handleSubmit} className={styles.submitButton} disabled={submitState === "loading"}>
-            {submitState === "loading" ? "Submitting…" : "Book & Reserve Your Deposit"}
+        {isPaymentStep ? null : isScheduleStep ? (
+          <button type="button" onClick={handleScheduleContinue} className={styles.submitButton} disabled={submitState === "loading"}>
+            {submitState === "loading" ? "Submitting…" : state.selectedSlotStart ? "Continue to Payment" : "Book & Reserve Your Deposit"}
           </button>
         ) : (
           <button type="button" onClick={handleNext} className={styles.submitButton}>

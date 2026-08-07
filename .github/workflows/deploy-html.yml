@@ -44,6 +44,7 @@ jobs:
       - name: Build static export
         env:
           GITHUB_PAGES: "true"
+          NEXT_PUBLIC_BOOKING_API_BASE: "https://hello-world.elevatedhome.workers.dev"
         run: npm run build
 
       - name: Verify static output
