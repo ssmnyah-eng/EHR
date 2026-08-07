@@ -33,6 +33,10 @@ export interface ServiceNode {
 export interface ContentSlot {
   eyebrow?: string;
   heading?: string;
+  /** Optional standalone pull quote — rendered between heading and body
+   *  where the consuming component supports it (e.g. EditorialSplit's
+   *  `quote` prop). Omit for the default heading-then-body layout. */
+  quote?: string;
   body?: string;
   media?: MediaSlotData | null;
   primaryCTA?: CTAData | null;

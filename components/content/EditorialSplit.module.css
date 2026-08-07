@@ -13,8 +13,16 @@
   order: 2;
 }
 
-.split.reverse .mediaCol {
+.split.reverse .mediaCol,
+.split.reverse .mediaColTall {
   order: 1;
+}
+
+/* tallMedia: the media column stretches to the copy column's full
+   rendered height instead of sitting in a fixed-height box — see
+   .mediaColTall below. */
+.split.stretch {
+  align-items: stretch;
 }
 
 @media (max-width: 56rem) {
@@ -25,7 +33,8 @@
   }
 
   .split.reverse .copy,
-  .split.reverse .mediaCol {
+  .split.reverse .mediaCol,
+  .split.reverse .mediaColTall {
     order: initial;
   }
 }
@@ -44,6 +53,21 @@ p.heading {
   max-width: 16ch;
   font-size: clamp(2.5rem, 1.9rem + 2.6vw, 4.5rem);
   line-height: 1.08;
+}
+
+/* Standalone pull quote (optional) — larger than body copy, italic, the
+   sitewide selective serif accent (--font-editorial, otherwise reserved
+   for quotations elsewhere on the site — see ServiceProof). No
+   decorative quotation marks/graphics; the type treatment alone sets it
+   apart. */
+.quote {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: clamp(1.375rem, 1.15rem + 1vw, 1.75rem);
+  line-height: var(--leading-snug);
+  color: var(--color-text-primary);
+  max-width: 32ch;
+  margin: var(--space-lg) 0;
 }
 
 .body {
@@ -68,6 +92,25 @@ p.heading {
 @media (max-width: 40rem) {
   .mediaCol {
     height: 14rem;
+  }
+}
+
+/* tallMedia variant: no fixed height — .split.stretch's align-items:
+   stretch makes this grid item resolve to the copy column's full
+   rendered height automatically, so the portrait fills that height
+   exactly rather than sitting in an independent fixed-height box. */
+.mediaColTall {
+  height: auto;
+}
+
+@media (max-width: 56rem) {
+  /* Stacked single-column layout: grid stretch no longer pairs this
+     against the copy column's height, so fall back to a generous
+     portrait ratio — still the full portrait, never cropped down to a
+     short horizontal strip. */
+  .mediaColTall {
+    height: auto;
+    aspect-ratio: 4 / 5;
   }
 }
 

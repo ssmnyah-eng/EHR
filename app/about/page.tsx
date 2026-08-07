@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
-import { AboutHero } from "@/components/content/AboutHero";
 import { EditorialSplit } from "@/components/content/EditorialSplit";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import { ServiceProof } from "@/components/content/ServiceProof";
 import { ServicePathwayStrip } from "@/components/content/ServicePathwayStrip";
 import { CLEANING_PATHWAY_PANEL, ORGANIZATION_PATHWAY_PANEL } from "@/content/navigation";
 import {
-  ABOUT_HERO_SLOT,
-  ABOUT_FOUNDER_SLOT,
   ABOUT_DIFFERENT_SLOT,
   ABOUT_REALITY_SLOT,
   ABOUT_STANDARD_SLOT,
@@ -27,28 +24,10 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      {/* Hero — the one page on the site that isn't a full-bleed video
-          overlay; a straightforward two-column editorial layout instead
-          (copy + a substantial portrait, nothing overlaid on the photo). */}
-      <Section spacing="lg" surface="background">
-        <Container>
-          <AboutHero slot={ABOUT_HERO_SLOT} />
-        </Container>
-      </Section>
-
-      {/* Founder story — copy left / image right */}
-      <Section spacing="lg" surface="surface">
-        <Container width="wide">
-          <EditorialSplit
-            eyebrow={ABOUT_FOUNDER_SLOT.eyebrow}
-            heading={ABOUT_FOUNDER_SLOT.heading ?? ""}
-            body={ABOUT_FOUNDER_SLOT.body}
-            media={ABOUT_FOUNDER_SLOT.media!}
-          />
-        </Container>
-      </Section>
-
-      {/* Why Elevated is different — image left / copy right */}
+      {/* Why Elevated is different — image left / copy right. First
+          section on the page (hero and founder-story sections removed) —
+          headingAs="h1" keeps this the page's one semantic h1 without any
+          visual change (Display's styling is class-driven, not tag-driven). */}
       <Section spacing="lg" surface="background">
         <Container width="wide">
           <EditorialSplit
@@ -57,6 +36,7 @@ export default function AboutPage() {
             body={ABOUT_DIFFERENT_SLOT.body}
             media={ABOUT_DIFFERENT_SLOT.media!}
             reverse
+            headingAs="h1"
           />
         </Container>
       </Section>
@@ -100,14 +80,17 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      {/* Founder / personal close — image left / copy right */}
+      {/* Founder / personal close — heading + featured pull quote + copy
+          left, full-height black-and-white portrait right (per spec: not
+          reversed, unlike this section's previous image-left layout) */}
       <Section spacing="lg" surface="background">
         <Container width="wide">
           <EditorialSplit
             heading={ABOUT_PERSONAL_CLOSE_SLOT.heading ?? ""}
+            quote={ABOUT_PERSONAL_CLOSE_SLOT.quote}
             body={ABOUT_PERSONAL_CLOSE_SLOT.body}
             media={ABOUT_PERSONAL_CLOSE_SLOT.media!}
-            reverse
+            tallMedia
           />
         </Container>
       </Section>

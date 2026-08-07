@@ -1,3 +1,4 @@
+import type { ElementType } from "react";
 import type { CTAData, MediaSlotData } from "@/lib/types";
 import { Eyebrow } from "@/components/typography/Eyebrow";
 import { Display } from "@/components/typography/Display";
@@ -10,6 +11,10 @@ import styles from "./EditorialSplit.module.css";
 interface EditorialSplitProps {
   eyebrow?: string;
   heading: string;
+  /** Optional standalone pull quote, rendered between the heading and the
+   *  body copy — larger and italic, set apart with its own spacing. Omit
+   *  for the default heading-then-body layout used everywhere else. */
+  quote?: string;
   body?: string;
   primaryCTA?: CTAData;
   secondaryCTA?: CTAData;
@@ -18,6 +23,17 @@ interface EditorialSplitProps {
    *  copy-left, media-right — use to vary rhythm across a page with more
    *  than one split section. */
   reverse?: boolean;
+  /** Stretches the media column to the copy column's full height instead
+   *  of the default fixed-height frame — for a portrait image meant to be
+   *  the section's visual focal point. Defaults to false everywhere else. */
+  tallMedia?: boolean;
+  /** Heading tag override — defaults to "p" since most EditorialSplit
+   *  sections aren't a page's primary heading. Set to "h1" only when this
+   *  is the first content on the page (e.g. About page after its hero was
+   *  removed) so the page still has exactly one h1. Purely semantic —
+   *  Display's styling is class-driven, not tag-driven, so this changes
+   *  no visual appearance. */
+  headingAs?: ElementType;
 }
 
 /**
@@ -26,15 +42,27 @@ interface EditorialSplitProps {
  * explanatory copy with a photograph/placeholder rather than a second
  * block of text (see TypeLedStatement for copy-only two-column layouts).
  */
-export function EditorialSplit({ eyebrow, heading, body, primaryCTA, secondaryCTA, media, reverse = false }: EditorialSplitProps) {
+export function EditorialSplit({
+  eyebrow,
+  heading,
+  quote,
+  body,
+  primaryCTA,
+  secondaryCTA,
+  media,
+  reverse = false,
+  tallMedia = false,
+  headingAs = "p",
+}: EditorialSplitProps) {
   return (
     <Reveal variant="fade-up">
-      <div className={[styles.split, reverse ? styles.reverse : ""].filter(Boolean).join(" ")}>
+      <div className={[styles.split, reverse ? styles.reverse : "", tallMedia ? styles.stretch : ""].filter(Boolean).join(" ")}>
         <div className={styles.copy}>
           {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
-          <Display as="p" size="md" className={styles.heading}>
+          <Display as={headingAs} size="md" className={styles.heading}>
             {heading}
           </Display>
+          {quote ? <blockquote className={styles.quote}>{quote}</blockquote> : null}
           {body ? (
             <Text size="lg" className={styles.body}>
               {body}
@@ -55,7 +83,7 @@ export function EditorialSplit({ eyebrow, heading, body, primaryCTA, secondaryCT
             </div>
           ) : null}
         </div>
-        <div className={styles.mediaCol}>
+        <div className={tallMedia ? styles.mediaColTall : styles.mediaCol}>
           <MediaSlot data={media} fill className={styles.media} />
         </div>
       </div>

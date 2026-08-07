@@ -4,33 +4,6 @@ import { VICKI_JOHNSON } from "@/content/testimonials";
 /** Final approved copy for the About page, provided directly by the
  *  client. */
 
-export const ABOUT_HERO_SLOT: ContentSlot = {
-  eyebrow: "About Elevated Home Resets",
-  heading: "I created the kind of home service I would want for the people I love.",
-  body: "Elevated Home Resets was built from a simple belief: when someone trusts you with their home, the job is bigger than completing a list of tasks.\n\nIt's about how they feel when you're finished.",
-  media: {
-    type: "image",
-    src: "/images/about/about-portrait-primary.png",
-    alt: "Portrait of the Elevated Home Resets founder, seated and smiling",
-    variant: "portrait",
-    aspectRatio: "4 / 5",
-    priority: true,
-  },
-};
-
-export const ABOUT_FOUNDER_SLOT: ContentSlot = {
-  eyebrow: "Why I Started Elevated",
-  heading: "I know what it means to want someone to truly care.",
-  body: "I'm a mom. I'm a sister. I'm someone who understands that behind every front door is a real person living a real life.\n\nI've seen the way home cleaning is often approached—the checklist gets completed, the service is technically done, and everyone moves on.\n\nBut I've also seen what people are actually hoping for when they ask someone to help with their home.\n\nThey want to walk back into the kitchen and feel relief.\n\nThey want to step into a clean bathroom and notice the details.\n\nThey want to open a closet or pantry without immediately feeling overwhelmed.\n\nThey want to sit down at the end of the day and feel like, for once, something has been taken off their plate.\n\nThat feeling matters to me.\n\nAnd it became a big part of why I created Elevated Home Resets.",
-  media: {
-    type: "image",
-    src: "/images/about/about-portrait-close.jpg",
-    alt: "Close, candid portrait of the Elevated Home Resets founder",
-    variant: "portrait",
-    objectPosition: "center 38%",
-  },
-};
-
 export const ABOUT_DIFFERENT_SLOT: ContentSlot = {
   eyebrow: "More Than Getting the Job Done",
   heading: "The service is what we do. The way your home feels afterward is why we do it.",
@@ -86,12 +59,14 @@ export const ABOUT_TWO_WAYS_SLOT: ContentSlot = {
 
 export const ABOUT_PERSONAL_CLOSE_SLOT: ContentSlot = {
   heading: "This company is personal to me.",
+  quote: "I created the kind of home service I would want for the people I love.",
   body: "When you invite someone into your home, you're trusting them with a space that is incredibly personal.\n\nI don't take that lightly.\n\nElevated Home Resets is the company I created because I believe home services can be thoughtful, detailed, supportive, and genuinely helpful—not just transactional.\n\nMy hope is that when the work is finished, you notice more than what we cleaned or organized.\n\nI hope you feel the difference.",
   media: {
     type: "image",
-    src: "/images/about/about-portrait-close.jpg",
-    alt: "Close, candid portrait of the Elevated Home Resets founder",
+    src: "/images/about/about-portrait-bw.jpg",
+    alt: "Black-and-white portrait of the Elevated Home Resets founder",
     variant: "portrait",
+    aspectRatio: "4 / 5",
     objectPosition: "center 38%",
   },
 };
