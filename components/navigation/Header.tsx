@@ -4,6 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PRIMARY_NAVIGATION, COMPANY_LINKS, SERVICE_GROUPS, ESTIMATE_CTA } from "@/content/navigation";
+
+/** Header-only label override — ESTIMATE_CTA.label ("Get Started") is
+ *  shared sitewide (footer, FAQ CTAs, homepage, etc.); only the header's
+ *  persistent button gets the "Reset Your Space" wording, same href and
+ *  everything else about the button unchanged. */
+const HEADER_CTA = { ...ESTIMATE_CTA, label: "Reset Your Space" };
 import { Button } from "@/components/content/Button";
 import { StatusBadge } from "@/components/content/StatusBadge";
 import { MobileMenu } from "@/components/navigation/MobileMenu";
@@ -120,8 +126,8 @@ export function Header() {
           </nav>
 
           <div className={styles.actions}>
-            <Button href={ESTIMATE_CTA.href} size="md" className={styles.desktopCta}>
-              {ESTIMATE_CTA.label}
+            <Button href={HEADER_CTA.href} size="md" className={styles.desktopCta}>
+              {HEADER_CTA.label}
             </Button>
 
             <button
@@ -142,7 +148,7 @@ export function Header() {
         open={mobileOpen}
         onClose={() => setMobileOpen(false)}
         groups={PRIMARY_NAVIGATION}
-        estimateCta={ESTIMATE_CTA}
+        estimateCta={HEADER_CTA}
       />
     </>
   );

@@ -60,19 +60,24 @@ export function MobileMenu({ open, onClose, groups, estimateCta }: MobileMenuPro
                   </button>
                 </div>
 
-                <ul
-                  id={`mobile-group-${group.slug}`}
-                  className={[styles.sublist, isExpanded && styles.sublistOpen].filter(Boolean).join(" ")}
-                >
-                  {group.children?.map((child) => (
-                    <li key={child.slug}>
-                      <Link href={child.href} className={styles.subLink} onClick={onClose}>
-                        <span>{child.title}</span>
-                        <StatusBadge status={child.status} />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                {/* The grid-template-rows 0fr/1fr collapse trick only
+                    animates a single grid row — applying it straight to
+                    a <ul> with several <li> children would only collapse
+                    the first item and leave the rest permanently
+                    visible. Wrapping the whole list in one element makes
+                    it the single row the trick actually needs. */}
+                <div className={[styles.sublistWrap, isExpanded && styles.sublistWrapOpen].filter(Boolean).join(" ")}>
+                  <ul id={`mobile-group-${group.slug}`} className={styles.sublist}>
+                    {group.children?.map((child) => (
+                      <li key={child.slug}>
+                        <Link href={child.href} className={styles.subLink} onClick={onClose}>
+                          <span>{child.title}</span>
+                          <StatusBadge status={child.status} />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </li>
             );
           })}

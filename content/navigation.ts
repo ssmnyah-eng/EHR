@@ -74,10 +74,13 @@ export const LIFESTYLE_RESETS: ServiceNode = {
   ],
 };
 
+/** Drives the header's primary nav (desktop + mobile). Service Areas is
+ *  deliberately not listed here — it lives only in the footer (see
+ *  Footer.tsx) to keep the header menu shorter; the page itself is
+ *  unchanged and still fully reachable. */
 export const COMPANY_LINKS: ServiceNode[] = [
   { title: "About", slug: "about", category: "company", status: "active", href: "/about" },
   { title: "FAQs", slug: "faq", category: "company", status: "active", href: "/faq" },
-  { title: "Service Areas", slug: "service-areas", category: "company", status: "active", href: "/service-areas" },
   { title: "Contact", slug: "contact", category: "company", status: "active", href: "/contact" },
 ];
 

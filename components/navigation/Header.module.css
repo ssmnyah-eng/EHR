@@ -71,14 +71,22 @@
 
 @media (min-width: 64rem) {
   .desktopNav {
-    display: block;
+    /* flex: 1 lets this column absorb whatever space the brand and
+       actions don't use, and justify-content centers the nav list
+       within it — so the nav sits visually centered in the header
+       regardless of how the brand text and action buttons compare in
+       width, rather than just wherever space-between happens to land
+       it. */
+    display: flex;
+    flex: 1;
+    justify-content: center;
   }
 }
 
 .navList {
   display: flex;
   align-items: center;
-  gap: var(--space-lg);
+  gap: var(--space-md);
 }
 
 .navItem {

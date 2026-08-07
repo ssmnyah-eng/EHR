@@ -102,18 +102,18 @@
   transform: rotate(225deg);
 }
 
-.sublist {
+.sublistWrap {
   display: grid;
   grid-template-rows: 0fr;
   overflow: hidden;
   transition: grid-template-rows var(--duration-medium) var(--ease-standard);
 }
 
-.sublist > * {
+.sublistWrap > .sublist {
   overflow: hidden;
 }
 
-.sublistOpen {
+.sublistWrapOpen {
   grid-template-rows: 1fr;
   padding-bottom: var(--space-sm);
 }

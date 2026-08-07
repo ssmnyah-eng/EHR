@@ -64,6 +64,11 @@ export function Footer() {
                 </li>
               ))}
               <li>
+                <Link href="/service-areas" className={styles.link}>
+                  Service Areas
+                </Link>
+              </li>
+              <li>
                 <Link href="/resources" className={styles.link}>
                   Resources <span className={styles.comingSoon}>Coming Soon</span>
                 </Link>
