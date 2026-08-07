@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { EditorialSplit } from "@/components/content/EditorialSplit";
+import { EditorialStatement } from "@/components/content/EditorialStatement";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import { ServiceProof } from "@/components/content/ServiceProof";
 import { ServicePathwayStrip } from "@/components/content/ServicePathwayStrip";
@@ -13,6 +14,7 @@ import {
   ABOUT_TWO_WAYS_SLOT,
   ABOUT_PERSONAL_CLOSE_SLOT,
   ABOUT_HISTORY_PROOF,
+  ABOUT_JOIN_TEAM_SLOT,
   ABOUT_FINAL_CTA_SLOT,
 } from "@/content/about";
 
@@ -99,6 +101,13 @@ export default function AboutPage() {
       <Section spacing="lg" surface="surface">
         <Container width="content">
           <ServiceProof eyebrow={ABOUT_HISTORY_PROOF.eyebrow} primary={ABOUT_HISTORY_PROOF.primary} />
+        </Container>
+      </Section>
+
+      {/* Careers — modest, secondary prompt toward Work With Us */}
+      <Section spacing="md" surface="background">
+        <Container width="content">
+          <EditorialStatement slot={ABOUT_JOIN_TEAM_SLOT} />
         </Container>
       </Section>
 

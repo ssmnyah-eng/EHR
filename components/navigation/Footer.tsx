@@ -69,6 +69,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/work-with-us" className={styles.link}>
+                  Work With Us
+                </Link>
+              </li>
+              <li>
                 <Link href="/resources" className={styles.link}>
                   Resources <span className={styles.comingSoon}>Coming Soon</span>
                 </Link>

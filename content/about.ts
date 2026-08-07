@@ -81,6 +81,13 @@ export const ABOUT_HISTORY_PROOF = {
   },
 };
 
+export const ABOUT_JOIN_TEAM_SLOT: ContentSlot = {
+  eyebrow: "Careers",
+  heading: "Interested in joining our team?",
+  body: "We're always glad to hear from people who care about doing this work well.",
+  primaryCTA: { label: "Work With Us", href: "/work-with-us" },
+};
+
 export const ABOUT_FINAL_CTA_SLOT: ContentSlot = {
   eyebrow: "Welcome to Elevated Home Resets",
   heading: "Let us help make home feel a little lighter.",
