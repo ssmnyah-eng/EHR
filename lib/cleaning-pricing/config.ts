@@ -53,13 +53,15 @@ export const TIER_LABELS: Record<CleaningTier, string> = {
  * below and extend wholeHomeSizeBand()'s type + logic if/when EHR
  * approves one; never delete a supplied band.
  */
-export const WHOLE_HOME_BASE_PRICE: Record<CleaningTier, { under1500: number; from1500to2500: number; from2500to4000: number }> = {
+export type WholeHomeSizeBand = "under1500" | "from1500to2500" | "from2500to4000";
+
+export const WHOLE_HOME_BASE_PRICE: Record<CleaningTier, Record<WholeHomeSizeBand, number>> = {
   "standard-clean": { under1500: 140, from1500to2500: 190, from2500to4000: 260 },
   "deep-premium-clean": { under1500: 270, from1500to2500: 365, from2500to4000: 495 },
   "elevated-reset-clean": { under1500: 400, from1500to2500: 550, from2500to4000: 725 },
 };
 
-export function wholeHomeSizeBand(squareFootage: number): "under1500" | "from1500to2500" | "from2500to4000" {
+export function wholeHomeSizeBand(squareFootage: number): WholeHomeSizeBand {
   if (squareFootage < 1500) return "under1500";
   if (squareFootage <= 2500) return "from1500to2500";
   return "from2500to4000";
@@ -72,7 +74,7 @@ export function wholeHomeSizeBand(squareFootage: number): "under1500" | "from150
  *  "2,501–3,500 sq ft" band; the key is named from2500to4000 only to
  *  share wholeHomeSizeBand() with the (separately updated) price bands
  *  above — no duration number here has changed. */
-export const WHOLE_HOME_CLEANER_HOURS: Record<CleaningTier, { under1500: number; from1500to2500: number; from2500to4000: number }> = {
+export const WHOLE_HOME_CLEANER_HOURS: Record<CleaningTier, Record<WholeHomeSizeBand, number>> = {
   "standard-clean": { under1500: 3.0, from1500to2500: 5.0, from2500to4000: 6.5 },
   "deep-premium-clean": { under1500: 4.5, from1500to2500: 7.0, from2500to4000: 9.0 },
   "elevated-reset-clean": { under1500: 5.5, from1500to2500: 8.5, from2500to4000: 11.0 },

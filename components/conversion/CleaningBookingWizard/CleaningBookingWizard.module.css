@@ -1,5 +1,102 @@
+.wizardLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 42rem) minmax(0, 20rem);
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+@media (max-width: 64rem) {
+  .wizardLayout {
+    grid-template-columns: 1fr;
+  }
+}
+
 .wizard {
   max-width: 42rem;
+}
+
+/* ===== Live booking summary ===== */
+
+.summaryPanel {
+  position: sticky;
+  top: var(--space-lg);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-muted);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+@media (max-width: 64rem) {
+  .summaryPanel {
+    position: static;
+    order: -1;
+  }
+}
+
+.summaryHeading {
+  font-family: var(--font-display);
+  font-size: var(--heading-sm);
+  color: var(--color-text-primary);
+}
+
+.summaryGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.summaryGroup:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.summaryGroupLabel {
+  font-family: var(--font-body);
+  font-size: var(--body-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-accent);
+}
+
+.summaryList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  font-family: var(--font-body);
+  font-size: var(--body-sm);
+  color: var(--color-text-secondary);
+}
+
+.summaryPriceCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.summaryPriceLabel {
+  font-family: var(--font-body);
+  font-size: var(--body-sm);
+  color: var(--color-text-secondary);
+}
+
+.summaryPriceTotal {
+  font-family: var(--font-display);
+  font-size: var(--heading-md);
+  color: var(--color-text-primary);
+}
+
+.summaryPriceNote {
+  font-family: var(--font-body);
+  font-size: var(--caption-size);
+  color: var(--color-muted);
 }
 
 /* ===== Progress ===== */

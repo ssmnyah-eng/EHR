@@ -1,5 +1,6 @@
 import type { CleaningPricingInput, ConditionLevel } from "@/lib/cleaning-pricing/types";
 import type { CleaningBookingFormState } from "./types";
+import { SQUARE_FOOTAGE_BAND_REPRESENTATIVE } from "./squareFootageBands";
 
 /** Converts wizard form state (all strings, since it's driven by form
  *  inputs) into the typed engine input. Shared by the live review price,
@@ -11,7 +12,7 @@ import type { CleaningBookingFormState } from "./types";
  *  submitted answers rather than trusting the number the browser shows. */
 export function buildPricingInput(state: CleaningBookingFormState): CleaningPricingInput | null {
   if (!state.tier || !state.scope) return null;
-  const squareFootage = Number(state.squareFootage) || 0;
+  const squareFootage = state.squareFootage ? SQUARE_FOOTAGE_BAND_REPRESENTATIVE[state.squareFootage] : 0;
 
   return {
     tier: state.tier,

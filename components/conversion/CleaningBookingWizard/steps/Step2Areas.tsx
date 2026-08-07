@@ -112,36 +112,23 @@ export function Step2Areas({ state, updateField, errors }: StepProps) {
         </p>
 
         <div className={styles.fieldGroup}>
-          <div className={styles.row}>
-            <div className={styles.field}>
-              <label htmlFor="step2-bedrooms" className={styles.label}>
-                Bedrooms
-              </label>
-              <input
-                id="step2-bedrooms"
-                type="number"
-                inputMode="numeric"
-                min={0}
-                value={state.wholeHomeBedrooms}
-                onChange={(e) => updateField("wholeHomeBedrooms", e.target.value)}
-                className={styles.input}
-              />
-            </div>
-            <div className={styles.field}>
-              <label htmlFor="step2-bathrooms" className={styles.label}>
-                Bathrooms
-              </label>
-              <input
-                id="step2-bathrooms"
-                type="number"
-                inputMode="numeric"
-                min={0}
-                value={state.wholeHomeBathrooms}
-                onChange={(e) => updateField("wholeHomeBathrooms", e.target.value)}
-                className={styles.input}
-              />
-            </div>
+          <div className={styles.field}>
+            <label htmlFor="step2-bedrooms" className={styles.label}>
+              Bedrooms
+            </label>
+            <input
+              id="step2-bedrooms"
+              type="number"
+              inputMode="numeric"
+              min={0}
+              value={state.wholeHomeBedrooms}
+              onChange={(e) => updateField("wholeHomeBedrooms", e.target.value)}
+              className={styles.input}
+            />
           </div>
+          {/* Bathroom count is asked once, in the next step (Home
+              Condition), where it's actually needed to drive the
+              per-bathroom condition question — not repeated here. */}
 
           <fieldset className={styles.fieldset}>
             <legend className={styles.legend}>Does your home have a finished basement or other bonus area?</legend>

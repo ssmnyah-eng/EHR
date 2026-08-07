@@ -5,6 +5,7 @@ import { STANDARD_CLEAN_PRICE } from "@/content/cleaning-standard";
 import { DEEP_PREMIUM_CLEAN_PRICE } from "@/content/cleaning-deep-premium";
 import { ELEVATED_RESET_CLEAN_PRICE } from "@/content/cleaning-elevated-reset";
 import type { CleaningTier, CleaningScope } from "@/lib/cleaning-pricing/types";
+import { SQUARE_FOOTAGE_BAND_OPTIONS } from "../squareFootageBands";
 import type { StepProps } from "../types";
 import styles from "../CleaningBookingWizard.module.css";
 
@@ -86,29 +87,30 @@ export function Step1CleaningHome({ state, updateField, errors }: StepProps) {
           ) : null}
         </fieldset>
 
-        <div className={styles.field}>
-          <label htmlFor="step1-sqft" className={styles.label}>
-            Total property square footage
-          </label>
+        <fieldset id="step1-sqft" tabIndex={-1} className={styles.fieldset}>
+          <legend className={styles.legend}>Total property square footage</legend>
           <p className={styles.helpText}>We ask every customer for this — it helps us prepare appropriately even for a selected-area clean.</p>
-          <input
-            id="step1-sqft"
-            name="squareFootage"
-            type="number"
-            inputMode="numeric"
-            min={1}
-            value={state.squareFootage}
-            onChange={(e) => updateField("squareFootage", e.target.value)}
-            className={styles.input}
-            aria-invalid={errors.squareFootage ? true : undefined}
-            aria-describedby={errors.squareFootage ? "step1-sqft-error" : undefined}
-          />
+          <div className={styles.choiceGrid} aria-describedby={errors.squareFootage ? "step1-sqft-error" : undefined}>
+            {SQUARE_FOOTAGE_BAND_OPTIONS.map((option) => (
+              <label key={option.value} className={styles.choiceCard}>
+                <input
+                  type="radio"
+                  name="squareFootage"
+                  value={option.value}
+                  checked={state.squareFootage === option.value}
+                  onChange={() => updateField("squareFootage", option.value)}
+                  className={styles.choiceInput}
+                />
+                <span className={styles.choiceLabel}>{option.label}</span>
+              </label>
+            ))}
+          </div>
           {errors.squareFootage ? (
             <p id="step1-sqft-error" className={styles.fieldError} role="alert">
               {errors.squareFootage}
             </p>
           ) : null}
-        </div>
+        </fieldset>
       </div>
     </div>
   );

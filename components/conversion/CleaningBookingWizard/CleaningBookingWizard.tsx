@@ -9,6 +9,8 @@ import { calculateDeposit, calculateDuration, calculatePrice } from "@/lib/clean
 import { createOrGetCustomer, createAppointment, cancelAppointment, createDepositPayment } from "@/lib/square-client";
 import { buildPricingInput } from "./buildPricingInput";
 import { INITIAL_FORM_STATE, TOTAL_STEPS, SCHEDULE_STEP, PAYMENT_STEP, type CleaningBookingFormState } from "./types";
+import { SQUARE_FOOTAGE_BAND_LABELS } from "./squareFootageBands";
+import { BookingSummary } from "./BookingSummary";
 import { WizardProgress } from "./WizardProgress";
 import { Step1CleaningHome } from "./steps/Step1CleaningHome";
 import { Step2Areas } from "./steps/Step2Areas";
@@ -82,8 +84,7 @@ function validateStep(step: number, state: CleaningBookingFormState): Record<str
   if (step === 1) {
     if (!state.tier) errors.tier = "Please choose a Cleaning service.";
     if (!state.scope) errors.scope = "Please let us know the scope of your clean.";
-    const sqft = Number(state.squareFootage);
-    if (!state.squareFootage || Number.isNaN(sqft) || sqft <= 0) errors.squareFootage = "Please enter your home's square footage.";
+    if (!state.squareFootage) errors.squareFootage = "Please choose your home's square footage.";
   }
 
   if (step === 2 && state.scope === "selected-areas") {
@@ -328,10 +329,10 @@ export function CleaningBookingWizard() {
 
       formData.append("tier", TIER_LABELS[input.tier]);
       formData.append("scope", input.scope);
-      formData.append("squareFootage", String(input.squareFootage));
+      formData.append("squareFootageRange", state.squareFootage ? SQUARE_FOOTAGE_BAND_LABELS[state.squareFootage] : "");
       formData.append("selectedAreas", JSON.stringify(input.selectedAreas));
       formData.append("wholeHomeBedrooms", state.wholeHomeBedrooms);
-      formData.append("wholeHomeBathrooms", state.wholeHomeBathrooms);
+      formData.append("bathrooms", state.bathroomCount);
       formData.append("wholeHomeBonusArea", state.wholeHomeHasBonusArea === "yes" ? state.wholeHomeBonusAreaDetails : "none");
 
       formData.append("condition", JSON.stringify(input.condition));
@@ -427,61 +428,65 @@ export function CleaningBookingWizard() {
   const isSpecialtyStep = currentStep === 6;
 
   return (
-    <div className={styles.wizard}>
-      <Suspense fallback={null}>
-        <ServiceParamListener onService={applyPreselectedService} />
-      </Suspense>
-      <WizardProgress currentStep={currentStep} hasSpecialtyCondition={hasSpecialtyCondition(state)} />
+    <div className={styles.wizardLayout}>
+      <div className={styles.wizard}>
+        <Suspense fallback={null}>
+          <ServiceParamListener onService={applyPreselectedService} />
+        </Suspense>
+        <WizardProgress currentStep={currentStep} hasSpecialtyCondition={hasSpecialtyCondition(state)} />
 
-      {stepErrorMessages.length > 0 ? (
-        <div className={styles.errorSummary} ref={errorSummaryRef} tabIndex={-1} role="alert">
-          <p className={styles.errorSummaryHeading}>Please fix the following before continuing:</p>
-          <div className={styles.errorSummaryList}>
-            {stepErrorMessages.map(([key, message]) => (
-              <button key={key} type="button" className={styles.errorSummaryLink} onClick={() => focusField(key)}>
-                {message}
-              </button>
-            ))}
+        {stepErrorMessages.length > 0 ? (
+          <div className={styles.errorSummary} ref={errorSummaryRef} tabIndex={-1} role="alert">
+            <p className={styles.errorSummaryHeading}>Please fix the following before continuing:</p>
+            <div className={styles.errorSummaryList}>
+              {stepErrorMessages.map(([key, message]) => (
+                <button key={key} type="button" className={styles.errorSummaryLink} onClick={() => focusField(key)}>
+                  {message}
+                </button>
+              ))}
+            </div>
           </div>
+        ) : null}
+
+        <div ref={stepWrapperRef} tabIndex={-1}>
+          {currentStep === 1 ? <Step1CleaningHome state={state} updateField={updateField} errors={errors} /> : null}
+          {currentStep === 2 ? <Step2Areas state={state} updateField={updateField} errors={errors} /> : null}
+          {currentStep === 3 ? <Step3Condition state={state} updateField={updateField} errors={errors} /> : null}
+          {currentStep === 4 ? <Step4AddOns state={state} updateField={updateField} errors={errors} /> : null}
+          {currentStep === 5 ? <Step5Details state={state} updateField={updateField} errors={errors} /> : null}
+          {isSpecialtyStep ? <Step6Specialty state={state} updateField={updateField} errors={errors} /> : null}
+          {isReviewStep ? <Step7Review state={state} onEdit={goToStep} /> : null}
+          {isScheduleStep ? <Step8Schedule state={state} updateField={updateField} errors={errors} /> : null}
+          {isPaymentStep ? <Step9Payment state={state} onPay={handlePayAndBook} errorMessage={submitErrorMessage} /> : null}
         </div>
-      ) : null}
 
-      <div ref={stepWrapperRef} tabIndex={-1}>
-        {currentStep === 1 ? <Step1CleaningHome state={state} updateField={updateField} errors={errors} /> : null}
-        {currentStep === 2 ? <Step2Areas state={state} updateField={updateField} errors={errors} /> : null}
-        {currentStep === 3 ? <Step3Condition state={state} updateField={updateField} errors={errors} /> : null}
-        {currentStep === 4 ? <Step4AddOns state={state} updateField={updateField} errors={errors} /> : null}
-        {currentStep === 5 ? <Step5Details state={state} updateField={updateField} errors={errors} /> : null}
-        {isSpecialtyStep ? <Step6Specialty state={state} updateField={updateField} errors={errors} /> : null}
-        {isReviewStep ? <Step7Review state={state} onEdit={goToStep} /> : null}
-        {isScheduleStep ? <Step8Schedule state={state} updateField={updateField} errors={errors} /> : null}
-        {isPaymentStep ? <Step9Payment state={state} onPay={handlePayAndBook} errorMessage={submitErrorMessage} /> : null}
+        {submitState === "error" && !isPaymentStep ? (
+          <p className={styles.fieldError} role="alert" style={{ marginTop: "var(--space-sm)" }}>
+            Something went wrong submitting this. Please try again, or contact us directly.
+          </p>
+        ) : null}
+
+        <div className={styles.navRow}>
+          {currentStep > 1 ? (
+            <button type="button" onClick={handleBack} className={styles.backButton}>
+              Back
+            </button>
+          ) : (
+            <span />
+          )}
+          {isPaymentStep ? null : isScheduleStep ? (
+            <button type="button" onClick={handleScheduleContinue} className={styles.submitButton} disabled={submitState === "loading"}>
+              {submitState === "loading" ? "Submitting…" : state.selectedSlotStart ? "Continue to Payment" : "Book & Reserve Your Deposit"}
+            </button>
+          ) : (
+            <button type="button" onClick={handleNext} className={styles.submitButton}>
+              {isReviewStep ? "Continue to Schedule" : "Continue"}
+            </button>
+          )}
+        </div>
       </div>
 
-      {submitState === "error" && !isPaymentStep ? (
-        <p className={styles.fieldError} role="alert" style={{ marginTop: "var(--space-sm)" }}>
-          Something went wrong submitting this. Please try again, or contact us directly.
-        </p>
-      ) : null}
-
-      <div className={styles.navRow}>
-        {currentStep > 1 ? (
-          <button type="button" onClick={handleBack} className={styles.backButton}>
-            Back
-          </button>
-        ) : (
-          <span />
-        )}
-        {isPaymentStep ? null : isScheduleStep ? (
-          <button type="button" onClick={handleScheduleContinue} className={styles.submitButton} disabled={submitState === "loading"}>
-            {submitState === "loading" ? "Submitting…" : state.selectedSlotStart ? "Continue to Payment" : "Book & Reserve Your Deposit"}
-          </button>
-        ) : (
-          <button type="button" onClick={handleNext} className={styles.submitButton}>
-            {isReviewStep ? "Continue to Schedule" : "Continue"}
-          </button>
-        )}
-      </div>
+      <BookingSummary state={state} />
     </div>
   );
 }

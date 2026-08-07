@@ -10,26 +10,37 @@ import type {
   SpecialtyExtent,
   TimeSinceCleaning,
 } from "@/lib/cleaning-pricing/types";
+import type { WholeHomeSizeBand } from "@/lib/cleaning-pricing/config";
 
 export interface CleaningBookingFormState {
   // Step 1 — Cleaning & Home
   tier: CleaningTier | "";
   scope: CleaningScope | "";
-  squareFootage: string;
+  /** One of the pricing engine's real WHOLE_HOME_BASE_PRICE bands, not a
+   *  free-typed number — a predefined selection so what the customer
+   *  picks maps 1:1 onto the actual pricing tiers with no possible
+   *  mismatch. See squareFootageBands.ts. */
+  squareFootage: WholeHomeSizeBand | "";
 
   // Step 2 — Areas Being Cleaned
   /** Only meaningful when scope === "selected-areas". */
   selectedAreas: SelectedArea[];
   /** Informational-only context collected for entire-home bookings —
-   *  does not affect price/duration (both are sq-ft + tier driven). */
+   *  does not affect price/duration (both are sq-ft + tier driven).
+   *  Bathroom count is asked once, in Step 3 (bathroomCount below),
+   *  since it's actually needed there to drive the per-bathroom
+   *  condition question — not repeated here. */
   wholeHomeBedrooms: string;
-  wholeHomeBathrooms: string;
   wholeHomeHasBonusArea: "" | "yes" | "no";
   wholeHomeBonusAreaDetails: string;
 
   // Step 3 — Home Condition
   timeSinceCleaning: TimeSinceCleaning | "";
   kitchenGrease: ConditionLevel | "";
+  /** The single source of truth for bathroom count — used both for the
+   *  per-bathroom condition question below and (via Step7Review /
+   *  BookingSummary) as the "Bathrooms" figure shown throughout the
+   *  wizard. Not asked a second time anywhere else. */
   bathroomCount: string;
   bathroomBuildup: ConditionLevel[];
   dustAccumulation: ConditionLevel | "";
@@ -93,7 +104,6 @@ export const INITIAL_FORM_STATE: CleaningBookingFormState = {
 
   selectedAreas: [],
   wholeHomeBedrooms: "",
-  wholeHomeBathrooms: "",
   wholeHomeHasBonusArea: "",
   wholeHomeBonusAreaDetails: "",
 

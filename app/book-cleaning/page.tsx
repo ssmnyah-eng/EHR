@@ -22,6 +22,11 @@ export default function BookCleaningPage() {
         <Text size="lg" tone="secondary" className={styles.intro}>
           {BOOK_CLEANING_BODY}
         </Text>
+      </Container>
+      {/* Wider container than the heading above — the wizard now shares
+          this row with a live booking-summary panel once the customer
+          starts answering, and needs the extra width to fit both. */}
+      <Container width="wide">
         <div className={styles.formWrapper}>
           <CleaningBookingWizard />
         </div>

@@ -4,6 +4,7 @@ import { AREA_LABELS, TIER_LABELS } from "@/lib/cleaning-pricing/config";
 import { calculatePrice } from "@/lib/cleaning-pricing/engine";
 import { ROOM_SIZE_LABELS } from "@/content/cleaning-booking-options";
 import { buildPricingInput } from "../buildPricingInput";
+import { SQUARE_FOOTAGE_BAND_LABELS } from "../squareFootageBands";
 import type { CleaningBookingFormState } from "../types";
 import styles from "../CleaningBookingWizard.module.css";
 
@@ -49,8 +50,24 @@ export function Step7Review({ state, onEdit }: Step7ReviewProps) {
         </div>
         <div className={styles.reviewRow}>
           <span className={styles.reviewRowLabel}>Square footage</span>
-          <span className={styles.reviewRowValue}>{input.squareFootage.toLocaleString()} sq ft</span>
+          <span className={styles.reviewRowValue}>{state.squareFootage ? SQUARE_FOOTAGE_BAND_LABELS[state.squareFootage] : ""}</span>
         </div>
+        {input.scope === "entire-home" ? (
+          <>
+            {state.wholeHomeBedrooms ? (
+              <div className={styles.reviewRow}>
+                <span className={styles.reviewRowLabel}>Bedrooms</span>
+                <span className={styles.reviewRowValue}>{state.wholeHomeBedrooms}</span>
+              </div>
+            ) : null}
+            {state.bathroomCount ? (
+              <div className={styles.reviewRow}>
+                <span className={styles.reviewRowLabel}>Bathrooms</span>
+                <span className={styles.reviewRowValue}>{state.bathroomCount}</span>
+              </div>
+            ) : null}
+          </>
+        ) : null}
       </div>
 
       {input.scope === "selected-areas" ? (
