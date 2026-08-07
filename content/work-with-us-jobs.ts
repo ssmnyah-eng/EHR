@@ -98,6 +98,11 @@ export interface JobListing {
   faq: FAQSection[];
 
   finalCTA: { heading: string; body: string; image: { src: string; alt: string } };
+
+  /** Real application form URL for this role, once one exists — falls
+   *  back to the Contact page (see JobDetailPage/ApplicationSidebar)
+   *  when a role doesn't have one yet. */
+  applyUrl?: string;
 }
 
 const BACKGROUND_CHECK_STEP = {
@@ -310,6 +315,8 @@ export const CLEANING_TECHNICIAN_JOB: JobListing = {
     body: "Tell us a little about yourself, your experience, and why Elevated Home Resets interests you — we'll follow up from there.",
     image: { src: "/images/services/elevated-reset-clean-2.jpg", alt: "A beautifully finished, freshly cleaned bedroom" },
   },
+
+  applyUrl: "https://tally.so/r/obZY1x",
 };
 
 export const PROFESSIONAL_ORGANIZING_ASSISTANT_JOB: JobListing = {

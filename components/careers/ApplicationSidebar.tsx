@@ -18,22 +18,26 @@ const QUICK_FACTS_CHECKLIST = [
   "Growing Company",
 ];
 
-/** No Notion (or other) application link has been provided yet, so every
- *  apply/start-application action here routes to the real Contact page
- *  rather than a fabricated or dead link. Swap this constant once a real
- *  application destination exists. */
-const APPLY_HREF = "/contact";
-
 function serviceAreaSummary(zoneIds: JobListing["zoneIds"]): string {
   const names = zoneIds.map((id) => WORK_ZONES.find((zone) => zone.id === id)?.name).filter((n): n is string => Boolean(n));
   return names.length === WORK_ZONES.length ? "All Zones (1–3)" : names.join(", ");
 }
 
 export function ApplicationSidebar({ job }: ApplicationSidebarProps) {
+  // Roles without a real application form yet fall back to the Contact
+  // page rather than a fabricated or dead link.
+  const applyHref = job.applyUrl ?? "/contact";
+  const applyIsExternal = applyHref.startsWith("http");
+
   return (
     <aside className={styles.sidebar}>
       <div className={styles.card}>
-        <Button href={APPLY_HREF} size="lg" className={styles.applyButton}>
+        <Button
+          href={applyHref}
+          size="lg"
+          className={styles.applyButton}
+          {...(applyIsExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        >
           Apply Now
         </Button>
 
@@ -60,7 +64,12 @@ export function ApplicationSidebar({ job }: ApplicationSidebarProps) {
           </li>
         </ul>
 
-        <Button href={APPLY_HREF} variant="secondary" className={styles.startButton}>
+        <Button
+          href={applyHref}
+          variant="secondary"
+          className={styles.startButton}
+          {...(applyIsExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        >
           Start Application
         </Button>
 

@@ -19,12 +19,6 @@ interface JobDetailPageProps {
   job: JobListing;
 }
 
-/** No Notion (or other) application link has been provided yet, so the
- *  hero's Apply Now button routes to the real Contact page rather than a
- *  fabricated or dead link — same placeholder decision as
- *  ApplicationSidebar. */
-const APPLY_HREF = "/contact";
-
 /**
  * Shared full-page body for every individual job listing — used by both
  * /work-with-us/cleaning-technician and
@@ -33,6 +27,12 @@ const APPLY_HREF = "/contact";
  * its own JobListing content entry, not a new page design.
  */
 export function JobDetailPage({ job }: JobDetailPageProps) {
+  // Roles without a real application form yet fall back to the Contact
+  // page rather than a fabricated or dead link.
+  const applyHref = job.applyUrl ?? "/contact";
+  const applyIsExternal = applyHref.startsWith("http");
+  const applyLinkProps = applyIsExternal ? { target: "_blank" as const, rel: "noopener noreferrer" } : {};
+
   return (
     <>
       <Section spacing="sm" surface="background">
@@ -51,7 +51,7 @@ export function JobDetailPage({ job }: JobDetailPageProps) {
           <Display as="h1" size="lg" className={styles.heroTitle}>
             {job.title}
           </Display>
-          <Button href={APPLY_HREF} size="lg">
+          <Button href={applyHref} size="lg" {...applyLinkProps}>
             Apply Now
           </Button>
         </div>
@@ -277,7 +277,7 @@ export function JobDetailPage({ job }: JobDetailPageProps) {
           <Text size="lg" className={styles.finalCtaBody}>
             {job.finalCTA.body}
           </Text>
-          <Button href={APPLY_HREF} size="lg">
+          <Button href={applyHref} size="lg" {...applyLinkProps}>
             Apply Now
           </Button>
         </div>
