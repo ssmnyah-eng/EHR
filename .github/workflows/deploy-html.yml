@@ -27,19 +27,25 @@ jobs:
 
       - run: npm ci
 
-      # /resources/[slug] and /transformations/[slug] have no published
-      # entries yet (their content arrays are intentionally empty), so
-      # generateStaticParams() returns []. `output: "export"` requires at
-      # least one static param per dynamic route, since there's no server
-      # left to resolve unknown slugs at request time — the build fails
-      # otherwise. Nothing currently links to these routes (no resource or
-      # transformation exists to link to), so excluding them from THIS
-      # runner's checkout only is safe: this never touches the committed
-      # source tree, only this ephemeral build. Delete this step once real
-      # resource/transformation content ships and these routes generate
-      # real params again.
+      # /resources/[slug] still has no published entries (its content
+      # array is intentionally empty), so generateStaticParams() returns
+      # []. `output: "export"` requires at least one static param per
+      # dynamic route, since there's no server left to resolve unknown
+      # slugs at request time — the build fails otherwise. Excluding it
+      # from THIS runner's checkout only is safe: this never touches the
+      # committed source tree, only this ephemeral build. Delete this step
+      # once real resource content ships and the route generates real
+      # params again.
+      #
+      # /transformations/[slug] is NOT excluded here anymore — its
+      # content array now has real published projects with real slugs, so
+      # generateStaticParams() returns real params and the route builds
+      # real pages. Excluding it used to silently 404 every "See Project"
+      # link across the site (transformations hub cards, cleaning tier
+      # pages) once that content shipped, because this step kept deleting
+      # the route after the reason for excluding it no longer applied.
       - name: Exclude dynamic routes with zero static params
-        run: rm -rf "app/resources/[slug]" "app/transformations/[slug]"
+        run: rm -rf "app/resources/[slug]"
 
       - name: Build static export
         env:

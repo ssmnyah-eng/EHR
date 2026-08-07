@@ -16,11 +16,11 @@ import { WORK_WITH_US_HUB_FAQ } from "./work-with-us-jobs";
 export const WORK_WITH_US_HERO: ContentSlot = {
   eyebrow: "Join the Team",
   heading: "Build Something Meaningful With Us",
-  body: "Elevated Home Resets is a locally owned, growing small business — not a franchise where you're assigned a job and forgotten. We're looking for professionals who take real pride in their work and want to grow with us.",
+  body: "At Elevated Home Resets, we're building more than a cleaning and organizing company—we're building a team of dependable professionals who take pride in helping people feel more comfortable, confident, and at home.\n\nWhether you're an experienced residential cleaning professional or interested in helping create organized, functional spaces, we're looking for people who value quality, professionalism, teamwork, and exceptional client care.\n\nIf you're dependable, detail-oriented, and looking for an opportunity to grow with a locally owned company, we'd love to meet you.",
   media: {
     type: "image",
-    src: "/images/services/elevated-reset-clean-4.jpg",
-    alt: "An Elevated Home Resets team member actively cleaning a bright, well-maintained home",
+    src: "/images/organization/living-room-reset.jpg",
+    alt: "A calm, finished living room in a client's home",
     variant: "landscape",
     priority: true,
   },

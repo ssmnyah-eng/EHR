@@ -5,7 +5,12 @@
   min-height: clamp(34rem, 92svh, 56rem);
 }
 
-.media {
+/* Descendant selector (not a bare .media class) so this reliably beats
+   MediaSlot's own .frame { position: relative } at equal specificity
+   regardless of production CSS chunk order — without it, the hero video/
+   image can lose its full-bleed absolute positioning and render at its
+   natural top-left size instead of covering the section. */
+.hero .media {
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -52,6 +57,19 @@
   .content {
     padding-inline: var(--page-gutter-desktop);
   }
+}
+
+/* Opt-in centered variant (align="center") — content stays bottom-left
+   by default everywhere else (Home, Home Organization); only pages that
+   explicitly request centered hero copy add this modifier. */
+.contentCentered {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.contentCentered .ctaRow {
+  justify-content: center;
 }
 
 .eyebrow {

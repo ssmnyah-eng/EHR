@@ -8,6 +8,11 @@ import styles from "./HomeHero.module.css";
 interface HomeHeroProps {
   slot: ContentSlot;
   media: MediaSlotData;
+  /** "end" (default) bottom-left aligns the copy, matching Home and Home
+   *  Organization. "center" centers it both horizontally and vertically —
+   *  opt-in only, for pages that specifically ask for centered hero copy
+   *  (e.g. Cleaning, Work With Us). */
+  align?: "end" | "center";
 }
 
 /**
@@ -19,12 +24,12 @@ interface HomeHeroProps {
  * legal, forms) keeps the shared `Hero` component's split treatment
  * ("pattern B"), which suits a page built around explanatory copy.
  */
-export function HomeHero({ slot, media }: HomeHeroProps) {
+export function HomeHero({ slot, media, align = "end" }: HomeHeroProps) {
   return (
     <div className={styles.hero}>
       <MediaSlot data={media} fill className={styles.media} />
       <div className={styles.scrim} aria-hidden="true" />
-      <div className={styles.content}>
+      <div className={[styles.content, align === "center" ? styles.contentCentered : ""].filter(Boolean).join(" ")}>
         {slot.eyebrow ? (
           <p className={styles.eyebrow}>
             <SlotText label="EYEBROW" value={slot.eyebrow} />

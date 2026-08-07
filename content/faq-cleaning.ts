@@ -109,12 +109,12 @@ export const CLEANING_FAQ_SECTIONS: FAQSection[] = [
         question: "Do you clean inside the oven?",
         answer:
           "Interior oven cleaning is not something customers should assume is automatically included with every Cleaning service.\n\nCheck your selected service and available add-ons for the exact scope before booking.",
-        links: [{ label: "See Cleaning add-ons", href: "/cleaning#add-ons" }],
+        links: [{ label: "See Cleaning add-ons", href: "/book-cleaning" }],
       },
       {
         question: "Do you clean inside the refrigerator?",
         answer: "Interior refrigerator cleaning is not automatically part of every Cleaning service.\n\nReview the service scope and available add-ons when booking.",
-        links: [{ label: "See Cleaning add-ons", href: "/cleaning#add-ons" }],
+        links: [{ label: "See Cleaning add-ons", href: "/book-cleaning" }],
       },
       {
         question: "Do you clean inside cabinets and drawers?",

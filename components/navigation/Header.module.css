@@ -133,6 +133,21 @@
   z-index: var(--z-mega-menu);
 }
 
+/* Invisible hover bridge: the visible gap above (top: 100% + space-md)
+   is empty space outside the trigger <li>, so moving the cursor from the
+   trigger down into the panel crosses a dead zone and fires mouseleave
+   before the panel is reached. This pseudo-element fills exactly that
+   gap and is a descendant of the same <li>, so hover state survives the
+   crossing — no visual change, no layout change. */
+.megaPanel::before {
+  content: "";
+  position: absolute;
+  top: calc(-1 * var(--space-md));
+  left: 0;
+  right: 0;
+  height: var(--space-md);
+}
+
 .megaList {
   display: flex;
   flex-direction: column;

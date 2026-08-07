@@ -48,7 +48,7 @@ export const BILLING_FAQ_SECTIONS: FAQSection[] = [
       {
         question: "How are add-ons priced?",
         answer: "Add-ons — like interior oven or refrigerator cleaning, cabinet interiors, interior window glass, linen changes, dishes, laundry, and pet-hair detailing — are available depending on your service and selected as part of the booking process.",
-        links: [{ label: "See Cleaning add-ons", href: "/cleaning#add-ons" }],
+        links: [{ label: "See Cleaning add-ons", href: "/book-cleaning" }],
       },
       {
         question: "Is a deposit required for Cleaning?",

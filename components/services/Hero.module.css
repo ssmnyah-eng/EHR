@@ -84,7 +84,11 @@
   min-height: clamp(30rem, 76svh, 46rem);
 }
 
-.overlayMedia {
+/* Descendant selector (not a bare class) so this reliably beats
+   MediaSlot's own .frame { position: relative } at equal specificity
+   regardless of production CSS chunk order — see HomeHero.module.css for
+   the same fix and why it's needed. */
+.heroOverlay .overlayMedia {
   position: absolute;
   inset: 0;
   z-index: 0;

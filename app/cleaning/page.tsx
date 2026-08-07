@@ -11,9 +11,6 @@ import { Heading } from "@/components/typography/Heading";
 import { Text } from "@/components/typography/Text";
 import { Button } from "@/components/content/Button";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
-import { ProjectMediaCarousel } from "@/components/content/ProjectMediaCarousel";
-import { TRANSFORMATIONS_TEASER } from "@/content/home";
-import { findTransformationsByCategory } from "@/content/transformations";
 import styles from "./page.module.css";
 import {
   CLEANING_HUB_HERO,
@@ -26,7 +23,6 @@ import {
   CLEANING_DIFFERENTIATION,
   CLEANING_SCOPE_PREVIEW,
   CLEANING_ORG_DISTINCTION,
-  CLEANING_ADD_ONS,
   CLEANING_RECURRING,
   CLEANING_RECURRING_OPTIONS,
   CLEANING_RECURRING_CTA,
@@ -43,8 +39,10 @@ export default function CleaningHubPage() {
   return (
     <>
       {/* Hero — full-bleed pattern A, matching the homepage and Home
-          Organization hub (the site's visually strongest pages) */}
-      <HomeHero slot={CLEANING_HUB_HERO} media={CLEANING_HUB_HERO.media!} />
+          Organization hub (the site's visually strongest pages). Content
+          is centered on this page specifically (align="center"), unlike
+          the bottom-left default used on Home/Home Organization. */}
+      <HomeHero slot={CLEANING_HUB_HERO} media={CLEANING_HUB_HERO.media!} align="center" />
 
       {/* Service intro */}
       <Section spacing="lg" surface="surface">
@@ -112,20 +110,6 @@ export default function CleaningHubPage() {
         </Container>
       </Section>
 
-      {/* See the Difference a Reset Can Make — Cleaning proof */}
-      <Section spacing="lg" surface="muted">
-        <Container width="wide">
-          <ProjectMediaCarousel
-            eyebrow={TRANSFORMATIONS_TEASER.eyebrow}
-            heading={TRANSFORMATIONS_TEASER.heading ?? ""}
-            body={TRANSFORMATIONS_TEASER.body}
-            cta={TRANSFORMATIONS_TEASER.primaryCTA ?? undefined}
-            projects={findTransformationsByCategory("cleaning")}
-            placeholderAlt="A completed Cleaning project"
-          />
-        </Container>
-      </Section>
-
       {/* Cleaning + organization distinction */}
       <Section spacing="lg" surface="surface">
         <Container width="content">
@@ -133,15 +117,10 @@ export default function CleaningHubPage() {
         </Container>
       </Section>
 
-      {/* Add-ons */}
-      <Section spacing="lg" surface="background" id="add-ons">
-        <Container width="content">
-          <EditorialStatement slot={CLEANING_ADD_ONS} />
-        </Container>
-      </Section>
-
-      {/* Recurring cleaning */}
-      <Section spacing="lg" surface="surface" id="recurring">
+      {/* Recurring cleaning — switched to "background" to keep alternating
+          with the Distinction section above it, now that the removed
+          Add-Ons section no longer sits between them. */}
+      <Section spacing="lg" surface="background" id="recurring">
         <Container width="content">
           <EditorialStatement slot={CLEANING_RECURRING} />
         </Container>
@@ -164,8 +143,9 @@ export default function CleaningHubPage() {
         </Container>
       </Section>
 
-      {/* Service area */}
-      <Section spacing="lg" surface="background">
+      {/* Service area — switched to "surface" for the same alternation
+          reason as Recurring above. */}
+      <Section spacing="lg" surface="surface">
         <Container width="content">
           <EditorialStatement slot={CLEANING_SERVICE_AREA} />
         </Container>

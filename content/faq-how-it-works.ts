@@ -71,7 +71,7 @@ export const HOW_IT_WORKS_FAQ_SECTIONS: FAQSection[] = [
       {
         question: "Can I add extra services?",
         answer: "Yes. Add-ons like interior oven or refrigerator cleaning, cabinet interiors, interior window glass, linen changes, dishes, laundry, and pet-hair detailing are available depending on your service.",
-        links: [{ label: "See Cleaning add-ons", href: "/cleaning#add-ons" }],
+        links: [{ label: "See Cleaning add-ons", href: "/book-cleaning" }],
       },
       {
         question: "What happens after I book?",

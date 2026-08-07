@@ -118,7 +118,11 @@
   min-height: clamp(24rem, 56svh, 36rem);
 }
 
-.finalCtaMedia {
+/* Descendant selector (not a bare class) so this reliably beats
+   MediaSlot's own .frame { position: relative } at equal specificity
+   regardless of production CSS chunk order — see HomeHero.module.css for
+   the same fix and why it's needed. */
+.finalCta .finalCtaMedia {
   position: absolute;
   inset: 0;
   z-index: 0;

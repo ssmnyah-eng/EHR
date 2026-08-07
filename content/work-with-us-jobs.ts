@@ -306,6 +306,11 @@ export const CLEANING_TECHNICIAN_JOB: JobListing = {
           question: "What happens after I apply?",
           answer: "We'll review your application, and if it looks like a fit, follow up to schedule a professional interview. From there, the process moves through background verification, the contractor agreement, and an equipment review before you're welcomed to the team.",
         },
+        {
+          question: "Will there be opportunities for growth or future W-2 positions?",
+          answer:
+            "Yes. Elevated Home Resets is a growing small business, and we're committed to building long-term opportunities for the right people.\n\nWhile many of our current opportunities begin as independent contractor positions, our long-term vision includes creating W-2 employment opportunities, consistent full-time schedules, leadership roles, and management positions as the company continues to grow.\n\nWe're looking for dependable professionals who want to grow alongside us. Contractors who consistently demonstrate exceptional work, professionalism, reliability, and strong client service may have opportunities to take on additional responsibilities and future leadership roles as our team expands.\n\nPlease note that future employment opportunities will depend on the growth and needs of the business, and cannot be guaranteed.",
+        },
       ],
     },
   ],
@@ -492,6 +497,11 @@ export const PROFESSIONAL_ORGANIZING_ASSISTANT_JOB: JobListing = {
         {
           question: "What happens after I apply?",
           answer: "We'll review your application, and if it looks like a fit, follow up to schedule a professional interview. From there, the process moves through background verification, the contractor agreement, and an equipment and expectations review before you're welcomed to the team.",
+        },
+        {
+          question: "Will there be opportunities for growth or future W-2 positions?",
+          answer:
+            "Yes. Elevated Home Resets is a growing small business, and we're committed to building long-term opportunities for the right people.\n\nWhile many of our current opportunities begin as independent contractor positions, our long-term vision includes creating W-2 employment opportunities, consistent full-time schedules, leadership roles, and management positions as the company continues to grow.\n\nWe're looking for dependable professionals who want to grow alongside us. Contractors who consistently demonstrate exceptional work, professionalism, reliability, and strong client service may have opportunities to take on additional responsibilities and future leadership roles as our team expands.\n\nPlease note that future employment opportunities will depend on the growth and needs of the business, and cannot be guaranteed.",
         },
       ],
     },

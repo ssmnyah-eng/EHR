@@ -18,11 +18,11 @@ export const CLEANING_HUB_HERO: ContentSlot = {
   primaryCTA: { label: "Find Your Clean", href: "#selector" },
   secondaryCTA: BOOK_CLEANING_CTA,
   media: {
-    type: "image",
-    src: "/images/cleaning/not-every-home-same-clean.jpg",
-    alt: "An empty, freshly presented living room with hardwood floors and a fireplace",
+    type: "video",
+    src: "/videos/services/standard-clean-banner-video.mp4",
+    poster: "/images/services/standard-clean-banner-video-poster.jpg",
+    alt: "A home being tidied and reset room by room",
     variant: "fullBleed",
-    objectPosition: "center 45%",
     priority: true,
   },
 };
@@ -105,7 +105,13 @@ export const CLEANING_SCOPE_PREVIEW: ContentSlot = {
   heading: "No guessing what \"clean\" is supposed to mean.",
   body: "Each cleaning level has a defined scope so you can see what's included before choosing your service.\n\nStandard Clean covers the ongoing cleaning essentials throughout the serviced home.\n\nDeep Premium includes Standard and adds the detailed areas and buildup that don't need attention every maintenance visit.\n\nElevated Reset includes both levels of cleaning and adds the final reset that brings the serviced spaces back together.",
   primaryCTA: { label: "Compare What's Included", href: "#compare" },
-  media: { type: "image", alt: "A cleaning team detailing a kitchen counter", variant: "portrait", aspectRatio: "4 / 5" },
+  media: {
+    type: "image",
+    src: "/images/cleaning/personal-living-space.jpg",
+    alt: "A tidy, lived-in living and dining space",
+    variant: "portrait",
+    aspectRatio: "4 / 5",
+  },
 };
 
 export const CLEANING_ORG_DISTINCTION: ContentSlot = {

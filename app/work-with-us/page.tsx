@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 export default function WorkWithUsPage() {
   return (
     <>
-      <HomeHero slot={WORK_WITH_US_HERO} media={WORK_WITH_US_HERO.media!} />
+      <HomeHero slot={WORK_WITH_US_HERO} media={WORK_WITH_US_HERO.media!} align="center" />
 
       <Section spacing="lg" surface="surface">
         <Container>
