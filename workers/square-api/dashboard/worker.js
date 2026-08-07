@@ -31,14 +31,7 @@
  *                                  "deep-premium-clean").
  *     SQUARE_SERVICE_VARIATION_ID_ELEVATED  Catalog service-variation ID
  *                                  for "Elevated Reset Cleaning" (tier
- *                                  "elevated-reset-clean"). Use GET
- *                                  /admin/catalog-services (below) to look
- *                                  these three IDs up automatically rather
- *                                  than hunting for them in Square's UI —
- *                                  remove that route once you've copied
- *                                  the IDs in, it's a one-time lookup
- *                                  tool, not something to leave reachable
- *                                  indefinitely.
+ *                                  "elevated-reset-clean").
  *     SQUARE_ENVIRONMENT           "sandbox" while testing, "production"
  *                                  once ready to take real payments.
  *     ALLOWED_ORIGIN                The exact site origin allowed to call
@@ -55,10 +48,6 @@
  *
  * ── Endpoints ───────────────────────────────────────────────────────────
  *   GET  /config                     → { applicationId, locationId, environment }
- *   GET  /admin/catalog-services      → { items } — one-time setup helper, see
- *                                       the SQUARE_SERVICE_VARIATION_ID_* note
- *                                       above; remove this route once you've
- *                                       copied the three IDs into Settings.
  *   POST /pricing/quote              → { price, duration, deposit }
  *   POST /availability                → { appointmentMinutes, slots }
  *   POST /customers                   → { customerId, created }
@@ -646,13 +635,6 @@ async function createSquareBooking(env, { startAt, durationMinutes, customerId, 
   });
 }
 
-/** GET /v2/catalog/list?types=ITEM — every catalog item (Square services
- *  show up here) with its variations, id, name, and price. Used only by
- *  the one-time /admin/catalog-services lookup below. */
-async function listSquareCatalogItems(env) {
-  return squareFetch(env, "/v2/catalog/list?types=ITEM", { method: "GET" });
-}
-
 async function getSquareBooking(env, bookingId) {
   return squareFetch(env, `/v2/bookings/${bookingId}`, { method: "GET" });
 }
@@ -731,52 +713,6 @@ async function handleConfig(env) {
     locationId: env.SQUARE_LOCATION_ID,
     environment: env.SQUARE_ENVIRONMENT,
   });
-}
-
-/** GET /admin/catalog-services — one-time setup helper. Lists every
- *  Square catalog item (your three cleaning services) with each
- *  variation's ID, name, and price, so you can copy the three
- *  SQUARE_SERVICE_VARIATION_ID_* values into Settings without hunting
- *  for them in Square's UI. Uses SQUARE_ACCESS_TOKEN server-side — the
- *  token itself is never returned. Remove this route (and its entry in
- *  the router below) once you've copied the IDs you need; it's a
- *  one-time lookup tool, not something to leave reachable indefinitely. */
-async function handleAdminCatalogServices(env) {
-  let result;
-  try {
-    result = await listSquareCatalogItems(env);
-  } catch (err) {
-    // This route is a one-time diagnostic tool you run yourself, so —
-    // unlike every customer-facing route — it's fine (and useful) to
-    // show Square's real error back to you instead of a generic message.
-    if (err instanceof SquareApiError) {
-      return jsonResponse(
-        env,
-        {
-          error: "Square rejected this request — see squareStatus/squareBody below.",
-          squareStatus: err.status,
-          squareBody: err.body,
-          currentEnvironment: env.SQUARE_ENVIRONMENT,
-          hint:
-            err.status === 401
-              ? "401 usually means SQUARE_ACCESS_TOKEN and SQUARE_ENVIRONMENT don't match (a sandbox token with SQUARE_ENVIRONMENT=production, or vice versa), or the token was copied with extra whitespace / is wrong."
-              : undefined,
-        },
-        502
-      );
-    }
-    throw err;
-  }
-  const items = (result.objects || []).map((obj) => {
-    const itemData = obj.item_data || {};
-    const variations = (itemData.variations || []).map((v) => ({
-      variationId: v.id,
-      variationName: v.item_variation_data && v.item_variation_data.name,
-      priceCents: v.item_variation_data && v.item_variation_data.price_money && v.item_variation_data.price_money.amount,
-    }));
-    return { itemId: obj.id, itemName: itemData.name, variations };
-  });
-  return jsonResponse(env, { items });
 }
 
 /** POST /pricing/quote — recomputes the full price/duration/deposit
@@ -988,9 +924,6 @@ export default {
       }
       if (request.method === "GET" && url.pathname === "/config") {
         return await handleConfig(env);
-      }
-      if (request.method === "GET" && url.pathname === "/admin/catalog-services") {
-        return await handleAdminCatalogServices(env);
       }
       if (request.method === "POST" && url.pathname === "/pricing/quote") {
         return await handlePricingQuote(request, env);
