@@ -41,6 +41,10 @@ export interface CleaningBookingFormState {
 
   // Step 4 — Add-Ons
   addOns: SelectedAddOn[];
+  /** "Will laundry already be sorted?" — only asked/meaningful once at
+   *  least one laundry load is selected. Affects scheduling only, never
+   *  price. See LAUNDRY_UNSORTED_MINUTES_PER_LOAD. */
+  laundryAlreadySorted: "" | "yes" | "no";
   /** Laundry beyond the 3-load online booking cap. Not priced/scheduled
    *  automatically — purely a flag + free-text estimate for EHR to review
    *  and confirm scheduling manually. See LAUNDRY_MAX_ONLINE_LOADS. */
@@ -94,6 +98,7 @@ export const INITIAL_FORM_STATE: CleaningBookingFormState = {
   specialtyTypes: [],
 
   addOns: [],
+  laundryAlreadySorted: "",
   largeLaundryRequest: false,
   estimatedLaundryLoads: "",
   laundryNotes: "",

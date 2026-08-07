@@ -34,7 +34,7 @@ const FIELD_IDS: Record<number, Record<string, string>> = {
     clutterAccess: "step3-clutter",
     petHair: "step3-pet",
   },
-  4: { estimatedLaundryLoads: "step4-estimated-loads" },
+  4: { estimatedLaundryLoads: "step4-estimated-loads", laundryAlreadySorted: "step4-laundry-sorted-error" },
   5: {
     firstName: "step5-first-name",
     lastName: "step5-last-name",
@@ -90,8 +90,14 @@ function validateStep(step: number, state: CleaningBookingFormState): Record<str
     if (state.bathroomCount === "" || Number(state.bathroomCount) < 0) errors.bathroomCount = "Please tell us how many bathrooms your home has.";
   }
 
-  if (step === 4 && state.largeLaundryRequest) {
-    if (!state.estimatedLaundryLoads.trim()) errors.estimatedLaundryLoads = "Please estimate how many loads you have.";
+  if (step === 4) {
+    const laundryQuantity = state.addOns.find((a) => a.type === "laundry")?.quantity ?? 0;
+    if (laundryQuantity > 0 && !state.laundryAlreadySorted) {
+      errors.laundryAlreadySorted = "Please let us know if your laundry will already be sorted.";
+    }
+    if (state.largeLaundryRequest && !state.estimatedLaundryLoads.trim()) {
+      errors.estimatedLaundryLoads = "Please estimate how many loads you have.";
+    }
   }
 
   if (step === 5) {
@@ -257,6 +263,7 @@ export function CleaningBookingWizard() {
 
       formData.append("condition", JSON.stringify(input.condition));
       formData.append("addOns", JSON.stringify(input.addOns));
+      formData.append("laundryAlreadySorted", String(input.laundryAlreadySorted));
       formData.append("largeLaundryRequest", String(state.largeLaundryRequest));
       formData.append("estimatedLaundryLoads", state.estimatedLaundryLoads);
       formData.append("laundryNotes", state.laundryNotes);
@@ -289,6 +296,7 @@ export function CleaningBookingWizard() {
       formData.append("depositDue", String(deposit.depositDue));
       formData.append("remainingBalance", String(deposit.remainingBalance));
       formData.append("estimatedCleanerMinutes", String(duration.totalCleanerMinutes));
+      formData.append("estimatedLaundryCompletion", String(duration.estimatedLaundryCompletion));
       formData.append("appointmentMinutes", String(duration.appointmentMinutes));
 
       const response = await fetch(INQUIRY_FORM_ENDPOINT, {

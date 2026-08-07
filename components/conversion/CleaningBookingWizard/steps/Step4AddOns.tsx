@@ -93,6 +93,43 @@ export function Step4AddOns({ state, updateField, errors }: StepProps) {
                 )}
               </div>
 
+              {isLaundry && quantity > 0 ? (
+                <fieldset className={styles.fieldset} style={{ marginTop: "var(--space-xs)" }}>
+                  <legend className={styles.legend}>Will laundry already be sorted?</legend>
+                  <div className={styles.choiceGrid}>
+                    <label className={styles.choiceCard}>
+                      <input
+                        type="radio"
+                        name="laundryAlreadySorted"
+                        value="yes"
+                        checked={state.laundryAlreadySorted === "yes"}
+                        onChange={() => updateField("laundryAlreadySorted", "yes")}
+                        className={styles.choiceInput}
+                        aria-describedby={errors.laundryAlreadySorted ? "step4-laundry-sorted-error" : undefined}
+                      />
+                      <span className={styles.choiceLabel}>Yes, everything is already sorted</span>
+                    </label>
+                    <label className={styles.choiceCard}>
+                      <input
+                        type="radio"
+                        name="laundryAlreadySorted"
+                        value="no"
+                        checked={state.laundryAlreadySorted === "no"}
+                        onChange={() => updateField("laundryAlreadySorted", "no")}
+                        className={styles.choiceInput}
+                        aria-describedby={errors.laundryAlreadySorted ? "step4-laundry-sorted-error" : undefined}
+                      />
+                      <span className={styles.choiceLabel}>No, it will need to be sorted</span>
+                    </label>
+                  </div>
+                  {errors.laundryAlreadySorted ? (
+                    <p id="step4-laundry-sorted-error" className={styles.fieldError} role="alert">
+                      {errors.laundryAlreadySorted}
+                    </p>
+                  ) : null}
+                </fieldset>
+              ) : null}
+
               {isLaundry ? (
                 <div style={{ marginTop: "var(--space-xs)", marginBottom: "var(--space-sm)" }}>
                   <button type="button" className={styles.editButton} onClick={toggleLargeLaundryRequest}>

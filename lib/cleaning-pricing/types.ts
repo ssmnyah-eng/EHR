@@ -103,6 +103,11 @@ export interface CleaningPricingInput {
   selectedAreas: SelectedArea[];
   condition: ConditionAnswers;
   addOns: SelectedAddOn[];
+  /** Only meaningful when a laundry add-on is selected — "Will laundry
+   *  already be sorted?" Defaults true (no scheduling penalty) when
+   *  laundry isn't selected at all. false adds LAUNDRY_UNSORTED_MINUTES_
+   *  PER_LOAD of active cleaner time per load; never changes price. */
+  laundryAlreadySorted: boolean;
   /** Recurring-service discount, if the approved recurring pricing rules
    *  apply to this booking (see content/cleaning.ts CLEANING_RECURRING*).
    *  Left at "none" until a recurring-frequency step is wired up. */
@@ -142,18 +147,29 @@ export interface DurationBreakdown {
   conditionMinutes: number;
   petHairMinutes: number;
   addOnMinutes: number;
+  /** Extra active cleaner-minutes for sorting laundry when the customer
+   *  said it isn't pre-sorted — 0 whenever laundryAlreadySorted is true
+   *  or no laundry was selected. Never affects price. */
+  laundrySortingMinutes: number;
   specialtyContingencyMinutes: number;
-  /** Sum of all of the above. */
+  /** Sum of all of the above (this is the "cleanerMinutes" figure —
+   *  active cleaner labor only, distinct from estimatedLaundryCompletion
+   *  and appointmentMinutes below). */
   totalCleanerMinutes: number;
   /** totalCleanerMinutes with the 15% scheduling buffer applied. */
   bufferedMinutes: number;
-  /** Wall-clock time (not active cleaner labor) needed for the selected
-   *  laundry loads to finish washing/drying — 0 if no laundry selected.
-   *  Never added into totalCleanerMinutes/bufferedMinutes; only compared
-   *  against bufferedMinutes so the appointment reserves whichever is
-   *  longer, and never shown to the customer. */
-  laundryWallClockMinutes: number;
-  /** max(bufferedMinutes, laundryWallClockMinutes), rounded up to the
+  /** Wall-clock time (not active cleaner labor) for the selected laundry
+   *  loads to finish washing/drying, modeled as a one-washer/one-dryer
+   *  pipeline (see laundryPipelineMinutes() in engine.ts) — 0 if no
+   *  laundry selected. Deliberately kept separate from both
+   *  totalCleanerMinutes and appointmentMinutes: it's compared against
+   *  bufferedMinutes (whichever is longer governs scheduling) but never
+   *  added into either, and it's exposed as its own field specifically so
+   *  a future change to the pipeline model or appliance assumptions (e.g.
+   *  two washers/dryers) only ever needs to change how this one number is
+   *  computed — never shown to the customer. */
+  estimatedLaundryCompletion: number;
+  /** max(bufferedMinutes, estimatedLaundryCompletion), rounded up to the
    *  next 30-minute block — this is the actual calendar reservation
    *  length. Never shown to the customer as a promise of exact
    *  cleaner-hours; only used for scheduling. */

@@ -12,7 +12,10 @@ import {
   FIXED_AREA_PRICE,
   HALF_BATHROOM_DURATION_MINUTES,
   KITCHEN_GREASE_ADJUSTMENT,
-  LAUNDRY_WALLCLOCK_MINUTES_PER_LOAD,
+  LAUNDRY_DRYER_MINUTES,
+  LAUNDRY_TRANSFER_FOLD_MINUTES,
+  LAUNDRY_UNSORTED_MINUTES_PER_LOAD,
+  LAUNDRY_WASHER_MINUTES,
   MINIMUM_BOOKING_PRICE,
   PET_HAIR_ADJUSTMENT,
   SCHEDULING_BUFFER_PERCENT,
@@ -208,18 +211,49 @@ function laundryLoadCount(input: CleaningPricingInput): number {
 }
 
 /**
+ * Wall-clock time for `loads` loads of laundry to fully wash, dry, and be
+ * pulled out — modeled as a pipeline through one washer and one dryer
+ * (load 2 can start washing while load 1 dries), not a flat per-load
+ * multiplier. Iterates rather than using a closed-form formula since
+ * `loads` is always small (capped at LAUNDRY_MAX_ONLINE_LOADS) and this
+ * stays obviously correct for any relative sizing of the three inputs.
+ * Swap LAUNDRY_WASHER_MINUTES / LAUNDRY_DRYER_MINUTES /
+ * LAUNDRY_TRANSFER_FOLD_MINUTES in config.ts to change the model — this
+ * function (or a replacement, e.g. for a two-washer/two-dryer setup) is
+ * the only place that would ever need to change if EHR's appliance setup
+ * changes; nothing else in the booking system depends on how this number
+ * is derived, only on its result (see DurationBreakdown.
+ * estimatedLaundryCompletion).
+ */
+function laundryPipelineMinutes(loads: number): number {
+  if (loads <= 0) return 0;
+  let dryFinish = 0;
+  for (let load = 1; load <= loads; load++) {
+    const washFinish = load * LAUNDRY_WASHER_MINUTES;
+    const dryStart = Math.max(washFinish + LAUNDRY_TRANSFER_FOLD_MINUTES, dryFinish);
+    dryFinish = dryStart + LAUNDRY_DRYER_MINUTES;
+  }
+  // Final transfer/fold buffer for the last load — earlier loads' folding
+  // can happen while later loads are still washing/drying, so only the
+  // very last one extends the timeline.
+  return dryFinish + LAUNDRY_TRANSFER_FOLD_MINUTES;
+}
+
+/**
  * Full duration breakdown, ending in the actual calendar reservation
  * length. Laundry is scheduled differently from every other add-on: its
- * ACTIVE cleaner-minutes (loading/folding) are included in the normal
+ * ACTIVE cleaner-minutes (loading/folding, plus extra sorting time if the
+ * customer says laundry isn't pre-sorted) are included in the normal
  * cleaner-minutes total like any other add-on, but machine runtime is
  * not — the appointment must instead reserve whichever is longer, the
  * buffered cleaning duration or the wall-clock time for the selected
- * laundry to finish, so the cleaner is never scheduled to leave before
- * the laundry is done. Everything else here is unchanged: total estimated
- * cleaner-minutes, +15% scheduling buffer (+15% specialty contingency
- * first, if flagged), rounded up to the next 30-minute block. None of
- * this is exposed to the customer as a labor-hour or staffing promise —
- * see DurationBreakdown's field comments.
+ * laundry to finish (see laundryPipelineMinutes()), so the cleaner is
+ * never scheduled to leave before the laundry is done. Everything else
+ * here is unchanged: total estimated cleaner-minutes, +15% scheduling
+ * buffer (+15% specialty contingency first, if flagged), rounded up to
+ * the next 30-minute block. None of this is exposed to the customer as a
+ * labor-hour or staffing promise — see DurationBreakdown's field
+ * comments.
  */
 export function calculateDuration(input: CleaningPricingInput): DurationBreakdown {
   const baseCleanerMinutes = baseServiceMinutes(input);
@@ -232,24 +266,32 @@ export function calculateDuration(input: CleaningPricingInput): DurationBreakdow
 
   const { addOnMinutes } = calculateAddOns(input);
 
-  const preContingency = baseCleanerMinutes + conditionMinutes + petHairMinutes + addOnMinutes;
+  const loads = laundryLoadCount(input);
+  // Scheduling only — never changes price. Sorting doesn't affect the
+  // machine pipeline itself, only how long the cleaner spends sorting
+  // before/while it runs, so it's added to active minutes, not
+  // estimatedLaundryCompletion.
+  const laundrySortingMinutes = loads > 0 && !input.laundryAlreadySorted ? loads * LAUNDRY_UNSORTED_MINUTES_PER_LOAD : 0;
+
+  const preContingency = baseCleanerMinutes + conditionMinutes + petHairMinutes + addOnMinutes + laundrySortingMinutes;
   const specialtyContingencyMinutes = input.hasSpecialtyCondition ? Math.round(preContingency * SPECIALTY_TIME_CONTINGENCY_PERCENT) : 0;
 
   const totalCleanerMinutes = preContingency + specialtyContingencyMinutes;
   const bufferedMinutes = Math.round(totalCleanerMinutes * (1 + SCHEDULING_BUFFER_PERCENT));
 
-  const laundryWallClockMinutes = laundryLoadCount(input) * LAUNDRY_WALLCLOCK_MINUTES_PER_LOAD;
-  const appointmentMinutes = Math.ceil(Math.max(bufferedMinutes, laundryWallClockMinutes) / 30) * 30;
+  const estimatedLaundryCompletion = laundryPipelineMinutes(loads);
+  const appointmentMinutes = Math.ceil(Math.max(bufferedMinutes, estimatedLaundryCompletion) / 30) * 30;
 
   return {
     baseCleanerMinutes,
     conditionMinutes,
     petHairMinutes,
     addOnMinutes,
+    laundrySortingMinutes,
     specialtyContingencyMinutes,
     totalCleanerMinutes,
     bufferedMinutes,
-    laundryWallClockMinutes,
+    estimatedLaundryCompletion,
     appointmentMinutes,
   };
 }

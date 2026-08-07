@@ -97,6 +97,9 @@ export function Step7Review({ state, onEdit }: Step7ReviewProps) {
               <span className={styles.reviewRowValue}>${item.amount}</span>
             </div>
           ))}
+          {state.laundryAlreadySorted === "no" ? (
+            <p className={styles.reviewRowLabel}>Your laundry will need to be sorted — extra time is reserved for this.</p>
+          ) : null}
           {state.largeLaundryRequest ? (
             <p className={styles.reviewRowLabel}>
               You need more than 3 loads of laundry (about {state.estimatedLaundryLoads || "?"}) — our team will review and confirm scheduling before

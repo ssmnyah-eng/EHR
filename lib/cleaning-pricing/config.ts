@@ -255,24 +255,41 @@ interface AddOnConfig {
  *  CleaningBookingWizard's submitted booking record. */
 export const LAUNDRY_MAX_ONLINE_LOADS = 3;
 
-/** Full wall-clock time (wash + dry) per laundry load, used only to make
- *  sure the appointment reservation is long enough for the laundry to
- *  finish before the cleaner would otherwise leave — never added into the
- *  active-cleaner-minutes total the way ADD_ON_CONFIG.laundry.minutes is.
- *  See calculateDuration()'s "reserve whichever is longer" logic. Assumes
- *  loads run sequentially (no pipelining across multiple loads) as a
- *  deliberately conservative default; fold time is treated as already
- *  covered by ADD_ON_CONFIG.laundry.minutes' active labor. This exact
- *  figure (40 min wash + 50 min dry) is an initial placeholder pending
- *  EHR's real appliance timing — replace here only, nothing else needs to
- *  change. */
-export const LAUNDRY_WALLCLOCK_MINUTES_PER_LOAD = 90;
+/**
+ * OWNER-CONFIGURABLE — laundry wall-clock pipeline model. EHR has one
+ * washer and one dryer, so loads pipeline (load 2 can start washing while
+ * load 1 is drying) rather than running each load's full cycle back to
+ * back — see laundryPipelineMinutes() in engine.ts, which uses exactly
+ * these three values and nothing else. Edit the numbers below to change
+ * the model; nothing else needs to change, including if EHR later adds a
+ * second washer/dryer (only laundryPipelineMinutes() itself would need a
+ * new formula — the rest of the booking system reads its result via
+ * DurationBreakdown.estimatedLaundryCompletion regardless of how it's
+ * computed). All three are initial placeholders pending EHR's real
+ * appliance timing.
+ */
+export const LAUNDRY_WASHER_MINUTES = 40;
+export const LAUNDRY_DRYER_MINUTES = 50;
+/** Active time to transfer a washed load into the dryer, and to pull +
+ *  fold the final load once it's dry — used both as the pipeline's
+ *  transfer gap and as this add-on's per-load ACTIVE cleaner-minutes
+ *  figure (ADD_ON_CONFIG.laundry.minutes below), one number serving both
+ *  roles consistently. */
+export const LAUNDRY_TRANSFER_FOLD_MINUTES = 20;
+
+/** Extra ACTIVE cleaner-minutes per load when the customer says laundry
+ *  is NOT already sorted (see the "Will laundry already be sorted?"
+ *  question) — sorting mixed laundry is real additional labor. Scheduling
+ *  only; never changes the $30/load price, and doesn't feed into
+ *  laundryPipelineMinutes()'s wall-clock estimate. Placeholder within
+ *  EHR's given 10–15 minute range. */
+export const LAUNDRY_UNSORTED_MINUTES_PER_LOAD = 12;
 
 export const ADD_ON_CONFIG: Record<AddOnType, AddOnConfig> = {
   "inside-oven": { label: "Inside oven", price: 43, minutes: 30, unit: "flat" },
   "inside-fridge": { label: "Inside refrigerator / freezer", price: 38, minutes: 25, unit: "flat" },
   "inside-cabinets": { label: "Inside kitchen cabinets", price: 63, minutes: 45, unit: "flat" },
-  laundry: { label: "Laundry — wash, dry, fold", price: 30, minutes: 20, unit: "load", maxQuantity: LAUNDRY_MAX_ONLINE_LOADS },
+  laundry: { label: "Laundry — wash, dry, fold", price: 30, minutes: LAUNDRY_TRANSFER_FOLD_MINUTES, unit: "load", maxQuantity: LAUNDRY_MAX_ONLINE_LOADS },
   dishes: { label: "Dishes", price: 28, minutes: 20, unit: "load" },
   "interior-windows": { label: "Interior windows", price: 11, minutes: 8, unit: "window" },
   "bedding-change": { label: "Bedding change", price: 23, minutes: 15, unit: "bed" },

@@ -27,6 +27,7 @@ export function buildPricingInput(state: CleaningBookingFormState): CleaningPric
       petHair: state.petHair || "none-light",
     },
     addOns: state.addOns,
+    laundryAlreadySorted: state.laundryAlreadySorted !== "no",
     recurringDiscountPercent: 0,
     hasSpecialtyCondition: state.specialtyTypes.length > 0 || state.clutterAccess === "extreme",
   };
