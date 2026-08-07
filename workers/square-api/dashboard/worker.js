@@ -742,7 +742,31 @@ async function handleConfig(env) {
  *  the router below) once you've copied the IDs you need; it's a
  *  one-time lookup tool, not something to leave reachable indefinitely. */
 async function handleAdminCatalogServices(env) {
-  const result = await listSquareCatalogItems(env);
+  let result;
+  try {
+    result = await listSquareCatalogItems(env);
+  } catch (err) {
+    // This route is a one-time diagnostic tool you run yourself, so —
+    // unlike every customer-facing route — it's fine (and useful) to
+    // show Square's real error back to you instead of a generic message.
+    if (err instanceof SquareApiError) {
+      return jsonResponse(
+        env,
+        {
+          error: "Square rejected this request — see squareStatus/squareBody below.",
+          squareStatus: err.status,
+          squareBody: err.body,
+          currentEnvironment: env.SQUARE_ENVIRONMENT,
+          hint:
+            err.status === 401
+              ? "401 usually means SQUARE_ACCESS_TOKEN and SQUARE_ENVIRONMENT don't match (a sandbox token with SQUARE_ENVIRONMENT=production, or vice versa), or the token was copied with extra whitespace / is wrong."
+              : undefined,
+        },
+        502
+      );
+    }
+    throw err;
+  }
   const items = (result.objects || []).map((obj) => {
     const itemData = obj.item_data || {};
     const variations = (itemData.variations || []).map((v) => ({
