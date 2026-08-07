@@ -3,6 +3,6 @@
  * (/book-cleaning). This is UI copy describing the request process
  * itself, not marketing copy — kept factual and minimal.
  */
-export const BOOK_CLEANING_HEADING = "Book Cleaning";
+export const BOOK_CLEANING_HEADING = "Book Your Clean";
 export const BOOK_CLEANING_BODY =
-  "Tell us about your home and choose your service. We'll follow up to confirm scheduling and payment for your clean.";
+  "Answer a few questions about your home and we'll build your Cleaning price as you go. You'll see your total before paying anything.";

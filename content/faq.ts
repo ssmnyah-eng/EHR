@@ -17,7 +17,7 @@ export const FAQ_HUB_BODY =
  * framing or a deliberate combination of more than one category answer);
  * the underlying facts still must not drift from those pages:
  *
- * - Cancellation/deposit figures ($250 deposit, $125/$125 split, 24-hour
+ * - Cancellation/deposit figures ($140 deposit, $70/$70 split, 24-hour
  *   window) match faq-billing-and-payments.ts, faq-booking-and-scheduling.ts,
  *   and faq-policies-and-your-home.ts — update all four together if this
  *   policy ever changes.
@@ -61,6 +61,6 @@ export const HOMEPAGE_FAQ_ITEMS: FAQItem[] = [
   {
     question: "What is your cancellation and rescheduling policy?",
     answer:
-      "We require at least 24 hours' notice for cancellations. If a service is canceled with less than 24 hours' notice, 50% of the $250 deposit is retained as the cancellation fee and the remaining $125 is refunded. If the appointment is rescheduled instead of canceled, the deposit moves to the new service date.",
+      "We require at least 24 hours' notice for cancellations. If a service is canceled with less than 24 hours' notice, 50% of the $140 deposit is retained as the cancellation fee and the remaining $70 is refunded. If the appointment is rescheduled instead of canceled, the deposit moves to the new service date.",
   },
 ];

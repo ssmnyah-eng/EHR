@@ -234,7 +234,7 @@ export const CLEANING_FAQ_SECTIONS: FAQSection[] = [
       {
         question: "What happens if I don't disclose a hazardous condition?",
         answer:
-          "For the safety of our team, hazardous conditions must be disclosed before we arrive.\n\nIf our team arrives and discovers an undisclosed hazardous condition, the entire service will stop and the $250 deposit will be retained.\n\nIf you would like to schedule another service after the condition has been reviewed and we determine that we can safely perform the work, a new $250 deposit will be required.\n\nAdditional charges may also apply when specialized materials, protective equipment, staffing, or procedures are necessary.",
+          "For the safety of our team, hazardous conditions must be disclosed before we arrive.\n\nIf our team arrives and discovers an undisclosed hazardous condition, the entire service will stop and the $140 deposit will be retained.\n\nIf you would like to schedule another service after the condition has been reviewed and we determine that we can safely perform the work, a new $140 deposit will be required.\n\nAdditional charges may also apply when specialized materials, protective equipment, staffing, or procedures are necessary.",
       },
       {
         question: "Why do you need to know about those conditions beforehand?",
@@ -290,7 +290,7 @@ export const CLEANING_FAQ_SECTIONS: FAQSection[] = [
       },
       {
         question: "Is a deposit required for Cleaning?",
-        answer: "Yes.\n\nA $250 deposit is required before your Cleaning service.",
+        answer: "Yes.\n\nA $140 deposit is required before your Cleaning service.",
       },
       {
         question: "What payment methods do you accept?",
@@ -299,7 +299,7 @@ export const CLEANING_FAQ_SECTIONS: FAQSection[] = [
       {
         question: "What is your cancellation policy?",
         answer:
-          "Please cancel or reschedule your appointment at least 24 hours before your scheduled service.\n\nWhen you provide at least 24 hours' notice, the late-cancellation fee does not apply.\n\nIf you cancel with less than 24 hours' notice, Elevated Home Resets retains 50% of your $250 deposit, which is $125, as the late-cancellation fee.\n\nThe remaining $125 is refunded.",
+          "Please cancel or reschedule your appointment at least 24 hours before your scheduled service.\n\nWhen you provide at least 24 hours' notice, the late-cancellation fee does not apply.\n\nIf you cancel with less than 24 hours' notice, Elevated Home Resets retains 50% of your $140 deposit, which is $70, as the late-cancellation fee.\n\nThe remaining $70 is refunded.",
       },
       {
         question: "What happens to my deposit if I reschedule?",

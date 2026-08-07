@@ -6,7 +6,7 @@
  * here states a policy beyond what's been approved. Home Organization's
  * separate 50%-of-quote deposit policy (see /home-organization and
  * content/home-organization.ts) is described accurately as distinct
- * from Cleaning's flat $250 deposit — do not conflate the two.
+ * from Cleaning's flat $140 deposit — do not conflate the two.
  */
 
 export const TERMS_SEO = {
@@ -28,11 +28,11 @@ export const TERMS_SECTIONS: { heading: string; body: string }[] = [
   },
   {
     heading: "Booking & Deposits",
-    body: "A $250 deposit is required to book a Cleaning service. Home Organization projects require a 50% deposit of the accepted project quote, with the remaining 50% due after the service is completed. We accept credit cards, debit cards, and cash. We do not accept checks.",
+    body: "A $140 deposit is required to book a Cleaning service. Home Organization projects require a 50% deposit of the accepted project quote, with the remaining 50% due after the service is completed. We accept credit cards, debit cards, and cash. We do not accept checks.",
   },
   {
     heading: "Cancellations & Rescheduling",
-    body: "Cancel or reschedule your Cleaning appointment at least 24 hours before your scheduled service to avoid a late-cancellation fee. If you cancel with less than 24 hours' notice, we retain 50% of your $250 deposit ($125) as a late-cancellation fee and refund the remaining $125. If you reschedule, your deposit moves with you to the new appointment date, subject to the same 24-hour policy for late changes.",
+    body: "Cancel or reschedule your Cleaning appointment at least 24 hours before your scheduled service to avoid a late-cancellation fee. If you cancel with less than 24 hours' notice, we retain 50% of your $140 deposit ($70) as a late-cancellation fee and refund the remaining $70. If you reschedule, your deposit moves with you to the new appointment date, subject to the same 24-hour policy for late changes.",
   },
   {
     heading: "Hazardous Conditions",

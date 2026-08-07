@@ -2,10 +2,11 @@ import type { FAQSection, PendingFAQItem } from "@/lib/types";
 
 /**
  * Approved Booking & Scheduling FAQ content (/faq/booking-and-scheduling).
- * Cleaning answers describe the current, live booking form
- * (components/conversion/CleaningBookingForm.tsx) without asserting any
- * Square-specific mechanics (no calendar/date-picker claims) since that
- * integration isn't built yet. Organization answers are grounded in the
+ * Cleaning answers describe the current, live booking flow
+ * (components/conversion/CleaningBookingWizard/) without asserting any
+ * Square-specific mechanics (no live calendar-availability claims) since
+ * that integration isn't deployed yet — see docs/square-integration.md.
+ * Organization answers are grounded in the
  * approved quote → deposit → reserved-project process.
  */
 
@@ -57,7 +58,7 @@ export const BOOKING_FAQ_SECTIONS: FAQSection[] = [
       {
         question: "Can I cancel?",
         answer:
-          "Yes. Cancel at least 24 hours before your scheduled service and the late-cancellation fee doesn't apply. With less than 24 hours' notice, we retain 50% of your $250 deposit ($125) and refund the remaining $125.",
+          "Yes. Cancel at least 24 hours before your scheduled service and the late-cancellation fee doesn't apply. With less than 24 hours' notice, we retain 50% of your $140 deposit ($70) and refund the remaining $70.",
         links: [{ label: "See Cleaning FAQs", href: "/faq/cleaning" }],
       },
       {

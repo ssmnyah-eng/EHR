@@ -4,7 +4,7 @@ import type { FAQSection, PendingFAQItem } from "@/lib/types";
  * Approved "How Our Services Work" FAQ content (/faq/how-it-works).
  * Grounded in content/home.ts, content/home-organization.ts,
  * content/cleaning.ts, content/estimate.ts (the gateway page), and the
- * live success-state copy in CleaningBookingForm / OrganizationQuoteWizard.
+ * live success-state copy in CleaningBookingWizard / OrganizationQuoteWizard.
  */
 
 export const HOW_IT_WORKS_FAQ_SECTIONS: FAQSection[] = [

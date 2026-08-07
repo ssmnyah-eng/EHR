@@ -130,7 +130,7 @@ export const POLICIES_FAQ_SECTIONS: FAQSection[] = [
       {
         question: "What if I need to cancel?",
         answer:
-          "For Cleaning, cancel at least 24 hours before your appointment and no late-cancellation fee applies. With less than 24 hours' notice, we retain 50% of your $250 deposit ($125) and refund the remaining $125.",
+          "For Cleaning, cancel at least 24 hours before your appointment and no late-cancellation fee applies. With less than 24 hours' notice, we retain 50% of your $140 deposit ($70) and refund the remaining $70.",
         links: [{ label: "See Cleaning FAQs", href: "/faq/cleaning" }],
       },
       {

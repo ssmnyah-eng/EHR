@@ -3,11 +3,11 @@ import type { FAQSection, PendingFAQItem } from "@/lib/types";
 /**
  * Approved Billing & Payments FAQ content (/faq/billing-and-payments).
  * Cleaning pricing is grounded in content/cleaning*.ts; the confirmed
- * Cleaning deposit ($250 flat), payment methods, and cancellation policy
+ * Cleaning deposit ($140 flat), payment methods, and cancellation policy
  * mirror content/faq-cleaning.ts. The Organization deposit policy (50%
  * at quote acceptance / 50% after completion) is unchanged and grounded
  * in content/home-organization.ts and every room file's process steps —
- * it is a separate policy from Cleaning's flat $250 deposit. Receipts,
+ * it is a separate policy from Cleaning's flat $140 deposit. Receipts,
  * tips, taxes, and a general refund policy beyond the confirmed
  * cancellation/deposit rules remain unapproved — see BILLING_FAQ_PENDING.
  */
@@ -52,7 +52,7 @@ export const BILLING_FAQ_SECTIONS: FAQSection[] = [
       },
       {
         question: "Is a deposit required for Cleaning?",
-        answer: "Yes. A $250 deposit is required before your Cleaning service.",
+        answer: "Yes. A $140 deposit is required before your Cleaning service.",
       },
       {
         question: "What payment methods do you accept?",
@@ -73,7 +73,7 @@ export const BILLING_FAQ_SECTIONS: FAQSection[] = [
       {
         question: "What happens if I need to cancel?",
         answer:
-          "For Cleaning, cancel or reschedule at least 24 hours before your appointment and no late-cancellation fee applies. With less than 24 hours' notice, we retain 50% of your $250 deposit ($125) and refund the remaining $125.",
+          "For Cleaning, cancel or reschedule at least 24 hours before your appointment and no late-cancellation fee applies. With less than 24 hours' notice, we retain 50% of your $140 deposit ($70) and refund the remaining $70.",
         links: [{ label: "See Cleaning FAQs", href: "/faq/cleaning" }],
       },
     ],
@@ -143,7 +143,7 @@ export const BILLING_FAQ_SECTIONS: FAQSection[] = [
       },
       {
         question: "When do I pay for Cleaning?",
-        answer: "A $250 deposit is required before your Cleaning service.",
+        answer: "A $140 deposit is required before your Cleaning service.",
       },
     ],
   },
@@ -155,7 +155,7 @@ export const BILLING_FAQ_SECTIONS: FAQSection[] = [
  * imported by any page — for business review only.
  */
 export const BILLING_FAQ_PENDING: PendingFAQItem[] = [
-  { question: "When is the remaining Cleaning balance due after the $250 deposit?", reason: "Exact Cleaning final-payment timing after the deposit is not yet finalized." },
+  { question: "When is the remaining Cleaning balance due after the $140 deposit?", reason: "Exact Cleaning final-payment timing after the deposit is not yet finalized." },
   { question: "Will I receive a receipt?", reason: "Receipt policy not approved." },
   { question: "Are tips required?", reason: "Tipping policy not approved." },
   { question: "Can I tip the team?", reason: "Tipping policy not approved." },
