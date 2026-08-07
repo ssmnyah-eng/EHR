@@ -71,6 +71,20 @@ export default function RootLayout(props: LayoutProps<"/">) {
           gtag('config', '${GA_MEASUREMENT_ID}');
         `}
       </Script>
+      {/* Microsoft Clarity — client-provided tracking snippet, reproduced
+          exactly as generated. Raw <script> tags can't be pasted directly
+          into JSX/TSX, so it's loaded via next/script (Next.js's
+          documented mechanism for third-party scripts in the App Router)
+          with the code itself left byte-for-byte unchanged. */}
+      <Script id="microsoft-clarity" strategy="afterInteractive">
+        {`
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xysdjc9gwt");
+        `}
+      </Script>
     </html>
   );
 }

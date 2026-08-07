@@ -1,4 +1,5 @@
 import type { FAQSection, PendingFAQItem } from "@/lib/types";
+import { formatCityListSentence } from "@/content/service-areas";
 
 /**
  * Approved "How Our Services Work" FAQ content (/faq/how-it-works).
@@ -45,8 +46,7 @@ export const HOW_IT_WORKS_FAQ_SECTIONS: FAQSection[] = [
       },
       {
         question: "What areas do you serve?",
-        answer:
-          "We serve Alexandria, Arlington, Ashburn, Fairfax, Falls Church, Herndon, Leesburg, Manassas, Manassas Park, Reston, Tysons, Vienna, and Woodbridge, with additional service in Fredericksburg, for both Cleaning and Home Organization.",
+        answer: `We serve ${formatCityListSentence()} for both Cleaning and Home Organization.`,
       },
     ],
   },

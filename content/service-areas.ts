@@ -62,3 +62,27 @@ export const SERVICE_AREAS_UNSURE_BODY =
 
 export const SERVICE_AREAS_CLEANING_CTA = BOOK_CLEANING_CTA;
 export const SERVICE_AREAS_ORGANIZATION_CTA = ORGANIZATION_QUOTE_CTA;
+
+/** Formats a city list as a natural-language, Oxford-comma sentence
+ *  fragment (e.g. "Alexandria, Arlington, and Ashburn"). Used wherever
+ *  copy needs to spell out the service area inline — derives from
+ *  SERVICE_AREAS_CITIES by default so that copy can't drift out of sync
+ *  with the approved list above. */
+export function formatCityListSentence(cities: string[] = SERVICE_AREAS_CITIES): string {
+  if (cities.length === 0) return "";
+  if (cities.length === 1) return cities[0];
+  if (cities.length === 2) return `${cities[0]} and ${cities[1]}`;
+  return `${cities.slice(0, -1).join(", ")}, and ${cities[cities.length - 1]}`;
+}
+
+/** Case-insensitive, whitespace-tolerant check for whether a
+ *  customer-entered city is one of the approved service area cities.
+ *  Used by the booking flow to surface the "outside our service area"
+ *  notice — never blocks submission, since the list is deliberately
+ *  conservative and EHR may still be able to accommodate a nearby
+ *  address. */
+export function isServiceAreaCity(city: string): boolean {
+  const normalized = city.trim().toLowerCase();
+  if (!normalized) return true;
+  return SERVICE_AREAS_CITIES.some((approved) => approved.toLowerCase() === normalized);
+}

@@ -1,9 +1,14 @@
 "use client";
 
+import { useState } from "react";
+import { isServiceAreaCity } from "@/content/service-areas";
 import type { StepProps } from "../types";
 import styles from "../CleaningBookingWizard.module.css";
 
 export function Step5Details({ state, updateField, errors }: StepProps) {
+  const [cityTouched, setCityTouched] = useState(false);
+  const showOutOfAreaNotice = cityTouched && state.city.trim() !== "" && !isServiceAreaCity(state.city);
+
   return (
     <div className={styles.stepPanel}>
       <h2 className={styles.stepHeading}>How can we reach you, and where&apos;s the clean?</h2>
@@ -142,13 +147,18 @@ export function Step5Details({ state, updateField, errors }: StepProps) {
               autoComplete="address-level2"
               value={state.city}
               onChange={(e) => updateField("city", e.target.value)}
+              onBlur={() => setCityTouched(true)}
               className={styles.input}
               aria-invalid={errors.city ? true : undefined}
-              aria-describedby={errors.city ? "step5-city-error" : undefined}
+              aria-describedby={errors.city ? "step5-city-error" : showOutOfAreaNotice ? "step5-city-area-notice" : undefined}
             />
             {errors.city ? (
               <p id="step5-city-error" className={styles.fieldError} role="alert">
                 {errors.city}
+              </p>
+            ) : showOutOfAreaNotice ? (
+              <p id="step5-city-area-notice" className={styles.helpText} role="status">
+                It looks like you&apos;re just outside our current service area. Please contact us—we&apos;re always expanding and may still be able to accommodate your request.
               </p>
             ) : null}
           </div>

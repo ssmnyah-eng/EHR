@@ -135,6 +135,13 @@
 
 /* ===== Step panel ===== */
 
+/* Scroll target for step transitions (see CleaningBookingWizard.tsx) —
+   offsets scrollIntoView()'s landing position so the new step's heading
+   clears the sticky header instead of landing directly underneath it. */
+.stepWrapper {
+  scroll-margin-top: var(--space-lg);
+}
+
 .stepPanel {
   animation: fadeIn var(--duration-medium) var(--ease-enter);
 }

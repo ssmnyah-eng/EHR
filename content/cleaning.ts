@@ -1,5 +1,6 @@
 import type { ContentSlot, TierSelectorCardData, ComparisonSummaryCardData, CTAData } from "@/lib/types";
 import { BOOK_CLEANING_CTA } from "@/content/navigation";
+import { formatCityListSentence } from "@/content/service-areas";
 
 /**
  * Final approved copy for the Cleaning Services hub page (/cleaning),
@@ -145,7 +146,7 @@ export const CLEANING_RECURRING_CTA: CTAData = { label: "Explore Recurring Clean
 export const CLEANING_SERVICE_AREA: ContentSlot = {
   eyebrow: "Areas We Serve",
   heading: "Elevated cleaning, close to home.",
-  body: "Elevated Home Resets provides cleaning services across our Northern Virginia service area, including Alexandria, Arlington, Ashburn, Fairfax, Falls Church, Herndon, Leesburg, Manassas, Manassas Park, Reston, Tysons, Vienna, and Woodbridge, with additional service in Fredericksburg.",
+  body: `Elevated Home Resets provides cleaning services throughout Northern Virginia and the Fredericksburg area, including ${formatCityListSentence()}.`,
   primaryCTA: BOOK_CLEANING_CTA,
 };
 

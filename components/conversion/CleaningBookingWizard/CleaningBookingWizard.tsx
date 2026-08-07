@@ -167,6 +167,11 @@ export function CleaningBookingWizard() {
     setState((prev) => (prev.tier ? prev : { ...prev, tier: service as CleaningBookingFormState["tier"] }));
   }
   const [currentStep, setCurrentStep] = useState(1);
+  /** Snapshot of `state` as of the last completed step boundary — this,
+   *  not the live `state`, drives the "Your Booking So Far" estimated
+   *  price so it doesn't recalculate on every selection mid-step (see
+   *  BookingSummary). Only ever reassigned alongside setCurrentStep. */
+  const [committedPriceState, setCommittedPriceState] = useState<CleaningBookingFormState>(INITIAL_FORM_STATE);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitState, setSubmitState] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [submitErrorMessage, setSubmitErrorMessage] = useState("");
@@ -181,7 +186,17 @@ export function CleaningBookingWizard() {
       hasFocusedInitialStep.current = true;
       return;
     }
-    stepWrapperRef.current?.focus();
+    const el = stepWrapperRef.current;
+    if (!el) return;
+    // Explicitly scroll to the top of the new step rather than relying on
+    // the browser's default focus-scroll heuristic, which was landing
+    // partway down the page (sometimes at the footer) instead of at the
+    // start of the new question — inconsistent across iOS Safari/Android
+    // Chrome. scroll-margin-top on .stepWrapper keeps the heading clear
+    // of the sticky header.
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    el.focus({ preventScroll: true });
   }, [currentStep]);
 
   useEffect(() => {
@@ -196,6 +211,7 @@ export function CleaningBookingWizard() {
 
   function goToStep(step: number) {
     setErrors({});
+    setCommittedPriceState(state);
     setCurrentStep(step);
   }
 
@@ -206,11 +222,13 @@ export function CleaningBookingWizard() {
       return;
     }
     setErrors({});
+    setCommittedPriceState(state);
     setCurrentStep(nextStepAfter(currentStep, state));
   }
 
   function handleBack() {
     setErrors({});
+    setCommittedPriceState(state);
     setCurrentStep(prevStepBefore(currentStep, state));
   }
 
@@ -231,6 +249,7 @@ export function CleaningBookingWizard() {
     }
     setErrors({});
     if (state.selectedSlotStart) {
+      setCommittedPriceState(state);
       setCurrentStep(PAYMENT_STEP);
     } else {
       void handleFallbackSubmit();
@@ -448,7 +467,7 @@ export function CleaningBookingWizard() {
           </div>
         ) : null}
 
-        <div ref={stepWrapperRef} tabIndex={-1}>
+        <div ref={stepWrapperRef} tabIndex={-1} className={styles.stepWrapper}>
           {currentStep === 1 ? <Step1CleaningHome state={state} updateField={updateField} errors={errors} /> : null}
           {currentStep === 2 ? <Step2Areas state={state} updateField={updateField} errors={errors} /> : null}
           {currentStep === 3 ? <Step3Condition state={state} updateField={updateField} errors={errors} /> : null}
@@ -486,7 +505,7 @@ export function CleaningBookingWizard() {
         </div>
       </div>
 
-      <BookingSummary state={state} />
+      <BookingSummary state={state} priceState={committedPriceState} />
     </div>
   );
 }

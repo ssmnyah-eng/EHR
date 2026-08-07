@@ -2,6 +2,7 @@ import type { ContentSlot, TierSelectorCardData, TeaserCardData, CTAData } from 
 import type { ProcessStep } from "@/components/content/Process";
 import { ESTIMATE_CTA, ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
 import { KIM_NELSON, LASHON_PATTERSON } from "@/content/testimonials";
+import { formatCityListSentence } from "@/content/service-areas";
 
 /**
  * Final approved copy for the Home Organization hub page
@@ -233,7 +234,7 @@ export const HOME_ORG_TRUST: ContentSlot = {
 export const HOME_ORG_SERVICE_AREA: ContentSlot = {
   eyebrow: "Areas We Serve",
   heading: "Home organization across Northern Virginia and Fredericksburg.",
-  body: "Elevated Home Resets serves Alexandria, Arlington, Ashburn, Fairfax, Falls Church, Herndon, Leesburg, Manassas, Manassas Park, Reston, Tysons, Vienna, Woodbridge, and Fredericksburg.",
+  body: `Elevated Home Resets serves ${formatCityListSentence()}, throughout Northern Virginia and the Fredericksburg area.`,
   primaryCTA: { label: "Start Your Organization Quote", href: ORGANIZATION_QUOTE_CTA.href },
 };
 

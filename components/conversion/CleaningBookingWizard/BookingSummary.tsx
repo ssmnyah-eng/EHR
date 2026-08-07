@@ -10,6 +10,12 @@ import styles from "./CleaningBookingWizard.module.css";
 
 interface BookingSummaryProps {
   state: CleaningBookingFormState;
+  /** Snapshot of state as of the last completed step boundary — drives
+   *  the estimated price/deposit only, so the total doesn't recalculate
+   *  on every selection mid-step (an intentional UX decision: the price
+   *  updates once per completed step, after Next/Continue). Everything
+   *  else in this panel still reflects live `state`. */
+  priceState: CleaningBookingFormState;
 }
 
 function formatSlot(startTime: string): string {
@@ -35,12 +41,17 @@ function formatDate(dateString: string): string {
  * Reads directly from the same wizard state every step writes to, so it
  * updates automatically with no separate state of its own, and reflects
  * exactly what going back and changing an earlier answer actually did.
+ *
+ * The one exception is the estimated price/deposit card: it's computed
+ * from `priceState` (a snapshot frozen at the last completed step
+ * boundary), not live `state`, so the total doesn't shift on every
+ * selection mid-step — see CleaningBookingWizard's committedPriceState.
  */
-export function BookingSummary({ state }: BookingSummaryProps) {
+export function BookingSummary({ state, priceState }: BookingSummaryProps) {
   const hasStarted = Boolean(state.tier || state.scope || state.squareFootage);
   if (!hasStarted) return null;
 
-  const input = buildPricingInput(state);
+  const input = buildPricingInput(priceState);
   const price = input ? calculatePrice(input) : null;
   const deposit = price ? calculateDeposit(price.finalTotal) : null;
 
