@@ -1,0 +1,141 @@
+.selector {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+@media (max-width: 56rem) {
+  .selector {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  text-align: left;
+  padding: var(--space-md);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  transition: border-color var(--duration-fast) var(--ease-standard), transform var(--duration-fast) var(--ease-standard);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.card[data-active="true"] {
+  border-color: var(--color-accent);
+  outline: 2px solid var(--color-accent);
+  outline-offset: -2px;
+  background: var(--color-surface-muted);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.cardIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.cardName {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--heading-sm);
+  color: var(--color-text-primary);
+}
+
+.cardRegion {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--body-sm);
+  color: var(--color-text-secondary);
+}
+
+.cardMeta {
+  font-family: var(--font-body);
+  font-size: var(--caption-size);
+  color: var(--color-muted);
+  padding-left: 2.25rem;
+}
+
+.panel {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface-muted);
+  padding: var(--space-lg);
+  min-height: 100%;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.panelBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-text-inverse);
+  font-family: var(--font-display);
+  font-size: var(--heading-sm);
+  flex-shrink: 0;
+}
+
+.panelName {
+  font-family: var(--font-display);
+  font-size: var(--heading-sm);
+  color: var(--color-text-primary);
+}
+
+.panelRegion {
+  font-family: var(--font-body);
+  font-size: var(--body-sm);
+  color: var(--color-text-secondary);
+}
+
+.panelLabel {
+  font-family: var(--font-body);
+  font-size: var(--body-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-xs);
+}
+
+.cityList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2xs) var(--space-md);
+  font-family: var(--font-body);
+  font-size: var(--body-md);
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 30rem) {
+  .cityList {
+    grid-template-columns: 1fr;
+  }
+}

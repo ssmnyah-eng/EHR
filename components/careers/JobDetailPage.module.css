@@ -1,0 +1,354 @@
+/* ---- Hero: full photo, dark overlay, title/location/pay + Apply ---- */
+.hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  min-height: clamp(22rem, 60svh, 34rem);
+}
+
+.heroMedia {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.heroScrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(190deg, rgba(23, 24, 26, 0.2) 0%, rgba(23, 24, 26, 0.45) 55%, rgba(23, 24, 26, 0.8) 100%);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding-inline: var(--page-gutter-mobile);
+  padding-block: var(--space-xl) var(--space-2xl);
+  color: var(--color-text-inverse);
+}
+
+@media (min-width: 48rem) {
+  .heroContent {
+    padding-inline: var(--page-gutter-tablet);
+  }
+}
+
+@media (min-width: 75rem) {
+  .heroContent {
+    padding-inline: var(--page-gutter-desktop);
+  }
+}
+
+.heroMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+  font-family: var(--font-body);
+  font-size: var(--body-md);
+  opacity: 0.92;
+}
+
+h1.heroTitle {
+  max-width: 24ch;
+  color: var(--color-text-inverse);
+  margin-bottom: var(--space-lg);
+}
+
+/* ---- Two-column layout: content + sticky sidebar ---- */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 22rem);
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+@media (max-width: 64rem) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebarCol {
+    order: -1;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.card {
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 1px 3px rgba(23, 24, 26, 0.05);
+}
+
+.cardHeading {
+  margin-bottom: var(--space-sm);
+}
+
+/* Position Overview */
+.overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+@media (max-width: 40rem) {
+  .overview {
+    grid-template-columns: 1fr;
+  }
+}
+
+.overviewImage {
+  height: 12rem;
+  border-radius: var(--radius-md);
+}
+
+/* Compensation */
+.compHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.compHeaderHeading {
+  margin-bottom: 0;
+}
+
+.zoneIntro {
+  margin-bottom: var(--space-md);
+}
+
+.compIcon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--color-accent);
+}
+
+.compPay {
+  font-family: var(--font-display);
+  font-size: var(--heading-xl);
+  color: var(--color-text-primary);
+}
+
+.compBullets {
+  list-style: none;
+  margin: var(--space-sm) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.compNote {
+  margin-top: var(--space-sm);
+}
+
+/* Icon grid (What You'll Do / Equipment) */
+.iconGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-sm);
+}
+
+@media (max-width: 36rem) {
+  .iconGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.iconGridItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  padding: var(--space-sm);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-muted);
+  font-family: var(--font-body);
+  font-size: var(--body-sm);
+  color: var(--color-text-primary);
+}
+
+.iconGridIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  color: var(--color-accent);
+  margin-top: 0.1rem;
+}
+
+/* Experience split card */
+.experience {
+  display: grid;
+  grid-template-columns: minmax(0, 0.35fr) minmax(0, 0.65fr);
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+@media (max-width: 36rem) {
+  .experience {
+    grid-template-columns: 1fr;
+  }
+}
+
+.experienceStat {
+  font-family: var(--font-display);
+  font-size: var(--display-md);
+  color: var(--color-accent);
+  text-align: center;
+}
+
+/* Dress code two-column */
+.dressCode {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-lg);
+}
+
+@media (max-width: 36rem) {
+  .dressCode {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dressList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  font-family: var(--font-body);
+  font-size: var(--body-sm);
+}
+
+.dressItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2xs);
+}
+
+.dressIconOk {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  color: var(--color-accent);
+  margin-top: 0.15rem;
+}
+
+.dressIconNo {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  color: var(--color-muted);
+  margin-top: 0.15rem;
+}
+
+.dressColHeading {
+  font-family: var(--font-body);
+  font-size: var(--caption-size);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.dressNote {
+  grid-column: 1 / -1;
+  margin-top: var(--space-sm);
+}
+
+/* Philosophy split */
+.philosophy {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+@media (max-width: 36rem) {
+  .philosophy {
+    grid-template-columns: 1fr;
+  }
+}
+
+.philosophyImage {
+  height: 16rem;
+  border-radius: var(--radius-md);
+}
+
+/* Why Join */
+.whyJoin {
+  display: grid;
+  grid-template-columns: minmax(0, 0.3fr) minmax(0, 0.7fr);
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+@media (max-width: 36rem) {
+  .whyJoin {
+    grid-template-columns: 1fr;
+  }
+}
+
+.whyJoinImage {
+  height: 8rem;
+  border-radius: var(--radius-md);
+}
+
+/* Final CTA */
+.finalCta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-height: clamp(22rem, 52svh, 32rem);
+}
+
+.finalCtaMedia {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.finalCtaScrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: rgba(23, 24, 26, 0.58);
+}
+
+.finalCtaContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-md);
+  max-width: 40rem;
+  padding: var(--space-xl) var(--page-gutter-mobile);
+  color: var(--color-text-inverse);
+}
+
+h2.finalCtaHeading {
+  color: var(--color-text-inverse);
+}
+
+.finalCtaBody {
+  color: var(--color-text-inverse);
+  opacity: 0.92;
+}

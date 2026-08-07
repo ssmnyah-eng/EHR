@@ -1,49 +1,160 @@
-.heroLayout {
+.sectionIntro {
+  max-width: 60ch;
+  margin-bottom: var(--space-lg);
+}
+
+.valueCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  height: 100%;
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  transition: transform var(--duration-fast) var(--ease-standard), box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.valueCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(23, 24, 26, 0.1);
+}
+
+.valueIcon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--color-accent);
+}
+
+.valueTitle {
+  margin-bottom: 0;
+}
+
+.zonesIntro {
+  max-width: 60ch;
+  margin-bottom: var(--space-lg);
+}
+
+.thrives {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: var(--space-2xl);
   align-items: center;
 }
 
 @media (max-width: 56rem) {
-  .heroLayout {
+  .thrives {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
   }
 }
 
-.heroMedia {
-  height: 22rem;
+.thrivesMedia {
+  height: 26rem;
 }
 
 @media (max-width: 40rem) {
-  .heroMedia {
-    height: 16rem;
+  .thrivesMedia {
+    height: 18rem;
   }
 }
 
-.intro {
-  max-width: 46ch;
-  margin-bottom: 0;
+.thrivesChecklist {
+  list-style: none;
+  margin: var(--space-md) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
 }
 
-.body {
-  max-width: 60ch;
-  margin-bottom: var(--space-md);
+.thrivesItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  font-family: var(--font-body);
+  font-size: var(--body-lg);
+  color: var(--color-text-primary);
 }
 
-.whyIntro {
-  max-width: 60ch;
-  margin-bottom: var(--space-lg);
+.thrivesCheckIcon {
+  width: 1.375rem;
+  height: 1.375rem;
+  flex-shrink: 0;
+  color: var(--color-accent);
+  margin-top: 0.15rem;
 }
 
-.whyCard {
-  padding: var(--space-lg);
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-md);
-  height: 100%;
+.positionsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-lg);
 }
 
-.whyCardHeading {
-  margin-bottom: var(--space-xs);
+@media (max-width: 48rem) {
+  .positionsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-xl);
+}
+
+@media (max-width: 56rem) {
+  .faqGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Final CTA: full-bleed image, dark overlay, centered content ---- */
+.finalCta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-height: clamp(24rem, 56svh, 36rem);
+}
+
+.finalCtaMedia {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.finalCtaScrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: rgba(23, 24, 26, 0.58);
+}
+
+.finalCtaContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-md);
+  max-width: 40rem;
+  padding: var(--space-xl) var(--page-gutter-mobile);
+  color: var(--color-text-inverse);
+}
+
+.finalCtaEyebrow {
+  color: var(--color-text-inverse);
+  opacity: 0.85;
+}
+
+h2.finalCtaHeading {
+  color: var(--color-text-inverse);
+}
+
+.finalCtaBody {
+  color: var(--color-text-inverse);
+  opacity: 0.92;
 }
