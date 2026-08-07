@@ -23,8 +23,22 @@
  *                                  /config below instead of hardcoding it
  *                                  client-side).
  *     SQUARE_LOCATION_ID           Square Location ID.
- *     SQUARE_SERVICE_VARIATION_ID  Catalog service-variation ID used for
- *                                  every booking/availability search.
+ *     SQUARE_SERVICE_VARIATION_ID_STANDARD  Catalog service-variation ID
+ *                                  for the "Standard Cleaning" Square
+ *                                  service (tier "standard-clean").
+ *     SQUARE_SERVICE_VARIATION_ID_PREMIUM   Catalog service-variation ID
+ *                                  for "Premium Deep Cleaning" (tier
+ *                                  "deep-premium-clean").
+ *     SQUARE_SERVICE_VARIATION_ID_ELEVATED  Catalog service-variation ID
+ *                                  for "Elevated Reset Cleaning" (tier
+ *                                  "elevated-reset-clean"). Use GET
+ *                                  /admin/catalog-services (below) to look
+ *                                  these three IDs up automatically rather
+ *                                  than hunting for them in Square's UI —
+ *                                  remove that route once you've copied
+ *                                  the IDs in, it's a one-time lookup
+ *                                  tool, not something to leave reachable
+ *                                  indefinitely.
  *     SQUARE_ENVIRONMENT           "sandbox" while testing, "production"
  *                                  once ready to take real payments.
  *     ALLOWED_ORIGIN                The exact site origin allowed to call
@@ -41,6 +55,10 @@
  *
  * ── Endpoints ───────────────────────────────────────────────────────────
  *   GET  /config                     → { applicationId, locationId, environment }
+ *   GET  /admin/catalog-services      → { items } — one-time setup helper, see
+ *                                       the SQUARE_SERVICE_VARIATION_ID_* note
+ *                                       above; remove this route once you've
+ *                                       copied the three IDs into Settings.
  *   POST /pricing/quote              → { price, duration, deposit }
  *   POST /availability                → { appointmentMinutes, slots }
  *   POST /customers                   → { customerId, created }
@@ -574,8 +592,23 @@ async function createSquareCustomer(env, { givenName, familyName, emailAddress, 
   });
 }
 
-async function searchSquareAvailability(env, { startAt, endAt, durationMinutes, teamMemberId }) {
-  const segmentFilter = { service_variation_id: env.SQUARE_SERVICE_VARIATION_ID };
+/** Maps a Cleaning tier to its Square catalog service-variation ID — EHR
+ *  has one Square service per tier (Standard / Premium / Elevated), not
+ *  one shared service, so every availability search and booking must use
+ *  the ID matching the tier the customer actually selected. */
+function serviceVariationIdForTier(env, tier) {
+  const byTier = {
+    "standard-clean": env.SQUARE_SERVICE_VARIATION_ID_STANDARD,
+    "deep-premium-clean": env.SQUARE_SERVICE_VARIATION_ID_PREMIUM,
+    "elevated-reset-clean": env.SQUARE_SERVICE_VARIATION_ID_ELEVATED,
+  };
+  const id = byTier[tier];
+  if (!id) throw new ValidationError(`No Square service variation configured for tier "${tier}" — set SQUARE_SERVICE_VARIATION_ID_${tier === "standard-clean" ? "STANDARD" : tier === "deep-premium-clean" ? "PREMIUM" : "ELEVATED"} in Settings.`, 500);
+  return id;
+}
+
+async function searchSquareAvailability(env, { startAt, endAt, durationMinutes, teamMemberId, serviceVariationId }) {
+  const segmentFilter = { service_variation_id: serviceVariationId };
   if (teamMemberId) segmentFilter.team_member_id_filter = { any: [teamMemberId] };
   return squareFetch(env, "/v2/bookings/availability/search", {
     method: "POST",
@@ -591,7 +624,7 @@ async function searchSquareAvailability(env, { startAt, endAt, durationMinutes, 
   });
 }
 
-async function createSquareBooking(env, { startAt, durationMinutes, customerId, teamMemberId, idempotencyKey, note }) {
+async function createSquareBooking(env, { startAt, durationMinutes, customerId, teamMemberId, idempotencyKey, note, serviceVariationId }) {
   return squareFetch(env, "/v2/bookings", {
     method: "POST",
     body: JSON.stringify({
@@ -604,13 +637,20 @@ async function createSquareBooking(env, { startAt, durationMinutes, customerId, 
         appointment_segments: [
           {
             duration_minutes: durationMinutes,
-            service_variation_id: env.SQUARE_SERVICE_VARIATION_ID,
+            service_variation_id: serviceVariationId,
             team_member_id: teamMemberId,
           },
         ],
       },
     }),
   });
+}
+
+/** GET /v2/catalog/list?types=ITEM — every catalog item (Square services
+ *  show up here) with its variations, id, name, and price. Used only by
+ *  the one-time /admin/catalog-services lookup below. */
+async function listSquareCatalogItems(env) {
+  return squareFetch(env, "/v2/catalog/list?types=ITEM", { method: "GET" });
 }
 
 async function getSquareBooking(env, bookingId) {
@@ -693,6 +733,28 @@ async function handleConfig(env) {
   });
 }
 
+/** GET /admin/catalog-services — one-time setup helper. Lists every
+ *  Square catalog item (your three cleaning services) with each
+ *  variation's ID, name, and price, so you can copy the three
+ *  SQUARE_SERVICE_VARIATION_ID_* values into Settings without hunting
+ *  for them in Square's UI. Uses SQUARE_ACCESS_TOKEN server-side — the
+ *  token itself is never returned. Remove this route (and its entry in
+ *  the router below) once you've copied the IDs you need; it's a
+ *  one-time lookup tool, not something to leave reachable indefinitely. */
+async function handleAdminCatalogServices(env) {
+  const result = await listSquareCatalogItems(env);
+  const items = (result.objects || []).map((obj) => {
+    const itemData = obj.item_data || {};
+    const variations = (itemData.variations || []).map((v) => ({
+      variationId: v.id,
+      variationName: v.item_variation_data && v.item_variation_data.name,
+      priceCents: v.item_variation_data && v.item_variation_data.price_money && v.item_variation_data.price_money.amount,
+    }));
+    return { itemId: obj.id, itemName: itemData.name, variations };
+  });
+  return jsonResponse(env, { items });
+}
+
 /** POST /pricing/quote — recomputes the full price/duration/deposit
  *  breakdown from the questionnaire answers. Call this right after the
  *  customer finishes the questionnaire to get the authoritative numbers
@@ -720,8 +782,9 @@ async function handleAvailability(request, env) {
 
   const startAt = `${raw.serviceDate}T00:00:00Z`;
   const endAt = `${raw.serviceDate}T23:59:59Z`;
+  const serviceVariationId = serviceVariationIdForTier(env, input.tier);
 
-  const result = await searchSquareAvailability(env, { startAt, endAt, durationMinutes: duration.appointmentMinutes });
+  const result = await searchSquareAvailability(env, { startAt, endAt, durationMinutes: duration.appointmentMinutes, serviceVariationId });
   const slots = (result.availabilities || []).map((a) => ({
     startTime: a.start_at,
     endTime: new Date(new Date(a.start_at).getTime() + duration.appointmentMinutes * 60000).toISOString(),
@@ -762,6 +825,7 @@ async function handleAppointmentCreate(request, env) {
   if (!raw.startAt || typeof raw.startAt !== "string") throw new ValidationError("startAt is required");
 
   const duration = calculateDuration(input);
+  const serviceVariationId = serviceVariationIdForTier(env, input.tier);
   const windowStart = new Date(raw.startAt);
   if (Number.isNaN(windowStart.getTime())) throw new ValidationError("startAt is not a valid ISO date-time");
   const windowEnd = new Date(windowStart.getTime() + 60000);
@@ -770,6 +834,7 @@ async function handleAppointmentCreate(request, env) {
     startAt: windowStart.toISOString(),
     endAt: windowEnd.toISOString(),
     durationMinutes: duration.appointmentMinutes,
+    serviceVariationId,
   });
   const match = (availability.availabilities || []).find((a) => a.start_at === windowStart.toISOString());
   if (!match) throw new ValidationError("That time is no longer available — please choose another.", 409);
@@ -785,6 +850,7 @@ async function handleAppointmentCreate(request, env) {
     teamMemberId,
     idempotencyKey,
     note: typeof raw.note === "string" ? raw.note : undefined,
+    serviceVariationId,
   });
 
   return jsonResponse(env, {
@@ -898,6 +964,9 @@ export default {
       }
       if (request.method === "GET" && url.pathname === "/config") {
         return await handleConfig(env);
+      }
+      if (request.method === "GET" && url.pathname === "/admin/catalog-services") {
+        return await handleAdminCatalogServices(env);
       }
       if (request.method === "POST" && url.pathname === "/pricing/quote") {
         return await handlePricingQuote(request, env);
