@@ -234,18 +234,45 @@ interface AddOnConfig {
   /** Price per unit (per load/window/bed/set) for quantity-based add-ons;
    *  flat price for the rest. */
   price: number;
-  /** Cleaner-minutes per unit. Laundry is deliberately lower than a
-   *  literal wash/dry/fold cycle would take — machine runtime isn't
-   *  active cleaner labor, cleaning continues elsewhere while it runs. */
+  /** ACTIVE cleaner-minutes per unit (loading/transferring/folding, etc.) —
+   *  not machine runtime. Laundry's active minutes are deliberately lower
+   *  than a full wash/dry/fold cycle: machine runtime isn't active cleaner
+   *  labor, cleaning continues elsewhere while it runs. See
+   *  LAUNDRY_WALLCLOCK_MINUTES_PER_LOAD below for the separate figure used
+   *  to make sure the appointment doesn't end before the laundry does. */
   minutes: number;
   unit: "flat" | "load" | "window" | "bed" | "set";
+  /** Online-booking cap for this add-on's quantity, if any. Enforced both
+   *  in the wizard UI and defensively in engine.ts (never trust a
+   *  client-submitted quantity above this). Undefined = no cap. */
+  maxQuantity?: number;
 }
+
+/** Laundry is capped at 3 loads through the standard online booking
+ *  calculator. More than that requires EHR to review and confirm
+ *  scheduling manually — see Step4AddOns.tsx's large-request panel and
+ *  the largeLaundryRequest/priorityReview flags in
+ *  CleaningBookingWizard's submitted booking record. */
+export const LAUNDRY_MAX_ONLINE_LOADS = 3;
+
+/** Full wall-clock time (wash + dry) per laundry load, used only to make
+ *  sure the appointment reservation is long enough for the laundry to
+ *  finish before the cleaner would otherwise leave — never added into the
+ *  active-cleaner-minutes total the way ADD_ON_CONFIG.laundry.minutes is.
+ *  See calculateDuration()'s "reserve whichever is longer" logic. Assumes
+ *  loads run sequentially (no pipelining across multiple loads) as a
+ *  deliberately conservative default; fold time is treated as already
+ *  covered by ADD_ON_CONFIG.laundry.minutes' active labor. This exact
+ *  figure (40 min wash + 50 min dry) is an initial placeholder pending
+ *  EHR's real appliance timing — replace here only, nothing else needs to
+ *  change. */
+export const LAUNDRY_WALLCLOCK_MINUTES_PER_LOAD = 90;
 
 export const ADD_ON_CONFIG: Record<AddOnType, AddOnConfig> = {
   "inside-oven": { label: "Inside oven", price: 43, minutes: 30, unit: "flat" },
   "inside-fridge": { label: "Inside refrigerator / freezer", price: 38, minutes: 25, unit: "flat" },
   "inside-cabinets": { label: "Inside kitchen cabinets", price: 63, minutes: 45, unit: "flat" },
-  laundry: { label: "Laundry — wash, dry, fold", price: 30, minutes: 20, unit: "load" },
+  laundry: { label: "Laundry — wash, dry, fold", price: 30, minutes: 20, unit: "load", maxQuantity: LAUNDRY_MAX_ONLINE_LOADS },
   dishes: { label: "Dishes", price: 28, minutes: 20, unit: "load" },
   "interior-windows": { label: "Interior windows", price: 11, minutes: 8, unit: "window" },
   "bedding-change": { label: "Bedding change", price: 23, minutes: 15, unit: "bed" },

@@ -34,6 +34,7 @@ const FIELD_IDS: Record<number, Record<string, string>> = {
     clutterAccess: "step3-clutter",
     petHair: "step3-pet",
   },
+  4: { estimatedLaundryLoads: "step4-estimated-loads" },
   5: {
     firstName: "step5-first-name",
     lastName: "step5-last-name",
@@ -87,6 +88,10 @@ function validateStep(step: number, state: CleaningBookingFormState): Record<str
     if (!state.clutterAccess) errors.clutterAccess = "Please answer this question.";
     if (!state.petHair) errors.petHair = "Please answer this question.";
     if (state.bathroomCount === "" || Number(state.bathroomCount) < 0) errors.bathroomCount = "Please tell us how many bathrooms your home has.";
+  }
+
+  if (step === 4 && state.largeLaundryRequest) {
+    if (!state.estimatedLaundryLoads.trim()) errors.estimatedLaundryLoads = "Please estimate how many loads you have.";
   }
 
   if (step === 5) {
@@ -252,6 +257,9 @@ export function CleaningBookingWizard() {
 
       formData.append("condition", JSON.stringify(input.condition));
       formData.append("addOns", JSON.stringify(input.addOns));
+      formData.append("largeLaundryRequest", String(state.largeLaundryRequest));
+      formData.append("estimatedLaundryLoads", state.estimatedLaundryLoads);
+      formData.append("laundryNotes", state.laundryNotes);
 
       formData.append("firstName", state.firstName);
       formData.append("lastName", state.lastName);
@@ -265,7 +273,7 @@ export function CleaningBookingWizard() {
       formData.append("accessNotes", state.accessNotes);
 
       formData.append("specialCondition", String(input.hasSpecialtyCondition));
-      formData.append("priorityReview", String(input.hasSpecialtyCondition));
+      formData.append("priorityReview", String(input.hasSpecialtyCondition || state.largeLaundryRequest));
       formData.append("photosProvided", String(state.specialtyPhotos.length > 0));
       formData.append("specialtyTypes", state.specialtyTypes.join(", "));
       formData.append("specialtyAffectedAreas", state.specialtyAffectedAreas);
@@ -313,6 +321,9 @@ export function CleaningBookingWizard() {
         </p>
         {input?.hasSpecialtyCondition ? (
           <p>Because of what you shared about your home&apos;s condition, our team will personally review this booking before it&apos;s confirmed.</p>
+        ) : null}
+        {state.largeLaundryRequest ? (
+          <p>Because you need more than 3 loads of laundry, our team will review your request and confirm scheduling before your appointment is finalized.</p>
         ) : null}
         <div className={styles.successActions}>
           <Link href="/" className={styles.backButton}>

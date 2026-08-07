@@ -147,9 +147,16 @@ export interface DurationBreakdown {
   totalCleanerMinutes: number;
   /** totalCleanerMinutes with the 15% scheduling buffer applied. */
   bufferedMinutes: number;
-  /** bufferedMinutes rounded up to the next 30-minute block — this is
-   *  the actual calendar reservation length. Never shown to the customer
-   *  as a promise of exact cleaner-hours; only used for scheduling. */
+  /** Wall-clock time (not active cleaner labor) needed for the selected
+   *  laundry loads to finish washing/drying — 0 if no laundry selected.
+   *  Never added into totalCleanerMinutes/bufferedMinutes; only compared
+   *  against bufferedMinutes so the appointment reserves whichever is
+   *  longer, and never shown to the customer. */
+  laundryWallClockMinutes: number;
+  /** max(bufferedMinutes, laundryWallClockMinutes), rounded up to the
+   *  next 30-minute block — this is the actual calendar reservation
+   *  length. Never shown to the customer as a promise of exact
+   *  cleaner-hours; only used for scheduling. */
   appointmentMinutes: number;
 }
 

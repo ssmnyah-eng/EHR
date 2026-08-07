@@ -83,7 +83,7 @@ export function Step7Review({ state, onEdit }: Step7ReviewProps) {
         </p>
       </div>
 
-      {state.addOns.length > 0 ? (
+      {state.addOns.length > 0 || state.largeLaundryRequest ? (
         <div className={styles.reviewSection}>
           <div className={styles.reviewSectionHeader}>
             <span className={styles.reviewSectionTitle}>Add-Ons</span>
@@ -97,6 +97,12 @@ export function Step7Review({ state, onEdit }: Step7ReviewProps) {
               <span className={styles.reviewRowValue}>${item.amount}</span>
             </div>
           ))}
+          {state.largeLaundryRequest ? (
+            <p className={styles.reviewRowLabel}>
+              You need more than 3 loads of laundry (about {state.estimatedLaundryLoads || "?"}) — our team will review and confirm scheduling before
+              your appointment is finalized.
+            </p>
+          ) : null}
         </div>
       ) : null}
 

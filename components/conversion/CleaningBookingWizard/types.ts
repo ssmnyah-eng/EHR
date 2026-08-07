@@ -41,6 +41,12 @@ export interface CleaningBookingFormState {
 
   // Step 4 — Add-Ons
   addOns: SelectedAddOn[];
+  /** Laundry beyond the 3-load online booking cap. Not priced/scheduled
+   *  automatically — purely a flag + free-text estimate for EHR to review
+   *  and confirm scheduling manually. See LAUNDRY_MAX_ONLINE_LOADS. */
+  largeLaundryRequest: boolean;
+  estimatedLaundryLoads: string;
+  laundryNotes: string;
 
   // Step 5 — Customer / Property Details
   firstName: string;
@@ -88,6 +94,9 @@ export const INITIAL_FORM_STATE: CleaningBookingFormState = {
   specialtyTypes: [],
 
   addOns: [],
+  largeLaundryRequest: false,
+  estimatedLaundryLoads: "",
+  laundryNotes: "",
 
   firstName: "",
   lastName: "",

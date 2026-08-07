@@ -12,6 +12,7 @@ import {
   FIXED_AREA_PRICE,
   HALF_BATHROOM_DURATION_MINUTES,
   KITCHEN_GREASE_ADJUSTMENT,
+  LAUNDRY_WALLCLOCK_MINUTES_PER_LOAD,
   MINIMUM_BOOKING_PRICE,
   PET_HAIR_ADJUSTMENT,
   SCHEDULING_BUFFER_PERCENT,
@@ -112,7 +113,11 @@ export function calculateAddOns(input: CleaningPricingInput): { addOnCharges: nu
     const eligible = ADD_ON_ELIGIBILITY[input.tier][selected.type];
     if (!eligible) continue;
     const config = ADD_ON_CONFIG[selected.type as AddOnType];
-    const quantity = config.unit === "flat" ? 1 : Math.max(1, selected.quantity);
+    // Never trust a client-submitted quantity above the configured cap
+    // (e.g. laundry's 3-load online limit) — clamp defensively here too,
+    // not just in the wizard UI.
+    const uncappedQuantity = config.unit === "flat" ? 1 : Math.max(1, selected.quantity);
+    const quantity = config.maxQuantity ? Math.min(uncappedQuantity, config.maxQuantity) : uncappedQuantity;
     const lineAmount = config.price * quantity;
     addOnCharges += lineAmount;
     addOnMinutes += config.minutes * quantity;
@@ -191,12 +196,30 @@ export function calculatePrice(input: CleaningPricingInput): PriceBreakdown {
   };
 }
 
+/** Loads of laundry actually selected (0 if none), clamped to the online
+ *  cap — mirrors the same defensive clamp calculateAddOns() applies to
+ *  pricing, so a tampered quantity can't inflate the reserved appointment
+ *  length either. */
+function laundryLoadCount(input: CleaningPricingInput): number {
+  const laundry = input.addOns.find((a) => a.type === "laundry");
+  if (!laundry) return 0;
+  const cap = ADD_ON_CONFIG.laundry.maxQuantity;
+  return cap ? Math.min(Math.max(0, laundry.quantity), cap) : Math.max(0, laundry.quantity);
+}
+
 /**
  * Full duration breakdown, ending in the actual calendar reservation
- * length: total estimated cleaner-minutes, +15% scheduling buffer (+15%
- * specialty contingency first, if flagged), rounded up to the next
- * 30-minute block. None of this is exposed to the customer as a labor-
- * hour or staffing promise — see DurationBreakdown's field comments.
+ * length. Laundry is scheduled differently from every other add-on: its
+ * ACTIVE cleaner-minutes (loading/folding) are included in the normal
+ * cleaner-minutes total like any other add-on, but machine runtime is
+ * not — the appointment must instead reserve whichever is longer, the
+ * buffered cleaning duration or the wall-clock time for the selected
+ * laundry to finish, so the cleaner is never scheduled to leave before
+ * the laundry is done. Everything else here is unchanged: total estimated
+ * cleaner-minutes, +15% scheduling buffer (+15% specialty contingency
+ * first, if flagged), rounded up to the next 30-minute block. None of
+ * this is exposed to the customer as a labor-hour or staffing promise —
+ * see DurationBreakdown's field comments.
  */
 export function calculateDuration(input: CleaningPricingInput): DurationBreakdown {
   const baseCleanerMinutes = baseServiceMinutes(input);
@@ -214,7 +237,9 @@ export function calculateDuration(input: CleaningPricingInput): DurationBreakdow
 
   const totalCleanerMinutes = preContingency + specialtyContingencyMinutes;
   const bufferedMinutes = Math.round(totalCleanerMinutes * (1 + SCHEDULING_BUFFER_PERCENT));
-  const appointmentMinutes = Math.ceil(bufferedMinutes / 30) * 30;
+
+  const laundryWallClockMinutes = laundryLoadCount(input) * LAUNDRY_WALLCLOCK_MINUTES_PER_LOAD;
+  const appointmentMinutes = Math.ceil(Math.max(bufferedMinutes, laundryWallClockMinutes) / 30) * 30;
 
   return {
     baseCleanerMinutes,
@@ -224,6 +249,7 @@ export function calculateDuration(input: CleaningPricingInput): DurationBreakdow
     specialtyContingencyMinutes,
     totalCleanerMinutes,
     bufferedMinutes,
+    laundryWallClockMinutes,
     appointmentMinutes,
   };
 }
