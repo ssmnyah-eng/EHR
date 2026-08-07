@@ -10,9 +10,10 @@ import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import { ServiceProof } from "@/components/content/ServiceProof";
 import type { ServiceProofQuote, ServiceProofMedia } from "@/components/content/ServiceProof";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
-import { SharedBeforeAfterSection } from "@/components/content/SharedBeforeAfterSection";
+import { TransformationPreview } from "@/components/content/TransformationPreview";
 import { ORGANIZATION_ROOMS } from "@/content/home-organization-rooms";
 import { getServiceMedia } from "@/content/service-media";
+import { featuredTransformationForCategory } from "@/content/transformations";
 
 interface OrganizationRoomProcess {
   eyebrow?: string;
@@ -54,6 +55,7 @@ interface OrganizationRoomTemplateProps {
 export function OrganizationRoomTemplate({ currentSlug, heroSlot, heroPrice, sections, process, proof, finalCTA }: OrganizationRoomTemplateProps) {
   const roomLabel = ORGANIZATION_ROOMS.find((room) => room.slug === currentSlug)?.navLabel ?? currentSlug;
   const media = getServiceMedia(currentSlug);
+  const featuredTransformation = featuredTransformationForCategory(roomLabel);
 
   return (
     <>
@@ -93,7 +95,7 @@ export function OrganizationRoomTemplate({ currentSlug, heroSlot, heroPrice, sec
 
       <Section spacing="lg" surface="surface">
         <Container width="wide">
-          <SharedBeforeAfterSection />
+          <TransformationPreview image={featuredTransformation.heroMedia!} />
         </Container>
       </Section>
 

@@ -280,3 +280,26 @@ export function findTransformationBySlug(slug: string): TransformationProject | 
 export function findTransformationsByCategory(category: string): TransformationProject[] {
   return TRANSFORMATIONS.filter((project) => project.category?.toLowerCase().includes(category.toLowerCase()));
 }
+
+/**
+ * Fallback featured image for Organization pages that don't have a
+ * room-specific transformation photo yet (Garage, Laundry Room,
+ * Whole-Home, and the Home Organization hub) — its category is the
+ * unscoped "Home Organization" rather than one room type, making it a
+ * reasonable stand-in until room-specific photography exists for those
+ * pages. Used by TransformationPreview.
+ */
+export const GENERIC_ORGANIZATION_TRANSFORMATION: TransformationProject = TRANSFORMATIONS.find(
+  (project) => project.slug === "living-room-shoe-storage-reset"
+)!;
+
+/**
+ * Picks a single featured transformation for `category` (first match from
+ * findTransformationsByCategory), falling back to
+ * GENERIC_ORGANIZATION_TRANSFORMATION when no room-specific photo exists
+ * yet. Powers TransformationPreview on Home Organization room pages —
+ * never used on Cleaning pages, which keep the full ProjectMediaCarousel.
+ */
+export function featuredTransformationForCategory(category: string): TransformationProject {
+  return findTransformationsByCategory(category)[0] ?? GENERIC_ORGANIZATION_TRANSFORMATION;
+}

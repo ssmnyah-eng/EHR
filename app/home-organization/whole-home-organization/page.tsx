@@ -10,9 +10,10 @@ import { Process } from "@/components/content/Process";
 import { RelatedOrganizationLinks } from "@/components/services/RelatedOrganizationLinks";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import { ServiceProof } from "@/components/content/ServiceProof";
-import { SharedBeforeAfterSection } from "@/components/content/SharedBeforeAfterSection";
+import { TransformationPreview } from "@/components/content/TransformationPreview";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { getServiceMedia } from "@/content/service-media";
+import { GENERIC_ORGANIZATION_TRANSFORMATION } from "@/content/transformations";
 import {
   WHOLE_HOME_SEO,
   WHOLE_HOME_HERO,
@@ -141,7 +142,7 @@ export default function WholeHomeOrganizationPage() {
 
       <Section spacing="lg" surface="surface">
         <Container width="wide">
-          <SharedBeforeAfterSection />
+          <TransformationPreview image={GENERIC_ORGANIZATION_TRANSFORMATION.heroMedia!} />
         </Container>
       </Section>
 

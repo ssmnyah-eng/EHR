@@ -1,0 +1,15 @@
+/* Deliberately fixed at every breakpoint — a single static image, unlike
+   ProjectMediaCarousel's frame which switches to a portrait crop on
+   mobile for touch-swipe ergonomics. This section always shows one
+   landscape photo, so one landscape ratio, everywhere. */
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.media {
+  height: 100%;
+}

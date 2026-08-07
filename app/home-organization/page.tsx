@@ -10,9 +10,8 @@ import { TeaserCard } from "@/components/content/TeaserCard";
 import { Process } from "@/components/content/Process";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import { ServiceProof } from "@/components/content/ServiceProof";
-import { ProjectMediaCarousel } from "@/components/content/ProjectMediaCarousel";
-import { TRANSFORMATIONS_TEASER } from "@/content/home";
-import { findTransformationsByCategory } from "@/content/transformations";
+import { TransformationPreview } from "@/components/content/TransformationPreview";
+import { GENERIC_ORGANIZATION_TRANSFORMATION } from "@/content/transformations";
 import { ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
 import {
   HOME_ORG_HUB_HERO,
@@ -182,14 +181,7 @@ export default function HomeOrganizationHubPage() {
       {/* See the Difference a Reset Can Make — Organization proof */}
       <Section spacing="lg" surface="background">
         <Container width="wide">
-          <ProjectMediaCarousel
-            eyebrow={TRANSFORMATIONS_TEASER.eyebrow}
-            heading={TRANSFORMATIONS_TEASER.heading ?? ""}
-            body={TRANSFORMATIONS_TEASER.body}
-            cta={TRANSFORMATIONS_TEASER.primaryCTA ?? undefined}
-            projects={findTransformationsByCategory("organization")}
-            placeholderAlt="A completed Home Organization project"
-          />
+          <TransformationPreview image={GENERIC_ORGANIZATION_TRANSFORMATION.heroMedia!} />
         </Container>
       </Section>
 
