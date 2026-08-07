@@ -16,7 +16,12 @@
   --color-accent-hover: #23392f;
   --color-border: rgba(23, 24, 26, 0.12);
   --color-border-strong: rgba(23, 24, 26, 0.24);
-  --color-muted: #8a8c8f;
+  /* Darkened from #8a8c8f — that value failed WCAG AA text contrast
+     (3.2–3.4:1 against --color-background/--color-surface; needs 4.5:1)
+     on every real use site-wide (captions, eyebrow labels, muted body
+     copy). This passes ~5:1 against both while staying visually a
+     "muted gray," not a design change. */
+  --color-muted: #6b6d70;
   --color-focus: #2f4a3e;
   --color-status-coming-soon-bg: rgba(23, 24, 26, 0.06);
   --color-status-coming-soon-text: #55575c;

@@ -45,7 +45,10 @@
 
 .text {
   padding: 0;
-  min-height: auto;
+  /* 24px WCAG 2.2 AA minimum touch-target height — invisible padding on
+     an inline-flex box that's already vertically centered, not a visual
+     size change (this variant has no border/background to resize). */
+  min-height: 1.5rem;
   color: var(--color-accent);
   text-decoration: underline;
   text-underline-offset: 0.25em;

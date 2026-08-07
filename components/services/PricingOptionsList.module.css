@@ -22,7 +22,6 @@
 
 .price {
   font-weight: 600;
-  white-space: nowrap;
 }
 
 .disclaimer {
@@ -33,4 +32,10 @@
 
 .cta {
   margin-top: var(--space-lg);
+  /* This CTA's label is longer than most buttons on the site (e.g.
+     "Request Your Laundry Room Quote") and overflowed at 320px width
+     under the sitewide nowrap button style. Scoped to this instance
+     only — every other button keeps its single-line nowrap label. */
+  white-space: normal;
+  text-align: center;
 }

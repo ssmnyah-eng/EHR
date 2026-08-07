@@ -141,7 +141,11 @@
 .dots {
   display: flex;
   justify-content: center;
-  gap: var(--space-xs);
+  align-items: center;
+  /* Real hit boxes are now 24px each (see .dot) with the visible pip
+     inset via padding, so 0 gap here reproduces roughly the same visual
+     spacing between pips as the old 8px-box + var(--space-xs) gap did. */
+  gap: 0;
 }
 
 .positionIndicator {
@@ -154,15 +158,23 @@
 }
 
 .dot {
-  width: 0.5rem;
-  height: 0.5rem;
+  /* 24px WCAG 2.2 AA minimum touch-target hit area — the real clickable
+     box. background-clip: content-box confines the visible color to an
+     8px inset circle (padding on all sides), so the painted dot stays
+     the original small size while the actual button box is compliant. */
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0.5rem;
   border-radius: 999px;
   background: var(--color-border-strong);
+  background-clip: content-box;
 }
 
 .dotActive {
   background: var(--color-accent);
-  width: 1.5rem;
+  /* Content-box spans the full 24px width (no horizontal padding) to
+     reproduce the original wider "active" pill, still 8px tall. */
+  padding-inline: 0;
 }
 
 .visuallyHidden {

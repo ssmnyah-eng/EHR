@@ -17,6 +17,12 @@
 }
 
 .link {
+  display: inline-flex;
+  align-items: center;
+  /* 24px WCAG 2.2 AA minimum touch-target height — invisible padding,
+     not a visual size change (text stays the same size, just centered
+     in a taller hit box). */
+  min-height: 1.5rem;
   color: var(--color-text-secondary);
   text-decoration: underline;
   text-underline-offset: 2px;

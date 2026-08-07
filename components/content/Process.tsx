@@ -33,8 +33,8 @@ export function Process({ eyebrow, heading, steps, cta }: ProcessProps) {
       ) : null}
       <ol className={styles.steps}>
         {steps.map((step, index) => (
-          <Reveal key={index} variant="fade-up" delay={index * 80}>
-            <li className={styles.step}>
+          <li key={index}>
+            <Reveal variant="fade-up" delay={index * 80} className={styles.step}>
               <span className={styles.number}>{String(index + 1).padStart(2, "0")}</span>
               <Heading as="h3" size="sm">
                 <SlotText label="STEP SLOT" value={step.heading} />
@@ -42,8 +42,8 @@ export function Process({ eyebrow, heading, steps, cta }: ProcessProps) {
               <Text size="md">
                 <SlotText label="Description" value={step.description} />
               </Text>
-            </li>
-          </Reveal>
+            </Reveal>
+          </li>
         ))}
       </ol>
       {cta ? (

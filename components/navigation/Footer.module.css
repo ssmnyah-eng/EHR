@@ -88,7 +88,13 @@
   font-weight: 600;
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  opacity: 0.6;
+  /* 0.6 failed WCAG AA contrast (3.97:1 against the dark footer
+     background; needs 4.5:1). This element also inherits the parent
+     .link's opacity: 0.9, so opacities compound multiplicatively —
+     0.75 here (0.9 * 0.75 = 0.675 effective) passes at ~5.2:1 with
+     margin and stays a subtle enough change not to read as a visual
+     difference. */
+  opacity: 0.75;
   margin-left: var(--space-2xs);
 }
 

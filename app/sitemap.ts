@@ -6,8 +6,9 @@ import { TRANSFORMATIONS } from "@/content/transformations";
  * /transformations/[slug] detail page (pulled from TRANSFORMATIONS
  * itself so this can't drift out of sync with what actually exists).
  *
- * /resources/[slug] is excluded — its content array is still empty, so
- * there's nothing to list yet.
+ * There is no /resources/[slug] detail route yet — its content array is
+ * still empty, so the dynamic route was removed until real resources
+ * exist (an empty generateStaticParams() breaks static export).
  */
 const BASE_URL = "https://elevatedhomeresets.com";
 

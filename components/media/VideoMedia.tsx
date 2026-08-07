@@ -45,6 +45,11 @@ export function VideoMedia({ data, objectFit = "cover", decorative = true }: Vid
   useEffect(() => {
     const video = ref.current;
     if (!video) return;
+    // React's hydration doesn't reliably set the `muted` DOM *property*
+    // from the `muted` JSX attribute alone — without it, iOS Safari treats
+    // the video as unmuted, blocks autoplay, and shows a large play button
+    // over the frame instead. Setting it imperatively is required.
+    video.muted = true;
     if (reduceMotion) {
       video.pause();
       video.currentTime = 0;
@@ -64,6 +69,8 @@ export function VideoMedia({ data, objectFit = "cover", decorative = true }: Vid
       loop={!reduceMotion}
       playsInline
       autoPlay={!reduceMotion}
+      disablePictureInPicture
+      disableRemotePlayback
       preload={data.priority ? "auto" : "metadata"}
       style={{ objectPosition: data.objectPosition, objectFit }}
       aria-hidden={decorative || undefined}

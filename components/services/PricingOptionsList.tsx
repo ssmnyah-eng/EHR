@@ -25,16 +25,16 @@ export function PricingOptionsList({ eyebrow, items, disclaimer, cta }: PricingO
       </Eyebrow>
       <ul className={styles.list}>
         {items.map((item, index) => (
-          <Reveal key={item.label} variant="fade-up" delay={index * 40}>
-            <li className={styles.row}>
+          <li key={item.label}>
+            <Reveal variant="fade-up" delay={index * 40} className={styles.row}>
               <Heading as="h3" size="sm" className={styles.itemLabel}>
                 {item.label}
               </Heading>
               <Text as="span" size="sm" className={styles.price}>
                 {item.priceLabel}
               </Text>
-            </li>
-          </Reveal>
+            </Reveal>
+          </li>
         ))}
       </ul>
       {disclaimer ? (

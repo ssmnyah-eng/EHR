@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import { Manrope, Cormorant_Garamond } from "next/font/google";
+import Script from "next/script";
 import { AppShell } from "@/components/layout/AppShell";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildOrganizationSchema, buildWebsiteSchema, withContext } from "@/lib/schema";
 import "@/styles/tokens.css";
 import "./globals.css";
+
+/** Google Analytics 4 measurement ID, provided directly by the client. */
+const GA_MEASUREMENT_ID = "G-Y2PQJ163V2";
 
 /** Sitewide Organization + WebSite structured data — present on every
  *  page via the root layout, which is standard practice (Google
@@ -58,6 +62,15 @@ export default function RootLayout(props: LayoutProps<"/">) {
         <JsonLd data={SITE_SCHEMA} />
         <AppShell>{props.children}</AppShell>
       </body>
+      <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} strategy="afterInteractive" />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_MEASUREMENT_ID}');
+        `}
+      </Script>
     </html>
   );
 }

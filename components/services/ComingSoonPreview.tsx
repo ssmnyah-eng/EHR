@@ -27,14 +27,14 @@ export function ComingSoonPreview({ group, description }: ComingSoonPreviewProps
 
       <ul className={styles.grid}>
         {group.children?.map((child, index) => (
-          <Reveal key={child.slug} variant="fade-up" delay={index * 60}>
-            <li className={styles.item}>
+          <li key={child.slug}>
+            <Reveal variant="fade-up" delay={index * 60} className={styles.item}>
               <Heading as="span" size="sm" className={styles.itemTitle}>
                 {child.title}
               </Heading>
               <StatusBadge status={child.status} />
-            </li>
-          </Reveal>
+            </Reveal>
+          </li>
         ))}
       </ul>
     </div>
