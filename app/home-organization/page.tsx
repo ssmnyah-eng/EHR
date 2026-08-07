@@ -10,8 +10,6 @@ import { TeaserCard } from "@/components/content/TeaserCard";
 import { Process } from "@/components/content/Process";
 import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import { ServiceProof } from "@/components/content/ServiceProof";
-import { TransformationPreview } from "@/components/content/TransformationPreview";
-import { GENERIC_ORGANIZATION_TRANSFORMATION } from "@/content/transformations";
 import { ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
 import {
   HOME_ORG_HUB_HERO,
@@ -102,17 +100,31 @@ export default function HomeOrganizationHubPage() {
         </Container>
       </Section>
 
-      {/* Light cleaning */}
+      {/* Light cleaning — image left / content right (Section 3,
+          continuing the alternating rhythm from Philosophy/What Happens
+          above) */}
       <Section spacing="lg" surface="background">
-        <Container width="content">
-          <EditorialStatement slot={HOME_ORG_LIGHT_CLEANING} />
+        <Container width="wide">
+          <EditorialSplit
+            eyebrow={HOME_ORG_LIGHT_CLEANING.eyebrow}
+            heading={HOME_ORG_LIGHT_CLEANING.heading ?? ""}
+            body={HOME_ORG_LIGHT_CLEANING.body}
+            primaryCTA={HOME_ORG_LIGHT_CLEANING.primaryCTA ?? undefined}
+            media={HOME_ORG_LIGHT_CLEANING.media!}
+            reverse
+          />
         </Container>
       </Section>
 
-      {/* Organizing products */}
+      {/* Organizing products — content left / image right (Section 4) */}
       <Section spacing="lg" surface="surface">
-        <Container width="content">
-          <EditorialStatement slot={HOME_ORG_PRODUCTS} />
+        <Container width="wide">
+          <EditorialSplit
+            eyebrow={HOME_ORG_PRODUCTS.eyebrow}
+            heading={HOME_ORG_PRODUCTS.heading ?? ""}
+            body={HOME_ORG_PRODUCTS.body}
+            media={HOME_ORG_PRODUCTS.media!}
+          />
         </Container>
       </Section>
 
@@ -164,7 +176,7 @@ export default function HomeOrganizationHubPage() {
       </Section>
 
       {/* Real-results proof */}
-      <Section spacing="lg" surface="muted">
+      <Section spacing="lg" surface="surface">
         <Container width="content">
           <ServiceProof
             eyebrow={HOME_ORG_PROOF.eyebrow}
@@ -175,13 +187,6 @@ export default function HomeOrganizationHubPage() {
             media={HOME_ORG_PROOF.media}
             editorial
           />
-        </Container>
-      </Section>
-
-      {/* See the Difference a Reset Can Make — Organization proof */}
-      <Section spacing="lg" surface="background">
-        <Container width="wide">
-          <TransformationPreview image={GENERIC_ORGANIZATION_TRANSFORMATION.heroMedia!} />
         </Container>
       </Section>
 

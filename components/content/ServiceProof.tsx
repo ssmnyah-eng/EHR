@@ -68,10 +68,12 @@ function QuoteBlock({
       <blockquote className={[secondary ? styles.secondaryQuote : styles.quote, editorial ? styles.editorialQuote : ""].join(" ")}>
         &ldquo;{quote}&rdquo;
       </blockquote>
-      <figcaption className={styles.attribution}>
-        <span className={styles.name}>{attribution}</span>
-        {attributionNote ? <span className={styles.attributionNote}>{attributionNote}</span> : null}
-      </figcaption>
+      {attribution || attributionNote ? (
+        <figcaption className={styles.attribution}>
+          {attribution ? <span className={styles.name}>{attribution}</span> : null}
+          {attributionNote ? <span className={styles.attributionNote}>{attributionNote}</span> : null}
+        </figcaption>
+      ) : null}
     </figure>
   );
 }

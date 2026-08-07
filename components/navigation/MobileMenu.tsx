@@ -41,19 +41,24 @@ export function MobileMenu({ open, onClose, groups, estimateCta }: MobileMenuPro
 
             return (
               <li key={group.slug} className={styles.item}>
-                <button
-                  type="button"
-                  className={styles.groupTrigger}
-                  aria-expanded={isExpanded}
-                  aria-controls={`mobile-group-${group.slug}`}
-                  onClick={() => setExpanded((current) => (current === group.slug ? null : group.slug))}
-                >
-                  <span className={styles.groupTitle}>
-                    {group.title}
-                    {group.status === "coming-soon" ? <StatusBadge status={group.status} /> : null}
-                  </span>
-                  <span className={[styles.chevron, isExpanded && styles.chevronOpen].filter(Boolean).join(" ")} aria-hidden="true" />
-                </button>
+                <div className={styles.groupRow}>
+                  <Link href={group.href} className={styles.groupTitleLink} onClick={onClose}>
+                    <span className={styles.groupTitle}>
+                      {group.title}
+                      {group.status === "coming-soon" ? <StatusBadge status={group.status} /> : null}
+                    </span>
+                  </Link>
+                  <button
+                    type="button"
+                    className={styles.chevronButton}
+                    aria-expanded={isExpanded}
+                    aria-controls={`mobile-group-${group.slug}`}
+                    aria-label={`${isExpanded ? "Collapse" : "Expand"} ${group.title} submenu`}
+                    onClick={() => setExpanded((current) => (current === group.slug ? null : group.slug))}
+                  >
+                    <span className={[styles.chevron, isExpanded && styles.chevronOpen].filter(Boolean).join(" ")} aria-hidden="true" />
+                  </button>
+                </div>
 
                 <ul
                   id={`mobile-group-${group.slug}`}

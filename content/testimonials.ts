@@ -69,7 +69,7 @@ export const VICKI_JOHNSON = {
   name: "Vicki Johnson",
   attributionNote: "Client review from prior work under Validate Your Vision",
   fullReview:
-    "Absolutely one of the most professional, accommodating, and hard workers that I have come across! I highly recommend VYV!! Super fast and great service! Had a ton of junk and broken things needed hauled away! They came when they said, took care of everything were friendly and professional. Prices very reasonable!",
+    "Absolutely one of the most professional, accommodating, and hard workers that I have come across! I highly recommend them. They came when they said, took care of everything were friendly and professional. Prices very reasonable!",
   quotes: {
     professionalism: "Absolutely one of the most professional, accommodating, and hard workers that I have come across!",
   },

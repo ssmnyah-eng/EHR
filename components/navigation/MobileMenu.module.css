@@ -54,11 +54,15 @@
   color: var(--color-text-primary);
 }
 
-.groupTrigger {
+.groupRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  gap: var(--space-sm);
+}
+
+.groupTitleLink {
+  flex: 1;
   padding: var(--space-md) 0;
   text-align: left;
 }
@@ -70,6 +74,19 @@
   font-family: var(--font-display);
   font-size: var(--heading-sm);
   color: var(--color-text-primary);
+}
+
+/* Separate tap target from the title link above — expands/collapses the
+   submenu without navigating, so tapping the group name itself can go
+   straight to its landing page. Sized to a full 44px minimum tap target
+   even though the visible chevron glyph is small. */
+.chevronButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-shrink: 0;
 }
 
 .chevron {

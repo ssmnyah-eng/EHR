@@ -1,45 +1,56 @@
 import { BOOK_CLEANING_CTA, ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
 
 /**
- * Content for the Service Areas page (/service-areas). Approved
- * coverage is currently broad-region only: Northern Virginia and the
- * Fredericksburg area. A detailed city/community list already exists
- * and is live on the Cleaning and Home Organization hub pages'
- * "Service Area" sections (see CLEANING_SERVICE_AREA in
- * content/cleaning.ts and HOME_ORG_SERVICE_AREA in
- * content/home-organization.ts) — that existing content is left
- * untouched here per instruction ("report it before changing it," not
- * "remove it"). This page intentionally does NOT repeat that city list
- * so it doesn't read as independently inventing geographic coverage;
- * REGIONS/CITIES below is structured so an approved, reconciled city
- * list can be inserted cleanly later.
+ * Content for the Service Areas page (/service-areas). Every city, town,
+ * and community below is served throughout Northern Virginia and the
+ * Fredericksburg area and is displayed directly in the hero as
+ * individual chips — no separate "Areas We Serve" breakdown section
+ * exists on this page anymore (removed per instruction; each location
+ * now lives only in SERVICE_AREAS_CITIES below).
  */
 
 export const SERVICE_AREAS_HEADING = "Where We Serve";
 export const SERVICE_AREAS_INTRO =
   "Elevated Home Resets provides Cleaning and Home Organization throughout Northern Virginia and the Fredericksburg area.";
 
-export const SERVICE_AREAS_REGIONS: string[] = ["Northern Virginia", "Fredericksburg area"];
-
-/**
- * Detailed locality breakdown within our two broad service regions.
- * Approved list — do not add, remove, or infer additional localities,
- * ZIP codes, or boundaries beyond what's provided here. "Areas We Serve"
- * is used as the section heading (not "Cities We Serve") since this list
- * mixes independent cities, towns, counties, and unincorporated
- * communities/CDPs — calling all of them "cities" would be inaccurate.
- */
-export const SERVICE_AREAS_LOCAL_HEADING = "Areas We Serve";
-export const SERVICE_AREAS_LOCAL_INTRO =
-  "A closer look at the cities, towns, and communities within our two service regions.";
-
-export const SERVICE_AREAS_FREDERICKSBURG_HEADING = "Fredericksburg & the Surrounding Area";
-export const SERVICE_AREAS_FREDERICKSBURG_BODY =
-  "In the Fredericksburg area, we serve Fredericksburg, Spotsylvania, Stafford, and King George — including Spotsylvania County, Stafford County, and King George County.";
-
-export const SERVICE_AREAS_NOVA_HEADING = "Northern Virginia";
-export const SERVICE_AREAS_NOVA_BODY =
-  "Throughout Northern Virginia, we serve Alexandria, Arlington, Fairfax, Falls Church, McLean, Tysons, Vienna, Oakton, Annandale, Burke, Springfield, Lorton, Centreville, Chantilly, Reston, Herndon, Great Falls, Sterling, Ashburn, Leesburg, South Riding, Manassas, Manassas Park, Gainesville, Haymarket, Bristow, Woodbridge, Lake Ridge, Dumfries, and Occoquan — including Arlington County, Fairfax County, Loudoun County, and Prince William County.";
+/** Approved list — do not add, remove, or reorder beyond what's
+ *  provided here. Displayed as individual chips, not grouped by region. */
+export const SERVICE_AREAS_CITIES: string[] = [
+  "Alexandria",
+  "Annandale",
+  "Arlington",
+  "Ashburn",
+  "Bristow",
+  "Burke",
+  "Centreville",
+  "Chantilly",
+  "Dumfries",
+  "Fairfax",
+  "Falls Church",
+  "Fredericksburg",
+  "Gainesville",
+  "Great Falls",
+  "Haymarket",
+  "Herndon",
+  "King George",
+  "Lake Ridge",
+  "Leesburg",
+  "Lorton",
+  "Manassas",
+  "Manassas Park",
+  "McLean",
+  "Oakton",
+  "Occoquan",
+  "Reston",
+  "South Riding",
+  "Spotsylvania",
+  "Springfield",
+  "Stafford",
+  "Sterling",
+  "Tysons",
+  "Vienna",
+  "Woodbridge",
+];
 
 export const SERVICE_AREAS_BOTH_SERVICES_HEADING = "Both services, one service area.";
 export const SERVICE_AREAS_BOTH_SERVICES_BODY =

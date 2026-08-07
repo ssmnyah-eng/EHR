@@ -2,10 +2,15 @@
   display: grid;
 }
 
-.cols-2 { grid-template-columns: repeat(2, 1fr); }
-.cols-3 { grid-template-columns: repeat(3, 1fr); }
-.cols-4 { grid-template-columns: repeat(4, 1fr); }
-.cols-12 { grid-template-columns: repeat(12, 1fr); }
+/* minmax(0, 1fr) rather than a bare 1fr — a grid item's implicit
+   min-width:auto otherwise lets its content's min-content size (e.g. a
+   long button label) force the whole track wider than its fair share,
+   overflowing the grid past the container instead of wrapping the text
+   within the card. */
+.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
 
 .gap-sm { gap: var(--space-sm); }
 .gap-md { gap: var(--space-lg); }

@@ -126,22 +126,48 @@ export const HOME_ORG_WHAT_HAPPENS: ContentSlot = {
   eyebrow: "More Than Straightening",
   heading: "We're not just making the room look better for a photograph.",
   body: "Home Organization is for spaces that need more than cleaning or putting a few things back where they already belong.\n\nIt's the service to choose when belongings need to be sorted, a space needs greater structure, or the way things are currently stored is no longer working for you.\n\nThe goal is to leave you with a space that makes more sense after we're gone—not simply one that looks tidy for the day.",
-  media: { type: "image", alt: "An organizer sorting belongings into labeled bins", variant: "portrait", aspectRatio: "4 / 5" },
+  media: {
+    type: "image",
+    src: "/images/organization/kitchen-cabinet-dishes.jpg",
+    alt: "An organizer sorting dishes and belongings into a newly organized kitchen cabinet",
+    variant: "portrait",
+    aspectRatio: "4 / 5",
+  },
 };
 
-/** Universal — reused verbatim on every dedicated room page. */
+/** Universal — reused verbatim on every dedicated room page. Also given
+ *  an image on the hub page (converted to an alternating EditorialSplit
+ *  there) — the 8 dedicated room pages keep rendering it as a text-only
+ *  EditorialStatement, unchanged. */
 export const HOME_ORG_LIGHT_CLEANING: ContentSlot = {
   eyebrow: "Part of the Process",
   heading: "We don't organize onto dirty shelves.",
   body: "Every Organization Reset includes light cleaning of the accessible space being organized.\n\nWhen appropriate areas are emptied during the organization process, accessible shelves, cabinet interiors, drawers, closet shelving, and similar surfaces can be wiped or vacuumed before belongings are returned.\n\nThat light cleaning is part of the organization service.\n\nIf you want the rest of the home professionally cleaned as well, Cleaning can be added separately.",
   primaryCTA: { label: "Explore Cleaning Services", href: "/cleaning" },
+  media: {
+    type: "image",
+    src: "/images/organization/bathroom-cabinet.jpg",
+    alt: "A freshly wiped, organized bathroom cabinet with clean shelving",
+    variant: "portrait",
+    aspectRatio: "4 / 5",
+  },
 };
 
-/** Universal — reused verbatim on every dedicated room page. */
+/** Universal — reused verbatim on every dedicated room page. Also given
+ *  an image on the hub page (converted to an alternating EditorialSplit
+ *  there) — the 8 dedicated room pages keep rendering it as a text-only
+ *  EditorialStatement, unchanged. */
 export const HOME_ORG_PRODUCTS: ContentSlot = {
   eyebrow: "Bins, Baskets & Organizers",
   heading: "The project price covers the organizing—not a cart full of products.",
   body: "Normal organizing labor, tools, and basic working supplies are part of the service.\n\nCustomer organization products—such as bins, baskets, containers, drawer dividers, hangers, turntables, jars, shelving, and similar items—are separate from the organization project price.\n\nThat keeps the project focused on what your space actually needs instead of automatically building unnecessary products into every project.",
+  media: {
+    type: "image",
+    src: "/images/organization/walk-in-closet.jpg",
+    alt: "A walk-in closet organized with labeled bins, baskets, and hangers",
+    variant: "portrait",
+    aspectRatio: "4 / 5",
+  },
 };
 
 export const HOME_ORG_CLEANING_COMBO: ContentSlot = {

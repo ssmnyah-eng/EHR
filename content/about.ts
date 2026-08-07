@@ -73,10 +73,11 @@ export const ABOUT_PERSONAL_CLOSE_SLOT: ContentSlot = {
 
 export const ABOUT_HISTORY_PROOF = {
   eyebrow: "Before Elevated Home Resets",
+  // No name or prior-business attribution shown here per instruction —
+  // this quote stands on its own.
   primary: {
     quote: VICKI_JOHNSON.fullReview,
-    attribution: VICKI_JOHNSON.name,
-    attributionNote: VICKI_JOHNSON.attributionNote,
+    attribution: "",
   },
 };
 

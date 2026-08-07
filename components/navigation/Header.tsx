@@ -70,17 +70,27 @@ export function Header() {
           <nav className={styles.desktopNav} aria-label="Primary">
             <ul className={styles.navList}>
               {SERVICE_GROUPS.map((group) => (
-                <li key={group.slug} className={styles.navItem}>
-                  <button
-                    type="button"
-                    className={styles.navTrigger}
-                    aria-expanded={openGroup === group.slug}
-                    aria-controls={`menu-${group.slug}`}
-                    onClick={() => setOpenGroup((current) => (current === group.slug ? null : group.slug))}
-                  >
+                <li
+                  key={group.slug}
+                  className={styles.navItem}
+                  onMouseEnter={() => setOpenGroup(group.slug)}
+                  onMouseLeave={() => setOpenGroup((current) => (current === group.slug ? null : current))}
+                  onFocus={() => setOpenGroup(group.slug)}
+                  onBlur={(event) => {
+                    if (!event.currentTarget.contains(event.relatedTarget as Node)) {
+                      setOpenGroup((current) => (current === group.slug ? null : current));
+                    }
+                  }}
+                >
+                  {/* Hover opens the submenu (mouse enter/leave above);
+                      clicking the title itself navigates straight to the
+                      group's landing page rather than only toggling the
+                      panel — the same parent-nav pattern most modern
+                      sites use for a link that's also a menu trigger. */}
+                  <Link href={group.href} className={styles.navTrigger} aria-expanded={openGroup === group.slug} aria-controls={`menu-${group.slug}`}>
                     {group.title}
                     {group.status === "coming-soon" ? <StatusBadge status={group.status} /> : null}
-                  </button>
+                  </Link>
 
                   {openGroup === group.slug ? (
                     <div id={`menu-${group.slug}`} role="menu" className={styles.megaPanel}>

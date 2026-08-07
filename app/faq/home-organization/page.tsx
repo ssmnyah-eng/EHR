@@ -23,6 +23,18 @@ export default function HomeOrganizationFAQPage() {
         secondaryCTA: { label: "Explore Home Organization", href: "/home-organization" },
       }}
       relatedSlugs={["billing-and-payments", "how-it-works", "policies-and-your-home"]}
+      heroMedia={{
+        type: "image",
+        src: "/images/services/kitchen-organization-3.jpg",
+        alt: "An organized kitchen with labeled containers and clear, functional storage",
+        variant: "landscape",
+      }}
+      ctaMedia={{
+        type: "image",
+        src: "/images/organization/living-room-organized.jpg",
+        alt: "A tidy, organized living room after a Home Organization reset",
+        variant: "landscape",
+      }}
     />
   );
 }

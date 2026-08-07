@@ -23,6 +23,18 @@ export default function HowItWorksFAQPage() {
         secondaryCTA: { label: "Contact Us", href: "/contact" },
       }}
       relatedSlugs={["cleaning", "home-organization", "booking-and-scheduling"]}
+      heroMedia={{
+        type: "image",
+        src: "/images/cleaning/right-level-of-cleaning.jpg",
+        alt: "A professional beginning a service visit in a bright, tidy home",
+        variant: "landscape",
+      }}
+      ctaMedia={{
+        type: "image",
+        src: "/images/organization/living-room.jpg",
+        alt: "A calm, finished living space representing a completed Elevated Home Resets visit",
+        variant: "landscape",
+      }}
     />
   );
 }

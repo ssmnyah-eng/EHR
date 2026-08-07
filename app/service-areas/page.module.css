@@ -48,14 +48,6 @@
   margin-bottom: var(--space-md);
 }
 
-.localityGroup {
-  margin-top: var(--space-lg);
-}
-
-.localityGroup:first-of-type {
-  margin-top: var(--space-xl);
-}
-
 .ctaRow {
   display: flex;
   gap: var(--space-sm);
