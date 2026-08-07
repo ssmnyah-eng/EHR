@@ -1,11 +1,19 @@
 import type { MetadataRoute } from "next";
 
 /**
- * Lists only real, live, statically-rendered routes. The two dynamic
- * detail routes (/resources/[slug], /transformations/[slug]) are
- * intentionally excluded — their backing content arrays are currently
- * empty, so there are no published detail pages to list yet. Add entries
- * here once real resource/transformation content ships.
+ * Lists real, live, statically-rendered routes.
+ *
+ * /resources/[slug] is excluded — its content array is still empty, so
+ * there's nothing to list yet.
+ *
+ * /transformations/[slug] (18 real project pages) is ALSO excluded for
+ * now, pending confirmation that this content is genuine Elevated Home
+ * Resets project photography rather than placeholder/stock — see the
+ * provenance note in content/transformations.ts. The pages themselves
+ * still build and are reachable by direct link; they're just not being
+ * actively submitted to search engines until that's confirmed. Add
+ * them here (and to the /transformations hub's own links, which already
+ * exist) once confirmed.
  */
 const BASE_URL = "https://elevatedhomeresets.com";
 
@@ -46,6 +54,10 @@ const STATIC_ROUTES = [
   "/lifestyle-resets-and-services",
   "/resources",
   "/transformations",
+
+  "/work-with-us",
+  "/work-with-us/cleaning-technician",
+  "/work-with-us/professional-organizing-assistant",
 
   "/faq",
   "/faq/cleaning",

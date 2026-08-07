@@ -10,38 +10,64 @@ directory — not the source code — using GitHub's official Pages Actions
 The workflow runs on every push to `claude/elevated-home-resets-brand-wwe2vy`
 or `main`.
 
-## One-time manual step (only you can do this)
+## One-time manual steps (only you can do this)
 
 1. Go to the repo on GitHub → **Settings** → **Pages**.
 2. Under "Build and deployment", set **Source** to **GitHub Actions**
    (not "Deploy from a branch" — the workflow deploys directly, it no
    longer needs the `gh-pages` branch as an intermediate step).
-3. Save.
+3. Under "Custom domain", enter `elevatedhomeresets.com` and save. (The
+   repo also ships a `public/CNAME` file with the same domain, which
+   `next build` copies into every static export automatically — GitHub
+   Pages picks it up from the deployed artifact either way, but setting
+   it in the UI too is what makes GitHub provision the HTTPS certificate.)
+4. At your domain registrar (Namecheap), point the domain at GitHub
+   Pages — see "DNS records to add at Namecheap" below.
 
-Once that's set, every push to the development branch will publish the
-site to:
+Once DNS has propagated, every push to the development branch will
+publish the site to:
 
 ```
-https://ssmnyah-eng.github.io/EHR/
+https://elevatedhomeresets.com
 ```
+
+## DNS records to add at Namecheap
+
+In Namecheap → Domain List → Manage → Advanced DNS, add:
+
+| Type | Host | Value |
+|---|---|---|
+| A | @ | 185.199.108.153 |
+| A | @ | 185.199.109.153 |
+| A | @ | 185.199.110.153 |
+| A | @ | 185.199.111.153 |
+| CNAME | www | ssmnyah-eng.github.io. |
+
+Remove any existing Namecheap "Parking Page" A/CNAME records for `@`
+and `www` first — they conflict with the ones above. DNS propagation
+can take anywhere from a few minutes to ~24 hours; GitHub shows the
+domain as verified and issues an HTTPS certificate automatically once
+it can see these records (Settings → Pages will show a green check).
 
 ## Base path
 
-GitHub Pages serves a project site (one not using a custom domain) from
-`/EHR/`, not the domain root. `next.config.ts` sets `basePath`/`assetPrefix`
-to `/EHR` only when `GITHUB_PAGES=true` is set, so local `npm run dev` /
-`npm run build` are unaffected — only the CI build targets the `/EHR/` path.
+The site is served from the domain root (`elevatedhomeresets.com/`),
+so `next.config.ts` sets no `basePath`/`assetPrefix`. (If this ever
+moves back to an unbranded GitHub Pages project-site URL —
+`https://<owner>.github.io/<repo>/` — a basePath would need to be
+reintroduced; see the comment in `next.config.ts`.)
 
 ## Known static-export limitation
 
-`/resources/[slug]` and `/transformations/[slug]` are dynamic detail
-routes with no published entries yet (their content arrays are
-intentionally empty). `output: "export"` requires at least one static
-param per dynamic route, since there's no server to resolve unknown
-slugs at request time. The workflow excludes these two route folders
-from its own checkout before building (never touched in the committed
-source) — remove that step once real resource/transformation content
-ships and these routes generate real params again.
+`/resources/[slug]` is a dynamic detail route with no published entries
+yet (its content array is intentionally empty). `output: "export"`
+requires at least one static param per dynamic route, since there's no
+server to resolve unknown slugs at request time. The workflow excludes
+just this one route folder from its own checkout before building (never
+touched in the committed source) — remove that step once real resource
+content ships and the route generates real params again.
+`/transformations/[slug]` has real published projects and is no longer
+excluded.
 
 ## What works on GitHub Pages
 
