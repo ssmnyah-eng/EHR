@@ -21,11 +21,6 @@ export async function generateMetadata(props: PageProps<"/transformations/[slug]
   return {
     title: `${project.title} | Elevated Home Resets`,
     description: project.summary,
-    // noindex until the photography's provenance is confirmed — see the
-    // note in content/transformations.ts. Pages stay reachable by direct
-    // link (nothing else here changes) but won't be indexed by search
-    // engines in the meantime. Remove once confirmed.
-    robots: { index: false, follow: true },
   };
 }
 

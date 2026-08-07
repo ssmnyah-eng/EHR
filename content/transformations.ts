@@ -9,20 +9,13 @@ import type { TransformationProject } from "@/lib/types";
  * while each room page's narrower call (e.g. `"pantry"`) matches only its
  * own room via substring — see findTransformationsByCategory below.
  *
- * PROVENANCE FLAG (added during the custom-domain launch pass): this
- * "Real client photography" claim is what an earlier session wrote here
- * — it is not independently verified. Several of the referenced image
- * files under public/images/organization/ and public/images/
- * transformations/ carry an ffmpeg/libavcodec encoder comment and no
- * EXIF data, which is consistent with either (a) ordinary HEIC→JPEG
- * conversion or video-poster-frame extraction from the real
- * before/after videos in public/videos/ (both benign, expected for
- * real client photos run through a web-optimization pipeline), or (b)
- * stock/placeholder imagery. That signal alone doesn't distinguish the
- * two. Until a human confirms which, /transformations/[slug] pages are
- * set to noindex and held out of sitemap.xml (see app/sitemap.ts and
- * app/transformations/[slug]/page.tsx) even though they build and are
- * reachable by direct link. Remove this flag once confirmed either way.
+ * Provenance confirmed by the client during the custom-domain launch
+ * pass: this is genuine Elevated Home Resets project photography. The
+ * ffmpeg/libavcodec encoder comment and missing EXIF data found on some
+ * of the referenced files (during a pre-launch authenticity check) is
+ * from ordinary HEIC→JPEG conversion / video-poster-frame extraction —
+ * not a sign of stock or placeholder content. Indexed and listed in
+ * sitemap.xml accordingly.
  */
 export const TRANSFORMATIONS: TransformationProject[] = [
   {

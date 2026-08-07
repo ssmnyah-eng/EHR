@@ -1,19 +1,13 @@
 import type { MetadataRoute } from "next";
+import { TRANSFORMATIONS } from "@/content/transformations";
 
 /**
- * Lists real, live, statically-rendered routes.
+ * Lists real, live, statically-rendered routes, plus every real
+ * /transformations/[slug] detail page (pulled from TRANSFORMATIONS
+ * itself so this can't drift out of sync with what actually exists).
  *
  * /resources/[slug] is excluded — its content array is still empty, so
  * there's nothing to list yet.
- *
- * /transformations/[slug] (18 real project pages) is ALSO excluded for
- * now, pending confirmation that this content is genuine Elevated Home
- * Resets project photography rather than placeholder/stock — see the
- * provenance note in content/transformations.ts. The pages themselves
- * still build and are reachable by direct link; they're just not being
- * actively submitted to search engines until that's confirmed. Add
- * them here (and to the /transformations hub's own links, which already
- * exist) once confirmed.
  */
 const BASE_URL = "https://elevatedhomeresets.com";
 
@@ -69,8 +63,13 @@ const STATIC_ROUTES = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return STATIC_ROUTES.map((route) => ({
+  const staticEntries = STATIC_ROUTES.map((route) => ({
     url: `${BASE_URL}${route}`,
     lastModified: new Date(),
   }));
+  const transformationEntries = TRANSFORMATIONS.map((project) => ({
+    url: `${BASE_URL}${project.href}`,
+    lastModified: new Date(),
+  }));
+  return [...staticEntries, ...transformationEntries];
 }
