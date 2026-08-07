@@ -8,6 +8,8 @@ import { InquiryCTA } from "@/components/conversion/InquiryCTA";
 import { Breadcrumb, type BreadcrumbItem } from "@/components/content/Breadcrumb";
 import { SharedBeforeAfterSection } from "@/components/content/SharedBeforeAfterSection";
 import { getServiceMedia } from "@/content/service-media";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildServiceSchema, withContext } from "@/lib/schema";
 
 interface ServiceDetailTemplateProps {
   /** Route slug (e.g. "standard-clean") — looks up this page's banner
@@ -32,9 +34,17 @@ interface ServiceDetailTemplateProps {
  */
 export function ServiceDetailTemplate({ slug, heroSlot, heroPrice, sections, snapshot, finalCTA, breadcrumb }: ServiceDetailTemplateProps) {
   const media = getServiceMedia(slug);
+  const serviceSchema = buildServiceSchema({
+    name: heroSlot.heading ?? breadcrumb[breadcrumb.length - 1]?.label ?? slug,
+    description: snapshot.description,
+    url: `/cleaning/${slug}`,
+    serviceType: "Residential Cleaning",
+    priceLabel: snapshot.priceLabel,
+  });
 
   return (
     <>
+      <JsonLd data={withContext(serviceSchema)} />
       <Section spacing="lg" surface="background">
         <Container>
           <Breadcrumb items={breadcrumb} />

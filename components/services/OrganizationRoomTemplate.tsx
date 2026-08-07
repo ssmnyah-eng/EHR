@@ -14,6 +14,8 @@ import { TransformationPreview } from "@/components/content/TransformationPrevie
 import { ORGANIZATION_ROOMS } from "@/content/home-organization-rooms";
 import { getServiceMedia } from "@/content/service-media";
 import { featuredTransformationForCategory } from "@/content/transformations";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildServiceSchema, withContext } from "@/lib/schema";
 
 interface OrganizationRoomProcess {
   eyebrow?: string;
@@ -56,9 +58,17 @@ export function OrganizationRoomTemplate({ currentSlug, heroSlot, heroPrice, sec
   const roomLabel = ORGANIZATION_ROOMS.find((room) => room.slug === currentSlug)?.navLabel ?? currentSlug;
   const media = getServiceMedia(currentSlug);
   const featuredTransformation = featuredTransformationForCategory(roomLabel);
+  const serviceSchema = buildServiceSchema({
+    name: heroSlot.heading ?? roomLabel,
+    description: heroSlot.body ?? heroPrice.note ?? roomLabel,
+    url: `/home-organization/${currentSlug}`,
+    serviceType: "Home Organization",
+    priceLabel: heroPrice.label,
+  });
 
   return (
     <>
+      <JsonLd data={withContext(serviceSchema)} />
       <Section spacing="lg" surface="background">
         <Container>
           <Breadcrumb

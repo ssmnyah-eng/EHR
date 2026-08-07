@@ -1,8 +1,21 @@
 import type { Metadata } from "next";
 import { Manrope, Cormorant_Garamond } from "next/font/google";
 import { AppShell } from "@/components/layout/AppShell";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildOrganizationSchema, buildWebsiteSchema, withContext } from "@/lib/schema";
 import "@/styles/tokens.css";
 import "./globals.css";
+
+/** Sitewide Organization + WebSite structured data — present on every
+ *  page via the root layout, which is standard practice (Google
+ *  explicitly supports repeating the same Organization block across
+ *  pages). Page-specific schema (Service, FAQPage, JobPosting,
+ *  BreadcrumbList) is added by the individual templates that render
+ *  that content, and reference this Organization by @id rather than
+ *  repeating its fields. */
+const SITE_SCHEMA = withContext({
+  "@graph": [buildOrganizationSchema(), buildWebsiteSchema()],
+});
 
 /**
  * Sitewide typography system: Manrope (primary — body, headings, nav,
@@ -42,6 +55,7 @@ export default function RootLayout(props: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${manrope.variable} ${cormorantGaramond.variable}`}>
       <body>
+        <JsonLd data={SITE_SCHEMA} />
         <AppShell>{props.children}</AppShell>
       </body>
     </html>

@@ -13,11 +13,18 @@ import { FAQAccordion } from "@/components/content/FAQAccordion";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { ZoneSelector } from "@/components/careers/ZoneSelector";
 import { ApplicationSidebar } from "@/components/careers/ApplicationSidebar";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildJobPostingSchema, withContext } from "@/lib/schema";
 import styles from "./JobDetailPage.module.css";
 
 interface JobDetailPageProps {
   job: JobListing;
 }
+
+// Computed once at build time (static export) — refreshes on every
+// deploy, which is accurate for real, currently-open roles republished
+// on each build rather than a one-time historical posting date.
+const DATE_POSTED = new Date().toISOString().slice(0, 10);
 
 /**
  * Shared full-page body for every individual job listing — used by both
@@ -35,6 +42,7 @@ export function JobDetailPage({ job }: JobDetailPageProps) {
 
   return (
     <>
+      <JsonLd data={withContext(buildJobPostingSchema(job, DATE_POSTED))} />
       <Section spacing="sm" surface="background">
         <Container>
           <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Work With Us", href: "/work-with-us" }, { label: job.title }]} />

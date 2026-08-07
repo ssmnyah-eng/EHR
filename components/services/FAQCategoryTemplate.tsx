@@ -13,6 +13,8 @@ import { EditorialSplit } from "@/components/content/EditorialSplit";
 import { MediaSlot } from "@/components/media/MediaSlot";
 import { Reveal } from "@/components/motion/Reveal";
 import { FAQ_CATEGORIES } from "@/content/faq-categories";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildFAQSchema, withContext } from "@/lib/schema";
 import styles from "./FAQCategoryTemplate.module.css";
 
 export interface FAQContextualCTA {
@@ -79,6 +81,7 @@ export function FAQCategoryTemplate({
 
   return (
     <>
+      <JsonLd data={withContext(buildFAQSchema(sections))} />
       <Section spacing="md" surface="background">
         <Container width={heroMedia ? "wide" : "content"}>
           <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "FAQs", href: "/faq" }, { label: category.navLabel }]} />
