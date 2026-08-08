@@ -16,6 +16,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: PRIVACY_SEO.title,
   description: PRIVACY_SEO.description,
+  alternates: { canonical: "/privacy/" },
 };
 
 export default function PrivacyPage() {

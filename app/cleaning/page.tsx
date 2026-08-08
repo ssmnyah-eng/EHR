@@ -33,6 +33,7 @@ import {
 export const metadata: Metadata = {
   title: "Cleaning Services | Elevated Home Resets",
   description: "Not every home needs the same kind of clean. Explore Standard, Deep Premium, and Elevated Reset cleaning.",
+  alternates: { canonical: "/cleaning/" },
 };
 
 export default function CleaningHubPage() {

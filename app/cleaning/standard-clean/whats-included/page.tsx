@@ -11,6 +11,7 @@ import {
 export const metadata: Metadata = {
   title: "What's Included in a Standard Clean | Elevated Home Resets",
   description: "A room-by-room look at what we take care of during your Standard Clean.",
+  alternates: { canonical: "/cleaning/standard-clean/whats-included/" },
 };
 
 export default function StandardCleanIncludedPage() {

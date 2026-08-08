@@ -9,6 +9,7 @@ const category = findFAQCategoryBySlug("how-it-works")!;
 export const metadata: Metadata = {
   title: category.seoTitle,
   description: category.seoDescription,
+  alternates: { canonical: "/faq/how-it-works/" },
 };
 
 export default function HowItWorksFAQPage() {

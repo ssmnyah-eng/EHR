@@ -18,6 +18,11 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: LIFESTYLE_RESETS_SEO.title,
   description: LIFESTYLE_RESETS_SEO.description,
+  alternates: { canonical: "/lifestyle-resets-and-services/" },
+  // Coming Soon — real content isn't published yet. Keep the page reachable
+  // for visitors (nav, direct link) but out of search results until the
+  // service actually launches and this gets real SEO treatment.
+  robots: { index: false, follow: true },
 };
 
 /**

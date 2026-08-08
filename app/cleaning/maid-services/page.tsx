@@ -16,6 +16,11 @@ import {
 export const metadata: Metadata = {
   title: MAID_SERVICES_SEO.title,
   description: MAID_SERVICES_SEO.description,
+  alternates: { canonical: "/cleaning/maid-services/" },
+  // Coming Soon — real content isn't published yet. Keep the page reachable
+  // for visitors (nav, direct link) but out of search results until the
+  // service actually launches and this gets real SEO treatment.
+  robots: { index: false, follow: true },
 };
 
 /**

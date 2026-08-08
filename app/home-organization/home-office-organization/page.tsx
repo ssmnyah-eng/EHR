@@ -12,6 +12,7 @@ import {
 export const metadata: Metadata = {
   title: HOME_OFFICE_SEO.title,
   description: HOME_OFFICE_SEO.description,
+  alternates: { canonical: "/home-organization/home-office-organization/" },
 };
 
 export default function HomeOfficeOrganizationPage() {

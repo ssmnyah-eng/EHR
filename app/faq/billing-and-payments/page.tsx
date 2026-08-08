@@ -9,6 +9,7 @@ const category = findFAQCategoryBySlug("billing-and-payments")!;
 export const metadata: Metadata = {
   title: category.seoTitle,
   description: category.seoDescription,
+  alternates: { canonical: "/faq/billing-and-payments/" },
 };
 
 export default function BillingFAQPage() {

@@ -9,6 +9,7 @@ const category = findFAQCategoryBySlug("booking-and-scheduling")!;
 export const metadata: Metadata = {
   title: category.seoTitle,
   description: category.seoDescription,
+  alternates: { canonical: "/faq/booking-and-scheduling/" },
 };
 
 export default function BookingFAQPage() {

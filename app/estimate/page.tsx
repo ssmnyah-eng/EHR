@@ -18,6 +18,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "Get Started | Elevated Home Resets",
   description: "Book your clean or request a Home Organization quote from Elevated Home Resets.",
+  alternates: { canonical: "/estimate/" },
 };
 
 /**

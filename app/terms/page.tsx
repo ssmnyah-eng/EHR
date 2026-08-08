@@ -9,6 +9,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: TERMS_SEO.title,
   description: TERMS_SEO.description,
+  alternates: { canonical: "/terms/" },
 };
 
 export default function TermsPage() {

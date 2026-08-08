@@ -21,6 +21,7 @@ import {
 export const metadata: Metadata = {
   title: "About | Elevated Home Resets",
   description: "Elevated Home Resets was built from a simple belief: when someone trusts you with their home, the job is bigger than a list of tasks.",
+  alternates: { canonical: "/about/" },
 };
 
 export default function AboutPage() {

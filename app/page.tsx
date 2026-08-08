@@ -52,6 +52,7 @@ export const metadata: Metadata = {
   title: "Elevated Home Resets",
   description:
     "Thoughtful cleaning and home organization designed to bring your home back to a cleaner, calmer, more manageable place.",
+  alternates: { canonical: "/" },
 };
 
 /**

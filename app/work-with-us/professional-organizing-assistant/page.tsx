@@ -5,6 +5,7 @@ import { PROFESSIONAL_ORGANIZING_ASSISTANT_JOB } from "@/content/work-with-us-jo
 export const metadata: Metadata = {
   title: "Professional Organizing Assistant | Elevated Home Resets",
   description: "Join Elevated Home Resets as an independent contractor Organizing Assistant across our Northern Virginia service zones.",
+  alternates: { canonical: "/work-with-us/professional-organizing-assistant/" },
 };
 
 export default function ProfessionalOrganizingAssistantJobPage() {

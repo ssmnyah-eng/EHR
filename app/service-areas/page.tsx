@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { Heading } from "@/components/typography/Heading";
@@ -16,11 +17,15 @@ import {
   SERVICE_AREAS_CLEANING_CTA,
   SERVICE_AREAS_ORGANIZATION_CTA,
 } from "@/content/service-areas";
+import { LOCATION_PAGES } from "@/content/service-areas-locations";
 import styles from "./page.module.css";
+
+const LOCATION_SLUG_BY_CITY = new Map(LOCATION_PAGES.map((location) => [location.city, location.slug]));
 
 export const metadata: Metadata = {
   title: "Service Areas | Elevated Home Resets",
   description: "Elevated Home Resets provides Cleaning and Home Organization throughout Northern Virginia and the Fredericksburg area.",
+  alternates: { canonical: "/service-areas/" },
 };
 
 export default function ServiceAreasPage() {
@@ -38,11 +43,18 @@ export default function ServiceAreasPage() {
               </Text>
 
               <div className={styles.regionList}>
-                {SERVICE_AREAS_CITIES.map((city) => (
-                  <span key={city} className={styles.regionChip}>
-                    {city}
-                  </span>
-                ))}
+                {SERVICE_AREAS_CITIES.map((city) => {
+                  const slug = LOCATION_SLUG_BY_CITY.get(city);
+                  return slug ? (
+                    <Link key={city} href={`/service-areas/${slug}`} className={styles.regionChip}>
+                      {city}
+                    </Link>
+                  ) : (
+                    <span key={city} className={styles.regionChip}>
+                      {city}
+                    </span>
+                  );
+                })}
               </div>
             </div>
 

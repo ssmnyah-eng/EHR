@@ -42,6 +42,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "Work With Us | Elevated Home Resets",
   description: "Join the Elevated Home Resets team — cleaning and home organization work that's respected, consistent, and personal.",
+  alternates: { canonical: "/work-with-us/" },
 };
 
 export default function WorkWithUsPage() {

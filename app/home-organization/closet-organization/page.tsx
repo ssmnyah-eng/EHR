@@ -5,6 +5,7 @@ import { CLOSET_SEO, CLOSET_HERO, CLOSET_HERO_PRICE, CLOSET_SECTIONS, CLOSET_PRO
 export const metadata: Metadata = {
   title: CLOSET_SEO.title,
   description: CLOSET_SEO.description,
+  alternates: { canonical: "/home-organization/closet-organization/" },
 };
 
 export default function ClosetOrganizationPage() {

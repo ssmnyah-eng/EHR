@@ -1,14 +1,23 @@
 import type { MetadataRoute } from "next";
 import { TRANSFORMATIONS } from "@/content/transformations";
+import { LOCATION_PAGES } from "@/content/service-areas-locations";
 
 /**
  * Lists real, live, statically-rendered routes, plus every real
  * /transformations/[slug] detail page (pulled from TRANSFORMATIONS
- * itself so this can't drift out of sync with what actually exists).
+ * itself so this can't drift out of sync with what actually exists) and
+ * every real /service-areas/[city] page (same idea, pulled from
+ * LOCATION_PAGES).
  *
  * There is no /resources/[slug] detail route yet — its content array is
  * still empty, so the dynamic route was removed until real resources
  * exist (an empty generateStaticParams() breaks static export).
+ *
+ * Maid Services, Organization Packages, and Lifestyle Resets & Services
+ * are excluded — all three are noindexed Coming Soon placeholders (see
+ * their page.tsx robots metadata), and a noindexed URL shouldn't also be
+ * submitted in the sitemap. Re-add once each ships real content and its
+ * noindex is lifted.
  */
 const BASE_URL = "https://elevatedhomeresets.com";
 
@@ -36,7 +45,6 @@ const STATIC_ROUTES = [
 
   "/home-organization",
   "/home-organization/request-a-quote",
-  "/home-organization/organization-packages",
   "/home-organization/whole-home-organization",
   "/home-organization/kitchen-organization",
   "/home-organization/pantry-organization",
@@ -46,7 +54,6 @@ const STATIC_ROUTES = [
   "/home-organization/home-office-organization",
   "/home-organization/laundry-room-organization",
 
-  "/lifestyle-resets-and-services",
   "/resources",
   "/transformations",
 
@@ -72,5 +79,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${BASE_URL}${project.href}`,
     lastModified: new Date(),
   }));
-  return [...staticEntries, ...transformationEntries];
+  const locationEntries = LOCATION_PAGES.map((location) => ({
+    url: `${BASE_URL}/service-areas/${location.slug}`,
+    lastModified: new Date(),
+  }));
+  return [...staticEntries, ...transformationEntries, ...locationEntries];
 }

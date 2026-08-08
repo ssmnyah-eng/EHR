@@ -12,6 +12,7 @@ import {
 export const metadata: Metadata = {
   title: GARAGE_SEO.title,
   description: GARAGE_SEO.description,
+  alternates: { canonical: "/home-organization/garage-organization/" },
 };
 
 export default function GarageOrganizationPage() {

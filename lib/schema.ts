@@ -24,6 +24,17 @@ export function absoluteUrl(path: string): string {
   return path.startsWith("http") ? path : `${SITE_URL}${path}`;
 }
 
+/** City node for a Service's areaServed, guarded against ever emitting
+ *  schema for a city that isn't actually in the approved service area —
+ *  throws at build time instead of silently publishing an unverified
+ *  coverage claim. */
+export function buildLocationAreaServed(city: string): { "@type": "City"; name: string } {
+  if (!SERVICE_AREAS_CITIES.includes(city)) {
+    throw new Error(`buildLocationAreaServed: "${city}" is not in the approved SERVICE_AREAS_CITIES list.`);
+  }
+  return { "@type": "City", name: `${city}, VA` };
+}
+
 /** Wraps a single schema.org node as a standalone JSON-LD document. */
 export function withContext<T extends object>(node: T): T & { "@context": string } {
   return { "@context": "https://schema.org", ...node };
@@ -74,9 +85,13 @@ interface ServiceSchemaInput {
   url: string;
   serviceType: string;
   priceLabel?: string;
+  /** Defaults to the whole state — pass a City node (see
+   *  buildLocationAreaServed) to scope a Service to one service-area
+   *  page instead. */
+  areaServed?: { "@type": string; name: string };
 }
 
-export function buildServiceSchema({ name, description, url, serviceType, priceLabel }: ServiceSchemaInput) {
+export function buildServiceSchema({ name, description, url, serviceType, priceLabel, areaServed }: ServiceSchemaInput) {
   const minPrice = priceLabel ? extractMinPrice(priceLabel) : null;
   return {
     "@type": "Service",
@@ -85,7 +100,7 @@ export function buildServiceSchema({ name, description, url, serviceType, priceL
     description,
     url: absoluteUrl(url),
     provider: { "@id": ORGANIZATION_ID },
-    areaServed: { "@type": "State", name: "Virginia" },
+    areaServed: areaServed ?? { "@type": "State", name: "Virginia" },
     ...(minPrice
       ? {
           offers: {

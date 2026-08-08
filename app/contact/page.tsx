@@ -12,6 +12,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "Contact | Elevated Home Resets",
   description: "Get in touch with Elevated Home Resets with a general question, or find your way to booking Cleaning or requesting a Home Organization quote.",
+  alternates: { canonical: "/contact/" },
 };
 
 export default function ContactPage() {

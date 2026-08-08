@@ -35,6 +35,7 @@ import {
 export const metadata: Metadata = {
   title: WHOLE_HOME_SEO.title,
   description: WHOLE_HOME_SEO.description,
+  alternates: { canonical: "/home-organization/whole-home-organization/" },
 };
 
 export default function WholeHomeOrganizationPage() {

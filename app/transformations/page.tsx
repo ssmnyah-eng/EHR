@@ -7,6 +7,7 @@ import { TRANSFORMATIONS } from "@/content/transformations";
 export const metadata: Metadata = {
   title: "Transformations | Elevated Home Resets",
   description: "Completed cleaning and organization projects by Elevated Home Resets.",
+  alternates: { canonical: "/transformations/" },
 };
 
 export default function TransformationsPage() {

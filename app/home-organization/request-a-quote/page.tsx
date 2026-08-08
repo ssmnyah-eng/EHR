@@ -12,6 +12,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "Request an Organization Quote | Elevated Home Resets",
   description: "Request a Home Organization project quote from Elevated Home Resets.",
+  alternates: { canonical: "/home-organization/request-a-quote/" },
 };
 
 export default function RequestAQuotePage() {

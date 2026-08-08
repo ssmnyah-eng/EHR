@@ -10,6 +10,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "Book Your Clean | Elevated Home Resets",
   description: "Book your Standard, Deep Premium, or Elevated Reset clean with Elevated Home Resets.",
+  alternates: { canonical: "/book-cleaning/" },
 };
 
 export default function BookCleaningPage() {

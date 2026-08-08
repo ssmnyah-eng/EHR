@@ -13,6 +13,7 @@ import {
 export const metadata: Metadata = {
   title: KITCHEN_SEO.title,
   description: KITCHEN_SEO.description,
+  alternates: { canonical: "/home-organization/kitchen-organization/" },
 };
 
 export default function KitchenOrganizationPage() {

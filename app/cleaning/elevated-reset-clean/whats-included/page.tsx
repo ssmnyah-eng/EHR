@@ -12,6 +12,7 @@ import {
 export const metadata: Metadata = {
   title: "What's Included in an Elevated Reset Clean | Elevated Home Resets",
   description: "Everything included in Standard Clean and Deep Premium Clean, followed by an intentional reset.",
+  alternates: { canonical: "/cleaning/elevated-reset-clean/whats-included/" },
 };
 
 export default function ElevatedResetCleanIncludedPage() {

@@ -12,6 +12,7 @@ import {
 export const metadata: Metadata = {
   title: LAUNDRY_SEO.title,
   description: LAUNDRY_SEO.description,
+  alternates: { canonical: "/home-organization/laundry-room-organization/" },
 };
 
 export default function LaundryRoomOrganizationPage() {

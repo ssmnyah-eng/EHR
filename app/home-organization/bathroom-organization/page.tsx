@@ -12,6 +12,7 @@ import {
 export const metadata: Metadata = {
   title: BATHROOM_SEO.title,
   description: BATHROOM_SEO.description,
+  alternates: { canonical: "/home-organization/bathroom-organization/" },
 };
 
 export default function BathroomOrganizationPage() {

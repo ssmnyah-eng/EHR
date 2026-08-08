@@ -8,6 +8,7 @@ const category = findFAQCategoryBySlug("cleaning")!;
 export const metadata: Metadata = {
   title: category.seoTitle,
   description: category.seoDescription,
+  alternates: { canonical: "/faq/cleaning/" },
 };
 
 export default function CleaningFAQPage() {

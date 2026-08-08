@@ -11,6 +11,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: RESOURCES_SEO.title,
   description: RESOURCES_SEO.description,
+  alternates: { canonical: "/resources/" },
 };
 
 /**

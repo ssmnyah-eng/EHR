@@ -9,8 +9,10 @@ import {
 } from "@/content/cleaning-standard";
 
 export const metadata: Metadata = {
-  title: "Standard Clean | Elevated Home Resets",
-  description: "A detailed maintenance clean for homes that need consistent professional care.",
+  title: "Standard Clean — Recurring House Cleaning | Elevated Home Resets",
+  description:
+    "Weekly, bi-weekly, or every-4-week maintenance cleaning for Northern Virginia and Fredericksburg homes. See what's included and book online.",
+  alternates: { canonical: "/cleaning/standard-clean/" },
 };
 
 export default function StandardCleanPage() {

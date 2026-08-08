@@ -9,8 +9,10 @@ import {
 } from "@/content/cleaning-elevated-reset";
 
 export const metadata: Metadata = {
-  title: "Elevated Reset Clean | Elevated Home Resets",
-  description: "Deep Premium cleaning combined with an intentional whole-home reset.",
+  title: "Elevated Reset Clean — Whole-Home Reset Cleaning | Elevated Home Resets",
+  description:
+    "Deep Premium cleaning plus an intentional whole-home reset — the most thorough clean we offer. See the finishing touches that make it different.",
+  alternates: { canonical: "/cleaning/elevated-reset-clean/" },
 };
 
 export default function ElevatedResetCleanPage() {

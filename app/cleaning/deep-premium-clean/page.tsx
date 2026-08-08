@@ -9,8 +9,10 @@ import {
 } from "@/content/cleaning-deep-premium";
 
 export const metadata: Metadata = {
-  title: "Deep Premium Clean | Elevated Home Resets",
-  description: "A detailed cleaning service that goes beyond everyday maintenance.",
+  title: "Deep Premium Clean — Detailed Deep Cleaning | Elevated Home Resets",
+  description:
+    "A thorough, detail-focused deep clean for first-time visits, seasonal resets, or homes that need more than routine upkeep. See what's included.",
+  alternates: { canonical: "/cleaning/deep-premium-clean/" },
 };
 
 export default function DeepPremiumCleanPage() {

@@ -9,6 +9,7 @@ const category = findFAQCategoryBySlug("policies-and-your-home")!;
 export const metadata: Metadata = {
   title: category.seoTitle,
   description: category.seoDescription,
+  alternates: { canonical: "/faq/policies-and-your-home/" },
 };
 
 export default function PoliciesFAQPage() {

@@ -13,6 +13,7 @@ import {
 export const metadata: Metadata = {
   title: PANTRY_SEO.title,
   description: PANTRY_SEO.description,
+  alternates: { canonical: "/home-organization/pantry-organization/" },
 };
 
 export default function PantryOrganizationPage() {

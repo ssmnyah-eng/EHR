@@ -16,6 +16,11 @@ import {
 export const metadata: Metadata = {
   title: ORGANIZATION_PACKAGES_SEO.title,
   description: ORGANIZATION_PACKAGES_SEO.description,
+  alternates: { canonical: "/home-organization/organization-packages/" },
+  // Coming Soon — real content isn't published yet. Keep the page reachable
+  // for visitors (nav, direct link) but out of search results until the
+  // service actually launches and this gets real SEO treatment.
+  robots: { index: false, follow: true },
 };
 
 /**

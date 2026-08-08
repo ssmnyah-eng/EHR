@@ -21,6 +21,7 @@ export async function generateMetadata(props: PageProps<"/transformations/[slug]
   return {
     title: `${project.title} | Elevated Home Resets`,
     description: project.summary,
+    alternates: { canonical: `${project.href}/` },
   };
 }
 

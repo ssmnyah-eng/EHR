@@ -37,6 +37,7 @@ import {
 export const metadata: Metadata = {
   title: "Home Organization | Elevated Home Resets",
   description: "Thoughtful home organization for the spaces that have become cluttered, frustrating, or harder to maintain.",
+  alternates: { canonical: "/home-organization/" },
 };
 
 export default function HomeOrganizationHubPage() {

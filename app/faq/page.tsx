@@ -15,6 +15,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "FAQs | Elevated Home Resets",
   description: "Frequently asked questions about Cleaning, Home Organization, booking, pricing, and what to expect from Elevated Home Resets.",
+  alternates: { canonical: "/faq/" },
 };
 
 export default function FAQPage() {
