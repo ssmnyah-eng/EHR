@@ -59,6 +59,19 @@ export default function RootLayout(props: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${manrope.variable} ${cormorantGaramond.variable}`}>
       <body>
+        {/* Google AdSense — client-provided script, attributes unchanged
+            (async, src, crossorigin). strategy="beforeInteractive" is
+            Next.js's documented mechanism for a script that must land in
+            <head> on every page regardless of where it's declared in the
+            component tree; a raw <script> tag can't be pasted directly
+            into JSX. No ad units are placed anywhere — this only loads
+            the library. */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1527026185780640"
+          crossOrigin="anonymous"
+          strategy="beforeInteractive"
+        />
         <JsonLd data={SITE_SCHEMA} />
         <AppShell>{props.children}</AppShell>
       </body>
