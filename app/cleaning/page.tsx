@@ -4,6 +4,7 @@ import { Container } from "@/components/layout/Container";
 import { Grid } from "@/components/layout/Grid";
 import { HomeHero } from "@/components/content/HomeHero";
 import { EditorialStatement } from "@/components/content/EditorialStatement";
+import { CityAreaStatement } from "@/components/content/CityAreaStatement";
 import { EditorialSplit } from "@/components/content/EditorialSplit";
 import { TierSelectorCard } from "@/components/services/TierSelectorCard";
 import { ComparisonSummaryCard } from "@/components/services/ComparisonSummaryCard";
@@ -148,7 +149,7 @@ export default function CleaningHubPage() {
           reason as Recurring above. */}
       <Section spacing="lg" surface="surface">
         <Container width="content">
-          <EditorialStatement slot={CLEANING_SERVICE_AREA} />
+          <CityAreaStatement {...CLEANING_SERVICE_AREA} />
         </Container>
       </Section>
 

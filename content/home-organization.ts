@@ -2,7 +2,6 @@ import type { ContentSlot, TierSelectorCardData, TeaserCardData, CTAData } from 
 import type { ProcessStep } from "@/components/content/Process";
 import { ESTIMATE_CTA, ORGANIZATION_QUOTE_CTA } from "@/content/navigation";
 import { KIM_NELSON, LASHON_PATTERSON } from "@/content/testimonials";
-import { formatCityListSentence } from "@/content/service-areas";
 
 /**
  * Final approved copy for the Home Organization hub page
@@ -231,10 +230,16 @@ export const HOME_ORG_TRUST: ContentSlot = {
   body: "You don't need to hide the clutter.\n\nYou don't need to make the pantry presentable.\n\nYou don't need to explain why the closet got away from you.\n\nWe need to see the space you actually live with—not a version you prepared for us.\n\nThat gives us a better understanding of what isn't working and what needs to change.",
 };
 
-export const HOME_ORG_SERVICE_AREA: ContentSlot = {
+/**
+ * Rendered via CityAreaStatement (not EditorialStatement) so the city
+ * list can carry real links to any city with a live /service-areas/[city]
+ * page — same visible sentence either way, see bodyPrefix/bodySuffix.
+ */
+export const HOME_ORG_SERVICE_AREA = {
   eyebrow: "Areas We Serve",
   heading: "Home organization across Northern Virginia and Fredericksburg.",
-  body: `Elevated Home Resets serves ${formatCityListSentence()}, throughout Northern Virginia and the Fredericksburg area.`,
+  bodyPrefix: "Elevated Home Resets serves ",
+  bodySuffix: ", throughout Northern Virginia and the Fredericksburg area.",
   primaryCTA: { label: "Start Your Organization Quote", href: ORGANIZATION_QUOTE_CTA.href },
 };
 

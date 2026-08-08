@@ -1,6 +1,5 @@
 import type { ContentSlot, TierSelectorCardData, ComparisonSummaryCardData, CTAData } from "@/lib/types";
 import { BOOK_CLEANING_CTA } from "@/content/navigation";
-import { formatCityListSentence } from "@/content/service-areas";
 
 /**
  * Final approved copy for the Cleaning Services hub page (/cleaning),
@@ -143,10 +142,16 @@ export const CLEANING_RECURRING_OPTIONS: { heading: string; body: string }[] = [
 
 export const CLEANING_RECURRING_CTA: CTAData = { label: "Explore Recurring Cleaning", href: BOOK_CLEANING_CTA.href };
 
-export const CLEANING_SERVICE_AREA: ContentSlot = {
+/**
+ * Rendered via CityAreaStatement (not EditorialStatement) so the city
+ * list can carry real links to any city with a live /service-areas/[city]
+ * page — same visible sentence either way, see bodyPrefix/bodySuffix.
+ */
+export const CLEANING_SERVICE_AREA = {
   eyebrow: "Areas We Serve",
   heading: "Elevated cleaning, close to home.",
-  body: `Elevated Home Resets provides cleaning services throughout Northern Virginia and the Fredericksburg area, including ${formatCityListSentence()}.`,
+  bodyPrefix: "Elevated Home Resets provides cleaning services throughout Northern Virginia and the Fredericksburg area, including ",
+  bodySuffix: ".",
   primaryCTA: BOOK_CLEANING_CTA,
 };
 

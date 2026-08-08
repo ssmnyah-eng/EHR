@@ -4,6 +4,7 @@ import { Container } from "@/components/layout/Container";
 import { Grid } from "@/components/layout/Grid";
 import { HomeHero } from "@/components/content/HomeHero";
 import { EditorialStatement } from "@/components/content/EditorialStatement";
+import { CityAreaStatement } from "@/components/content/CityAreaStatement";
 import { EditorialSplit } from "@/components/content/EditorialSplit";
 import { TierSelectorCard } from "@/components/services/TierSelectorCard";
 import { TeaserCard } from "@/components/content/TeaserCard";
@@ -172,7 +173,7 @@ export default function HomeOrganizationHubPage() {
       {/* Service area */}
       <Section spacing="lg" surface="background">
         <Container width="content">
-          <EditorialStatement slot={HOME_ORG_SERVICE_AREA} />
+          <CityAreaStatement {...HOME_ORG_SERVICE_AREA} />
         </Container>
       </Section>
 
