@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useRef, useSyncExternalStore } from "react";
 import type { MediaSlotData } from "@/lib/types";
 import { assetPath } from "@/lib/assetPath";
 import styles from "./MediaSlot.module.css";
@@ -42,13 +42,23 @@ export function VideoMedia({ data, objectFit = "cover", decorative = true }: Vid
   const ref = useRef<HTMLVideoElement>(null);
   const reduceMotion = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
+  // React's hydration doesn't reliably set the `muted`/`playsInline` DOM
+  // *properties* from their JSX attributes alone — without them, iOS
+  // Safari can treat the video as unmuted, block autoplay, and show its
+  // play-button overlay instead. Setting them imperatively via the ref
+  // callback (synchronous, at mount) rather than only in a useEffect
+  // (deferred until after paint) closes that gap as early as possible.
+  const setVideoRef = useCallback((node: HTMLVideoElement | null) => {
+    ref.current = node;
+    if (node) {
+      node.muted = true;
+      node.playsInline = true;
+    }
+  }, []);
+
   useEffect(() => {
     const video = ref.current;
     if (!video) return;
-    // React's hydration doesn't reliably set the `muted` DOM *property*
-    // from the `muted` JSX attribute alone — without it, iOS Safari treats
-    // the video as unmuted, blocks autoplay, and shows a large play button
-    // over the frame instead. Setting it imperatively is required.
     video.muted = true;
     if (reduceMotion) {
       video.pause();
@@ -62,7 +72,7 @@ export function VideoMedia({ data, objectFit = "cover", decorative = true }: Vid
 
   return (
     <video
-      ref={ref}
+      ref={setVideoRef}
       className={styles.media}
       poster={data.poster ? assetPath(data.poster) : undefined}
       muted
