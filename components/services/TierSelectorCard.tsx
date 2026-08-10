@@ -44,7 +44,7 @@ export function TierSelectorCard({ card, delay = 0 }: TierSelectorCardProps) {
           </div>
         ) : null}
         <div className={styles.ctaRow}>
-          <Button href={card.primaryCTA.href} size="md">
+          <Button href={card.primaryCTA.href} size="md" className={styles.primaryCta}>
             {card.primaryCTA.label}
           </Button>
           {card.secondaryCTA ? (

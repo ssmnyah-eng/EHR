@@ -56,3 +56,14 @@
   gap: var(--space-sm);
   margin-top: var(--space-lg);
 }
+
+.primaryCta {
+  /* Some card labels ("Explore Laundry Room Reset", "Request a
+     Whole-Home Quote") are longer than most buttons on the site and
+     overflowed past the card's right edge under the sitewide nowrap
+     button style once the grid narrowed the card below the label's
+     natural width. Scoped to this card's primary CTA only — every
+     other button keeps its single-line nowrap label. */
+  white-space: normal;
+  text-align: center;
+}
