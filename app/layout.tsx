@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope, Cormorant_Garamond } from "next/font/google";
 import Script from "next/script";
 import { AppShell } from "@/components/layout/AppShell";
+import { UnderConstructionOverlay } from "@/components/layout/UnderConstructionOverlay";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildOrganizationSchema, buildWebsiteSchema, withContext } from "@/lib/schema";
 import "@/styles/tokens.css";
@@ -53,6 +54,10 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://elevatedhomeresets.com"),
   title: "Elevated Home Resets",
   description: "Elevated Home Resets — cleaning and home organization.",
+  // Site-wide, temporary: keep the real site out of search results while
+  // it's gated behind the Under Construction overlay below. Individual
+  // pages don't set their own `robots`, so this is inherited everywhere.
+  robots: { index: false, follow: false },
 };
 
 export default function RootLayout(props: LayoutProps<"/">) {
@@ -72,8 +77,16 @@ export default function RootLayout(props: LayoutProps<"/">) {
           crossOrigin="anonymous"
           strategy="beforeInteractive"
         />
-        <JsonLd data={SITE_SCHEMA} />
-        <AppShell>{props.children}</AppShell>
+        {/* Site-wide temporary gate: the real site renders normally
+            underneath (nothing here was changed), but `inert` removes it
+            from focus/interaction/assistive-tech, and the overlay right
+            after covers it visually. Remove both to take the site live
+            again. */}
+        <div inert>
+          <JsonLd data={SITE_SCHEMA} />
+          <AppShell>{props.children}</AppShell>
+        </div>
+        <UnderConstructionOverlay />
       </body>
       <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} strategy="afterInteractive" />
       <Script id="google-analytics" strategy="afterInteractive">

@@ -1,0 +1,36 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  background: var(--color-background);
+  color: var(--color-text-primary);
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--eyebrow-size);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: var(--display-md);
+  line-height: var(--leading-tight);
+}
+
+.body {
+  font-family: var(--font-body);
+  font-size: var(--body-lg);
+  color: var(--color-text-secondary);
+  max-width: 34rem;
+}
